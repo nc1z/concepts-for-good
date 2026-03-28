@@ -1,0 +1,2 @@
+# pre-commit intentionally left empty.
+# All quality checks run on pre-push — see .husky/pre-push.
