@@ -1,6 +1,7 @@
 # Content Rules — Mandatory Brief for All User-Facing Copy
 
 This file is authoritative. All other files that reference content quality point here. **Read this file completely before writing a single word of user-facing copy.**
+Also read `ANTIPATTERNS_CODEX.md` before writing helper text, reassurance copy, or any line near the hero/first screen.
 
 Every rule in this file is a hard rule. Vague rules ("write clearly", "be user-friendly") are not here. These are specific, testable, enforceable rules.
 
@@ -59,6 +60,7 @@ Every one of these has appeared in this repo's POC pages and must never appear o
 - A "Reset map state" or "Reset planner" or "Reset dispatch state" button in the header
 - A kicker that just restates the app's technical name with no human framing
 - A lede that begins with "This prototype..." or "A browser-only..." or "A guided planner for..."
+- A helper line that simply repeats the internal brief, such as "Large text. Large buttons. No rushing."
 
 ### What passes this test
 
@@ -134,6 +136,7 @@ browser-only
 The app is not a demo. The app is not a prototype. The app is not a concept. For the user, it is a tool. Write accordingly.
 
 Every piece of copy should read as if this app is live, used by real people in Singapore today, and was designed specifically for them.
+If a sentence sounds like it came from the build prompt, design checklist, or implementation brief, remove it.
 
 ### Every label, button, and heading must be task-oriented
 

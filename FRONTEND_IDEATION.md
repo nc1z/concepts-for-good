@@ -2,6 +2,7 @@
 
 This file is mandatory reading for any agent implementing UI in this repository.
 **Read this file completely before writing a single line of UI code.**
+You must also read `ANTIPATTERNS_CODEX.md` before writing any user-facing UI copy or helper text.
 
 ---
 
@@ -19,6 +20,7 @@ This is the wrong mental model. **The question is not "how do I present this dat
 - **Do not repeat a layout you used in any previous POC in this repo.** Each concept must feel like it was designed for that concept specifically.
 - **Do not use a sidebar + header + content body template.** This is the default Next.js dashboard shell. It is not a design. It is an absence of design.
 - **Do not put builder language in the UI.** Words like "POC", "component", "scaffold", "slice", "implementation", "concept", or "generated" must never appear in the user-facing interface. Write as if this is a real product.
+- **Do not leak prompt or brief language into the UI.** If a line sounds like it came from the design brief, checklist, or agent instructions, it does not belong in the product.
 - **Do not use forms as the primary UI unless the concept's interaction model says form-led.** A form is an input mechanism. It is not an experience.
 - **Do not skip library installation.** If the concept spec lists `framer-motion`, `recharts`, `three.js`, or any other library — install it and use it. These are not suggestions. They exist because a concept without them will be flat.
 
@@ -139,6 +141,7 @@ These libraries exist to make concepts distinctive. If a concept spec lists them
 ## Content and copy rules
 
 **Full rules are in [`CONTENT_RULES.md`](./CONTENT_RULES.md). Read it completely before writing any copy.** The summary below is mandatory reading, but `CONTENT_RULES.md` is the authoritative source.
+Also read [`ANTIPATTERNS_CODEX.md`](./ANTIPATTERNS_CODEX.md) for Codex-specific instruction leakage failures.
 
 ### The one-sentence rule
 Before building, write one sentence that answers "what does this do and for whom?" in plain language for the target user. That sentence must appear on the first screen. If you cannot write it, you are not ready to build.

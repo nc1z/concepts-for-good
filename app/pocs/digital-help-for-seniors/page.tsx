@@ -219,10 +219,14 @@ export default function DigitalHelpForSeniorsPage() {
                 <p className={styles.lede}>
                   If using a phone feels confusing, this guide shows one thing to do on each screen.
                 </p>
-                <button type="button" className={styles.startButton} onClick={goToTasks}>
-                  Start
-                </button>
-                <p className={styles.helper}>Large text. Large buttons. No rushing.</p>
+                <div className={styles.finishButtons}>
+                  <button type="button" className={styles.ghostButton} onClick={goBack}>
+                    Back
+                  </button>
+                  <button type="button" className={styles.startButton} onClick={goToTasks}>
+                    Start
+                  </button>
+                </div>
               </motion.section>
             )}
 
@@ -256,6 +260,18 @@ export default function DigitalHelpForSeniorsPage() {
                     </button>
                   ))}
                 </div>
+                <div className={styles.finishButtons}>
+                  <button type="button" className={styles.ghostButton} onClick={goBack}>
+                    Back
+                  </button>
+                  <button
+                    type="button"
+                    className={styles.navButton}
+                    onClick={() => startTask(guideTasks[0].id)}
+                  >
+                    Start with {guideTasks[0].shortTitle}
+                  </button>
+                </div>
               </motion.section>
             )}
 
@@ -277,6 +293,14 @@ export default function DigitalHelpForSeniorsPage() {
                 <h1 className={styles.stepTitle}>{activeTask.steps[state.stepIndex].title}</h1>
                 <p className={styles.stepBody}>{activeTask.steps[state.stepIndex].body}</p>
                 <p className={styles.stepCue}>{activeTask.steps[state.stepIndex].cue}</p>
+                <div className={styles.finishButtons}>
+                  <button type="button" className={styles.ghostButton} onClick={goBack}>
+                    Back
+                  </button>
+                  <button type="button" className={styles.navButton} onClick={goNext}>
+                    {state.stepIndex === activeTask.steps.length - 1 ? "Finish" : "Next"}
+                  </button>
+                </div>
               </motion.section>
             )}
 
@@ -313,30 +337,6 @@ export default function DigitalHelpForSeniorsPage() {
               </motion.section>
             )}
           </AnimatePresence>
-        </div>
-
-        <div className={styles.nav}>
-          <button type="button" className={styles.ghostButton} onClick={goBack}>
-            Back
-          </button>
-
-          {state.screen === "steps" ? (
-            <button type="button" className={styles.navButton} onClick={goNext}>
-              {activeTask && state.stepIndex === activeTask.steps.length - 1 ? "Finish" : "Next"}
-            </button>
-          ) : state.screen === "welcome" ? (
-            <button type="button" className={styles.navButton} onClick={goToTasks}>
-              Start now
-            </button>
-          ) : state.screen === "tasks" ? (
-            <button type="button" className={styles.navButton} onClick={() => startTask(guideTasks[0].id)}>
-              Start with {guideTasks[0].shortTitle}
-            </button>
-          ) : (
-            <button type="button" className={styles.navButton} onClick={goToTasks}>
-              Another task
-            </button>
-          )}
         </div>
       </div>
     </main>

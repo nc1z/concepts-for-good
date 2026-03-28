@@ -23,7 +23,7 @@
   min-height: calc(100vh - 48px);
   margin: 0 auto;
   display: grid;
-  grid-template-rows: auto 1fr auto;
+  grid-template-rows: auto 1fr;
   gap: 20px;
 }
 
@@ -232,12 +232,6 @@
   color: var(--text-soft);
 }
 
-.nav {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-}
-
 .navButton,
 .ghostButton {
   min-height: 84px;
@@ -287,7 +281,6 @@
     padding: 22px;
   }
 
-  .nav,
   .finishButtons {
     grid-template-columns: 1fr;
   }
