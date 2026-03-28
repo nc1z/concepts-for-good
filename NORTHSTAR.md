@@ -1,109 +1,133 @@
 ## Project North Star
 
-This document defines the **vision**, **goals**, and **constraints** for this repository in a way that both **humans** and **Codex agents** (like the PM agent) can understand and follow.
+This repository is the planning and automation home for a future `Next.js` website that showcases many Singapore-focused public-good POCs in one place.
 
-The PM agent (`pm.md` / `$pm-round`) should **always consult this file first** when:
-- Triaging ADMIN issues
-- Assigning priority labels (high / medium / low)
-- Proposing new issues with the **PM** label
-
-Fill in the sections below. Agents will treat them as the single source of truth unless you update this file.
+The PM agent (`automations/pm.md` / `$pm-round`) should treat this file as the primary product brief. The local dataset reference at `challenge/GOOD_SG.json` is the source material for selecting and scoping candidate POCs.
 
 ---
 
 ### 1. Vision (What we are building)
 
-**Human (you) should fill this in.**
+- **One-sentence vision**:
+  Build a `Next.js` gallery of small, fast, useful proof-of-concept apps that support Singapore for good.
 
-- **One-sentence vision**:  
-  _Example: "Turn this repo into an autonomous project manager that can triage, plan, implement, and QA work with minimal human oversight."_
-
-- **Short paragraph (2–4 sentences)** describing:
-  - Who this project is for
-  - What pain it solves
-  - What “done” or “success” looks like from your perspective
+- **Short paragraph**:
+  This project is for people in Singapore who could benefit from practical digital tools around access, care, resilience, inclusion, and community support, and for collaborators who want a clear idea bank to build from. The website should feel like a curated gallery of credible POCs, not a single monolithic product. Success means the repo can continuously turn good Singapore-focused ideas into well-scoped issues, then into lightweight demoable web apps that are easy to browse from one landing page.
 
 ---
 
 ### 2. North Star Goal (Concrete outcome)
 
-Define the **main outcome** you want in the next 1–3 months.
+- **Primary goal**:
+  In the next 1 to 3 months, define and sequence the work needed to launch the first version of a `Next.js` site with a landing-page gallery plus the first set of Singapore-for-good POC app pages. The current phase is product definition and issue generation, not app scaffolding yet.
 
-- **Primary goal** (1–2 sentences):  
-  _Example: "Have a stable set of Codex automations (PM + Dev) that can reliably take an issue from ADMIN → READY → implemented PR with minimal manual intervention."_
-
-- **Key capabilities required for this goal** (3–7 bullets):  
-  - …
-  - …
+- **Key capabilities required for this goal**:
+  - Define the gallery information architecture for listing many POCs from a shared catalog.
+  - Decide how each POC gets its own route, metadata, and lightweight demo expectations.
+  - Convert `challenge/GOOD_SG.json` into a disciplined backlog of platform stories and app-specific stories.
+  - Establish clear acceptance criteria for browser-only POCs that use seeded demo data and local-first storage.
+  - Prioritize a first batch of POCs that prove the concept across a few Singapore public-good categories.
+  - Keep PM and Dev automation aligned so issues are small, buildable, and non-duplicative.
 
 ---
 
 ### 3. Principles and Guardrails
 
-These are **rules and preferences** that shape how work should be done.
+- **Quality bar**:
+  Prefer small, independently shippable slices with explicit acceptance criteria over broad “build the whole app” tasks.
 
-- **Quality bar**:  
-  _Example: "Prefer small, well-scoped changes with clear tests over large, risky refactors."_
+- **Risk tolerance**:
+  Early work should optimize for fast learning and believable demos, not production infrastructure. Avoid committing the project to heavy backend, compliance, or operational complexity before concept validation.
 
-- **Risk tolerance**:  
-  _Example: "Avoid destructive operations (force pushes, mass file deletions, schema drops) unless explicitly requested by the human."_
+- **Style / UX preferences**:
+  The eventual site should feel intentional and curated. The landing page is a gallery of POCs. Each app should have a focused user flow, Singapore-relevant seed data, and a clear “what this concept proves” story.
 
-- **Style / UX preferences** (if applicable):  
-  _Example: "Favor clear, simple UX over cleverness; consistent naming and file structure over ad-hoc organization."_
-
-- **Communication tone** for comments/issues:  
-  _Example: "Be concise, neutral, and factual. Avoid over-explaining unless specifically asked."_
+- **Communication tone**:
+  Be concise, direct, and product-minded. Comments and issues should explain the user problem, the smallest useful scope, and why the work matters now.
 
 ---
 
 ### 4. Scope: In and Out
 
-Clarify what is **in scope** and **out of scope** for this repo and its automations.
+- **In scope**:
+  - Product planning for a central `Next.js` gallery website.
+  - Story generation from `challenge/GOOD_SG.json`.
+  - Work breakdown for shared platform pieces such as landing page, routing, content model, and reusable POC scaffolding.
+  - Work breakdown for individual Singapore public-good POCs.
+  - POCs that are browser-first, simulation-friendly, and easy to demo with seeded local data.
 
-- **In scope** (what we want more of):
-  - …
-  - …
-
-- **Out of scope** (what we should avoid or defer):
-  - …
-  - …
+- **Out of scope**:
+  - Setting up the actual `Next.js` app in this phase unless a human explicitly asks for it.
+  - Production backend systems, real auth, and complex multi-user synchronization for initial POCs.
+  - Large compliance-heavy domains or anything that requires substantial offline operations before a demo is useful.
+  - Issues that assume all 100 ideas should be built at once.
 
 ---
 
 ### 5. Priority Heuristics (high / medium / low)
 
 - **high**:
-  - Directly unblocks the North Star goal or a core capability
-  - Fixes a critical bug or broken workflow
-  - Prevents data loss, security problems, or major user pain
+  - Unblocks the first launch path for the gallery site or the first batch of POCs.
+  - Defines shared architecture needed by many POCs, such as routing, metadata shape, catalog structure, or seeded-demo conventions.
+  - Sharpens ambiguous product direction into buildable stories with clear acceptance criteria.
 
 - **medium**:
-  - Clearly improves the system in a noticeable way
-  - Adds or refines capabilities that support the main workflows
-  - Addresses non-critical bugs or UX rough edges
+  - Advances one specific POC from the dataset into a well-scoped implementation slice.
+  - Improves PM or Dev automation so the backlog is more reliable and less repetitive.
+  - Adds useful but non-critical planning detail around taxonomy, categorization, or contributor workflow.
 
--- **low**:
-  - Nice-to-have improvements or polish
-  - Experiments, ideas, or refactors that are not currently blocking anything
+- **low**:
+  - Nice-to-have polish, speculative expansion, or broad brainstorming without a near-term implementation path.
+  - Additional POC ideas when the first-launch platform work is still unclear.
 
 ---
 
-### 6. Roadmap Themes (optional but helpful)
+### 6. Roadmap Themes
 
-Group future work into a few **themes** so agents can cluster proposals.
-
-For each theme you care about:
 Name:
-Short description (1–2 sentences):
+Gallery Foundation
+Short description:
+Define the structure of the landing page, routing model, catalog data shape, and what every POC card/page must contain.
 Example tasks:
+Landing page IA, route conventions, POC metadata schema, contributor instructions for adding a new POC.
+
+Name:
+Dataset-to-Backlog Triage
+Short description:
+Turn `challenge/GOOD_SG.json` into a manageable pipeline of issues without flooding the repo with duplicates or vague work.
+Example tasks:
+Category prioritization, first-batch selection, issue templates for app-specific work, triage rules for platform versus app stories.
+
+Name:
+POC Build Conventions
+Short description:
+Keep each app small, browser-based, and demoable by one person with seeded data and fake state transitions where needed.
+Example tasks:
+Persona switch pattern, local storage conventions, resettable demo state, seeded data requirements.
+
+Name:
+First Singapore-for-Good Apps
+Short description:
+Select and ship an initial set of POCs that represent the value of the gallery across different public-good themes.
+Example tasks:
+Pick first 3 to 5 ideas, break each into small deliverable stories, define success signals for each concept.
 
 ---
 
 ### 7. Known Constraints and Integrations
 
-List any **hard constraints** or important external systems.
+- **Primary source material**:
+  - `challenge/GOOD_SG.json` is the local idea bank reference for PM triage and issue creation.
+  - The upstream intent came from `../idea-factory/challenge/CHALLENGE.md`, but PM should rely on the local copy in this repo.
 
-Tooling constraints (languages, runtimes, services that **must** or **must not** be used)
-Integration points (e.g. GitHub, specific APIs, third-party services)
-Performance / cost constraints (e.g. "avoid running very expensive CI jobs repeatedly")
+- **Product constraints from the dataset**:
+  - All current ideas are `website` ideas and should map to a `Next.js` implementation.
+  - All `GOOD_SG` entries are `poc` stage, not full production MVPs.
+  - Initial POCs should prefer `localStorage`, use `IndexedDB` only when justified, and avoid a server database.
+  - Real auth is not part of the initial concept; multi-sided flows should usually use persona-switch buttons.
+  - Seeded demo data and resettable fake state are preferred over live integrations.
 
+- **PM issue-generation rules**:
+  - Prefer creating issues that are small enough for one implementation pass.
+  - When proposing app-specific work from the dataset, cite the exact idea ID and title from `challenge/GOOD_SG.json`.
+  - Do not create more than a few new issues per run, and avoid flooding the backlog before the gallery foundation is defined.
