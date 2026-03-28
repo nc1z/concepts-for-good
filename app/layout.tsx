@@ -14,10 +14,49 @@ const jetBrainsMono = JetBrains_Mono({
   subsets: ["latin"],
 });
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://conceptsforgood.sg";
+
 export const metadata: Metadata = {
-  title: "Concepts for Good",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: "Concepts for Good",
+    template: "%s | Concepts for Good",
+  },
   description:
-    "A gallery of Singapore-for-good proof-of-concept apps built as focused browser-based experiments.",
+    "A gallery of Singapore-focused proof-of-concept apps for access, care, resilience, and community — built as fast, browser-based experiments.",
+  keywords: [
+    "Singapore",
+    "public good",
+    "social impact",
+    "civic tech",
+    "accessibility",
+    "community",
+    "volunteering",
+    "caregiving",
+    "proof of concept",
+  ],
+  openGraph: {
+    type: "website",
+    url: siteUrl,
+    siteName: "Concepts for Good",
+    title: "Concepts for Good",
+    description:
+      "A gallery of Singapore-focused proof-of-concept apps for access, care, resilience, and community — built as fast, browser-based experiments.",
+    locale: "en_SG",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Concepts for Good",
+    description:
+      "A gallery of Singapore-focused proof-of-concept apps for access, care, resilience, and community.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+  alternates: {
+    canonical: siteUrl,
+  },
 };
 
 export default function RootLayout({
