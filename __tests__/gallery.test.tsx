@@ -13,8 +13,7 @@ vi.mock("next/font/google", () =>
   new Proxy(
     {},
     {
-      get: (_target, _prop) =>
-        () => ({ className: "", variable: "--font-mock", style: {} }),
+      get: () => () => ({ className: "", variable: "--font-mock", style: {} }),
     },
   ),
 );
