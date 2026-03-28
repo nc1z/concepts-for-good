@@ -9,6 +9,8 @@ description: PM agent — enriches ideas/GOOD_SG.json by adding new Singapore pu
 
 Act as the **PM agent** for one round. Your sole job is to improve `ideas/GOOD_SG.json`. You either **add new ideas** or **improve existing entries** (sharper `ui` specs, better libraries, clearer `distinctive_feature`, tighter `avoid` lists). Changes go on a branch and are opened as a PR labelled **agent** for human review. You must **not** implement code, create GitHub issues, or push to the default branch.
 
+Use `ideas/IDEATION.md` first to understand category coverage, thin areas, and persona spread. Open `ideas/GOOD_SG.json` when you need schema detail, duplicate validation, IDs, or final edits.
+
 ## Scope and constraints
 
 - Operate in the repo root or worktree root.
@@ -34,7 +36,8 @@ Act as the **PM agent** for one round. Your sole job is to improve `ideas/GOOD_S
 ### 2) Read context
 
 - Read `NORTHSTAR.md` for product direction and prioritisation heuristics.
-- Read `ideas/GOOD_SG.json` in full. Note the `idea_count`, `design_contract`, and which entries have `"built": true`.
+- Read `ideas/IDEATION.md` first for a fast overview.
+- Read `ideas/GOOD_SG.json` as needed. Note the `idea_count`, `design_contract`, and which entries have `"implemented": true`.
 - Scan `app/pocs/` to understand what has already been built and what patterns exist.
 
 ### 3) Decide what to do (pick one or both)
@@ -42,14 +45,14 @@ Act as the **PM agent** for one round. Your sole job is to improve `ideas/GOOD_S
 **Option A — Add new ideas (up to 3 per run)**
 - Identify gaps: categories under-represented, target users not yet covered, or interaction models not yet explored.
 - Each new entry must:
-  - Follow the exact JSON schema of existing entries (`id`, `title`, `platform`, `folder`, `build_stack`, `category`, `tags`, `summary`, `target_user`, `why_fast`, `stage`, `poc`, `prototype_goal`, `ui`, `built`).
+  - Follow the exact JSON schema of existing entries (`id`, `title`, `platform`, `folder`, `build_stack`, `category`, `tags`, `summary`, `target_user`, `why_fast`, `stage`, `poc`, `prototype_goal`, `ui`, `implemented`).
   - Have a realistic Singapore public-good context aligned with `NORTHSTAR.md`.
-  - Have a **distinct** `ui.direction` not already used by another unbuilt entry.
+  - Have a **distinct** `ui.direction` not already used by another not-yet-implemented entry.
   - Have a specific `ui.interaction_model` (not "standard CRUD form").
   - List at least two concrete `ui.suggested_libraries` (real npm package names).
   - Have a vivid `ui.distinctive_feature` — the one thing that makes the concept feel real.
   - Have a non-empty `ui.avoid` list.
-  - Set `"built": false`.
+  - Set `"implemented": false`.
   - Use the next sequential `GOOD_SG-NNN` ID.
 
 **Option B — Improve existing entries**
@@ -59,7 +62,7 @@ Act as the **PM agent** for one round. Your sole job is to improve `ideas/GOOD_S
   - `ui.direction` is generic — sharpen it.
   - `ui.avoid` is empty or short — expand it.
   - `summary` or `target_user` is written for a developer audience — rewrite for the actual end user.
-- Prefer improving entries that are **not yet built** (`"built"` absent or `false`), as they will guide future Dev runs.
+- Prefer improving entries that are **not yet implemented** (`"implemented": false`), as they will guide future Dev runs.
 
 ### 4) Check for duplicates
 
@@ -95,12 +98,12 @@ Act as the **PM agent** for one round. Your sole job is to improve `ideas/GOOD_S
 
 - List new idea IDs/titles added.
 - List existing entry IDs improved and what changed.
-- Remind: "Human: review and merge this PR when the ideas look good. Dev will pick up any entry without `\"built\": true` on its next run."
+- Remind: "Human: review and merge this PR when the ideas look good. Dev will pick up any entry with `\"implemented\": false` on its next run."
 
 ## Quality bar for new ideas
 
 Every new idea must pass these checks before committing:
-- [ ] `ui.direction` is visually distinct from all other unbuilt entries.
+- [ ] `ui.direction` is visually distinct from all other not-yet-implemented entries.
 - [ ] `ui.interaction_model` describes a concrete interaction (not "user clicks around").
 - [ ] `ui.suggested_libraries` are real npm packages appropriate for the interaction model.
 - [ ] `ui.distinctive_feature` is specific enough that a developer could implement it without asking for clarification.

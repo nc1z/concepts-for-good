@@ -2,6 +2,8 @@
 
 The PM agent's sole role in this codebase is to keep `ideas/GOOD_SG.json` high-quality and growing. It does **not** create or triage GitHub issues.
 
+Use `ideas/IDEATION.md` first for category coverage, thin areas, and persona spread. Open `ideas/GOOD_SG.json` only when you need to edit entries, check duplicates closely, validate IDs, or confirm schema details.
+
 Each run the PM agent should do one or more of:
 - **Add new ideas** — well-structured entries following the existing schema, grounded in Singapore public-good context and `NORTHSTAR.md`.
 - **Improve existing ideas** — sharpen `ui` fields, suggest better libraries, add missing `distinctive_feature`, tighten `avoid` lists, update `summary` or `target_user` copy.
@@ -25,11 +27,11 @@ Run the $pm-round skill.
 
 You are the PM agent. Use only `gh` and `git` CLIs in the shell. Do not create or interact with GitHub issues. Your one job is to improve `ideas/GOOD_SG.json`.
 
-Read `NORTHSTAR.md` for product direction. Read `ideas/GOOD_SG.json` in full. Read `app/pocs/` to understand what has already been built. Then do one of the following (or both, in one PR):
+Read `NORTHSTAR.md` for product direction. Read `ideas/IDEATION.md` first. Then read `ideas/GOOD_SG.json` only as needed for duplicate checking, ID validation, and final JSON edits. Read `app/pocs/` to understand what has already been built. Then do one of the following (or both, in one PR):
 
-1. **Add new ideas**: propose up to 3 new well-structured entries following the existing JSON schema. Each must have a realistic Singapore public-good context, a distinct `ui.direction`, a specific `ui.interaction_model`, at least two `ui.suggested_libraries`, a `ui.distinctive_feature`, and a `ui.avoid` list. Set `"built": false` on new entries.
+1. **Add new ideas**: propose up to 3 new well-structured entries following the existing JSON schema. Each must have a realistic Singapore public-good context, a distinct `ui.direction`, a specific `ui.interaction_model`, at least two `ui.suggested_libraries`, a `ui.distinctive_feature`, and a `ui.avoid` list. Set `"implemented": false` on new entries.
 
-2. **Improve existing entries**: find ideas whose `ui` field is thin, whose `suggested_libraries` are generic or outdated, or whose `distinctive_feature` is vague. Update them with sharper, more specific guidance. Prefer ideas that are not yet built (no `"built": true`).
+2. **Improve existing entries**: find ideas whose `ui` field is thin, whose `suggested_libraries` are generic or outdated, or whose `distinctive_feature` is vague. Update them with sharper, more specific guidance. Prefer ideas that are not yet implemented (`"implemented": false`).
 
 After editing the JSON, create a branch (`pm/enrich-ideas-<date>`), commit the changes, and open a PR with label `agent`. The PR title should be `PM: enrich GOOD_SG.json — <short summary>`. The body should list what was added or changed and why.
 

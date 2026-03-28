@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
 
 import { pocCards } from "@/lib/pocs";
@@ -20,16 +21,66 @@ function formatCardTimestamp(value: string) {
   return `${day} ${month} ${year}, ${hours12}:${minutes} ${suffix}`;
 }
 
+function hashWithSeed(value: string, seed: number) {
+  let hash = seed || 1;
+
+  for (let index = 0; index < value.length; index += 1) {
+    hash = (hash * 33) ^ value.charCodeAt(index);
+  }
+
+  return hash >>> 0;
+}
+
 export default function Home() {
-  const [query, setQuery] = useState("");
-  const [activeCategory, setActiveCategory] = useState("All");
-  const [sortOrder, setSortOrder] = useState<"desc" | "asc">("desc");
+  const pathname = usePathname();
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const urlQuery = searchParams.get("q") ?? "";
+  const urlSortParam = searchParams.get("sort");
+  const urlSortOrder = urlSortParam === "asc" ? "asc" : "desc";
+  const [query, setQuery] = useState(urlQuery);
+  const [sortOrder, setSortOrder] = useState<"desc" | "asc">(urlSortOrder);
+  const [randomSeed, setRandomSeed] = useState(0);
   const [visibleCount, setVisibleCount] = useState(4);
   const [showBackToTop, setShowBackToTop] = useState(false);
   const [attrOpen, setAttrOpen] = useState(false);
   const sentinelRef = useRef<HTMLDivElement | null>(null);
   const searchInputRef = useRef<HTMLInputElement | null>(null);
   const attrRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    setQuery(urlQuery);
+  }, [urlQuery]);
+
+  useEffect(() => {
+    setSortOrder(urlSortOrder);
+  }, [urlSortOrder]);
+
+  useEffect(() => {
+    const nextQuery = query.trim();
+    const currentQuery = searchParams.get("q") ?? "";
+    const currentSortParam = searchParams.get("sort");
+    const nextSortParam = randomSeed === 0 ? sortOrder : null;
+
+    if (nextQuery === currentQuery && nextSortParam === currentSortParam) return;
+
+    const nextParams = new URLSearchParams(searchParams.toString());
+
+    if (nextQuery) {
+      nextParams.set("q", nextQuery);
+    } else {
+      nextParams.delete("q");
+    }
+
+    if (nextSortParam) {
+      nextParams.set("sort", nextSortParam);
+    } else {
+      nextParams.delete("sort");
+    }
+
+    const nextUrl = nextParams.toString() ? `${pathname}?${nextParams.toString()}` : pathname;
+    router.replace(nextUrl, { scroll: false });
+  }, [pathname, query, randomSeed, router, searchParams, sortOrder]);
 
   useEffect(() => {
     if (!attrOpen) return;
@@ -42,8 +93,19 @@ export default function Home() {
     return () => document.removeEventListener("mousedown", handleClick);
   }, [attrOpen]);
 
-  const categories = useMemo(
-    () => ["All", ...new Set(pocCards.map((card) => card.category))],
+  const quickFilters = useMemo(
+    () => [
+      "All",
+      "Community",
+      "Caregiving",
+      "Mobility",
+      "Accessibility",
+      "Volunteering",
+      "Transport",
+      "Food",
+      "Seniors",
+      "Housing",
+    ],
     [],
   );
 
@@ -62,23 +124,26 @@ export default function Home() {
           .join(" ")
           .toLowerCase()
           .includes(normalized);
-
-      const matchesCategory =
-        activeCategory === "All" || card.category === activeCategory;
-
-      return matchesQuery && matchesCategory;
+      return matchesQuery;
     });
+
+    if (randomSeed !== 0) {
+      return [...cards].sort(
+        (left, right) =>
+          hashWithSeed(left.slug, randomSeed) - hashWithSeed(right.slug, randomSeed),
+      );
+    }
 
     return [...cards].sort((left, right) => {
       const leftTime = new Date(left.createdAt).getTime();
       const rightTime = new Date(right.createdAt).getTime();
       return sortOrder === "desc" ? rightTime - leftTime : leftTime - rightTime;
     });
-  }, [activeCategory, query, sortOrder]);
+  }, [query, randomSeed, sortOrder]);
 
   useEffect(() => {
     setVisibleCount(4);
-  }, [activeCategory, query, sortOrder]);
+  }, [query, randomSeed, sortOrder]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -129,6 +194,41 @@ export default function Home() {
   }, []);
 
   const visibleCards = filteredCards.slice(0, visibleCount);
+  const normalizedQuery = query.trim().toLowerCase();
+  const hasActiveFilters = normalizedQuery.length > 0;
+
+  function handleTagClick(tag: string) {
+    setRandomSeed(0);
+    setQuery(tag);
+    searchInputRef.current?.focus();
+    searchInputRef.current?.select();
+  }
+
+  function handleQuickFilterClick(filter: string) {
+    if (filter === "All") {
+      clearFilters();
+      return;
+    }
+
+    setRandomSeed(0);
+    setQuery(filter);
+    searchInputRef.current?.focus();
+    searchInputRef.current?.select();
+  }
+
+  function clearFilters() {
+    setRandomSeed(0);
+    setQuery("");
+  }
+
+  function handleSortChange(nextSortOrder: "desc" | "asc") {
+    setRandomSeed(0);
+    setSortOrder(nextSortOrder);
+  }
+
+  function handleRandomize() {
+    setRandomSeed(Date.now());
+  }
 
   return (
     <main id="top" className="shell">
@@ -214,15 +314,15 @@ export default function Home() {
             </span>
           </label>
           <div className="gallery-toolbar">
-            <div className="gallery-categories" aria-label="Filter by category">
-              {categories.map((category) => (
+            <div className="gallery-categories" aria-label="Filter by tag">
+              {quickFilters.map((filter) => (
                 <button
-                  key={category}
+                  key={filter}
                   type="button"
-                  className={`gallery-category-chip ${activeCategory === category ? "gallery-category-chip--active" : ""}`}
-                  onClick={() => setActiveCategory(category)}
+                  className={`gallery-category-chip ${(filter === "All" && !hasActiveFilters) || normalizedQuery === filter.toLowerCase() ? "gallery-category-chip--active" : ""}`}
+                  onClick={() => handleQuickFilterClick(filter)}
                 >
-                  {category}
+                  {filter}
                 </button>
               ))}
             </div>
@@ -230,25 +330,46 @@ export default function Home() {
               <p className="gallery-count">
                 {filteredCards.length} idea{filteredCards.length === 1 ? "" : "s"}
               </p>
-              <label className="gallery-sort" htmlFor="gallery-sort">
-                <span className="gallery-sort__icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24">
+              <div className="gallery-actions">
+                {hasActiveFilters ? (
+                  <button type="button" className="gallery-clear" onClick={clearFilters}>
+                    Clear filters
+                  </button>
+                ) : null}
+                <button
+                  type="button"
+                  className="gallery-randomize"
+                  onClick={handleRandomize}
+                  aria-label="Randomize visible results"
+                >
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
                     <path
                       fill="currentColor"
-                      d="M7 4h10v2H7V4Zm3 7h7v2h-7v-2Zm4 7h3v2h-3v-2Z"
+                      d="M12 2.75l1.18 3.32 3.32 1.18-3.32 1.18L12 11.75l-1.18-3.32-3.32-1.18 3.32-1.18L12 2.75Zm6.25 7.5.82 2.31 2.31.82-2.31.82-.82 2.3-.82-2.3-2.3-.82 2.3-.82.82-2.31ZM8.25 13.25l1.47 4.13 4.13 1.47-4.13 1.46-1.47 4.14-1.46-4.14-4.14-1.46 4.14-1.47 1.46-4.13Z"
                     />
                   </svg>
-                </span>
-                <select
-                  id="gallery-sort"
-                  aria-label="Sort ideas"
-                  value={sortOrder}
-                  onChange={(event) => setSortOrder(event.target.value as "desc" | "asc")}
-                >
-                  <option value="desc">Newest first</option>
-                  <option value="asc">Oldest first</option>
-                </select>
-              </label>
+                  <span>Randomize</span>
+                </button>
+                <label className="gallery-sort" htmlFor="gallery-sort">
+                  <span className="gallery-sort__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24">
+                      <path
+                        fill="currentColor"
+                        d="M7 4h10v2H7V4Zm3 7h7v2h-7v-2Zm4 7h3v2h-3v-2Z"
+                      />
+                    </svg>
+                  </span>
+                  <select
+                    id="gallery-sort"
+                    aria-label="Sort ideas"
+                    value={sortOrder}
+                    onChange={(event) => handleSortChange(event.target.value as "desc" | "asc")}
+                  >
+                    <option value="desc">Newest first</option>
+                    <option value="asc">Oldest first</option>
+                  </select>
+                </label>
+              </div>
             </div>
           </div>
         </div>
@@ -271,7 +392,15 @@ export default function Home() {
 
               <div className="gallery-item__tags">
                 {card.tags.map((tag) => (
-                  <span key={tag}>{tag}</span>
+                  <button
+                    key={tag}
+                    type="button"
+                    className="gallery-item__tag"
+                    onClick={() => handleTagClick(tag)}
+                    aria-label={`Filter ideas by ${tag}`}
+                  >
+                    {tag}
+                  </button>
                 ))}
               </div>
 
@@ -312,7 +441,17 @@ export default function Home() {
 
       <footer className="site-footer">
         <p>SG Concepts for Good</p>
-        <p>Built with Claude and Codex | 2026</p>
+        <p>
+          By{" "}
+          <a
+            href="https://www.linkedin.com/in/neil-c"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Neil C
+          </a>
+          {" "}· Built with Claude and Codex · 2026
+        </p>
       </footer>
     </main>
   );

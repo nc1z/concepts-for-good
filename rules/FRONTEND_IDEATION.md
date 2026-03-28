@@ -18,6 +18,8 @@ This is the wrong mental model. **The question is not "how do I present this dat
 
 ## Hard rules — no exceptions
 
+- **Every POC page must include a `← Back to gallery` link** that navigates to `/`. Use `import Link from "next/link"` and add a `.backLink` CSS class. Place it above the hero, as the first element inside the page shell. This is non-negotiable — a POC with no way back to the gallery is incomplete.
+
 - **Do not build a card grid unless the concept's `ui.interaction_model` explicitly says card grid.** If you default to cards without reading the UI spec, you have failed before you started.
 - **Do not repeat a layout you used in any previous POC in this repo.** Each concept must feel like it was designed for that concept specifically.
 - **Do not fake novelty with a single different widget.** A chart, map, node graph, or set of chips does not make the UI unique if the surrounding page still looks like the last five POCs.
@@ -45,7 +47,9 @@ Before writing any UI code, you must answer ALL of these questions. Write down y
 6. **What does the first screen communicate?** Can a stranger understand the concept's point of view within 3 seconds of opening the page? If not, redesign the first screen.
 7. **Is this concept's visual direction different from all other POCs already in the repo?** Check what exists. Do not reuse the same palette, layout rhythm, or animation style.
 
-**If you cannot answer all 7 questions before building, you are not ready to build.**
+8. **Does the page have a `← Back to gallery` link** using `<Link href="/">` as the first element in the shell, above the hero? If not, add it before pushing.
+
+**If you cannot answer all 8 questions before building, you are not ready to build.**
 
 ## Repo quality references
 
@@ -205,6 +209,7 @@ The result must pass all of these:
 - [ ] No builder language in the visible copy
 - [ ] Suggested libraries are installed and in use
 - [ ] The design direction from `ui.direction` is visible in the palette, type choices, and layout rhythm
+- [ ] A `← Back to gallery` link (`<Link href="/">`) is present as the first element in the page shell
 
 **If the UI looks like a generic dashboard with cards everywhere, it is not done yet.**
 **If the UI could belong to any concept in the repo, it is not done yet.**

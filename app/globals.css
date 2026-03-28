@@ -335,6 +335,7 @@ a {
   background: rgba(255, 255, 255, 0.78);
   color: var(--text-soft);
   font-size: 0.82rem;
+  cursor: pointer;
 }
 
 .gallery-category-chip--active {
@@ -350,6 +351,64 @@ a {
   justify-content: space-between;
   gap: 16px;
   width: 100%;
+}
+
+.gallery-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.gallery-clear {
+  min-height: 34px;
+  padding: 0 12px;
+  border: 1px solid rgba(12, 95, 215, 0.12);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.84);
+  color: var(--text-soft);
+  cursor: pointer;
+  transition:
+    border-color 180ms ease,
+    color 180ms ease,
+    background 180ms ease;
+}
+
+.gallery-clear:hover {
+  border-color: rgba(12, 95, 215, 0.24);
+  background: rgba(12, 95, 215, 0.06);
+  color: var(--blue-strong);
+}
+
+.gallery-randomize {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 34px;
+  padding: 0 12px;
+  border: 1px solid rgba(12, 95, 215, 0.14);
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(239, 246, 255, 0.92));
+  color: var(--blue-strong);
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    background 180ms ease;
+}
+
+.gallery-randomize:hover {
+  transform: translateY(-1px);
+  border-color: rgba(12, 95, 215, 0.24);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 1), rgba(232, 242, 255, 0.96));
+  box-shadow: 0 10px 22px rgba(12, 95, 215, 0.12);
+}
+
+.gallery-randomize svg {
+  width: 16px;
+  height: 16px;
 }
 
 .gallery-sort {
@@ -463,9 +522,10 @@ a {
   gap: 6px;
 }
 
-.gallery-item__tags span {
+.gallery-item__tag {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   height: 24px;
   padding: 0 9px;
   border-radius: 999px;
@@ -477,9 +537,20 @@ a {
   letter-spacing: 0.02em;
   line-height: 1;
   white-space: nowrap;
+  cursor: pointer;
+  transition:
+    border-color 180ms ease,
+    background 180ms ease,
+    color 180ms ease;
 }
 
-.gallery-item--ops .gallery-item__tags span {
+.gallery-item__tag:hover {
+  border-color: rgba(12, 95, 215, 0.24);
+  background: rgba(12, 95, 215, 0.08);
+  color: var(--blue-strong);
+}
+
+.gallery-item--ops .gallery-item__tag {
   border-color: rgba(12, 95, 215, 0.14);
   background: rgba(255, 255, 255, 0.62);
 }

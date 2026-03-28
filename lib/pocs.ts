@@ -11,6 +11,60 @@ export type PocCard = {
 
 export const pocCards: PocCard[] = [
   {
+    slug: "rain-window-planner-sg",
+    title: "Rain Window Planner",
+    category: "Urban access",
+    createdAt: "2026-03-28T19:01:00+08:00",
+    summary:
+      "Check if it is dry enough to leave now, or how long to wait before heading to your appointment.",
+    impact:
+      "An ambient forecast board that tells caregivers and wheelchair users whether to leave now or wait for a clearer window.",
+    theme: "editorial",
+    tags: ["Mobility", "Weather", "Caregiving", "data.gov.sg"],
+  },
+  {
+    slug: "traffic-camera-check-sg",
+    title: "Traffic Camera Check",
+    category: "Urban access",
+    createdAt: "2026-03-28T19:01:00+08:00",
+    summary: "Check live traffic camera views along your route before heading out for a volunteer run or caregiver trip.",
+    impact: "A route storyboard of live traffic cameras that lets volunteer drivers assess road conditions before leaving.",
+    theme: "ops",
+    tags: ["Mobility", "Transport", "Volunteering", "data.gov.sg"],
+  },
+  {
+    slug: "carpark-chance-sg",
+    title: "Carpark Chance",
+    category: "Urban access",
+    createdAt: "2026-03-28T18:56:00+08:00",
+    summary:
+      "Check nearby carpark availability before heading to a clinic, hospital, or errand stop.",
+    impact:
+      "A pulsing availability board for caregivers and drivers who need a parking plan before they leave.",
+    theme: "ops",
+    tags: ["Mobility", "Caregiving", "Parking", "Transport"],
+  },
+  {
+    slug: "block-potluck-planner-sg",
+    title: "Block Potluck Planner",
+    category: "Social connection",
+    createdAt: "2026-03-28T18:56:00+08:00",
+    summary: "Plan a block potluck where everyone can see what's coming and where the gaps are.",
+    impact: "A festive table planner that makes communal gatherings easy to coordinate without duplicates.",
+    theme: "civic",
+    tags: ["Community", "Food", "Social", "Neighbourhood"],
+  },
+  {
+    slug: "rent-split-planner-sg",
+    title: "Rent Split Planner",
+    category: "Cost of living",
+    createdAt: "2026-03-28T18:56:00+08:00",
+    summary: "See exactly what each flatmate owes this month, with bills assigned and split in a glance.",
+    impact: "A calm split board that makes shared household costs visible and conflict-free.",
+    theme: "editorial",
+    tags: ["Housing", "Cost of living", "Budgeting", "Shared expenses"],
+  },
+  {
     slug: "food-donation-route-sg",
     title: "Food Donation Route",
     category: "Food security",
@@ -20,7 +74,7 @@ export const pocCards: PocCard[] = [
     impact:
       "A visual route planner with reorderable stops for volunteer drivers.",
     theme: "ops",
-    tags: ["Food rescue", "Volunteer logistics", "Route planning"],
+    tags: ["Food", "Volunteering", "Community", "Route planning"],
   },
   {
     slug: "medication-reminder-sg",
@@ -32,7 +86,7 @@ export const pocCards: PocCard[] = [
     impact:
       "A clock-face medication guide for seniors and caregivers to follow through the day.",
     theme: "editorial",
-    tags: ["Medication", "Caregiving", "Daily routine"],
+    tags: ["Caregiving", "Health", "Seniors", "Daily routine"],
   },
   {
     slug: "senior-check-in-sg",
@@ -44,7 +98,7 @@ export const pocCards: PocCard[] = [
     impact:
       "A warm daily check-in flow for volunteers and families supporting seniors living alone.",
     theme: "civic",
-    tags: ["Senior support", "Volunteer care", "Community check-ins"],
+    tags: ["Caregiving", "Community", "Volunteering", "Seniors"],
   },
   {
     slug: "digital-help-for-seniors",
@@ -56,7 +110,7 @@ export const pocCards: PocCard[] = [
     impact:
       "A large-step phone guide for older adults doing everyday digital tasks.",
     theme: "civic",
-    tags: ["Digital literacy", "Seniors", "Phone help"],
+    tags: ["Seniors", "Digital inclusion", "Community", "Phone help"],
   },
   {
     slug: "elder-visit-planner-sg",
@@ -68,7 +122,7 @@ export const pocCards: PocCard[] = [
     impact:
       "A weekly calendar planner that makes open visit days easy to spot and fill.",
     theme: "civic",
-    tags: ["Visit planning", "Volunteers", "Senior care"],
+    tags: ["Caregiving", "Volunteering", "Community", "Seniors"],
   },
   {
     slug: "accessible-mall-route-sg",
@@ -80,7 +134,7 @@ export const pocCards: PocCard[] = [
     impact:
       "An animated floor-plan route guide for wheelchair users, families, and caregivers.",
     theme: "editorial",
-    tags: ["Accessibility", "Mall navigation", "Wheelchair access"],
+    tags: ["Accessibility", "Mobility", "Caregiving", "Wayfinding"],
   },
   {
     slug: "mrt-lift-note-sg",
@@ -92,7 +146,7 @@ export const pocCards: PocCard[] = [
     impact:
       "A schematic rail map that helps mobility-impaired commuters spot lift issues at a glance.",
     theme: "ops",
-    tags: ["MRT access", "Lift status", "Mobility support"],
+    tags: ["Accessibility", "Mobility", "Transport", "Caregiving"],
   },
   {
     slug: "quiet-places-sg",
@@ -104,7 +158,7 @@ export const pocCards: PocCard[] = [
     impact:
       "An ambient quietness explorer for neurodivergent residents and caregivers planning an outing.",
     theme: "editorial",
-    tags: ["Sensory-friendly", "Quiet spaces", "Neurodivergent support"],
+    tags: ["Accessibility", "Mental health", "Caregiving", "Sensory-friendly"],
   },
   {
     slug: "accessible-toilet-notes-sg",
@@ -116,7 +170,7 @@ export const pocCards: PocCard[] = [
     impact:
       "A map-led finder for caregivers, seniors, and disabled users who need the right facilities fast.",
     theme: "civic",
-    tags: ["Accessible toilets", "Changing facilities", "Caregiver planning"],
+    tags: ["Accessibility", "Caregiving", "Mobility", "Facilities"],
   },
   {
     slug: "volunteer-match-sg",
@@ -128,7 +182,7 @@ export const pocCards: PocCard[] = [
     impact:
       "A split-screen matcher that connects busy adults and students to roles they can actually do.",
     theme: "editorial",
-    tags: ["Volunteering", "Skills matching", "Community causes"],
+    tags: ["Volunteering", "Community", "Skills", "Civic"],
   },
   {
     slug: "skills-for-good-sg",
@@ -140,7 +194,7 @@ export const pocCards: PocCard[] = [
     impact:
       "A tag-cloud skills marketplace for nonprofits and volunteers looking for the right help this week.",
     theme: "civic",
-    tags: ["Professional volunteering", "Nonprofit support", "Skills directory"],
+    tags: ["Volunteering", "Community", "Skills", "Nonprofits"],
   },
   {
     slug: "volunteer-hours-sg",
@@ -152,7 +206,7 @@ export const pocCards: PocCard[] = [
     impact:
       "A live-updating hours log for volunteers and students who want a clear record of their time.",
     theme: "ops",
-    tags: ["Volunteer log", "Service hours", "Weekly tracking"],
+    tags: ["Volunteering", "Community", "Students", "Tracking"],
   },
 ];
 

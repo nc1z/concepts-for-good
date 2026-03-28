@@ -1,0 +1,396 @@
+.page {
+  min-height: 100vh;
+  background: #fffbf0;
+  color: #2d1f0e;
+  font-family: var(--font-body), system-ui, sans-serif;
+}
+
+.shell {
+  width: min(1280px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 24px 0 64px;
+}
+
+/* ── Header ─────────────────────────────────────────── */
+
+.topbar {
+  display: flex;
+  align-items: center;
+  margin-bottom: 28px;
+}
+
+.backLink {
+  color: #7c5a2a;
+  font-size: 0.88rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.backLink:hover {
+  color: #e05c2a;
+}
+
+/* ── Event banner ────────────────────────────────────── */
+
+.eventBanner {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 36px;
+}
+
+.eventLabel {
+  margin: 0;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #e05c2a;
+}
+
+.eventName {
+  margin: 0;
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+  color: #2d1f0e;
+}
+
+.eventDate {
+  margin: 0;
+  font-size: 1rem;
+  color: #8a6840;
+}
+
+.headline {
+  margin: 0 0 32px;
+  font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+  font-weight: 600;
+  color: #5a3a12;
+  font-style: italic;
+}
+
+/* ── Table layout (4 course sections) ───────────────── */
+
+.table {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(240px, 1fr));
+  gap: 0;
+  border: 2px solid rgba(180, 110, 40, 0.18);
+  border-radius: 20px;
+  overflow: hidden;
+  background: rgba(255, 248, 230, 0.6);
+}
+
+.courseSection {
+  padding: 24px 20px 28px;
+  border-right: 1.5px solid rgba(180, 110, 40, 0.14);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-height: 420px;
+}
+
+.courseSection:last-child {
+  border-right: none;
+}
+
+.courseSectionInner {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* ── Section header ──────────────────────────────────── */
+
+.courseHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--course-colour);
+}
+
+.courseTitle {
+  margin: 0;
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--course-colour);
+}
+
+.addBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid var(--course-colour);
+  background: transparent;
+  color: var(--course-colour);
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  flex-shrink: 0;
+}
+
+.addBtn:hover {
+  background: var(--course-colour);
+  color: #fff;
+}
+
+/* ── Dish tiles ──────────────────────────────────────── */
+
+.tiles {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.tile {
+  position: relative;
+  background: #fff8ec;
+  border: 1.5px solid rgba(180, 110, 40, 0.14);
+  border-radius: 14px;
+  padding: 12px 14px 10px;
+  cursor: default;
+  transition: border-color 0.2s;
+}
+
+/* Duplicate cluster highlight */
+.tile.duplicate {
+  border-color: #f0b429;
+  background: #fffbea;
+  box-shadow: 0 0 0 3px rgba(240, 180, 41, 0.18), inset 0 0 0 1px rgba(240, 180, 41, 0.3);
+}
+
+.tileDishName {
+  margin: 0 0 4px;
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: #2d1f0e;
+  line-height: 1.25;
+}
+
+.tileBroughtBy {
+  margin: 0;
+  font-size: 0.8rem;
+  color: #8a6840;
+}
+
+/* Dietary note tag */
+.dietaryTag {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 2px 7px;
+  border-radius: 999px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: #d4edda;
+  color: #276234;
+}
+
+.dietaryTag.halal {
+  background: #d4edda;
+  color: #276234;
+}
+
+.dietaryTag.vegetarian {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.dietaryTag.vegan {
+  background: #c8e6c9;
+  color: #1b5e20;
+}
+
+/* Duplicate badge */
+.duplicateBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 6px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: #f0b429;
+  color: #5c3d0a;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+}
+
+/* ── Empty state ─────────────────────────────────────── */
+
+.emptyState {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: 8px 2px;
+  font-size: 0.85rem;
+  color: #b38a5a;
+  font-style: italic;
+  line-height: 1.5;
+}
+
+/* ── Inline add form ─────────────────────────────────── */
+
+.addForm {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 14px 14px 12px;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1.5px solid var(--course-colour);
+  border-radius: 14px;
+}
+
+.addFormTitle {
+  margin: 0;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--course-colour);
+}
+
+.addFormField {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.addFormField label {
+  font-size: 0.72rem;
+  color: #8a6840;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+}
+
+.addFormField input,
+.addFormField select {
+  padding: 8px 10px;
+  border: 1px solid rgba(180, 110, 40, 0.22);
+  border-radius: 10px;
+  background: #fffbf0;
+  font: inherit;
+  font-size: 0.9rem;
+  color: #2d1f0e;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.addFormField input:focus,
+.addFormField select:focus {
+  border-color: var(--course-colour);
+}
+
+.addFormActions {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.bringBtn {
+  flex: 1;
+  padding: 8px 10px;
+  border: none;
+  border-radius: 999px;
+  background: var(--course-colour);
+  color: #fff;
+  font-size: 0.82rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.bringBtn:hover {
+  opacity: 0.88;
+}
+
+.cancelBtn {
+  padding: 8px 10px;
+  border: 1.5px solid rgba(180, 110, 40, 0.22);
+  border-radius: 999px;
+  background: transparent;
+  color: #8a6840;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+
+.cancelBtn:hover {
+  border-color: #8a6840;
+}
+
+/* ── Legend strip ────────────────────────────────────── */
+
+.legend {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  padding: 14px 20px;
+  background: rgba(255, 248, 220, 0.5);
+  border-radius: 12px;
+  border: 1px solid rgba(180, 110, 40, 0.1);
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+  color: #7c5a2a;
+}
+
+.legendDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ── Responsive ──────────────────────────────────────── */
+
+@media (max-width: 1000px) {
+  .table {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .courseSection:nth-child(2) {
+    border-right: none;
+  }
+
+  .courseSection:nth-child(1),
+  .courseSection:nth-child(2) {
+    border-bottom: 1.5px solid rgba(180, 110, 40, 0.14);
+  }
+}
+
+@media (max-width: 600px) {
+  .table {
+    grid-template-columns: 1fr;
+  }
+
+  .courseSection {
+    border-right: none;
+    border-bottom: 1.5px solid rgba(180, 110, 40, 0.14);
+  }
+
+  .courseSection:last-child {
+    border-bottom: none;
+  }
+}

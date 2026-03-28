@@ -998,7 +998,8 @@
       "implementation_tags": [
         "drag-reorder"
       ],
-      "implemented": false
+      "implemented": false,
+      "built": true
     },
     {
       "id": "GOOD_SG-134",
@@ -1071,7 +1072,8 @@
         "experience_goal": "the potluck feels communal, balanced, and easy to coordinate"
       },
       "implementation_tags": [],
-      "implemented": false
+      "implemented": false,
+      "built": true
     },
     {
       "id": "GOOD_SG-154",
@@ -1151,7 +1153,8 @@
         "public-api",
         "realtime-cache"
       ],
-      "implemented": false
+      "implemented": false,
+      "built": true
     },
     {
       "id": "GOOD_SG-058",
@@ -1305,7 +1308,8 @@
       "tags": [
         "LTA API",
         "Taxi availability",
-        "Late-night travel"
+        "Late-night travel",
+        "data.gov.sg"
       ],
       "summary": "See when taxi supply is thinning so you can leave earlier or try a safer pickup plan.",
       "target_user": "shift workers, caregivers, and seniors planning evening travel",
@@ -1526,7 +1530,8 @@
       "tags": [
         "LTA API",
         "Traffic images",
-        "Volunteer driving"
+        "Volunteer driving",
+        "data.gov.sg"
       ],
       "summary": "Check live road camera views before a volunteer delivery run or caregiver pickup trip.",
       "target_user": "volunteer drivers, family drivers, and dispatch coordinators",
@@ -1594,7 +1599,8 @@
         "public-api",
         "image-feed"
       ],
-      "implemented": false
+      "implemented": false,
+      "built": true
     },
     {
       "id": "GOOD_SG-149",
@@ -1747,7 +1753,8 @@
       "tags": [
         "NEA API",
         "2-hour forecast",
-        "Mobility planning"
+        "Mobility planning",
+        "data.gov.sg"
       ],
       "summary": "Pick the driest short window for a clinic visit, school run, or market trip.",
       "target_user": "caregivers, wheelchair users, and parents on tight schedules",
@@ -1815,7 +1822,8 @@
         "public-api",
         "forecast"
       ],
-      "implemented": false
+      "implemented": false,
+      "built": true
     },
     {
       "id": "GOOD_SG-136",
@@ -1967,7 +1975,8 @@
       "tags": [
         "NEA API",
         "PM2.5",
-        "Outdoor activity"
+        "Outdoor activity",
+        "data.gov.sg"
       ],
       "summary": "Find the better hour for an outdoor walk, school activity, or elder exercise session.",
       "target_user": "seniors, caregivers, teachers, and families",
@@ -2188,7 +2197,8 @@
       "tags": [
         "NEA API",
         "Temperature",
-        "Heat safety"
+        "Heat safety",
+        "data.gov.sg"
       ],
       "summary": "Find a better time for outdoor chores, walks, or volunteer work when the heat is less punishing.",
       "target_user": "seniors, outdoor volunteers, cleaners, and caregivers",
@@ -2410,7 +2420,8 @@
       "tags": [
         "NEA API",
         "UV index",
-        "Family outings"
+        "Family outings",
+        "data.gov.sg"
       ],
       "summary": "Choose a lower-exposure time for playground visits, walks, or sports practice.",
       "target_user": "parents, coaches, and caregivers",
@@ -2636,7 +2647,8 @@
       "tags": [
         "NEA API",
         "Rainfall",
-        "Wheelchair access"
+        "Wheelchair access",
+        "data.gov.sg"
       ],
       "summary": "Use recent rainfall to judge whether a route, market area, or estate is likely to be wet and harder to navigate.",
       "target_user": "wheelchair users, caregivers, and residents with mobility concerns",
@@ -2858,7 +2870,8 @@
       "tags": [
         "LTA API",
         "NEA API",
-        "Trip planning"
+        "Trip planning",
+        "data.gov.sg"
       ],
       "summary": "See rain, traffic camera conditions, and taxi supply together before a short essential trip.",
       "target_user": "caregivers, shift workers, and residents making time-sensitive trips",
@@ -3077,7 +3090,8 @@
       "tags": [
         "NEA API",
         "LTA API",
-        "Volunteer logistics"
+        "Volunteer logistics",
+        "data.gov.sg"
       ],
       "summary": "Check rain and road conditions before committing to a food rescue or donation run.",
       "target_user": "volunteer drivers and community coordinators",
@@ -4066,6 +4080,87 @@
       },
       "implementation_tags": [],
       "implemented": false
+    },
+    {
+      "id": "GOOD_SG-165",
+      "title": "Hawker Weather Match",
+      "platform": "website",
+      "folder": "web",
+      "build_stack": "Next.js website",
+      "category": "food security",
+      "tags": [
+        "NEA API",
+        "Hawker centres",
+        "Weather planning",
+        "data.gov.sg"
+      ],
+      "summary": "Find a hawker centre or food court that suits the weather right now — sheltered when raining, open when fine.",
+      "target_user": "families, elderly residents, and caregivers planning a hawker lunch",
+      "why_fast": "The interesting challenge is matching real-time NEA rain forecast to each eating venue shelter type, so wet weather surfaces covered options and dry weather opens everything up.",
+      "stage": "poc",
+      "poc": [
+        "forecast check",
+        "shelter-type filter",
+        "nearby venue list"
+      ],
+      "prototype_goal": "Simulate the core value of Hawker Weather Match in-browser with believable local data and NEA forecast data.",
+      "auth_strategy": "No authentication.",
+      "storage_strategy": {
+        "primary": "localStorage",
+        "secondary": "IndexedDB only if needed",
+        "server_database": "not allowed for the initial POC"
+      },
+      "simulation_mode": "Use seeded hawker centre records with real shelter types; fetch live NEA 2-hour forecast via SWR.",
+      "personas": [
+        "resident",
+        "caregiver"
+      ],
+      "core_entities": [
+        "venues",
+        "forecast_windows",
+        "shelter_types"
+      ],
+      "primary_user_flow": [
+        "forecast_check",
+        "shelter_match",
+        "venue_browse",
+        "get_directions"
+      ],
+      "demo_seed_data": [
+        "12 to 16 Singapore hawker centres and food courts with realistic names, areas, and shelter types (sheltered/partial/open-air)",
+        "Mix of areas: Toa Payoh, Bedok, Jurong, Ang Mo Kio, Geylang",
+        "At least 2 edge cases: a popular open-air market on a rainy day, a fully sheltered food court during hot sun"
+      ],
+      "success_signal": "User can see the current rain forecast and get a filtered list of suitable eating venues in under 30 seconds.",
+      "non_goals": [
+        "real-time seat availability",
+        "menu data",
+        "food delivery integration"
+      ],
+      "build_notes": [
+        "Use the data.gov.sg NEA 2-hour Weather Forecast API (no auth required): https://api.data.gov.sg/v1/environment/2-hour-weather-forecast",
+        "Map the forecast area labels (e.g. Toa Payoh, Bedok) to hawker centre records by neighbourhood.",
+        "Shelter types: sheltered (full roof, AC or not), partial (covered walkway, open sides), open-air (no roof). Show shelter icon prominently on each card.",
+        "When forecast shows rain: auto-filter to sheltered only, with partial visible but dimmed. When clear: show all.",
+        "Use SWR with a 10-minute revalidation interval."
+      ],
+      "ui": {
+        "direction": "warm civic",
+        "interaction_model": "weather-led venue picker — a large forecast banner at top (rainy/partly cloudy/sunny) drives the shelter filter below; venue tiles show shelter type icon prominently",
+        "suggested_libraries": [
+          "framer-motion",
+          "axios",
+          "swr"
+        ],
+        "distinctive_feature": "shelter-type icon on each card visibly dims or glows based on the live forecast — open-air venues fade when rain is forecast, sheltered venues come forward; framer-motion layout animation reorders the list as the filter changes",
+        "avoid": "weather app clone; map-first radar view; plain address directory",
+        "experience_goal": "user feels like the app knows the weather and has done the thinking for them"
+      },
+      "implementation_tags": [
+        "public-api",
+        "forecast",
+        "realtime-cache"
+      ]
     },
     {
       "id": "GOOD_SG-109",
@@ -7264,6 +7359,87 @@
       },
       "implementation_tags": [],
       "implemented": false
+    },
+    {
+      "id": "GOOD_SG-164",
+      "title": "HDB Resale Pulse",
+      "platform": "website",
+      "folder": "web",
+      "build_stack": "Next.js website",
+      "category": "cost of living",
+      "tags": [
+        "HDB API",
+        "Resale prices",
+        "First-time buyers",
+        "data.gov.sg"
+      ],
+      "summary": "See how HDB resale prices have moved in your target town over the past year — one transaction at a time.",
+      "target_user": "young couples and first-time flat buyers researching an HDB purchase",
+      "why_fast": "The interesting challenge is making transaction data feel personal and grounded — a heartbeat timeline of real deals rather than an abstract price chart.",
+      "stage": "poc",
+      "poc": [
+        "town + flat type selector",
+        "transaction heartbeat timeline",
+        "price context panel"
+      ],
+      "prototype_goal": "Fetch real HDB resale transaction data from data.gov.sg and display it as an animated pulse timeline.",
+      "auth_strategy": "No authentication.",
+      "storage_strategy": {
+        "primary": "localStorage",
+        "secondary": "IndexedDB for transaction cache",
+        "server_database": "not allowed for the initial POC"
+      },
+      "simulation_mode": "Use real API data fetched at load time; cache in localStorage with a 24-hour TTL to avoid repeated fetches.",
+      "personas": [
+        "resident"
+      ],
+      "core_entities": [
+        "transactions",
+        "towns",
+        "flat_types"
+      ],
+      "primary_user_flow": [
+        "town_pick",
+        "flat_type_pick",
+        "timeline_explore",
+        "price_compare"
+      ],
+      "demo_seed_data": [
+        "Pre-cached transactions for 3 popular towns: Ang Mo Kio, Tampines, Queenstown",
+        "3-room, 4-room, and 5-room flat types",
+        "Last 12 months of data from the HDB Resale Flat Prices dataset on data.gov.sg"
+      ],
+      "success_signal": "A first-time buyer can pick a town and flat type and immediately see recent transaction prices with median context in under 1 minute.",
+      "non_goals": [
+        "mortgage calculator",
+        "grant eligibility checker",
+        "real estate agent referral"
+      ],
+      "build_notes": [
+        "Use the data.gov.sg HDB Resale Flat Prices dataset API: https://data.gov.sg/api/action/datastore_search?resource_id=d_8b84c4ee58e3cfc0ece0d773c8ca6abc&limit=100",
+        "Filter by town and flat_type in the query params. Sort by month descending. Show the most recent 20 to 40 transactions.",
+        "Compute median resale price for the filtered set and show how each transaction sits above or below median.",
+        "Heartbeat timeline: each transaction is a vertical line whose height = price deviation from median. Lines are spaced evenly across the x-axis by transaction month.",
+        "framer-motion: lines draw in one by one on load with a stagger; hovering a line shows a tooltip with address, storey range, floor area, and price.",
+        "Cache API response in localStorage with town+flatType as key, expire after 24 hours."
+      ],
+      "ui": {
+        "direction": "editorial",
+        "interaction_model": "transaction heartbeat timeline — a horizontal axis of the past 12 months; each resale transaction is a vertical pulse line sized by deviation from the median; a median price band runs through the middle as a reference",
+        "suggested_libraries": [
+          "framer-motion",
+          "axios",
+          "swr"
+        ],
+        "distinctive_feature": "the heartbeat line — transactions cluster or spread visually based on price variance, giving each town a unique visual signature; a smooth median band animates in first, then individual pulses draw in with a stagger",
+        "avoid": "bar chart; line chart; table of transactions; anything that looks like a property portal",
+        "experience_goal": "buyer feels informed and grounded — prices stop being abstract numbers and start being real decisions made by real people in this same town"
+      },
+      "implementation_tags": [
+        "public-api",
+        "data-visualization",
+        "editorial"
+      ]
     },
     {
       "id": "GOOD_SG-080",

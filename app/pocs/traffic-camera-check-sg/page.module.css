@@ -1,0 +1,471 @@
+/* ─── Page shell ───────────────────────────────────────────────────────────── */
+
+.page {
+  min-height: 100dvh;
+  background: #111827;
+  color: #f3f4f6;
+  font-family: var(--font-ibm-plex-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.shell {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1.25rem 4rem;
+}
+
+/* ─── Top bar ──────────────────────────────────────────────────────────────── */
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 0;
+  border-bottom: 1px solid #1f2937;
+  gap: 1rem;
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #9ca3af;
+  text-decoration: none;
+  transition: color 150ms ease;
+  letter-spacing: 0.02em;
+  font-family: var(--font-ibm-plex-sans), system-ui, sans-serif;
+}
+
+.backLink:hover {
+  color: #f3f4f6;
+}
+
+.topbarBadge {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #6366f1;
+  font-family: var(--font-ibm-plex-mono), monospace;
+}
+
+.refreshBtn {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #9ca3af;
+  background: transparent;
+  border: 1px solid #374151;
+  border-radius: 6px;
+  padding: 0.35rem 0.85rem;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+  font-family: var(--font-ibm-plex-sans), system-ui, sans-serif;
+}
+
+.refreshBtn:hover {
+  color: #e5e7eb;
+  border-color: #6366f1;
+}
+
+/* ─── Hero ─────────────────────────────────────────────────────────────────── */
+
+.hero {
+  padding: 2.5rem 0 1.5rem;
+}
+
+.heroTitle {
+  font-size: clamp(1.5rem, 3.5vw, 2.25rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.6rem;
+  color: #f9fafb;
+}
+
+.heroSub {
+  font-size: 0.95rem;
+  color: #9ca3af;
+  margin: 0;
+  max-width: 52ch;
+  line-height: 1.6;
+}
+
+/* ─── Route tabs ───────────────────────────────────────────────────────────── */
+
+.routeTabs {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 1.75rem;
+}
+
+.routeTab {
+  padding: 0.45rem 1.1rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  border: 1px solid #374151;
+  background: #1f2937;
+  color: #9ca3af;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  font-family: var(--font-ibm-plex-sans), system-ui, sans-serif;
+}
+
+.routeTab:hover {
+  color: #e5e7eb;
+  border-color: #6366f1;
+}
+
+.routeTabActive {
+  background: #6366f1;
+  color: #fff;
+  border-color: #6366f1;
+}
+
+.routeSubtitle {
+  margin: 0.65rem 0 0;
+  font-size: 0.8rem;
+  color: #6b7280;
+  font-family: var(--font-ibm-plex-mono), monospace;
+}
+
+/* ─── Error banner ─────────────────────────────────────────────────────────── */
+
+.errorBanner {
+  margin-top: 1rem;
+  padding: 0.75rem 1rem;
+  background: #1f1010;
+  border: 1px solid #7f1d1d;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  color: #fca5a5;
+}
+
+/* ─── Strip section ────────────────────────────────────────────────────────── */
+
+.stripSection {
+  margin-top: 2rem;
+  position: relative;
+}
+
+.stripScroll {
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+  /* smooth momentum scroll on iOS */
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: #374151 transparent;
+}
+
+.stripScroll::-webkit-scrollbar {
+  height: 4px;
+}
+
+.stripScroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.stripScroll::-webkit-scrollbar-thumb {
+  background: #374151;
+  border-radius: 2px;
+}
+
+.strip {
+  display: flex;
+  align-items: flex-start;
+  padding: 0.5rem 1rem 0.25rem;
+  min-width: max-content;
+}
+
+/* ─── Frame stop ───────────────────────────────────────────────────────────── */
+
+.frameStop {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 180px;
+}
+
+/* ─── Route line ───────────────────────────────────────────────────────────── */
+
+.lineRow {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 56px; /* enough room for the node circle */
+}
+
+.lineSeg {
+  flex: 1;
+  height: 2px;
+  background: #6366f1;
+}
+
+.lineInvisible {
+  background: transparent;
+}
+
+/* ─── Node button ──────────────────────────────────────────────────────────── */
+
+.frameNode {
+  flex-shrink: 0;
+  position: relative;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  border-radius: 8px;
+  outline-offset: 3px;
+}
+
+.frameNode:focus-visible {
+  outline: 2px solid #6366f1;
+}
+
+/* ─── Thumbnail ────────────────────────────────────────────────────────────── */
+
+.frameThumbnail {
+  width: 140px;
+  aspect-ratio: 4 / 3;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #374151;
+  background: #1f2937;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.frameThumbnailSelected {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 2px #6366f133;
+}
+
+.frameImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ─── Unavailable frame ────────────────────────────────────────────────────── */
+
+.frameUnavailable {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #111827;
+  padding: 0.5rem;
+}
+
+.frameUnavailableText {
+  font-size: 0.65rem;
+  color: #4b5563;
+  text-align: center;
+  line-height: 1.4;
+}
+
+/* ─── Stop labels ──────────────────────────────────────────────────────────── */
+
+.stopLabel {
+  margin: 0.45rem 0 0;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #d1d5db;
+  text-align: center;
+  max-width: 150px;
+  line-height: 1.3;
+}
+
+.stopTime {
+  margin: 0.15rem 0 0;
+  font-size: 0.63rem;
+  color: #6b7280;
+  font-family: var(--font-ibm-plex-mono), monospace;
+  text-align: center;
+}
+
+/* ─── Loading skeletons ────────────────────────────────────────────────────── */
+
+.loadingRow {
+  display: flex;
+  gap: 2.25rem;
+  padding: 0 1rem;
+  margin-top: 0.5rem;
+}
+
+.skeleton {
+  width: 140px;
+  aspect-ratio: 4 / 3;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #1f2937 25%, #2d3748 50%, #1f2937 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+  flex-shrink: 0;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ─── Tap hint ─────────────────────────────────────────────────────────────── */
+
+.tapHint {
+  margin-top: 0.75rem;
+  font-size: 0.72rem;
+  color: #4b5563;
+  text-align: center;
+  font-style: italic;
+}
+
+/* ─── Focus overlay ────────────────────────────────────────────────────────── */
+
+.focusOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.72);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  backdrop-filter: blur(4px);
+}
+
+/* ─── Focus card ───────────────────────────────────────────────────────────── */
+
+.focusCard {
+  background: #1f2937;
+  border: 1px solid #374151;
+  border-radius: 14px;
+  width: 100%;
+  max-width: 560px;
+  overflow: hidden;
+}
+
+.focusHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 1.1rem 1.25rem 0.75rem;
+  gap: 1rem;
+}
+
+.focusLabel {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #f3f4f6;
+}
+
+.focusTime {
+  margin: 0.2rem 0 0;
+  font-size: 0.72rem;
+  color: #9ca3af;
+  font-family: var(--font-ibm-plex-mono), monospace;
+}
+
+.focusClose {
+  background: #374151;
+  border: none;
+  color: #9ca3af;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  font-size: 0.75rem;
+  transition: background 0.15s, color 0.15s;
+}
+
+.focusClose:hover {
+  background: #4b5563;
+  color: #f3f4f6;
+}
+
+.focusImageWrap {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: #111827;
+}
+
+.focusImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.focusUnavailable {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  color: #4b5563;
+}
+
+.focusMeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.65rem 1.25rem;
+  font-size: 0.68rem;
+  color: #6b7280;
+  font-family: var(--font-ibm-plex-mono), monospace;
+  border-top: 1px solid #374151;
+}
+
+/* ─── Responsive ───────────────────────────────────────────────────────────── */
+
+@media (max-width: 600px) {
+  .shell {
+    padding: 0 1rem 3rem;
+  }
+
+  .hero {
+    padding: 1.75rem 0 1.25rem;
+  }
+
+  .heroTitle {
+    font-size: 1.4rem;
+  }
+
+  .routeTabs {
+    gap: 0.4rem;
+    margin-top: 1.25rem;
+  }
+
+  .routeTab {
+    font-size: 0.78rem;
+    padding: 0.4rem 0.9rem;
+  }
+
+  .frameStop {
+    width: 150px;
+  }
+
+  .frameThumbnail {
+    width: 118px;
+  }
+
+  .focusOverlay {
+    align-items: flex-end;
+    padding: 0;
+  }
+
+  .focusCard {
+    max-width: 100%;
+    border-radius: 14px 14px 0 0;
+    border-bottom: none;
+  }
+}

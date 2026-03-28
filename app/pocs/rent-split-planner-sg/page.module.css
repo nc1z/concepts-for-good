@@ -1,0 +1,517 @@
+.page {
+  min-height: 100vh;
+  background: #faf7f2;
+  color: #2a2420;
+  font-family: var(--font-dm-sans), system-ui, sans-serif;
+}
+
+.shell {
+  width: min(1200px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 32px 0 64px;
+}
+
+/* ── Back link ────────────────────────────────────────── */
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #7a6a5a;
+  text-decoration: none;
+  opacity: 0.65;
+  transition: opacity 150ms ease;
+  margin-bottom: 24px;
+}
+
+.backLink:hover {
+  opacity: 1;
+}
+
+/* ── Hero ─────────────────────────────────────────────── */
+
+.hero {
+  margin-bottom: 48px;
+}
+
+.eyebrow {
+  margin: 0 0 12px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #8a7c6e;
+}
+
+.hero h1 {
+  margin: 0 0 10px;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: #2a2420;
+  max-width: 22ch;
+}
+
+.lede {
+  margin: 0;
+  font-size: 1.05rem;
+  color: #6b5e52;
+  line-height: 1.65;
+  max-width: 52ch;
+}
+
+/* ── Board layout ─────────────────────────────────────── */
+
+.board {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: 40px;
+  align-items: start;
+}
+
+/* ── Bills column ─────────────────────────────────────── */
+
+.billsSection {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.billsHeader {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.sectionLabel {
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #8a7c6e;
+}
+
+.totalBadge {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #6b5e52;
+}
+
+.billsList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ── Bill tile ────────────────────────────────────────── */
+
+.billTile {
+  --border-color: #b0a99a;
+  background: #ffffff;
+  border-radius: 16px;
+  border-left: 4px solid var(--border-color);
+  padding: 18px 20px;
+  cursor: pointer;
+  transition: box-shadow 0.18s ease, transform 0.18s ease;
+  box-shadow: 0 1px 3px rgba(42, 36, 32, 0.06);
+}
+
+.billTile:hover {
+  box-shadow: 0 4px 16px rgba(42, 36, 32, 0.1);
+  transform: translateY(-1px);
+}
+
+.billTile.active {
+  box-shadow: 0 4px 20px rgba(42, 36, 32, 0.14);
+  outline: 2px solid var(--border-color);
+  outline-offset: 1px;
+}
+
+.billTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.billName {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #2a2420;
+}
+
+.billAmount {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #2a2420;
+  white-space: nowrap;
+}
+
+.billMeta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ownerDot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.ownerLabel {
+  font-size: 0.83rem;
+  color: #8a7c6e;
+}
+
+/* ── Split editor (inline panel) ──────────────────────── */
+
+.splitEditor {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #ede8e2;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.splitEditorTitle {
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #8a7c6e;
+}
+
+.modeRow {
+  display: flex;
+  gap: 8px;
+}
+
+.modeBtn {
+  flex: 1;
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 1.5px solid #e0d9d1;
+  background: transparent;
+  font-size: 0.83rem;
+  font-weight: 600;
+  color: #6b5e52;
+  cursor: pointer;
+  transition: background 0.14s, border-color 0.14s;
+}
+
+.modeBtn:hover {
+  background: #f0ebe4;
+}
+
+.modeBtn.modeBtnActive {
+  background: #2a2420;
+  color: #faf7f2;
+  border-color: #2a2420;
+}
+
+.soleRow {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.personChoiceBtn {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1.5px solid #e0d9d1;
+  background: transparent;
+  font-size: 0.88rem;
+  font-weight: 500;
+  cursor: pointer;
+  color: #2a2420;
+  transition: background 0.14s, border-color 0.14s;
+}
+
+.personChoiceBtn:hover {
+  background: #f0ebe4;
+}
+
+.personChoiceBtn.personChoiceBtnActive {
+  border-width: 2px;
+}
+
+.choiceDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.sliderRows {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sliderRow {
+  display: grid;
+  grid-template-columns: 88px 1fr 52px;
+  align-items: center;
+  gap: 12px;
+}
+
+.sliderName {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: #2a2420;
+}
+
+.sliderDot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.splitSlider {
+  width: 100%;
+  accent-color: #6b5e52;
+  cursor: pointer;
+}
+
+.sliderValue {
+  text-align: right;
+  font-size: 0.83rem;
+  font-weight: 600;
+  color: #6b5e52;
+}
+
+/* ── Add bill ─────────────────────────────────────────── */
+
+.addBillForm {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 20px;
+  border: 1.5px dashed #d4ccc4;
+}
+
+.addBillFields {
+  display: grid;
+  grid-template-columns: 1fr 120px;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.addBillInput {
+  padding: 10px 14px;
+  border: 1.5px solid #e0d9d1;
+  border-radius: 10px;
+  background: #faf7f2;
+  font-size: 0.95rem;
+  color: #2a2420;
+  font-family: inherit;
+}
+
+.addBillInput:focus {
+  outline: none;
+  border-color: #8a7c6e;
+}
+
+.addBillInput::placeholder {
+  color: #b0a99a;
+}
+
+.addBillBtn {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 10px;
+  background: #2a2420;
+  color: #faf7f2;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.addBillBtn:hover {
+  background: #3d3530;
+}
+
+.addBillBtn:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+/* ── Empty state ──────────────────────────────────────── */
+
+.emptyState {
+  text-align: center;
+  padding: 32px 20px;
+  color: #8a7c6e;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  background: #fff;
+  border-radius: 16px;
+  border: 1.5px dashed #d4ccc4;
+}
+
+/* ── People bars column ───────────────────────────────── */
+
+.peopleSection {
+  position: sticky;
+  top: 24px;
+}
+
+.peopleHeader {
+  margin-bottom: 16px;
+}
+
+.peopleBars {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+}
+
+.personColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+}
+
+.personName {
+  font-size: 0.83rem;
+  font-weight: 600;
+  color: #2a2420;
+  text-align: center;
+}
+
+.barWrap {
+  width: 100%;
+  height: 320px;
+  border-radius: 12px;
+  background: #ede8e2;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  position: relative;
+}
+
+.barStack {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 2px;
+  padding: 2px;
+}
+
+.barSegment {
+  width: 100%;
+  border-radius: 8px;
+  min-height: 4px;
+}
+
+.barTotal {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #2a2420;
+}
+
+.barSubtotal {
+  font-size: 0.75rem;
+  color: #8a7c6e;
+}
+
+.personTotals {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+/* ── Summary footer ───────────────────────────────────── */
+
+.summaryFooter {
+  margin-top: 40px;
+  padding: 24px;
+  background: #ffffff;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+  box-shadow: 0 1px 4px rgba(42, 36, 32, 0.06);
+}
+
+.summaryNote {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #6b5e52;
+  line-height: 1.55;
+}
+
+.summaryNote strong {
+  color: #2a2420;
+}
+
+.saveBtn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 10px;
+  background: #2a2420;
+  color: #faf7f2;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s;
+}
+
+.saveBtn:hover {
+  background: #3d3530;
+}
+
+.savedNote {
+  font-size: 0.83rem;
+  color: #7aab8a;
+  font-weight: 600;
+}
+
+/* ── Responsive ───────────────────────────────────────── */
+
+@media (max-width: 820px) {
+  .board {
+    grid-template-columns: 1fr;
+  }
+
+  .peopleSection {
+    position: static;
+  }
+
+  .peopleBars {
+    justify-content: flex-start;
+  }
+
+  .barWrap {
+    height: 200px;
+  }
+
+  .addBillFields {
+    grid-template-columns: 1fr;
+  }
+}
