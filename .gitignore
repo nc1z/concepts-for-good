@@ -3,9 +3,12 @@ node_modules
 out
 coverage
 dist
+.npm-cache
 .DS_Store
+*.tsbuildinfo
+.env
+.env.*
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
-

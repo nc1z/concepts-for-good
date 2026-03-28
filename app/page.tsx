@@ -5,56 +5,52 @@ import { useEffect, useMemo, useRef, useState } from "react";
 
 import { pocCards } from "@/lib/pocs";
 
-function shuffleCards<T>(items: T[]) {
-  const next = [...items];
-
-  for (let index = next.length - 1; index > 0; index -= 1) {
-    const swapIndex = Math.floor(Math.random() * (index + 1));
-    const current = next[index];
-
-    next[index] = next[swapIndex];
-    next[swapIndex] = current;
-  }
-
-  return next;
-}
-
 export default function Home() {
   const [query, setQuery] = useState("");
+  const [activeCategory, setActiveCategory] = useState("All");
+  const [sortOrder, setSortOrder] = useState<"desc" | "asc">("desc");
   const [visibleCount, setVisibleCount] = useState(4);
   const [showBackToTop, setShowBackToTop] = useState(false);
-  const [orderedCards, setOrderedCards] = useState(pocCards);
   const sentinelRef = useRef<HTMLDivElement | null>(null);
   const searchInputRef = useRef<HTMLInputElement | null>(null);
 
+  const categories = useMemo(
+    () => ["All", ...new Set(pocCards.map((card) => card.category))],
+    [],
+  );
+
   const filteredCards = useMemo(() => {
     const normalized = query.trim().toLowerCase();
+    const cards = pocCards.filter((card) => {
+      const matchesQuery =
+        !normalized ||
+        [
+          card.title,
+          card.category,
+          card.summary,
+          card.impact,
+          ...card.tags,
+        ]
+          .join(" ")
+          .toLowerCase()
+          .includes(normalized);
 
-    if (!normalized) {
-      return orderedCards;
-    }
+      const matchesCategory =
+        activeCategory === "All" || card.category === activeCategory;
 
-    return orderedCards.filter((card) =>
-      [
-        card.title,
-        card.category,
-        card.summary,
-        card.impact,
-        ...card.tags,
-      ]
-        .join(" ")
-        .toLowerCase()
-        .includes(normalized),
-    );
-  }, [orderedCards, query]);
+      return matchesQuery && matchesCategory;
+    });
 
-  useEffect(() => {
-    setOrderedCards(shuffleCards(pocCards));
-  }, []);
+    return [...cards].sort((left, right) => {
+      const leftTime = new Date(left.createdAt).getTime();
+      const rightTime = new Date(right.createdAt).getTime();
+      return sortOrder === "desc" ? rightTime - leftTime : leftTime - rightTime;
+    });
+  }, [activeCategory, query, sortOrder]);
 
   useEffect(() => {
     setVisibleCount(4);
-  }, [query]);
+  }, [activeCategory, query, sortOrder]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -163,9 +159,44 @@ export default function Home() {
               <kbd>K</kbd>
             </span>
           </label>
-          <p className="gallery-count">
-            {filteredCards.length} idea{filteredCards.length === 1 ? "" : "s"}
-          </p>
+          <div className="gallery-toolbar">
+            <div className="gallery-categories" aria-label="Filter by category">
+              {categories.map((category) => (
+                <button
+                  key={category}
+                  type="button"
+                  className={`gallery-category-chip ${activeCategory === category ? "gallery-category-chip--active" : ""}`}
+                  onClick={() => setActiveCategory(category)}
+                >
+                  {category}
+                </button>
+              ))}
+            </div>
+            <div className="gallery-meta-row">
+              <p className="gallery-count">
+                {filteredCards.length} idea{filteredCards.length === 1 ? "" : "s"}
+              </p>
+              <label className="gallery-sort" htmlFor="gallery-sort">
+                <span className="gallery-sort__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <path
+                      fill="currentColor"
+                      d="M7 4h10v2H7V4Zm3 7h7v2h-7v-2Zm4 7h3v2h-3v-2Z"
+                    />
+                  </svg>
+                </span>
+                <select
+                  id="gallery-sort"
+                  aria-label="Sort ideas"
+                  value={sortOrder}
+                  onChange={(event) => setSortOrder(event.target.value as "desc" | "asc")}
+                >
+                  <option value="desc">Newest first</option>
+                  <option value="asc">Oldest first</option>
+                </select>
+              </label>
+            </div>
+          </div>
         </div>
 
         <div className="gallery-grid">
@@ -191,8 +222,18 @@ export default function Home() {
 
               <div className="gallery-item__footer">
                 <p>{card.impact}</p>
-                <Link href={`/pocs/${card.slug}`} className="gallery-item__link">
-                  Open demo
+                <Link
+                  href={`/pocs/${card.slug}`}
+                  className="gallery-item__link"
+                  aria-label={`Open ${card.title} demo`}
+                >
+                  <span>View</span>
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path
+                      fill="currentColor"
+                      d="M7.5 12.75h7.19l-2.97 2.97 1.06 1.06 4.78-4.78-4.78-4.78-1.06 1.06 2.97 2.97H7.5v1.5Z"
+                    />
+                  </svg>
                 </Link>
               </div>
             </article>

@@ -10,6 +10,8 @@ You must also read `ANTIPATTERNS_CODEX.md` before writing any user-facing UI cop
 
 Previous agents have repeatedly built the same output: a white background, a header, a filter row, and a grid of cards with title + description + button. This is not acceptable. It does not matter what the concept is — every concept gets the same generic SaaS dashboard treatment.
 
+Another repeated failure is fake variety: one page becomes "the chart one", another becomes "the map one", another becomes "the card one", but the underlying layout rhythm and product feel stay the same. This also fails.
+
 This is the wrong mental model. **The question is not "how do I present this data?" The question is "what kind of experience does this concept deserve?"**
 
 ---
@@ -18,15 +20,20 @@ This is the wrong mental model. **The question is not "how do I present this dat
 
 - **Do not build a card grid unless the concept's `ui.interaction_model` explicitly says card grid.** If you default to cards without reading the UI spec, you have failed before you started.
 - **Do not repeat a layout you used in any previous POC in this repo.** Each concept must feel like it was designed for that concept specifically.
+- **Do not fake novelty with a single different widget.** A chart, map, node graph, or set of chips does not make the UI unique if the surrounding page still looks like the last five POCs.
 - **Do not use a sidebar + header + content body template.** This is the default Next.js dashboard shell. It is not a design. It is an absence of design.
 - **Do not put builder language in the UI.** Words like "POC", "component", "scaffold", "slice", "implementation", "concept", or "generated" must never appear in the user-facing interface. Write as if this is a real product.
 - **Do not leak prompt or brief language into the UI.** If a line sounds like it came from the design brief, checklist, or agent instructions, it does not belong in the product.
 - **Do not use forms as the primary UI unless the concept's interaction model says form-led.** A form is an input mechanism. It is not an experience.
 - **Do not skip library installation.** If the concept spec lists `framer-motion`, `recharts`, `three.js`, or any other library — install it and use it. These are not suggestions. They exist because a concept without them will be flat.
+- **Do not implement before plan approval.** For any new user-facing route or major redesign, you must first draft a concrete plan covering theme, style, interaction model, and library choices, then stop and wait for explicit approval.
 
 ---
 
 ## Mandatory pre-build checklist
+
+Before this checklist, you must complete a planning step and get approval.
+Use `skills/public/frontend-plan-first/SKILL.md` whenever the task is to build or redesign a user-facing POC.
 
 Before writing any UI code, you must answer ALL of these questions. Write down your answers in your working notes or PR description.
 
@@ -39,6 +46,16 @@ Before writing any UI code, you must answer ALL of these questions. Write down y
 7. **Is this concept's visual direction different from all other POCs already in the repo?** Check what exists. Do not reuse the same palette, layout rhythm, or animation style.
 
 **If you cannot answer all 7 questions before building, you are not ready to build.**
+
+## Repo quality references
+
+When planning a new route, inspect existing POCs that already feel native to their domain rather than "a generic web app with different data".
+
+Strong examples in this repo:
+- `app/pocs/medication-reminder-sg/page.tsx` — the interaction, geometry, and tone feel like a medication product
+- `app/pocs/senior-check-in-sg/page.tsx` — the streak ring system, warmth, and pacing feel built for community care
+
+These are examples of specificity, not templates to copy.
 
 ---
 
@@ -191,3 +208,5 @@ The result must pass all of these:
 
 **If the UI looks like a generic dashboard with cards everywhere, it is not done yet.**
 **If the UI could belong to any concept in the repo, it is not done yet.**
+**If the only novelty is "this page has a map/chart/graph", it is not done yet.**
+**If you could swap another concept's copy into the same layout and it would still work, it is not done yet.**

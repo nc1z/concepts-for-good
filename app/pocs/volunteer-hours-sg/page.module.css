@@ -1,0 +1,242 @@
+.page {
+  min-height: 100vh;
+  color: #1c2430;
+  font-family: var(--font-ibm-plex-sans), sans-serif;
+  background:
+    linear-gradient(180deg, #fbfcfe 0%, #f2f5f9 100%);
+}
+
+.shell {
+  width: min(1180px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 24px 0 48px;
+}
+
+.backLink {
+  color: #566b81;
+  font-weight: 700;
+}
+
+.hero {
+  display: grid;
+  gap: 14px;
+  max-width: 760px;
+  margin: 28px 0 22px;
+}
+
+.eyebrow {
+  margin: 0;
+  color: #1d4ed8;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.hero h1 {
+  margin: 0;
+  max-width: 11ch;
+  font-family: var(--font-space-grotesk), sans-serif;
+  font-size: clamp(3rem, 5vw, 5rem);
+  line-height: 0.94;
+  letter-spacing: -0.06em;
+}
+
+.lede,
+.entry p,
+.emptyState {
+  margin: 0;
+  color: #66788d;
+  line-height: 1.7;
+}
+
+.ribbon {
+  position: relative;
+  overflow: hidden;
+  min-height: 42px;
+  border-radius: 999px;
+  background: rgba(29, 78, 216, 0.08);
+}
+
+.ribbonFill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 0;
+  background: linear-gradient(90deg, #1d4ed8, #14b8a6);
+}
+
+.ribbon span {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  min-height: 42px;
+  padding: 0 16px;
+  color: #123767;
+  font-weight: 700;
+}
+
+.weekStrip {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.dayButton {
+  display: grid;
+  gap: 4px;
+  min-height: 84px;
+  padding: 14px 12px;
+  border: 1px solid rgba(29, 78, 216, 0.12);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.8);
+  text-align: left;
+}
+
+.dayButton strong {
+  font-size: 1rem;
+}
+
+.dayButton span {
+  color: #66788d;
+}
+
+.dayButtonActive {
+  border-color: rgba(29, 78, 216, 0.28);
+}
+
+.timeline {
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.dayColumn {
+  position: sticky;
+  top: 20px;
+  align-self: start;
+}
+
+.dayLabel {
+  margin: 0;
+  color: #6b7c90;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.78rem;
+}
+
+.dayColumn h2 {
+  margin: 10px 0 0;
+  font-size: 2rem;
+  letter-spacing: -0.04em;
+}
+
+.entryColumn {
+  display: grid;
+  gap: 16px;
+}
+
+.entry {
+  --accent: #1d4ed8;
+  padding-left: 24px;
+  border-left: 3px solid var(--accent);
+}
+
+.entryTop,
+.entryMeta {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.entryTop {
+  color: color-mix(in srgb, var(--accent) 78%, #213041);
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.entry h3 {
+  margin: 8px 0 6px;
+  font-size: 1.45rem;
+  letter-spacing: -0.03em;
+}
+
+.entryMeta {
+  margin-top: 10px;
+  color: #6b7c90;
+  font-size: 0.92rem;
+}
+
+.writer {
+  display: grid;
+  gap: 14px;
+  margin-top: 30px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(29, 78, 216, 0.1);
+}
+
+.writerRow {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.writer label {
+  display: grid;
+  gap: 8px;
+}
+
+.writer span {
+  color: #6b7c90;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.writer input,
+.writer select,
+.writer textarea {
+  width: 100%;
+  border: 1px solid rgba(29, 78, 216, 0.12);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.86);
+  padding: 12px 14px;
+  font: inherit;
+}
+
+.wideField {
+  grid-column: span 2;
+}
+
+.noteField textarea {
+  resize: vertical;
+}
+
+.addButton {
+  justify-self: start;
+  min-height: 44px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 999px;
+  background: #1d4ed8;
+  color: #fff;
+  font-weight: 700;
+}
+
+@media (max-width: 900px) {
+  .weekStrip,
+  .writerRow,
+  .timeline {
+    grid-template-columns: 1fr;
+  }
+
+  .dayColumn {
+    position: static;
+  }
+
+  .wideField {
+    grid-column: auto;
+  }
+}

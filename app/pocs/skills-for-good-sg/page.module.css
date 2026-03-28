@@ -1,0 +1,138 @@
+.page {
+  min-height: 100vh;
+  color: #142235;
+  font-family: var(--font-manrope), sans-serif;
+  background:
+    radial-gradient(circle at top left, rgba(229, 214, 190, 0.28), transparent 24%),
+    linear-gradient(180deg, #faf8f3 0%, #eef1ec 100%);
+}
+
+.shell {
+  width: min(1260px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 24px 0 48px;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+}
+
+.backLink {
+  color: #586b7f;
+  font-weight: 700;
+}
+
+.topHint,
+.readoutMeta,
+.readoutNote {
+  margin: 0;
+  color: #5f7285;
+}
+
+.hero {
+  display: grid;
+  gap: 12px;
+  max-width: 760px;
+  margin: 28px 0 22px;
+}
+
+.eyebrow {
+  margin: 0;
+  color: #7d5b31;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.hero h1 {
+  margin: 0;
+  max-width: 11ch;
+  font-family: var(--font-fraunces), serif;
+  font-size: clamp(3rem, 5vw, 5rem);
+  line-height: 0.94;
+  letter-spacing: -0.05em;
+}
+
+.lede {
+  margin: 0;
+  max-width: 46ch;
+  color: #5f7285;
+  line-height: 1.7;
+}
+
+.graphStage {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(20, 34, 53, 0.08);
+  border-radius: 34px;
+  background:
+    radial-gradient(circle at top, rgba(255, 255, 255, 0.72), transparent 20%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.86), rgba(245, 242, 235, 0.9));
+  box-shadow: 0 24px 54px rgba(24, 34, 45, 0.08);
+}
+
+.graphStage canvas {
+  display: block;
+}
+
+.graphFrame {
+  position: absolute;
+  inset: 18px;
+  border: 1px dashed rgba(20, 34, 53, 0.08);
+  border-radius: 24px;
+  pointer-events: none;
+}
+
+.readout {
+  display: grid;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.readoutLabel {
+  margin: 0;
+  color: #7d5b31;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.readout h2 {
+  margin: 0;
+  font-family: var(--font-fraunces), serif;
+  font-size: 2.2rem;
+  letter-spacing: -0.04em;
+}
+
+.readoutNote {
+  max-width: 56ch;
+  line-height: 1.65;
+}
+
+.readoutRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.readoutRow span {
+  min-height: 32px;
+  padding: 0 12px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  background: rgba(20, 34, 53, 0.06);
+  color: #314455;
+}
+
+@media (max-width: 900px) {
+  .topbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

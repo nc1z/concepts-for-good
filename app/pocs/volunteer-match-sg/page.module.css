@@ -1,0 +1,283 @@
+.page {
+  min-height: 100vh;
+  color: #18222d;
+  font-family: var(--font-manrope), sans-serif;
+  background:
+    radial-gradient(circle at top left, rgba(234, 210, 173, 0.3), transparent 24%),
+    linear-gradient(180deg, #fcf6ef 0%, #f3ece2 100%);
+}
+
+.shell {
+  width: min(1260px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 24px 0 52px;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+}
+
+.backLink {
+  color: #55697c;
+  font-weight: 700;
+}
+
+.navButtons {
+  display: flex;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.skillToken {
+  border: 1px solid rgba(24, 34, 45, 0.1);
+  background: rgba(255, 255, 255, 0.84);
+  color: #18222d;
+}
+
+.navButtons button {
+  min-height: 52px;
+  min-width: 184px;
+  padding: 0 22px;
+  border: 0;
+  border-radius: 18px;
+  background: linear-gradient(180deg, #18222d, #2c3948);
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  box-shadow: 0 18px 32px rgba(24, 34, 45, 0.18);
+}
+
+.navButtons button:hover {
+  transform: translateY(-1px);
+}
+
+.hero {
+  display: grid;
+  gap: 12px;
+  max-width: 760px;
+  margin: 30px 0 24px;
+}
+
+.eyebrow {
+  margin: 0;
+  color: #896334;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.hero h1 {
+  margin: 0;
+  max-width: 12ch;
+  font-family: var(--font-cormorant), serif;
+  font-size: clamp(3rem, 6vw, 5.4rem);
+  line-height: 0.92;
+  letter-spacing: -0.05em;
+}
+
+.lede {
+  margin: 0;
+  max-width: 48ch;
+  color: #5d6f80;
+  line-height: 1.7;
+}
+
+.stage {
+  display: grid;
+  grid-template-columns: minmax(300px, 0.7fr) minmax(0, 1.3fr);
+  gap: 28px;
+  align-items: center;
+  margin-top: 26px;
+}
+
+.stageCopy h2,
+.skillBench h3 {
+  margin: 0;
+}
+
+.resultHeader {
+  display: grid;
+  gap: 10px;
+}
+
+.stageTopline,
+.stageCopy p,
+.skillBenchCopy p {
+  margin: 0;
+  color: #5d6f80;
+}
+
+.stageTopline {
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.stageCopy h2 {
+  margin-top: 10px;
+  font-family: var(--font-cormorant), serif;
+  font-size: clamp(2.4rem, 4vw, 4rem);
+  line-height: 0.96;
+}
+
+.stageCopy > p {
+  margin-top: 12px;
+  line-height: 1.7;
+}
+
+.fitMeter {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.fitMeter span {
+  color: #896334;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.76rem;
+  font-weight: 800;
+}
+
+.fitMeter strong {
+  font-size: 3rem;
+  letter-spacing: -0.06em;
+}
+
+.impact {
+  margin-top: 12px;
+  max-width: 36ch;
+}
+
+.orbit {
+  --accent: #1f7a67;
+  position: relative;
+  min-height: 640px;
+  overflow: hidden;
+}
+
+.core {
+  position: absolute;
+  inset: 50%;
+  width: 230px;
+  height: 230px;
+  margin: -115px 0 0 -115px;
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.9), transparent 36%),
+    color-mix(in srgb, var(--accent) 18%, #f8f4ed);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--accent) 20%, transparent),
+    0 30px 60px rgba(81, 58, 31, 0.12);
+  display: grid;
+  place-items: center;
+  text-align: center;
+}
+
+.coreLabel {
+  display: block;
+  color: #6d7d8d;
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.core strong {
+  display: block;
+  width: 160px;
+  margin-top: 10px;
+  font-size: 1.5rem;
+  line-height: 1.15;
+}
+
+.orbitNode {
+  position: absolute;
+  max-width: 160px;
+  min-height: 46px;
+  padding: 0 16px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.86);
+  color: #314354;
+  box-shadow: 0 18px 36px rgba(86, 66, 38, 0.1);
+  text-align: center;
+  transform: translate(-50%, -50%);
+}
+
+.orbitNodeNeeded {
+  background: color-mix(in srgb, var(--accent) 12%, white);
+}
+
+.orbitNodeSelected {
+  box-shadow: 0 18px 40px color-mix(in srgb, var(--accent) 24%, transparent);
+}
+
+.skillBench {
+  display: grid;
+  gap: 14px;
+  margin-top: 24px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(24, 34, 45, 0.08);
+}
+
+.skillBenchCopy {
+  display: grid;
+  gap: 6px;
+}
+
+.skillTray {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.skillToken {
+  min-height: 42px;
+  padding: 0 14px;
+  border-radius: 999px;
+}
+
+.skillTokenActive {
+  background: #243140;
+  color: #fff;
+}
+
+.skillTokenMatched {
+  background: #1f7a67;
+}
+
+@media (max-width: 900px) {
+  .topbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .stage {
+    grid-template-columns: 1fr;
+  }
+
+  .resultHeader {
+    gap: 10px;
+  }
+
+  .navButtons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .navButtons button {
+    width: 100%;
+  }
+
+  .orbit {
+    min-height: 520px;
+  }
+}

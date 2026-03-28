@@ -1,0 +1,323 @@
+.page {
+  min-height: 100vh;
+  color: #ecf4ff;
+  font-family: var(--font-rail), sans-serif;
+  background:
+    radial-gradient(circle at top left, rgba(46, 109, 183, 0.24), transparent 26%),
+    radial-gradient(circle at 85% 10%, rgba(89, 240, 197, 0.12), transparent 22%),
+    linear-gradient(180deg, #06101c 0%, #0a1321 100%);
+}
+
+.shell {
+  width: min(1380px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 24px 0 48px;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.backLink {
+  color: #c8d7ea;
+  font-weight: 700;
+}
+
+.statusStrip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.statusStripItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 34px;
+  padding: 0 12px;
+  border: 1px solid rgba(133, 162, 196, 0.16);
+  border-radius: 999px;
+  color: #cdd9e8;
+  background: rgba(9, 17, 30, 0.7);
+  font-size: 0.84rem;
+}
+
+.statusStripItem i {
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  background: currentColor;
+}
+
+.statusStripItem[data-status="working"] {
+  color: #59f0c5;
+}
+
+.statusStripItem[data-status="maintenance"] {
+  color: #ffbf66;
+}
+
+.statusStripItem[data-status="out"] {
+  color: #ff7d73;
+}
+
+.hero {
+  display: grid;
+  gap: 12px;
+  max-width: 700px;
+  margin: 34px 0 22px;
+}
+
+.eyebrow {
+  margin: 0;
+  color: #59f0c5;
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.hero h1 {
+  margin: 0;
+  max-width: 11ch;
+  font-size: clamp(3rem, 6vw, 5.4rem);
+  line-height: 0.94;
+  letter-spacing: -0.06em;
+}
+
+.lede {
+  margin: 0;
+  max-width: 48ch;
+  color: #9db2c9;
+  font-size: 1.06rem;
+  line-height: 1.7;
+}
+
+.network {
+  position: relative;
+  overflow: hidden;
+  min-height: 720px;
+  border: 1px solid rgba(133, 162, 196, 0.14);
+  border-radius: 36px;
+  background:
+    radial-gradient(circle at top, rgba(54, 108, 173, 0.18), transparent 24%),
+    linear-gradient(180deg, rgba(8, 14, 24, 0.95), rgba(11, 20, 33, 0.96));
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.3);
+}
+
+.mapSvg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.stationLayer {
+  position: absolute;
+  inset: 0;
+}
+
+.baseLine,
+.dimLine,
+.activeLine {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.baseLine {
+  stroke: rgba(140, 166, 196, 0.14);
+  stroke-width: 16;
+}
+
+.dimLine {
+  stroke-width: 12;
+}
+
+.activeLine {
+  stroke-width: 14;
+  filter: drop-shadow(0 0 16px rgba(89, 240, 197, 0.18));
+}
+
+.stationButton {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border: 0;
+  background: transparent;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+}
+
+.stationPoint {
+  display: block;
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  background: #dce8f8;
+  border: 3px solid #081321;
+  transition: transform 180ms ease;
+}
+
+.stationPoint[data-status="working"] {
+  background: #59f0c5;
+}
+
+.stationPoint[data-status="maintenance"] {
+  background: #ffbf66;
+}
+
+.stationPoint[data-status="out"] {
+  background: #ff7d73;
+}
+
+.stationPointSelected {
+  transform: scale(1.2);
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.14);
+}
+
+.stationAlert {
+  position: absolute;
+  color: #081321;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.stationShadow {
+  fill: rgba(255, 255, 255, 0.06);
+}
+
+.stationShadowActive {
+  fill: rgba(255, 255, 255, 0.12);
+}
+
+.stationLabel {
+  fill: rgba(236, 244, 255, 0.66);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.stationLabelActive {
+  fill: #fff;
+}
+
+.pulse {
+  position: absolute;
+  width: 110px;
+  height: 110px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.liveNote {
+  position: absolute;
+  width: min(330px, calc(100vw - 64px));
+  padding: 18px 18px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 24px;
+  background: rgba(8, 15, 25, 0.92);
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.24);
+  transform: translate(-20%, 56px);
+  backdrop-filter: blur(18px);
+}
+
+.liveLine,
+.liveStatus,
+.liveSummary,
+.liveNotes p,
+.liveMeta dt,
+.liveMeta dd {
+  margin: 0;
+}
+
+.liveLine {
+  color: #9db2c9;
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.liveNote h2 {
+  margin: 8px 0 6px;
+  font-size: 1.8rem;
+  letter-spacing: -0.04em;
+}
+
+.liveStatus {
+  font-weight: 700;
+}
+
+.liveStatus[data-status="working"] {
+  color: #59f0c5;
+}
+
+.liveStatus[data-status="maintenance"] {
+  color: #ffbf66;
+}
+
+.liveStatus[data-status="out"] {
+  color: #ff7d73;
+}
+
+.liveSummary {
+  margin-top: 10px;
+  color: #d4deea;
+  line-height: 1.6;
+}
+
+.liveMeta {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.liveMeta dt {
+  color: #7f93a9;
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.liveMeta dd {
+  margin-top: 4px;
+  color: #eef4ff;
+  font-weight: 700;
+}
+
+.liveNotes {
+  display: grid;
+  gap: 8px;
+  margin-top: 14px;
+  color: #c1cfdf;
+  line-height: 1.55;
+}
+
+@media (max-width: 900px) {
+  .topbar {
+    flex-direction: column;
+  }
+
+  .network {
+    min-height: 640px;
+  }
+
+  .liveNote {
+    left: 50% !important;
+    top: auto !important;
+    right: auto;
+    bottom: 18px;
+    transform: translateX(-50%);
+  }
+
+  .pulse {
+    display: none;
+  }
+}

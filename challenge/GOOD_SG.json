@@ -484,6 +484,11 @@
       "folder": "mobile",
       "build_stack": "Next.js website",
       "category": "accessibility",
+      "tags": [
+        "MRT access",
+        "Lift status",
+        "Mobility support"
+      ],
       "summary": "Track practical notes on lift access and alternate station choices.",
       "target_user": "mobility-impaired commuters",
       "why_fast": "The interesting challenge is building a schematic MRT network diagram in SVG where stations show live-simulated lift status without any external API.",
@@ -548,6 +553,11 @@
       "folder": "web",
       "build_stack": "Next.js website",
       "category": "accessibility",
+      "tags": [
+        "Sensory-friendly",
+        "Quiet spaces",
+        "Neurodivergent support"
+      ],
       "summary": "Curate calmer places for neurodivergent users and families.",
       "target_user": "neurodivergent residents and caregivers",
       "why_fast": "The interesting challenge is designing a UI that IS the concept — so calm and minimal that browsing it feels like being in a quiet place.",
@@ -614,6 +624,11 @@
       "folder": "mobile",
       "build_stack": "Next.js website",
       "category": "accessibility",
+      "tags": [
+        "Accessible toilets",
+        "Changing facilities",
+        "Caregiver planning"
+      ],
       "summary": "Track clean, reliable accessible toilets and changing facilities.",
       "target_user": "caregivers, seniors, and disabled users",
       "why_fast": "The interesting challenge is colour-coding map pins by amenity completeness and letting the map itself answer the question of which toilet is best.",
@@ -685,6 +700,11 @@
       "folder": "web",
       "build_stack": "Next.js website",
       "category": "civic",
+      "tags": [
+        "Volunteering",
+        "Skills matching",
+        "Community causes"
+      ],
       "summary": "Match Singapore residents to short volunteer opportunities by area and cause.",
       "target_user": "busy adults and students",
       "why_fast": "The interesting challenge is animating a skill-match glow at the moment a volunteer's skills align with a cause's needs.",
@@ -754,6 +774,11 @@
       "folder": "web",
       "build_stack": "Next.js website",
       "category": "civic",
+      "tags": [
+        "Professional volunteering",
+        "Nonprofit support",
+        "Skills directory"
+      ],
       "summary": "Help professionals donate time for design, admin, tutoring, or tech needs.",
       "target_user": "professionals and nonprofits",
       "why_fast": "The interesting challenge is building a tag cloud where tag size reflects real availability and clicking a tag filters results with a smooth animation.",
@@ -819,6 +844,11 @@
       "folder": "mobile",
       "build_stack": "Next.js website",
       "category": "civic",
+      "tags": [
+        "Volunteer log",
+        "Service hours",
+        "Weekly tracking"
+      ],
       "summary": "Track service hours and recurring commitments for community work.",
       "target_user": "volunteers and students",
       "why_fast": "The interesting challenge is making a volunteer's accumulated hours feel meaningful through a live-updating stacked bar chart and animated totals.",
