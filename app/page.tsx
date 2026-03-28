@@ -213,6 +213,11 @@ export default function Home() {
           Back to top
         </a>
       ) : null}
+
+      <footer className="site-footer">
+        <p>SG Concepts for Good</p>
+        <p>Built with Claude and Codex | 2026</p>
+      </footer>
     </main>
   );
 }
