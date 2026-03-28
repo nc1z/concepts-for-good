@@ -1,0 +1,227 @@
+.page {
+  min-height: 100vh;
+  padding: 24px;
+  background:
+    radial-gradient(circle at top left, rgba(223, 238, 252, 0.72), transparent 32%),
+    linear-gradient(180deg, #f6f9fc 0%, #eef3f8 100%);
+  color: #15232f;
+  font-family: var(--font-space), sans-serif;
+}
+
+.shell {
+  width: min(1280px, 100%);
+  margin: 0 auto;
+  display: grid;
+  gap: 22px;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+}
+
+.backLink,
+.helperPill {
+  display: inline-flex;
+  align-items: center;
+  min-height: 48px;
+  padding: 0 18px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.74);
+  border: 1px solid rgba(41, 78, 120, 0.12);
+  font-weight: 700;
+}
+
+.hero {
+  display: grid;
+  gap: 14px;
+  max-width: 780px;
+}
+
+.eyebrow {
+  margin: 0;
+  color: #2f5f9a;
+  font-size: 0.88rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.title {
+  margin: 0;
+  font-size: clamp(2.6rem, 4vw, 4.4rem);
+  line-height: 1.02;
+  letter-spacing: -0.05em;
+}
+
+.lede {
+  margin: 0;
+  max-width: 34ch;
+  color: #567089;
+  font-size: 1.14rem;
+  line-height: 1.65;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  gap: 22px;
+  align-items: start;
+}
+
+.diagram {
+  padding: 20px;
+  border-radius: 34px;
+  background:
+    radial-gradient(circle at top, rgba(255, 255, 255, 0.95), transparent 62%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(242, 247, 252, 0.96));
+  border: 1px solid rgba(41, 78, 120, 0.08);
+  box-shadow: 0 28px 44px rgba(21, 35, 47, 0.08);
+}
+
+.diagramTitle {
+  margin: 0 0 14px;
+  font-size: 1.3rem;
+  letter-spacing: -0.03em;
+}
+
+.svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.nodeButton {
+  cursor: pointer;
+}
+
+.nodeLabel {
+  font-size: 13px;
+  font-weight: 700;
+  fill: #1d3958;
+  pointer-events: none;
+}
+
+.routePath {
+  fill: none;
+  stroke: #0d6b73;
+  stroke-width: 10;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 6px 12px rgba(13, 107, 115, 0.18));
+}
+
+.routeDots {
+  fill: none;
+  stroke: #ffffff;
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-dasharray: 2 16;
+  opacity: 0.85;
+}
+
+.panel {
+  display: grid;
+  gap: 16px;
+  padding: 20px;
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.84);
+  border: 1px solid rgba(41, 78, 120, 0.08);
+  position: sticky;
+  top: 20px;
+}
+
+.panelTitle {
+  margin: 0;
+  font-size: 1.8rem;
+  letter-spacing: -0.04em;
+}
+
+.panelLead,
+.note,
+.destinationHint {
+  margin: 0;
+  color: #5d738a;
+  line-height: 1.6;
+}
+
+.routeBadge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 0 14px;
+  width: fit-content;
+  border-radius: 999px;
+  background: rgba(47, 95, 154, 0.12);
+  color: #2f5f9a;
+  font-size: 0.9rem;
+  font-weight: 800;
+}
+
+.destinationList {
+  display: grid;
+  gap: 12px;
+}
+
+.destinationButton {
+  display: grid;
+  justify-items: start;
+  gap: 4px;
+  width: 100%;
+  padding: 16px;
+  border-radius: 22px;
+  border: 1px solid rgba(41, 78, 120, 0.1);
+  background: #fbfdff;
+  text-align: left;
+  cursor: pointer;
+}
+
+.destinationButtonActive {
+  border-color: rgba(13, 107, 115, 0.28);
+  background: rgba(228, 244, 244, 0.84);
+}
+
+.destinationName {
+  font-size: 1.08rem;
+  font-weight: 800;
+}
+
+.destinationZone {
+  color: #688097;
+  font-size: 0.94rem;
+}
+
+.notes {
+  display: grid;
+  gap: 10px;
+}
+
+.note {
+  padding: 14px 16px;
+  border-radius: 18px;
+  background: #f8fbfe;
+  border: 1px solid rgba(41, 78, 120, 0.08);
+}
+
+@media (max-width: 980px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .panel {
+    position: static;
+  }
+}
+
+@media (max-width: 640px) {
+  .page {
+    padding: 16px;
+  }
+
+  .topbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

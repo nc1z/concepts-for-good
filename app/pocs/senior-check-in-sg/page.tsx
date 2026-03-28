@@ -503,7 +503,7 @@ export default function SeniorCheckInSgPage() {
         <Link href="/" className={styles.backLink}>
           ← Back to gallery
         </Link>
-        <span className={styles.appLabel}>Senior Check-In SG</span>
+        <span className={styles.appLabel}>Senior Check-In</span>
       </header>
 
       {/* Hero */}

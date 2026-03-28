@@ -409,7 +409,7 @@ export default function FoodDonationRouteSGPage() {
       <section className={styles.hero}>
         <p className={styles.heroEyebrow}>
           <span className={styles.heroDot} aria-hidden="true" />
-          Food Donation Route SG
+          Food Donation Route
         </p>
         <h1 className={styles.heroHeadline}>
           Plan your pickup stops for tonight and see your route take shape before you leave.

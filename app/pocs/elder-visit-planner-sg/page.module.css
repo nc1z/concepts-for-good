@@ -1,0 +1,374 @@
+.page {
+  min-height: 100vh;
+  padding: 28px;
+  background:
+    radial-gradient(circle at top left, rgba(255, 244, 227, 0.85), transparent 32%),
+    linear-gradient(180deg, #faf6ef 0%, #f4eee4 100%);
+  color: #263233;
+  font-family: var(--font-manrope), sans-serif;
+}
+
+.shell {
+  width: min(1320px, 100%);
+  margin: 0 auto;
+  display: grid;
+  gap: 22px;
+}
+
+.topRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 50px;
+  padding: 0 18px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(67, 82, 83, 0.1);
+  font-weight: 700;
+}
+
+.weekBadge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 50px;
+  padding: 0 18px;
+  border-radius: 999px;
+  background: rgba(190, 125, 76, 0.12);
+  color: #8f562e;
+  font-weight: 800;
+}
+
+.hero {
+  display: grid;
+  gap: 14px;
+  max-width: 740px;
+}
+
+.eyebrow {
+  margin: 0;
+  color: #8f562e;
+  font-size: 0.88rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.title {
+  margin: 0;
+  font-size: clamp(2.6rem, 4vw, 4.4rem);
+  line-height: 1.02;
+  letter-spacing: -0.05em;
+}
+
+.lede {
+  margin: 0;
+  max-width: 30ch;
+  color: #5e6a6b;
+  font-size: 1.14rem;
+  line-height: 1.65;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 22px;
+  align-items: start;
+}
+
+.planner {
+  display: grid;
+  gap: 16px;
+}
+
+.summaryBar {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.summaryTile {
+  display: grid;
+  gap: 6px;
+  padding: 18px 20px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.76);
+  border: 1px solid rgba(67, 82, 83, 0.08);
+}
+
+.summaryLabel {
+  color: #687374;
+  font-size: 0.86rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.summaryValue {
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+}
+
+.calendar {
+  padding: 18px;
+  border-radius: 34px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(251, 248, 241, 0.96));
+  border: 1px solid rgba(67, 82, 83, 0.08);
+  box-shadow: 0 28px 46px rgba(75, 58, 31, 0.08);
+  overflow-x: auto;
+}
+
+.calendarGrid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(180px, 1fr));
+  gap: 12px;
+  min-width: 1360px;
+}
+
+.dayCard {
+  width: 100%;
+  position: relative;
+  min-height: 360px;
+  padding: 16px;
+  border-radius: 24px;
+  border: 1px solid rgba(67, 82, 83, 0.08);
+  background: rgba(250, 247, 241, 0.78);
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  text-align: left;
+  color: inherit;
+  font: inherit;
+  appearance: none;
+  cursor: pointer;
+}
+
+.dayCardOpen {
+  border-color: rgba(66, 112, 162, 0.34);
+  background: rgba(243, 248, 255, 0.92);
+}
+
+.dayCardMissing::after {
+  position: absolute;
+  inset: 10px;
+  border-radius: 18px;
+  border: 1px dashed rgba(190, 125, 76, 0.38);
+  content: "";
+  pointer-events: none;
+}
+
+.dayTop {
+  display: grid;
+  gap: 4px;
+}
+
+.dayName {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.dayState {
+  color: #7c6660;
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+.slotList {
+  display: grid;
+  gap: 10px;
+}
+
+.slot {
+  display: grid;
+  gap: 8px;
+  padding: 12px;
+  border-radius: 18px;
+  background: white;
+  border-left: 8px solid var(--slot-accent);
+}
+
+.slotTime {
+  color: #4d5d5f;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.slotTitle {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.slotVolunteer {
+  color: #617171;
+  font-size: 0.92rem;
+}
+
+.emptyPrompt {
+  margin-top: auto;
+  padding-top: 18px;
+  color: #8f562e;
+  font-size: 0.98rem;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.pulse {
+  animation: pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% { box-shadow: 0 0 0 0 rgba(190, 125, 76, 0.18); }
+  50% { box-shadow: 0 0 0 12px rgba(190, 125, 76, 0); }
+}
+
+.sideRail {
+  display: grid;
+  gap: 16px;
+}
+
+.panel,
+.seniorList {
+  padding: 18px;
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(67, 82, 83, 0.08);
+}
+
+.panel {
+  display: grid;
+  gap: 16px;
+  position: sticky;
+  top: 20px;
+}
+
+.panelTitle,
+.seniorListTitle {
+  margin: 0;
+  font-size: 1.4rem;
+  letter-spacing: -0.03em;
+}
+
+.panelText,
+.seniorListText,
+.seniorNote {
+  margin: 0;
+  color: #617171;
+  line-height: 1.55;
+}
+
+.fieldGroup {
+  display: grid;
+  gap: 10px;
+}
+
+.fieldLabel {
+  font-size: 0.9rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #697677;
+}
+
+.select {
+  width: 100%;
+  min-height: 56px;
+  padding: 0 16px;
+  border-radius: 18px;
+  border: 1px solid rgba(67, 82, 83, 0.12);
+  background: #fffdf9;
+}
+
+.bookButton {
+  min-height: 64px;
+  border: 0;
+  border-radius: 22px;
+  background: linear-gradient(180deg, #b66540, #8f562e);
+  color: white;
+  font-size: 1.05rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.seniorList {
+  display: grid;
+  gap: 14px;
+}
+
+.seniorCard {
+  display: grid;
+  gap: 8px;
+  padding: 14px;
+  border-radius: 20px;
+  background: #fcfaf5;
+  border: 1px solid rgba(67, 82, 83, 0.08);
+}
+
+.seniorNameRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: center;
+}
+
+.seniorName {
+  margin: 0;
+  font-size: 1.08rem;
+  font-weight: 800;
+}
+
+.preferredDay {
+  min-height: 30px;
+  padding: 0 12px;
+  border-radius: 999px;
+  background: rgba(190, 125, 76, 0.14);
+  color: #8f562e;
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.seniorMeta {
+  color: #536263;
+  font-weight: 700;
+}
+
+@media (max-width: 1080px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .panel {
+    position: static;
+  }
+}
+
+@media (max-width: 920px) {
+  .summaryBar {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .page {
+    padding: 16px;
+  }
+
+  .topRow {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

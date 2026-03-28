@@ -2,7 +2,7 @@
   "dataset": "GOOD_SG",
   "region": "singapore",
   "lens": "public good and social impact in Singapore",
-  "idea_count": 97,
+  "idea_count": 100,
   "design_contract": {
     "mandate": "Every idea must be built with a deliberately chosen visual direction and interaction model, and copy written for the target user — not for developers. Reading the ui field and CONTENT_RULES.md is mandatory before writing a single line of code.",
     "anti_patterns": [
@@ -38,11 +38,16 @@
   "ideas": [
     {
       "id": "GOOD_SG-004",
-      "title": "Food Donation Route SG",
+      "title": "Food Donation Route",
       "platform": "website",
       "folder": "mobile",
       "build_stack": "Next.js website",
       "category": "food security",
+      "tags": [
+        "Food rescue",
+        "Volunteer logistics",
+        "Route planning"
+      ],
       "summary": "Plan efficient pickup and drop-off routes for small rescue runs.",
       "target_user": "volunteer drivers and coordinators",
       "why_fast": "The interesting challenge is visualising a multi-stop rescue route as an animated SVG path the user can interactively reorder.",
@@ -52,7 +57,7 @@
         "generated plan or checklist",
         "save and share output"
       ],
-      "prototype_goal": "Simulate the core value of Food Donation Route SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Food Donation Route in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -101,15 +106,23 @@
         "distinctive_feature": "animated dotted SVG path connecting stops in sequence; reordering a stop redraws the path with a smooth animation",
         "avoid": "standard list of addresses; static map thumbnail; form-first without route visualization",
         "experience_goal": "user feels like they are planning a physical journey, seeing the route take shape as they add stops"
-      }
+      },
+      "implementation_tags": [
+        "drag-reorder"
+      ]
     },
     {
       "id": "GOOD_SG-005",
-      "title": "Senior Check-In SG",
+      "title": "Senior Check-In",
       "platform": "website",
       "folder": "mobile",
       "build_stack": "Next.js website",
       "category": "aging",
+      "tags": [
+        "Senior support",
+        "Volunteer care",
+        "Community check-ins"
+      ],
       "summary": "Coordinate simple check-ins for seniors living alone.",
       "target_user": "families, grassroots groups, and volunteers",
       "why_fast": "The interesting challenge is making check-in streaks feel warm and human — radial rings, large type, and celebration moments for a non-technical audience.",
@@ -119,7 +132,7 @@
         "history list with filters",
         "reminders or streaks"
       ],
-      "prototype_goal": "Simulate the core value of Senior Check-In SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Senior Check-In in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -174,11 +187,16 @@
     },
     {
       "id": "GOOD_SG-006",
-      "title": "Medication Reminder SG",
+      "title": "Medication Reminder",
       "platform": "website",
       "folder": "mobile",
       "build_stack": "Next.js website",
       "category": "aging",
+      "tags": [
+        "Medication",
+        "Caregiving",
+        "Daily routine"
+      ],
       "summary": "Send discreet reminders with optional caregiver visibility.",
       "target_user": "seniors and caregivers",
       "why_fast": "The interesting challenge is representing a day's medication schedule as a circular clock-face SVG rather than a list of reminders.",
@@ -188,7 +206,7 @@
         "push or email alerts",
         "settings for thresholds and frequency"
       ],
-      "prototype_goal": "Simulate the core value of Medication Reminder SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Medication Reminder in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -244,6 +262,11 @@
       "folder": "web",
       "build_stack": "Next.js website",
       "category": "aging",
+      "tags": [
+        "Digital literacy",
+        "Seniors",
+        "Phone help"
+      ],
       "summary": "Provide short guides for daily digital tasks like payments, forms, and appointments.",
       "target_user": "older adults in Singapore",
       "why_fast": "The interesting challenge is designing a one-screen-at-a-time wizard with oversized tap targets that an elderly first-time smartphone user can follow unassisted.",
@@ -305,11 +328,16 @@
     },
     {
       "id": "GOOD_SG-008",
-      "title": "Elder Visit Planner SG",
+      "title": "Elder Visit Planner",
       "platform": "website",
       "folder": "web",
       "build_stack": "Next.js website",
       "category": "aging",
+      "tags": [
+        "Visit planning",
+        "Volunteers",
+        "Senior care"
+      ],
       "summary": "Coordinate short volunteer visits for seniors in the neighborhood.",
       "target_user": "community volunteers",
       "why_fast": "The interesting challenge is building a weekly calendar booking grid where unvisited senior slots pulse as gentle visual reminders to coordinators.",
@@ -319,7 +347,7 @@
         "generated plan or checklist",
         "save and share output"
       ],
-      "prototype_goal": "Simulate the core value of Elder Visit Planner SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Elder Visit Planner in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -376,21 +404,26 @@
     },
     {
       "id": "GOOD_SG-009",
-      "title": "Accessible Mall Route SG",
+      "title": "Accessible Mall Route",
       "platform": "website",
       "folder": "mobile",
       "build_stack": "Next.js website",
       "category": "accessibility",
+      "tags": [
+        "Accessibility",
+        "Mall navigation",
+        "Wheelchair access"
+      ],
       "summary": "Share practical route notes for lifts, ramps, and accessible entrances.",
       "target_user": "wheelchair users, families, and caregivers",
-      "why_fast": "The interesting challenge is rendering a simplified mall floor plan in SVG and animating a step-free accessible route path when a destination is selected.",
+      "why_fast": "The interesting challenge is rendering a simplified mall floor plan in SVG and animating a stairs-free accessible route path when a destination is selected.",
       "stage": "poc",
       "poc": [
         "quick entry flow",
         "history list with filters",
         "reminders or streaks"
       ],
-      "prototype_goal": "Simulate the core value of Accessible Mall Route SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Accessible Mall Route in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -435,7 +468,7 @@
       ],
       "ui": {
         "direction": "diagram-first",
-        "interaction_model": "interactive floor plan SVG — a simplified mall floor plan as primary view; tapping a destination highlights the accessible route in a contrasting color with step-free icons at key points",
+        "interaction_model": "interactive floor plan SVG — a simplified mall floor plan as primary view; tapping a destination highlights the accessible route in a contrasting color with stairs-free icons at key points",
         "suggested_libraries": [
           "framer-motion"
         ],
@@ -446,7 +479,7 @@
     },
     {
       "id": "GOOD_SG-010",
-      "title": "MRT Lift Note SG",
+      "title": "MRT Lift Note",
       "platform": "website",
       "folder": "mobile",
       "build_stack": "Next.js website",
@@ -460,7 +493,7 @@
         "push or email alerts",
         "settings for thresholds and frequency"
       ],
-      "prototype_goal": "Simulate the core value of MRT Lift Note SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of MRT Lift Note in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -510,7 +543,7 @@
     },
     {
       "id": "GOOD_SG-011",
-      "title": "Quiet Places SG",
+      "title": "Quiet Places",
       "platform": "website",
       "folder": "web",
       "build_stack": "Next.js website",
@@ -524,7 +557,7 @@
         "simple filters or tags",
         "detail pages with call-to-action"
       ],
-      "prototype_goal": "Simulate the core value of Quiet Places SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Quiet Places in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -576,7 +609,7 @@
     },
     {
       "id": "GOOD_SG-012",
-      "title": "Accessible Toilet Notes SG",
+      "title": "Accessible Toilet Notes",
       "platform": "website",
       "folder": "mobile",
       "build_stack": "Next.js website",
@@ -590,7 +623,7 @@
         "simple filters or tags",
         "detail pages with call-to-action"
       ],
-      "prototype_goal": "Simulate the core value of Accessible Toilet Notes SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Accessible Toilet Notes in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -640,11 +673,14 @@
         "distinctive_feature": "pins are color-coded by amenity completeness; a hover tooltip shows a quick preview before clicking",
         "avoid": "alphabetical list without spatial context; generic form for submitting notes without map feedback",
         "experience_goal": "caregiver or disabled user can immediately see what is near them without reading through a list"
-      }
+      },
+      "implementation_tags": [
+        "react-simple-maps"
+      ]
     },
     {
       "id": "GOOD_SG-013",
-      "title": "Volunteer Match SG",
+      "title": "Volunteer Match",
       "platform": "website",
       "folder": "web",
       "build_stack": "Next.js website",
@@ -658,7 +694,7 @@
         "simple filters or tags",
         "detail pages with call-to-action"
       ],
-      "prototype_goal": "Simulate the core value of Volunteer Match SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Volunteer Match in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -713,7 +749,7 @@
     },
     {
       "id": "GOOD_SG-014",
-      "title": "Skills for Good SG",
+      "title": "Skills for Good",
       "platform": "website",
       "folder": "web",
       "build_stack": "Next.js website",
@@ -727,7 +763,7 @@
         "simple filters or tags",
         "detail pages with call-to-action"
       ],
-      "prototype_goal": "Simulate the core value of Skills for Good SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Skills for Good in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -778,7 +814,7 @@
     },
     {
       "id": "GOOD_SG-015",
-      "title": "Volunteer Hours SG",
+      "title": "Volunteer Hours",
       "platform": "website",
       "folder": "mobile",
       "build_stack": "Next.js website",
@@ -792,7 +828,7 @@
         "history list with filters",
         "reminders or streaks"
       ],
-      "prototype_goal": "Simulate the core value of Volunteer Hours SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Volunteer Hours in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -849,7 +885,7 @@
     },
     {
       "id": "GOOD_SG-016",
-      "title": "Cause Explorer SG",
+      "title": "Cause Explorer",
       "platform": "website",
       "folder": "web",
       "build_stack": "Next.js website",
@@ -863,7 +899,7 @@
         "generated plan or checklist",
         "save and share output"
       ],
-      "prototype_goal": "Simulate the core value of Cause Explorer SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Cause Explorer in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -912,7 +948,10 @@
         "distinctive_feature": "radial SVG diagram that animates expansion when a node is clicked; causes float into view from the spoke",
         "avoid": "flat list of categories; card grid of causes; dropdown filter menus",
         "experience_goal": "user discovers adjacent causes they would not have thought to search for"
-      }
+      },
+      "implementation_tags": [
+        "graph-nodes"
+      ]
     },
     {
       "id": "GOOD_SG-017",
@@ -976,11 +1015,14 @@
         "distinctive_feature": "SVG tree where answered branches stay visible but de-emphasize; the active path is highlighted; result node pulses when reached",
         "avoid": "multi-page form wizard; alphabetical list of schemes; search box as primary entry point",
         "experience_goal": "resident with no knowledge of CDC programs can find the right one in under 2 minutes"
-      }
+      },
+      "implementation_tags": [
+        "flowchart"
+      ]
     },
     {
       "id": "GOOD_SG-018",
-      "title": "Family Budget Relief SG",
+      "title": "Family Budget Relief",
       "platform": "website",
       "folder": "mobile",
       "build_stack": "Next.js website",
@@ -994,7 +1036,7 @@
         "generated plan or checklist",
         "save and share output"
       ],
-      "prototype_goal": "Simulate the core value of Family Budget Relief SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Family Budget Relief in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -1047,7 +1089,7 @@
     },
     {
       "id": "GOOD_SG-019",
-      "title": "Support Document Checklist SG",
+      "title": "Support Document Checklist",
       "platform": "website",
       "folder": "mobile",
       "build_stack": "Next.js website",
@@ -1061,7 +1103,7 @@
         "generated plan or checklist",
         "save and share output"
       ],
-      "prototype_goal": "Simulate the core value of Support Document Checklist SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Support Document Checklist in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -1181,7 +1223,7 @@
     },
     {
       "id": "GOOD_SG-021",
-      "title": "Dengue Check SG",
+      "title": "Dengue Check",
       "platform": "website",
       "folder": "mobile",
       "build_stack": "Next.js website",
@@ -1195,7 +1237,7 @@
         "push or email alerts",
         "settings for thresholds and frequency"
       ],
-      "prototype_goal": "Simulate the core value of Dengue Check SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Dengue Check in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -1246,7 +1288,7 @@
     },
     {
       "id": "GOOD_SG-022",
-      "title": "Heat Safe Walk SG",
+      "title": "Heat Safe Walk",
       "platform": "website",
       "folder": "mobile",
       "build_stack": "Next.js website",
@@ -1260,7 +1302,7 @@
         "generated plan or checklist",
         "save and share output"
       ],
-      "prototype_goal": "Simulate the core value of Heat Safe Walk SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Heat Safe Walk in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -1313,7 +1355,7 @@
     },
     {
       "id": "GOOD_SG-023",
-      "title": "Clinic Question Prep SG",
+      "title": "Clinic Question Prep",
       "platform": "website",
       "folder": "web",
       "build_stack": "Next.js website",
@@ -1327,7 +1369,7 @@
         "generated plan or checklist",
         "save and share output"
       ],
-      "prototype_goal": "Simulate the core value of Clinic Question Prep SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Clinic Question Prep in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -1376,11 +1418,14 @@
         "distinctive_feature": "drag-to-reorder questions with smooth reorder animation; questions slide into priority order",
         "avoid": "static checklist; form with text area; anything without drag reordering",
         "experience_goal": "patient arrives at clinic feeling prepared, with their top questions ready in order"
-      }
+      },
+      "implementation_tags": [
+        "drag-reorder"
+      ]
     },
     {
       "id": "GOOD_SG-024",
-      "title": "Vaccination Card SG",
+      "title": "Vaccination Card",
       "platform": "website",
       "folder": "mobile",
       "build_stack": "Next.js website",
@@ -1394,7 +1439,7 @@
         "history list with filters",
         "reminders or streaks"
       ],
-      "prototype_goal": "Simulate the core value of Vaccination Card SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Vaccination Card in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -1446,7 +1491,7 @@
     },
     {
       "id": "GOOD_SG-025",
-      "title": "Low-Cost Exercise SG",
+      "title": "Low-Cost Exercise",
       "platform": "website",
       "folder": "web",
       "build_stack": "Next.js website",
@@ -1460,7 +1505,7 @@
         "simple filters or tags",
         "detail pages with call-to-action"
       ],
-      "prototype_goal": "Simulate the core value of Low-Cost Exercise SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Low-Cost Exercise in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -1510,7 +1555,7 @@
     },
     {
       "id": "GOOD_SG-026",
-      "title": "Healthy Hawker Budget SG",
+      "title": "Healthy Hawker Budget",
       "platform": "website",
       "folder": "mobile",
       "build_stack": "Next.js website",
@@ -1524,7 +1569,7 @@
         "generated plan or checklist",
         "save and share output"
       ],
-      "prototype_goal": "Simulate the core value of Healthy Hawker Budget SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Healthy Hawker Budget in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -1579,7 +1624,7 @@
     },
     {
       "id": "GOOD_SG-027",
-      "title": "Steps Together SG",
+      "title": "Steps Together",
       "platform": "website",
       "folder": "mobile",
       "build_stack": "Next.js website",
@@ -1593,7 +1638,7 @@
         "history list with filters",
         "reminders or streaks"
       ],
-      "prototype_goal": "Simulate the core value of Steps Together SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Steps Together in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -1647,7 +1692,7 @@
     },
     {
       "id": "GOOD_SG-028",
-      "title": "Water Reminder SG",
+      "title": "Water Reminder",
       "platform": "website",
       "folder": "mobile",
       "build_stack": "Next.js website",
@@ -1661,7 +1706,7 @@
         "push or email alerts",
         "settings for thresholds and frequency"
       ],
-      "prototype_goal": "Simulate the core value of Water Reminder SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Water Reminder in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -1715,7 +1760,7 @@
     },
     {
       "id": "GOOD_SG-029",
-      "title": "Library Skills Share SG",
+      "title": "Library Skills Share",
       "platform": "website",
       "folder": "web",
       "build_stack": "Next.js website",
@@ -1729,7 +1774,7 @@
         "simple filters or tags",
         "detail pages with call-to-action"
       ],
-      "prototype_goal": "Simulate the core value of Library Skills Share SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Library Skills Share in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -1782,7 +1827,7 @@
     },
     {
       "id": "GOOD_SG-030",
-      "title": "Homework Buddy SG",
+      "title": "Homework Buddy",
       "platform": "website",
       "folder": "web",
       "build_stack": "Next.js website",
@@ -1796,7 +1841,7 @@
         "simple filters or tags",
         "detail pages with call-to-action"
       ],
-      "prototype_goal": "Simulate the core value of Homework Buddy SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Homework Buddy in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -1847,7 +1892,7 @@
     },
     {
       "id": "GOOD_SG-031",
-      "title": "Device Donation Flow SG",
+      "title": "Device Donation Flow",
       "platform": "website",
       "folder": "web",
       "build_stack": "Next.js website",
@@ -1861,7 +1906,7 @@
         "generated plan or checklist",
         "save and share output"
       ],
-      "prototype_goal": "Simulate the core value of Device Donation Flow SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Device Donation Flow in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -1918,7 +1963,7 @@
     },
     {
       "id": "GOOD_SG-032",
-      "title": "Scholarship Tracker SG",
+      "title": "Scholarship Tracker",
       "platform": "website",
       "folder": "mobile",
       "build_stack": "Next.js website",
@@ -1932,7 +1977,7 @@
         "history list with filters",
         "reminders or streaks"
       ],
-      "prototype_goal": "Simulate the core value of Scholarship Tracker SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Scholarship Tracker in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -1986,7 +2031,7 @@
     },
     {
       "id": "GOOD_SG-033",
-      "title": "Migrant Worker Resource SG",
+      "title": "Migrant Worker Resource",
       "platform": "website",
       "folder": "web",
       "build_stack": "Next.js website",
@@ -2000,7 +2045,7 @@
         "simple filters or tags",
         "detail pages with call-to-action"
       ],
-      "prototype_goal": "Simulate the core value of Migrant Worker Resource SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Migrant Worker Resource in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -2052,7 +2097,7 @@
     },
     {
       "id": "GOOD_SG-034",
-      "title": "Work Injury Notes SG",
+      "title": "Work Injury Notes",
       "platform": "website",
       "folder": "mobile",
       "build_stack": "Next.js website",
@@ -2066,7 +2111,7 @@
         "history list with filters",
         "reminders or streaks"
       ],
-      "prototype_goal": "Simulate the core value of Work Injury Notes SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Work Injury Notes in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -2185,7 +2230,7 @@
     },
     {
       "id": "GOOD_SG-036",
-      "title": "Welcome Pack SG",
+      "title": "Welcome Pack",
       "platform": "website",
       "folder": "web",
       "build_stack": "Next.js website",
@@ -2199,7 +2244,7 @@
         "simple filters or tags",
         "detail pages with call-to-action"
       ],
-      "prototype_goal": "Simulate the core value of Welcome Pack SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Welcome Pack in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -2249,7 +2294,7 @@
     },
     {
       "id": "GOOD_SG-037",
-      "title": "Repair Cafe Board SG",
+      "title": "Repair Cafe Board",
       "platform": "website",
       "folder": "web",
       "build_stack": "Next.js website",
@@ -2263,7 +2308,7 @@
         "simple filters or tags",
         "detail pages with call-to-action"
       ],
-      "prototype_goal": "Simulate the core value of Repair Cafe Board SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Repair Cafe Board in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -2313,7 +2358,7 @@
     },
     {
       "id": "GOOD_SG-038",
-      "title": "Recycling Rules SG",
+      "title": "Recycling Rules",
       "platform": "website",
       "folder": "web",
       "build_stack": "Next.js website",
@@ -2327,7 +2372,7 @@
         "simple filters or tags",
         "detail pages with call-to-action"
       ],
-      "prototype_goal": "Simulate the core value of Recycling Rules SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Recycling Rules in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -2373,11 +2418,14 @@
         "distinctive_feature": "animated highlight path through the decision tree as branches are selected",
         "avoid": "list of rules; table of materials; search box without the tree diagram",
         "experience_goal": "user learns recycling rules through active navigation of the tree, not passive reading"
-      }
+      },
+      "implementation_tags": [
+        "flowchart"
+      ]
     },
     {
       "id": "GOOD_SG-039",
-      "title": "E-Waste Drop SG",
+      "title": "E-Waste Drop",
       "platform": "website",
       "folder": "mobile",
       "build_stack": "Next.js website",
@@ -2391,7 +2439,7 @@
         "simple filters or tags",
         "detail pages with call-to-action"
       ],
-      "prototype_goal": "Simulate the core value of E-Waste Drop SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of E-Waste Drop in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -2441,7 +2489,7 @@
     },
     {
       "id": "GOOD_SG-040",
-      "title": "Food Waste Cut SG",
+      "title": "Food Waste Cut",
       "platform": "website",
       "folder": "mobile",
       "build_stack": "Next.js website",
@@ -2455,7 +2503,7 @@
         "history list with filters",
         "reminders or streaks"
       ],
-      "prototype_goal": "Simulate the core value of Food Waste Cut SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Food Waste Cut in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -2507,7 +2555,7 @@
     },
     {
       "id": "GOOD_SG-041",
-      "title": "Community Garden SG",
+      "title": "Community Garden",
       "platform": "website",
       "folder": "web",
       "build_stack": "Next.js website",
@@ -2521,7 +2569,7 @@
         "simple filters or tags",
         "detail pages with call-to-action"
       ],
-      "prototype_goal": "Simulate the core value of Community Garden SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Community Garden in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -2572,7 +2620,7 @@
     },
     {
       "id": "GOOD_SG-042",
-      "title": "Seed Swap SG",
+      "title": "Seed Swap",
       "platform": "website",
       "folder": "mobile",
       "build_stack": "Next.js website",
@@ -2586,7 +2634,7 @@
         "simple filters or tags",
         "detail pages with call-to-action"
       ],
-      "prototype_goal": "Simulate the core value of Seed Swap SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Seed Swap in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -2636,7 +2684,7 @@
     },
     {
       "id": "GOOD_SG-043",
-      "title": "Harvest Share SG",
+      "title": "Harvest Share",
       "platform": "website",
       "folder": "mobile",
       "build_stack": "Next.js website",
@@ -2650,7 +2698,7 @@
         "push or email alerts",
         "settings for thresholds and frequency"
       ],
-      "prototype_goal": "Simulate the core value of Harvest Share SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Harvest Share in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -2701,7 +2749,7 @@
     },
     {
       "id": "GOOD_SG-044",
-      "title": "Garden Task Relay SG",
+      "title": "Garden Task Relay",
       "platform": "website",
       "folder": "mobile",
       "build_stack": "Next.js website",
@@ -2715,7 +2763,7 @@
         "generated plan or checklist",
         "save and share output"
       ],
-      "prototype_goal": "Simulate the core value of Garden Task Relay SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Garden Task Relay in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -2768,7 +2816,7 @@
     },
     {
       "id": "GOOD_SG-045",
-      "title": "PM2.5 Care Guide SG",
+      "title": "PM2.5 Care Guide",
       "platform": "website",
       "folder": "mobile",
       "build_stack": "Next.js website",
@@ -2782,7 +2830,7 @@
         "push or email alerts",
         "settings for thresholds and frequency"
       ],
-      "prototype_goal": "Simulate the core value of PM2.5 Care Guide SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of PM2.5 Care Guide in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -2835,7 +2883,7 @@
     },
     {
       "id": "GOOD_SG-046",
-      "title": "Cool Space SG",
+      "title": "Cool Space",
       "platform": "website",
       "folder": "web",
       "build_stack": "Next.js website",
@@ -2849,7 +2897,7 @@
         "simple filters or tags",
         "detail pages with call-to-action"
       ],
-      "prototype_goal": "Simulate the core value of Cool Space SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Cool Space in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -2897,11 +2945,14 @@
         "distinctive_feature": "map has a heat overlay effect showing relative temperature by district; cool spots have an animated cool-breeze visual effect",
         "avoid": "list without map; generic directory; no spatial heat visualization",
         "experience_goal": "user on a hot day can immediately see where to go to cool down near their location"
-      }
+      },
+      "implementation_tags": [
+        "react-simple-maps"
+      ]
     },
     {
       "id": "GOOD_SG-047",
-      "title": "Rain Shelter Map SG",
+      "title": "Rain Shelter Map",
       "platform": "website",
       "folder": "mobile",
       "build_stack": "Next.js website",
@@ -2915,7 +2966,7 @@
         "simple filters or tags",
         "detail pages with call-to-action"
       ],
-      "prototype_goal": "Simulate the core value of Rain Shelter Map SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Rain Shelter Map in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -2963,11 +3014,14 @@
         "distinctive_feature": "animated rain-drop effect on the map when filtering for wet weather conditions",
         "avoid": "list of shelters; search-only without spatial map",
         "experience_goal": "user caught in rain can find the nearest shelter by looking at the map, not reading addresses"
-      }
+      },
+      "implementation_tags": [
+        "react-simple-maps"
+      ]
     },
     {
       "id": "GOOD_SG-048",
-      "title": "Flood Prep SG",
+      "title": "Flood Prep",
       "platform": "website",
       "folder": "web",
       "build_stack": "Next.js website",
@@ -2981,7 +3035,7 @@
         "generated plan or checklist",
         "save and share output"
       ],
-      "prototype_goal": "Simulate the core value of Flood Prep SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Flood Prep in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -3033,7 +3087,7 @@
     },
     {
       "id": "GOOD_SG-049",
-      "title": "Legal Aid Prep SG",
+      "title": "Legal Aid Prep",
       "platform": "website",
       "folder": "web",
       "build_stack": "Next.js website",
@@ -3047,7 +3101,7 @@
         "generated plan or checklist",
         "save and share output"
       ],
-      "prototype_goal": "Simulate the core value of Legal Aid Prep SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Legal Aid Prep in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -3100,7 +3154,7 @@
     },
     {
       "id": "GOOD_SG-050",
-      "title": "Support Hotline Guide SG",
+      "title": "Support Hotline Guide",
       "platform": "website",
       "folder": "web",
       "build_stack": "Next.js website",
@@ -3114,7 +3168,7 @@
         "simple filters or tags",
         "detail pages with call-to-action"
       ],
-      "prototype_goal": "Simulate the core value of Support Hotline Guide SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Support Hotline Guide in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -3165,7 +3219,7 @@
     },
     {
       "id": "GOOD_SG-051",
-      "title": "Trusted Contact SG",
+      "title": "Trusted Contact",
       "platform": "website",
       "folder": "mobile",
       "build_stack": "Next.js website",
@@ -3179,7 +3233,7 @@
         "history list with filters",
         "reminders or streaks"
       ],
-      "prototype_goal": "Simulate the core value of Trusted Contact SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Trusted Contact in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -3227,11 +3281,14 @@
         "distinctive_feature": "radial contact diagram that animates when a new contact is added; the network visually grows",
         "avoid": "address book list; generic contact form; anything that looks like a CRM",
         "experience_goal": "user feels supported seeing their network visualised as a circle of people around them"
-      }
+      },
+      "implementation_tags": [
+        "graph-nodes"
+      ]
     },
     {
       "id": "GOOD_SG-052",
-      "title": "Escape Plan Notes SG",
+      "title": "Escape Plan Notes",
       "platform": "website",
       "folder": "mobile",
       "build_stack": "Next.js website",
@@ -3245,7 +3302,7 @@
         "generated plan or checklist",
         "save and share output"
       ],
-      "prototype_goal": "Simulate the core value of Escape Plan Notes SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Escape Plan Notes in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -3300,7 +3357,7 @@
     },
     {
       "id": "GOOD_SG-053",
-      "title": "Inclusive Playground SG",
+      "title": "Inclusive Playground",
       "platform": "website",
       "folder": "web",
       "build_stack": "Next.js website",
@@ -3314,7 +3371,7 @@
         "simple filters or tags",
         "detail pages with call-to-action"
       ],
-      "prototype_goal": "Simulate the core value of Inclusive Playground SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Inclusive Playground in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -3362,11 +3419,14 @@
         "distinctive_feature": "filter toggles animate playground markers in/out based on selected features",
         "avoid": "alphabetical list; table of features; anything without the spatial map",
         "experience_goal": "parent with a disabled child finds the nearest suitable playground in one step"
-      }
+      },
+      "implementation_tags": [
+        "react-simple-maps"
+      ]
     },
     {
       "id": "GOOD_SG-054",
-      "title": "Nursing Room SG",
+      "title": "Nursing Room",
       "platform": "website",
       "folder": "mobile",
       "build_stack": "Next.js website",
@@ -3380,7 +3440,7 @@
         "simple filters or tags",
         "detail pages with call-to-action"
       ],
-      "prototype_goal": "Simulate the core value of Nursing Room SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Nursing Room in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -3430,7 +3490,7 @@
     },
     {
       "id": "GOOD_SG-055",
-      "title": "Family Toilet Notes SG",
+      "title": "Family Toilet Notes",
       "platform": "website",
       "folder": "mobile",
       "build_stack": "Next.js website",
@@ -3444,7 +3504,7 @@
         "simple filters or tags",
         "detail pages with call-to-action"
       ],
-      "prototype_goal": "Simulate the core value of Family Toilet Notes SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Family Toilet Notes in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -3498,7 +3558,7 @@
     },
     {
       "id": "GOOD_SG-056",
-      "title": "Stroller Route SG",
+      "title": "Stroller Route",
       "platform": "website",
       "folder": "mobile",
       "build_stack": "Next.js website",
@@ -3512,7 +3572,7 @@
         "generated plan or checklist",
         "save and share output"
       ],
-      "prototype_goal": "Simulate the core value of Stroller Route SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Stroller Route in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -3566,7 +3626,7 @@
     },
     {
       "id": "GOOD_SG-057",
-      "title": "Community Event SG",
+      "title": "Community Event",
       "platform": "website",
       "folder": "web",
       "build_stack": "Next.js website",
@@ -3580,7 +3640,7 @@
         "simple filters or tags",
         "detail pages with call-to-action"
       ],
-      "prototype_goal": "Simulate the core value of Community Event SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Community Event in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -3699,7 +3759,7 @@
     },
     {
       "id": "GOOD_SG-059",
-      "title": "Neighbour Help Request SG",
+      "title": "Neighbour Help Request",
       "platform": "website",
       "folder": "web",
       "build_stack": "Next.js website",
@@ -3713,7 +3773,7 @@
         "simple filters or tags",
         "detail pages with call-to-action"
       ],
-      "prototype_goal": "Simulate the core value of Neighbour Help Request SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Neighbour Help Request in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -3765,7 +3825,7 @@
     },
     {
       "id": "GOOD_SG-060",
-      "title": "Community Need Pulse SG",
+      "title": "Community Need Pulse",
       "platform": "website",
       "folder": "mobile",
       "build_stack": "Next.js website",
@@ -3779,7 +3839,7 @@
         "history list with filters",
         "reminders or streaks"
       ],
-      "prototype_goal": "Simulate the core value of Community Need Pulse SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Community Need Pulse in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -3833,7 +3893,7 @@
     },
     {
       "id": "GOOD_SG-061",
-      "title": "Nature Walk SG",
+      "title": "Nature Walk",
       "platform": "website",
       "folder": "mobile",
       "build_stack": "Next.js website",
@@ -3847,7 +3907,7 @@
         "generated plan or checklist",
         "save and share output"
       ],
-      "prototype_goal": "Simulate the core value of Nature Walk SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Nature Walk in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -3900,7 +3960,7 @@
     },
     {
       "id": "GOOD_SG-062",
-      "title": "Pollinator Spotter SG",
+      "title": "Pollinator Spotter",
       "platform": "website",
       "folder": "mobile",
       "build_stack": "Next.js website",
@@ -3914,7 +3974,7 @@
         "history list with filters",
         "reminders or streaks"
       ],
-      "prototype_goal": "Simulate the core value of Pollinator Spotter SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Pollinator Spotter in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -3967,7 +4027,7 @@
     },
     {
       "id": "GOOD_SG-063",
-      "title": "Beach Cleanup Board SG",
+      "title": "Beach Cleanup Board",
       "platform": "website",
       "folder": "web",
       "build_stack": "Next.js website",
@@ -3981,7 +4041,7 @@
         "simple filters or tags",
         "detail pages with call-to-action"
       ],
-      "prototype_goal": "Simulate the core value of Beach Cleanup Board SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Beach Cleanup Board in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -4035,7 +4095,7 @@
     },
     {
       "id": "GOOD_SG-064",
-      "title": "Mangrove Visit Planner SG",
+      "title": "Mangrove Visit Planner",
       "platform": "website",
       "folder": "web",
       "build_stack": "Next.js website",
@@ -4049,7 +4109,7 @@
         "generated plan or checklist",
         "save and share output"
       ],
-      "prototype_goal": "Simulate the core value of Mangrove Visit Planner SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Mangrove Visit Planner in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -4103,7 +4163,7 @@
     },
     {
       "id": "GOOD_SG-065",
-      "title": "Transit Kindness SG",
+      "title": "Transit Kindness",
       "platform": "website",
       "folder": "mobile",
       "build_stack": "Next.js website",
@@ -4117,7 +4177,7 @@
         "push or email alerts",
         "settings for thresholds and frequency"
       ],
-      "prototype_goal": "Simulate the core value of Transit Kindness SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Transit Kindness in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -4233,7 +4293,7 @@
     },
     {
       "id": "GOOD_SG-067",
-      "title": "Small Acts SG",
+      "title": "Small Acts",
       "platform": "website",
       "folder": "mobile",
       "build_stack": "Next.js website",
@@ -4247,7 +4307,7 @@
         "history list with filters",
         "reminders or streaks"
       ],
-      "prototype_goal": "Simulate the core value of Small Acts SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Small Acts in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -4302,7 +4362,7 @@
     },
     {
       "id": "GOOD_SG-068",
-      "title": "Welcome Neighbour SG",
+      "title": "Welcome Neighbour",
       "platform": "website",
       "folder": "web",
       "build_stack": "Next.js website",
@@ -4316,7 +4376,7 @@
         "generated plan or checklist",
         "save and share output"
       ],
-      "prototype_goal": "Simulate the core value of Welcome Neighbour SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Welcome Neighbour in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -4368,7 +4428,7 @@
     },
     {
       "id": "GOOD_SG-069",
-      "title": "Mental Health Resources SG",
+      "title": "Mental Health Resources",
       "platform": "website",
       "folder": "web",
       "build_stack": "Next.js website",
@@ -4382,7 +4442,7 @@
         "simple filters or tags",
         "detail pages with call-to-action"
       ],
-      "prototype_goal": "Simulate the core value of Mental Health Resources SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Mental Health Resources in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -4432,7 +4492,7 @@
     },
     {
       "id": "GOOD_SG-070",
-      "title": "Breathing Break SG",
+      "title": "Breathing Break",
       "platform": "website",
       "folder": "mobile",
       "build_stack": "Next.js website",
@@ -4446,7 +4506,7 @@
         "push or email alerts",
         "settings for thresholds and frequency"
       ],
-      "prototype_goal": "Simulate the core value of Breathing Break SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Breathing Break in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -4500,7 +4560,7 @@
     },
     {
       "id": "GOOD_SG-071",
-      "title": "Stress Check Card SG",
+      "title": "Stress Check Card",
       "platform": "website",
       "folder": "mobile",
       "build_stack": "Next.js website",
@@ -4514,7 +4574,7 @@
         "history list with filters",
         "reminders or streaks"
       ],
-      "prototype_goal": "Simulate the core value of Stress Check Card SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Stress Check Card in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -4569,7 +4629,7 @@
     },
     {
       "id": "GOOD_SG-072",
-      "title": "Burnout Boundary SG",
+      "title": "Burnout Boundary",
       "platform": "website",
       "folder": "web",
       "build_stack": "Next.js website",
@@ -4583,7 +4643,7 @@
         "generated plan or checklist",
         "save and share output"
       ],
-      "prototype_goal": "Simulate the core value of Burnout Boundary SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Burnout Boundary in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -4638,7 +4698,7 @@
     },
     {
       "id": "GOOD_SG-073",
-      "title": "Caregiver Grant Guide SG",
+      "title": "Caregiver Grant Guide",
       "platform": "website",
       "folder": "web",
       "build_stack": "Next.js website",
@@ -4652,7 +4712,7 @@
         "simple filters or tags",
         "detail pages with call-to-action"
       ],
-      "prototype_goal": "Simulate the core value of Caregiver Grant Guide SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Caregiver Grant Guide in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -4706,7 +4766,7 @@
     },
     {
       "id": "GOOD_SG-074",
-      "title": "Care Visit Log SG",
+      "title": "Care Visit Log",
       "platform": "website",
       "folder": "mobile",
       "build_stack": "Next.js website",
@@ -4720,7 +4780,7 @@
         "history list with filters",
         "reminders or streaks"
       ],
-      "prototype_goal": "Simulate the core value of Care Visit Log SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Care Visit Log in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -4775,7 +4835,7 @@
     },
     {
       "id": "GOOD_SG-075",
-      "title": "Respite Day Planner SG",
+      "title": "Respite Day Planner",
       "platform": "website",
       "folder": "mobile",
       "build_stack": "Next.js website",
@@ -4789,7 +4849,7 @@
         "generated plan or checklist",
         "save and share output"
       ],
-      "prototype_goal": "Simulate the core value of Respite Day Planner SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Respite Day Planner in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -4838,11 +4898,14 @@
         "distinctive_feature": "drag-to-schedule activities onto the day timeline with smooth animations",
         "avoid": "form-only; list without timeline; anything that feels like a work scheduler",
         "experience_goal": "caregiver plans a restful day for themselves and feels the UI is on their side"
-      }
+      },
+      "implementation_tags": [
+        "drag-reorder"
+      ]
     },
     {
       "id": "GOOD_SG-076",
-      "title": "Trusted Helper List SG",
+      "title": "Trusted Helper List",
       "platform": "website",
       "folder": "mobile",
       "build_stack": "Next.js website",
@@ -4856,7 +4919,7 @@
         "history list with filters",
         "reminders or streaks"
       ],
-      "prototype_goal": "Simulate the core value of Trusted Helper List SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Trusted Helper List in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -4909,7 +4972,7 @@
     },
     {
       "id": "GOOD_SG-077",
-      "title": "Shelter from Rain SG",
+      "title": "Shelter from Rain",
       "platform": "website",
       "folder": "web",
       "build_stack": "Next.js website",
@@ -4923,7 +4986,7 @@
         "simple filters or tags",
         "detail pages with call-to-action"
       ],
-      "prototype_goal": "Simulate the core value of Shelter from Rain SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Shelter from Rain in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -4973,7 +5036,7 @@
     },
     {
       "id": "GOOD_SG-078",
-      "title": "Bench Rest SG",
+      "title": "Bench Rest",
       "platform": "website",
       "folder": "mobile",
       "build_stack": "Next.js website",
@@ -4987,7 +5050,7 @@
         "history list with filters",
         "reminders or streaks"
       ],
-      "prototype_goal": "Simulate the core value of Bench Rest SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Bench Rest in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -5041,7 +5104,7 @@
     },
     {
       "id": "GOOD_SG-079",
-      "title": "Free Water SG",
+      "title": "Free Water",
       "platform": "website",
       "folder": "web",
       "build_stack": "Next.js website",
@@ -5055,7 +5118,7 @@
         "simple filters or tags",
         "detail pages with call-to-action"
       ],
-      "prototype_goal": "Simulate the core value of Free Water SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Free Water in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -5101,25 +5164,28 @@
         "distinctive_feature": "map markers have an animated water-drop pulse; filtered-out markers fade cleanly",
         "avoid": "list of locations; no map; overly complex UI for a simple need",
         "experience_goal": "someone thirsty on a walk finds a free water point in their area immediately"
-      }
+      },
+      "implementation_tags": [
+        "react-simple-maps"
+      ]
     },
     {
       "id": "GOOD_SG-080",
-      "title": "Public Toilet SG",
+      "title": "Queue Seat Finder",
       "platform": "website",
       "folder": "mobile",
       "build_stack": "Next.js website",
       "category": "urban access",
-      "summary": "Curate practical public toilet notes for families, elders, and travelers.",
-      "target_user": "families, caregivers, and tourists",
-      "why_fast": "The interesting challenge is animated cleanliness rating bars per toilet marker that update when community ratings change.",
+      "summary": "Spot where to sit and wait near busy clinics and service centres.",
+      "target_user": "seniors, pregnant users, and caregivers",
+      "why_fast": "The interesting challenge is drawing a waiting-area layout in SVG and highlighting the easiest seat path from the entrance without relying on a generic list.",
       "stage": "poc",
       "poc": [
-        "searchable listings",
-        "simple filters or tags",
-        "detail pages with call-to-action"
+        "quick seat map",
+        "seat detail notes",
+        "entrance-to-seat route preview"
       ],
-      "prototype_goal": "Simulate the core value of Public Toilet SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Queue Seat Finder in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -5134,13 +5200,14 @@
       ],
       "core_entities": [
         "places",
+        "entries",
         "tags"
       ],
       "primary_user_flow": [
-        "directory_list",
-        "filters_panel",
-        "detail_view",
-        "submit_update_modal"
+        "waiting_area_map",
+        "seat_selection",
+        "detail_drawer",
+        "route_preview"
       ],
       "demo_seed_data": [
         "3 to 8 sample places records tailored to Singapore context",
@@ -5159,33 +5226,33 @@
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
       ],
       "ui": {
-        "direction": "map-first",
-        "interaction_model": "toilet finder with accessibility and cleanliness filter — a Singapore district map showing public toilets; filter by accessibility and community cleanliness rating; tapping shows a quick-review panel",
+        "direction": "diagram-first",
+        "interaction_model": "waiting-area seating diagram — an SVG layout of seats, counters, rails, and toilets; tapping a seat or waiting bay highlights the easiest approach path from the entrance",
         "suggested_libraries": [
           "framer-motion"
         ],
-        "distinctive_feature": "cleanliness rating shown as animated fill bars per toilet marker; rating updates animate",
-        "avoid": "list without map; no community rating; generic address lookup",
-        "experience_goal": "user finds a clean, accessible toilet nearby without guessing"
+        "distinctive_feature": "available waiting bays pulse gently while the route line from entrance to selected seat draws itself across the diagram",
+        "avoid": "text-only waiting tips; generic list of locations; anything without a visual seating layout",
+        "experience_goal": "user can judge whether there is a practical place to wait before they arrive"
       }
     },
     {
       "id": "GOOD_SG-081",
-      "title": "School Supply Share SG",
+      "title": "Scam Check Pause",
       "platform": "website",
       "folder": "web",
       "build_stack": "Next.js website",
-      "category": "education equity",
-      "summary": "Offer or request school supplies within local communities.",
-      "target_user": "families, teachers, and volunteers",
-      "why_fast": "The interesting challenge is a match animation when a school supply offer meets a request, making the connection feel like a discovery.",
+      "category": "digital safety",
+      "summary": "Slow down suspicious messages by checking the warning signs before you reply.",
+      "target_user": "older adults and caregivers in Singapore",
+      "why_fast": "The interesting challenge is an interactive decision tree that stays calm and clear while guiding users through suspicious links, calls, and payment requests.",
       "stage": "poc",
       "poc": [
-        "searchable listings",
-        "simple filters or tags",
-        "detail pages with call-to-action"
+        "message check flow",
+        "warning sign prompts",
+        "safe next-step result"
       ],
-      "prototype_goal": "Simulate the core value of School Supply Share SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Scam Check Pause in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -5194,23 +5261,23 @@
       },
       "simulation_mode": "Use seeded demo records, optimistic UI updates, and fake notifications or status changes so the end-to-end workflow is testable by one person.",
       "personas": [
-        "volunteer",
-        "coordinator",
-        "student",
-        "parent_or_tutor"
+        "senior",
+        "caregiver",
+        "resident"
       ],
       "core_entities": [
-        "places",
-        "tags"
+        "entries",
+        "tags",
+        "history"
       ],
       "primary_user_flow": [
-        "directory_list",
-        "filters_panel",
-        "detail_view",
-        "submit_update_modal"
+        "decision_tree",
+        "branch_result",
+        "next_action_card",
+        "save_reminder"
       ],
       "demo_seed_data": [
-        "3 to 8 sample places records tailored to Singapore context",
+        "3 to 8 sample entries records tailored to Singapore context",
         "2 to 3 personas with prefilled preferences, saved items, or history",
         "at least 1 edge case record to demonstrate empty states, stale data, or exceptions"
       ],
@@ -5226,19 +5293,22 @@
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
       ],
       "ui": {
-        "direction": "playful utility",
-        "interaction_model": "item grid with offer/request toggle — a grid of school supply items; each item can be toggled between offering and requesting; a match notification appears when a complementary offer/request is found",
+        "direction": "calm institutional",
+        "interaction_model": "decision tree flowchart — a yes/no branching path that highlights each suspicious sign and leads to a clear next action",
         "suggested_libraries": [
           "framer-motion"
         ],
-        "distinctive_feature": "match animation when an offer meets a request; items animate between offer/request states",
-        "avoid": "plain list; form submission without visual matching; no item grid",
-        "experience_goal": "parent finds what their child needs from another family without any friction"
-      }
+        "distinctive_feature": "the active branch glows while earlier answered branches stay visible but fade into the background",
+        "avoid": "alarmist red warning dashboard; long legal text; chat-style message feed as the main layout",
+        "experience_goal": "user feels helped to pause and check, not frightened or rushed"
+      },
+      "implementation_tags": [
+        "flowchart"
+      ]
     },
     {
       "id": "GOOD_SG-082",
-      "title": "Uniform Reuse SG",
+      "title": "Uniform Reuse",
       "platform": "website",
       "folder": "web",
       "build_stack": "Next.js website",
@@ -5252,7 +5322,7 @@
         "simple filters or tags",
         "detail pages with call-to-action"
       ],
-      "prototype_goal": "Simulate the core value of Uniform Reuse SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Uniform Reuse in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -5303,21 +5373,21 @@
     },
     {
       "id": "GOOD_SG-083",
-      "title": "Reading Buddy SG",
+      "title": "Hospital Discharge Pack",
       "platform": "website",
-      "folder": "mobile",
+      "folder": "web",
       "build_stack": "Next.js website",
-      "category": "education equity",
-      "summary": "Encourage short reading sessions with parents or volunteers.",
-      "target_user": "children and caregivers",
-      "why_fast": "The interesting challenge is an animated connection line between matched reading buddy profiles and a book shelf that slides items in and out.",
+      "category": "caregiving",
+      "summary": "Prepare medicines, transport, and home essentials before leaving the hospital.",
+      "target_user": "family caregivers",
+      "why_fast": "The interesting challenge is presenting discharge preparation as a single-screen packing flow with large, obvious choices rather than a dense checklist.",
       "stage": "poc",
       "poc": [
-        "quick entry flow",
-        "history list with filters",
-        "reminders or streaks"
+        "packing sequence",
+        "transport step",
+        "home setup reminder"
       ],
-      "prototype_goal": "Simulate the core value of Reading Buddy SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Hospital Discharge Pack in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -5326,25 +5396,22 @@
       },
       "simulation_mode": "Use seeded demo records, optimistic UI updates, and fake notifications or status changes so the end-to-end workflow is testable by one person.",
       "personas": [
-        "senior",
         "caregiver",
-        "student",
-        "parent_or_tutor"
+        "senior"
       ],
       "core_entities": [
-        "watchlists",
-        "alerts",
-        "entries",
-        "history"
+        "checklists",
+        "plans",
+        "entries"
       ],
       "primary_user_flow": [
-        "quick_entry",
-        "history_feed",
-        "detail_drawer",
-        "streaks_or_summary"
+        "pack_tray",
+        "transport_choice",
+        "home_setup",
+        "completion_state"
       ],
       "demo_seed_data": [
-        "3 to 8 sample watchlists records tailored to Singapore context",
+        "3 to 8 sample checklists records tailored to Singapore context",
         "2 to 3 personas with prefilled preferences, saved items, or history",
         "at least 1 edge case record to demonstrate empty states, stale data, or exceptions"
       ],
@@ -5360,33 +5427,33 @@
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
       ],
       "ui": {
-        "direction": "warm civic",
-        "interaction_model": "match view with book exchange — a split view showing a child reader profile on the left and available reading buddies on the right; a book exchange shelf in the middle; clicking a match sends a connection request",
+        "direction": "tactile kiosk",
+        "interaction_model": "one-screen packing wizard — one preparation step per screen with oversized item choices and a large continue button",
         "suggested_libraries": [
           "framer-motion"
         ],
-        "distinctive_feature": "book exchange shelf animates books sliding in and out; match connection sends a visual connection line between profiles",
-        "avoid": "generic signup form; list without matching visualisation; no book shelf",
-        "experience_goal": "child and parent feel the warmth of finding a reading buddy, not completing a registration"
+        "distinctive_feature": "a large illustrated hospital bag fills up item by item as the caregiver confirms what is ready",
+        "avoid": "small checkbox lists; multi-column discharge form; anything requiring scanning a long page",
+        "experience_goal": "caregiver feels guided through the handoff home without missing a critical item"
       }
     },
     {
       "id": "GOOD_SG-084",
-      "title": "Study Space for All SG",
+      "title": "ComCare Renewal Calendar",
       "platform": "website",
       "folder": "web",
       "build_stack": "Next.js website",
-      "category": "education equity",
-      "summary": "Find free or low-cost study spaces with practical notes.",
-      "target_user": "students from all backgrounds",
-      "why_fast": "The interesting challenge is a horizontal opening-hours timeline that highlights currently open study spaces directly on the map.",
+      "category": "support",
+      "summary": "Keep renewal dates, documents, and check-ins in one clear calendar.",
+      "target_user": "residents renewing support applications",
+      "why_fast": "The interesting challenge is making deadlines visible as a living time sequence so the user can see what matters this week and what can wait.",
       "stage": "poc",
       "poc": [
-        "searchable listings",
-        "simple filters or tags",
-        "detail pages with call-to-action"
+        "renewal timeline",
+        "document reminders",
+        "deadline status"
       ],
-      "prototype_goal": "Simulate the core value of Study Space for All SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of ComCare Renewal Calendar in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -5395,21 +5462,22 @@
       },
       "simulation_mode": "Use seeded demo records, optimistic UI updates, and fake notifications or status changes so the end-to-end workflow is testable by one person.",
       "personas": [
-        "student",
-        "parent_or_tutor"
+        "resident",
+        "caregiver"
       ],
       "core_entities": [
-        "places",
-        "tags"
+        "plans",
+        "entries",
+        "history"
       ],
       "primary_user_flow": [
-        "directory_list",
-        "filters_panel",
-        "detail_view",
-        "submit_update_modal"
+        "calendar_timeline",
+        "document_step",
+        "deadline_card",
+        "saved_plan"
       ],
       "demo_seed_data": [
-        "3 to 8 sample places records tailored to Singapore context",
+        "3 to 8 sample plans records tailored to Singapore context",
         "2 to 3 personas with prefilled preferences, saved items, or history",
         "at least 1 edge case record to demonstrate empty states, stale data, or exceptions"
       ],
@@ -5425,19 +5493,19 @@
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
       ],
       "ui": {
-        "direction": "map-first",
-        "interaction_model": "study space map with opening hours timeline — a Singapore district SVG map showing libraries and community centres; a horizontal timeline below shows current opening status for each; filtering by noise level, WiFi, and power outlets",
+        "direction": "timeline-first",
+        "interaction_model": "renewal timeline — a horizontal sequence of upcoming dates with documents, appointments, and follow-up steps expanding inline",
         "suggested_libraries": [
           "framer-motion"
         ],
-        "distinctive_feature": "study spaces show a live open/closed status indicator on the map; the timeline highlights currently open spaces",
-        "avoid": "plain list of locations; no opening hours visualisation; no filter for study-specific needs",
-        "experience_goal": "student finds an open study space with the right environment for their current needs"
+        "distinctive_feature": "deadline cards slide closer together as the due date approaches, making the week visually denser",
+        "avoid": "form-first renewal flow; table of dates; generic task list with no sense of time",
+        "experience_goal": "user can see the renewal path in one glance and knows what must happen next"
       }
     },
     {
       "id": "GOOD_SG-085",
-      "title": "Domestic Help Support SG",
+      "title": "Domestic Help Support",
       "platform": "website",
       "folder": "web",
       "build_stack": "Next.js website",
@@ -5451,7 +5519,7 @@
         "simple filters or tags",
         "detail pages with call-to-action"
       ],
-      "prototype_goal": "Simulate the core value of Domestic Help Support SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Domestic Help Support in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -5501,7 +5569,7 @@
     },
     {
       "id": "GOOD_SG-086",
-      "title": "Rest Day Planner SG",
+      "title": "Rest Day Planner",
       "platform": "website",
       "folder": "mobile",
       "build_stack": "Next.js website",
@@ -5515,7 +5583,7 @@
         "generated plan or checklist",
         "save and share output"
       ],
-      "prototype_goal": "Simulate the core value of Rest Day Planner SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Rest Day Planner in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -5567,21 +5635,21 @@
     },
     {
       "id": "GOOD_SG-087",
-      "title": "Language Help SG",
+      "title": "Salary Day Check",
       "platform": "website",
-      "folder": "mobile",
+      "folder": "web",
       "build_stack": "Next.js website",
       "category": "inclusion",
-      "summary": "Create practical phrase cards for healthcare, transport, and daily life.",
-      "target_user": "workers and newcomers",
-      "why_fast": "The interesting challenge is very-large-type phrase cards with a flip animation so the screen can be shown to another person without explanation.",
+      "summary": "Check pay, deductions, and rest days against what was promised.",
+      "target_user": "domestic workers and migrant workers in Singapore",
+      "why_fast": "The interesting challenge is turning a payslip into a visual explainer so users can tap each section and immediately understand what it means.",
       "stage": "poc",
       "poc": [
-        "guided input form",
-        "generated plan or checklist",
-        "save and share output"
+        "payslip diagram",
+        "deduction check",
+        "rest day note"
       ],
-      "prototype_goal": "Simulate the core value of Language Help SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Salary Day Check in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -5590,22 +5658,22 @@
       },
       "simulation_mode": "Use seeded demo records, optimistic UI updates, and fake notifications or status changes so the end-to-end workflow is testable by one person.",
       "personas": [
-        "resident"
+        "resident",
+        "caregiver"
       ],
       "core_entities": [
-        "places",
+        "entries",
         "tags",
-        "plans",
-        "checklists"
+        "history"
       ],
       "primary_user_flow": [
-        "guided_form",
-        "generated_result",
-        "saved_items",
-        "scenario_switcher"
+        "payslip_view",
+        "line_item_check",
+        "difference_highlight",
+        "save_note"
       ],
       "demo_seed_data": [
-        "3 to 8 sample places records tailored to Singapore context",
+        "3 to 8 sample entries records tailored to Singapore context",
         "2 to 3 personas with prefilled preferences, saved items, or history",
         "at least 1 edge case record to demonstrate empty states, stale data, or exceptions"
       ],
@@ -5621,19 +5689,19 @@
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
       ],
       "ui": {
-        "direction": "tactile kiosk",
-        "interaction_model": "phrase book with language selection — a large-format phrase book organised by situation; each phrase is shown in English with translation below; a prominent language selector",
+        "direction": "diagram-first",
+        "interaction_model": "annotated payslip diagram — a large payslip visual where each section can be tapped to reveal a plain-language explanation and warning signs",
         "suggested_libraries": [
           "framer-motion"
         ],
-        "distinctive_feature": "phrase cards have very large type; tapping a phrase flips to show the translation in large text",
-        "avoid": "small text; search-first interface; anything requiring typing to find a phrase",
-        "experience_goal": "someone who cannot speak the local language can show the screen to get help immediately"
+        "distinctive_feature": "tapping a line item draws a visual connector from the payslip section to a simple explanation panel",
+        "avoid": "long FAQ list; hidden glossary terms; spreadsheet-like table as the main interface",
+        "experience_goal": "user feels they can inspect salary details line by line without legal training"
       }
     },
     {
       "id": "GOOD_SG-088",
-      "title": "Worker Check-In SG",
+      "title": "Worker Check-In",
       "platform": "website",
       "folder": "mobile",
       "build_stack": "Next.js website",
@@ -5647,7 +5715,7 @@
         "history list with filters",
         "reminders or streaks"
       ],
-      "prototype_goal": "Simulate the core value of Worker Check-In SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Worker Check-In in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -5700,21 +5768,21 @@
     },
     {
       "id": "GOOD_SG-089",
-      "title": "Repair Before Replace SG",
+      "title": "Fix-It Queue",
       "platform": "website",
       "folder": "web",
       "build_stack": "Next.js website",
       "category": "sustainability",
-      "summary": "Guide residents through repair-vs-replace decisions with local options.",
-      "target_user": "households",
-      "why_fast": "The interesting challenge is an animated cost comparison bar that renders repair-vs-replace side by side as a visual rather than a text recommendation.",
+      "summary": "Book a repair slot and see what tools or parts to bring before you head down.",
+      "target_user": "residents visiting neighbourhood repair sessions",
+      "why_fast": "The interesting challenge is a visual queue board where each booked slot feels like a physical token moving into place rather than a form submission.",
       "stage": "poc",
       "poc": [
-        "guided input form",
-        "generated plan or checklist",
-        "save and share output"
+        "slot board",
+        "repair type selection",
+        "bring list"
       ],
-      "prototype_goal": "Simulate the core value of Repair Before Replace SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Fix-It Queue in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -5723,22 +5791,22 @@
       },
       "simulation_mode": "Use seeded demo records, optimistic UI updates, and fake notifications or status changes so the end-to-end workflow is testable by one person.",
       "personas": [
-        "resident"
+        "resident",
+        "volunteer"
       ],
       "core_entities": [
-        "places",
-        "tags",
+        "entries",
         "plans",
-        "checklists"
+        "tags"
       ],
       "primary_user_flow": [
-        "guided_form",
-        "generated_result",
-        "saved_items",
-        "scenario_switcher"
+        "queue_board",
+        "repair_pick",
+        "slot_claim",
+        "bring_list"
       ],
       "demo_seed_data": [
-        "3 to 8 sample places records tailored to Singapore context",
+        "3 to 8 sample entries records tailored to Singapore context",
         "2 to 3 personas with prefilled preferences, saved items, or history",
         "at least 1 edge case record to demonstrate empty states, stale data, or exceptions"
       ],
@@ -5754,19 +5822,19 @@
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
       ],
       "ui": {
-        "direction": "editorial",
-        "interaction_model": "repair decision wizard — a conversational decision flow: what is broken? what is wrong? how old is it? cost to repair vs replace is estimated with a visual comparison; a find-repair-shop button at the end",
+        "direction": "neo-brutalist",
+        "interaction_model": "repair queue board — bold time blocks lined up across the day; choosing a slot reveals what to bring and what the repair team can handle",
         "suggested_libraries": [
           "framer-motion"
         ],
-        "distinctive_feature": "repair vs replace comparison renders as an animated visual side-by-side cost bar",
-        "avoid": "text checklist; static tips; form without a decision outcome",
-        "experience_goal": "user has a clear, honest recommendation on whether to repair or replace their item"
+        "distinctive_feature": "a claimed slot snaps into the board like a physical ticket with an animated stamp effect",
+        "avoid": "plain booking form; generic calendar widget; soft anonymous cards with no queue feel",
+        "experience_goal": "user feels the session is active, tangible, and easy to join"
       }
     },
     {
       "id": "GOOD_SG-090",
-      "title": "Textile Reuse SG",
+      "title": "Textile Reuse",
       "platform": "website",
       "folder": "web",
       "build_stack": "Next.js website",
@@ -5780,7 +5848,7 @@
         "simple filters or tags",
         "detail pages with call-to-action"
       ],
-      "prototype_goal": "Simulate the core value of Textile Reuse SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Textile Reuse in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -5830,21 +5898,21 @@
     },
     {
       "id": "GOOD_SG-091",
-      "title": "Waste Sort SG",
+      "title": "Clinic Visit Pack",
       "platform": "website",
-      "folder": "mobile",
+      "folder": "web",
       "build_stack": "Next.js website",
-      "category": "sustainability",
-      "summary": "Help households decide whether to donate, recycle, repair, or discard.",
-      "target_user": "households",
-      "why_fast": "The interesting challenge is a drag-and-drop sorting game where wrong answers reveal the classification decision tree as the lesson.",
+      "category": "health systems",
+      "summary": "Know what to bring for today's clinic visit before you leave home.",
+      "target_user": "seniors and caregivers",
+      "why_fast": "The interesting challenge is a tactile packing tray where the user adds cards for IC, referral letters, medicine lists, and payment items in one pass.",
       "stage": "poc",
       "poc": [
-        "guided input form",
-        "generated plan or checklist",
-        "save and share output"
+        "packing tray",
+        "visit type selection",
+        "ready-to-leave state"
       ],
-      "prototype_goal": "Simulate the core value of Waste Sort SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Clinic Visit Pack in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -5853,22 +5921,22 @@
       },
       "simulation_mode": "Use seeded demo records, optimistic UI updates, and fake notifications or status changes so the end-to-end workflow is testable by one person.",
       "personas": [
-        "resident"
+        "senior",
+        "caregiver"
       ],
       "core_entities": [
-        "places",
-        "tags",
+        "checklists",
         "plans",
-        "checklists"
+        "entries"
       ],
       "primary_user_flow": [
-        "guided_form",
-        "generated_result",
-        "saved_items",
-        "scenario_switcher"
+        "visit_type_pick",
+        "packing_tray",
+        "missing_item_prompt",
+        "ready_state"
       ],
       "demo_seed_data": [
-        "3 to 8 sample places records tailored to Singapore context",
+        "3 to 8 sample checklists records tailored to Singapore context",
         "2 to 3 personas with prefilled preferences, saved items, or history",
         "at least 1 edge case record to demonstrate empty states, stale data, or exceptions"
       ],
@@ -5884,19 +5952,19 @@
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
       ],
       "ui": {
-        "direction": "diagram-first",
-        "interaction_model": "sorting quiz game — item images drop from the top of the screen; user drags each item to the correct bin; correct sorts score points; a classification tree appears for wrong answers",
+        "direction": "tactile kiosk",
+        "interaction_model": "packing tray interface — a large tray of appointment essentials where each item is tapped into a ready stack before the user leaves home",
         "suggested_libraries": [
           "framer-motion"
         ],
-        "distinctive_feature": "drag-and-drop item to bin with satisfying animation; wrong answers reveal the classification tree explanation",
-        "avoid": "static information page; list of rules; no interactive game element",
-        "experience_goal": "user learns recycling rules through active gameplay and remembers them because of the game"
+        "distinctive_feature": "items physically slide from the tray into a ready stack, making the packed state visible at a glance",
+        "avoid": "small checkbox list; long clinic FAQ page; dense appointment admin dashboard",
+        "experience_goal": "user leaves with fewer forgotten papers or medicine details"
       }
     },
     {
       "id": "GOOD_SG-092",
-      "title": "Item Life SG",
+      "title": "Item Life",
       "platform": "website",
       "folder": "mobile",
       "build_stack": "Next.js website",
@@ -5910,7 +5978,7 @@
         "history list with filters",
         "reminders or streaks"
       ],
-      "prototype_goal": "Simulate the core value of Item Life SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Item Life in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -5963,7 +6031,7 @@
     },
     {
       "id": "GOOD_SG-093",
-      "title": "Blood Reminder SG",
+      "title": "Blood Reminder",
       "platform": "website",
       "folder": "mobile",
       "build_stack": "Next.js website",
@@ -5977,7 +6045,7 @@
         "push or email alerts",
         "settings for thresholds and frequency"
       ],
-      "prototype_goal": "Simulate the core value of Blood Reminder SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Blood Reminder in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -6027,88 +6095,21 @@
     },
     {
       "id": "GOOD_SG-094",
-      "title": "Clinic File SG",
-      "platform": "website",
-      "folder": "mobile",
-      "build_stack": "Next.js website",
-      "category": "health systems",
-      "summary": "Store medical admin notes and appointment summaries simply.",
-      "target_user": "patients and caregivers",
-      "why_fast": "The interesting challenge is a document timeline where new records animate in and past visit entries expand smoothly on tap.",
-      "stage": "poc",
-      "poc": [
-        "quick entry flow",
-        "history list with filters",
-        "reminders or streaks"
-      ],
-      "prototype_goal": "Simulate the core value of Clinic File SG in-browser with believable local data and zero backend dependencies.",
-      "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
-      "storage_strategy": {
-        "primary": "localStorage",
-        "secondary": "IndexedDB only if the POC needs larger offline caches, many records, or image/file blobs",
-        "server_database": "not allowed for the initial POC"
-      },
-      "simulation_mode": "Use seeded demo records, optimistic UI updates, and fake notifications or status changes so the end-to-end workflow is testable by one person.",
-      "personas": [
-        "senior",
-        "caregiver"
-      ],
-      "core_entities": [
-        "watchlists",
-        "alerts",
-        "entries",
-        "history"
-      ],
-      "primary_user_flow": [
-        "quick_entry",
-        "history_feed",
-        "detail_drawer",
-        "streaks_or_summary"
-      ],
-      "demo_seed_data": [
-        "3 to 8 sample watchlists records tailored to Singapore context",
-        "2 to 3 personas with prefilled preferences, saved items, or history",
-        "at least 1 edge case record to demonstrate empty states, stale data, or exceptions"
-      ],
-      "success_signal": "A new user can switch into a persona, complete the main workflow in under 2 minutes, and understand the concept without any manual setup.",
-      "non_goals": [
-        "real identity verification or account systems",
-        "production-grade multi-user synchronization",
-        "complex backend integrations before concept validation"
-      ],
-      "build_notes": [
-        "Prefer deterministic mock data over external APIs.",
-        "Keep state resettable so demos can be rerun quickly.",
-        "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ],
-      "ui": {
-        "direction": "calm institutional",
-        "interaction_model": "medical record organiser with document timeline — a chronological timeline of clinic visits and documents; clicking a visit shows associated documents and notes; a quick-add panel for new documents",
-        "suggested_libraries": [
-          "framer-motion"
-        ],
-        "distinctive_feature": "document timeline with animated entry when new records are added; visit entries expand smoothly",
-        "avoid": "generic file list; form-only entry; anything that feels like a bureaucratic filing system",
-        "experience_goal": "patient or caregiver quickly finds any document or note from a past visit"
-      }
-    },
-    {
-      "id": "GOOD_SG-095",
-      "title": "Question List SG",
+      "title": "HDB Notice Reader",
       "platform": "website",
       "folder": "web",
       "build_stack": "Next.js website",
-      "category": "health systems",
-      "summary": "Prepare a short question list before appointments.",
-      "target_user": "patients seeking clearer care visits",
-      "why_fast": "The interesting challenge is questions that animate from a suggestion panel into a priority list with drag-to-reorder and smooth layout transitions.",
+      "category": "support",
+      "summary": "Turn estate letters into short plain-language next steps residents can follow.",
+      "target_user": "residents reading HDB or town council notices",
+      "why_fast": "The interesting challenge is an editorial reading layout that lets users tap highlighted phrases in a notice and immediately see what action they need to take.",
       "stage": "poc",
       "poc": [
-        "guided input form",
-        "generated plan or checklist",
-        "save and share output"
+        "notice reader",
+        "highlight explanations",
+        "next-step summary"
       ],
-      "prototype_goal": "Simulate the core value of Question List SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of HDB Notice Reader in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -6117,22 +6118,22 @@
       },
       "simulation_mode": "Use seeded demo records, optimistic UI updates, and fake notifications or status changes so the end-to-end workflow is testable by one person.",
       "personas": [
-        "resident"
+        "resident",
+        "caregiver"
       ],
       "core_entities": [
-        "places",
+        "entries",
         "tags",
-        "plans",
-        "checklists"
+        "history"
       ],
       "primary_user_flow": [
-        "guided_form",
-        "generated_result",
-        "saved_items",
-        "scenario_switcher"
+        "notice_view",
+        "highlight_tap",
+        "next_step_panel",
+        "save_summary"
       ],
       "demo_seed_data": [
-        "3 to 8 sample places records tailored to Singapore context",
+        "3 to 8 sample entries records tailored to Singapore context",
         "2 to 3 personas with prefilled preferences, saved items, or history",
         "at least 1 edge case record to demonstrate empty states, stale data, or exceptions"
       ],
@@ -6149,32 +6150,99 @@
       ],
       "ui": {
         "direction": "editorial",
-        "interaction_model": "appointment question builder — a two-panel layout; suggested questions from common symptom categories on the left; user's selected and custom questions on the right with drag-to-prioritise; a print-ready view",
+        "interaction_model": "annotated notice reader — the official letter sits on one side while highlighted phrases reveal plain-language actions on the other",
         "suggested_libraries": [
           "framer-motion"
         ],
-        "distinctive_feature": "questions animate from left panel to right as they are selected; drag-to-reorder with smooth animations",
-        "avoid": "plain text area; no structured question categories; no drag reorder",
-        "experience_goal": "patient arrives at the clinic with the right questions in priority order and forgets nothing"
+        "distinctive_feature": "highlighting a phrase on the notice pulls a matching action card into view with a smooth editorial reveal",
+        "avoid": "paragraph summary only; chatbot layout; dumping the whole letter into a plain text block",
+        "experience_goal": "resident can move from official wording to practical action without asking someone else to interpret the letter"
+      }
+    },
+    {
+      "id": "GOOD_SG-095",
+      "title": "Neighbour Favour Relay",
+      "platform": "website",
+      "folder": "web",
+      "build_stack": "Next.js website",
+      "category": "community care",
+      "summary": "Pass small errands between neighbours who are already heading that way.",
+      "target_user": "neighbours and volunteer coordinators",
+      "why_fast": "The interesting challenge is a relay-style handoff planner where errands visually move from one person's route to the next instead of sitting in a flat task list.",
+      "stage": "poc",
+      "poc": [
+        "errand chain",
+        "handoff sequence",
+        "completion notes"
+      ],
+      "prototype_goal": "Simulate the core value of Neighbour Favour Relay in-browser with believable local data and zero backend dependencies.",
+      "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
+      "storage_strategy": {
+        "primary": "localStorage",
+        "secondary": "IndexedDB only if the POC needs larger offline caches, many records, or image/file blobs",
+        "server_database": "not allowed for the initial POC"
+      },
+      "simulation_mode": "Use seeded demo records, optimistic UI updates, and fake notifications or status changes so the end-to-end workflow is testable by one person.",
+      "personas": [
+        "resident",
+        "volunteer",
+        "caregiver"
+      ],
+      "core_entities": [
+        "entries",
+        "plans",
+        "history"
+      ],
+      "primary_user_flow": [
+        "relay_board",
+        "handoff_pick",
+        "sequence_view",
+        "completion_note"
+      ],
+      "demo_seed_data": [
+        "3 to 8 sample entries records tailored to Singapore context",
+        "2 to 3 personas with prefilled preferences, saved items, or history",
+        "at least 1 edge case record to demonstrate empty states, stale data, or exceptions"
+      ],
+      "success_signal": "A new user can switch into a persona, complete the main workflow in under 2 minutes, and understand the concept without any manual setup.",
+      "non_goals": [
+        "real identity verification or account systems",
+        "production-grade multi-user synchronization",
+        "complex backend integrations before concept validation"
+      ],
+      "build_notes": [
+        "Prefer deterministic mock data over external APIs.",
+        "Keep state resettable so demos can be rerun quickly.",
+        "Treat notifications, queues, and matching as simulations unless a real API is trivial."
+      ],
+      "ui": {
+        "direction": "warm civic",
+        "interaction_model": "relay timeline — errands appear as handoff tokens moving across a day from one neighbour to the next based on where each person is already going",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "handoff tokens animate along the relay line when a neighbour takes responsibility for the next leg",
+        "avoid": "plain to-do list; request form with no movement between people; generic kanban board",
+        "experience_goal": "user sees community help as a shared flow rather than one person doing everything alone"
       }
     },
     {
       "id": "GOOD_SG-096",
-      "title": "Care Contact Tree SG",
+      "title": "Dementia Walk Companion",
       "platform": "website",
-      "folder": "mobile",
+      "folder": "web",
       "build_stack": "Next.js website",
-      "category": "health systems",
-      "summary": "Create a simple family communication plan for urgent situations.",
-      "target_user": "households and caregivers",
-      "why_fast": "The interesting challenge is a care network tree where branches animate as contacts are added and missing-detail nodes pulse as visual prompts.",
+      "category": "caregiving",
+      "summary": "Plan a short familiar walk with rest points and an easy return route.",
+      "target_user": "family caregivers and seniors with memory decline",
+      "why_fast": "The interesting challenge is a calm loop-route planner that makes the return path and resting spots as visible as the outward walk.",
       "stage": "poc",
       "poc": [
-        "guided input form",
-        "generated plan or checklist",
-        "save and share output"
+        "walk loop view",
+        "rest point markers",
+        "return cue"
       ],
-      "prototype_goal": "Simulate the core value of Care Contact Tree SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Dementia Walk Companion in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -6183,21 +6251,19 @@
       },
       "simulation_mode": "Use seeded demo records, optimistic UI updates, and fake notifications or status changes so the end-to-end workflow is testable by one person.",
       "personas": [
-        "senior",
         "caregiver",
-        "resident"
+        "senior"
       ],
       "core_entities": [
         "places",
-        "tags",
         "plans",
-        "checklists"
+        "history"
       ],
       "primary_user_flow": [
-        "guided_form",
-        "generated_result",
-        "saved_items",
-        "scenario_switcher"
+        "loop_route_view",
+        "rest_point_pick",
+        "return_highlight",
+        "save_walk"
       ],
       "demo_seed_data": [
         "3 to 8 sample places records tailored to Singapore context",
@@ -6216,33 +6282,33 @@
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
       ],
       "ui": {
-        "direction": "diagram-first",
-        "interaction_model": "care network tree visualisation — a tree diagram showing the patient at root with care contacts branching out by role; clicking a contact shows role, contact details, and notes",
+        "direction": "minimalist",
+        "interaction_model": "calm loop-route diagram — a simple route loop showing start point, rest stop, toilet, and return cue with minimal visual noise",
         "suggested_libraries": [
           "framer-motion"
         ],
-        "distinctive_feature": "tree diagram animates branches as contacts are added; contact nodes pulse if contact details are missing",
-        "avoid": "list of contacts; generic address book; no tree visualisation",
-        "experience_goal": "caregiver sees the full care network in one diagram and quickly adds any missing contacts"
+        "distinctive_feature": "the return path brightens after the outward leg completes, making the way back feel always present",
+        "avoid": "busy city map; sports tracking dashboard; list of route steps with no visual loop",
+        "experience_goal": "caregiver feels reassured by the visible return path and predictable stopping points"
       }
     },
     {
       "id": "GOOD_SG-097",
-      "title": "Lift Route for Seniors SG",
+      "title": "Wheelchair Car Transfer",
       "platform": "website",
-      "folder": "mobile",
+      "folder": "web",
       "build_stack": "Next.js website",
-      "category": "urban access",
-      "summary": "Suggest easier errand routes with fewer stairs and more lift access.",
-      "target_user": "seniors and caregivers",
-      "why_fast": "The interesting challenge is an animated SVG path that draws the lift-accessible route through a simplified HDB floor plan when a destination is tapped.",
+      "category": "accessibility",
+      "summary": "Preview drop-off bay space, kerb ramps, and transfer points before arriving.",
+      "target_user": "wheelchair users, families, and drivers",
+      "why_fast": "The interesting challenge is a curbside cutaway diagram that shows whether a car transfer is practical before a family leaves home.",
       "stage": "poc",
       "poc": [
-        "guided input form",
-        "generated plan or checklist",
-        "save and share output"
+        "drop-off diagram",
+        "transfer point notes",
+        "step-free route cue"
       ],
-      "prototype_goal": "Simulate the core value of Lift Route for Seniors SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Wheelchair Car Transfer in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -6251,20 +6317,20 @@
       },
       "simulation_mode": "Use seeded demo records, optimistic UI updates, and fake notifications or status changes so the end-to-end workflow is testable by one person.",
       "personas": [
-        "senior",
-        "caregiver"
+        "resident",
+        "caregiver",
+        "senior"
       ],
       "core_entities": [
         "places",
-        "tags",
-        "plans",
-        "checklists"
+        "entries",
+        "tags"
       ],
       "primary_user_flow": [
-        "guided_form",
-        "generated_result",
-        "saved_items",
-        "scenario_switcher"
+        "curbside_diagram",
+        "transfer_pick",
+        "route_note",
+        "save_location"
       ],
       "demo_seed_data": [
         "3 to 8 sample places records tailored to Singapore context",
@@ -6284,32 +6350,32 @@
       ],
       "ui": {
         "direction": "diagram-first",
-        "interaction_model": "HDB floor plan with lift path overlay — a simplified floor plan showing lifts, corridors, and unit locations; tapping a destination unit highlights the lift-accessible route; known lift outages are flagged",
+        "interaction_model": "curbside transfer cutaway — a side-view diagram showing bay width, kerb ramp, shelter, and door clearance for different drop-off spots",
         "suggested_libraries": [
           "framer-motion"
         ],
-        "distinctive_feature": "animated path that draws from origin to destination showing the lift-accessible route; lift outage nodes flash red",
-        "avoid": "address list; no floor diagram; generic accessible route without HDB-specific layout",
-        "experience_goal": "senior or caregiver navigates a HDB block knowing exactly where to go to avoid stairs"
+        "distinctive_feature": "choosing a transfer point overlays animated door-swing and wheelchair path guides on the curbside diagram",
+        "avoid": "list of text notes only; generic map pin view; anything without a spatial cutaway",
+        "experience_goal": "family can quickly tell whether arrival and transfer will be manageable"
       }
     },
     {
       "id": "GOOD_SG-098",
-      "title": "Tuition Aid Guide SG",
+      "title": "Apprenticeship Taster",
       "platform": "website",
       "folder": "web",
       "build_stack": "Next.js website",
       "category": "education equity",
-      "summary": "Explain low-cost tutoring and education support options clearly.",
-      "target_user": "students and lower-income families",
-      "why_fast": "The interesting challenge is a scheme comparison table where columns animate in as eligibility is confirmed and the best-fit row is highlighted.",
+      "summary": "Compare what a training path feels like week by week before you apply.",
+      "target_user": "youths and career switchers exploring training pathways",
+      "why_fast": "The interesting challenge is showing the rhythm of a training pathway over time so a user can compare weekly reality instead of reading generic descriptions.",
       "stage": "poc",
       "poc": [
-        "searchable listings",
-        "simple filters or tags",
-        "detail pages with call-to-action"
+        "week-by-week preview",
+        "path comparison",
+        "save option"
       ],
-      "prototype_goal": "Simulate the core value of Tuition Aid Guide SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Apprenticeship Taster in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -6318,21 +6384,22 @@
       },
       "simulation_mode": "Use seeded demo records, optimistic UI updates, and fake notifications or status changes so the end-to-end workflow is testable by one person.",
       "personas": [
-        "student",
-        "parent_or_tutor"
+        "resident",
+        "student"
       ],
       "core_entities": [
-        "places",
+        "plans",
+        "entries",
         "tags"
       ],
       "primary_user_flow": [
-        "directory_list",
-        "filters_panel",
-        "detail_view",
-        "submit_update_modal"
+        "path_pick",
+        "week_timeline",
+        "compare_view",
+        "save_path"
       ],
       "demo_seed_data": [
-        "3 to 8 sample places records tailored to Singapore context",
+        "3 to 8 sample plans records tailored to Singapore context",
         "2 to 3 personas with prefilled preferences, saved items, or history",
         "at least 1 edge case record to demonstrate empty states, stale data, or exceptions"
       ],
@@ -6348,33 +6415,33 @@
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
       ],
       "ui": {
-        "direction": "calm institutional",
-        "interaction_model": "eligibility checker with scheme comparison — a 3-step wizard asking about income level, school level, and subject; a comparison table renders showing eligible schemes side by side with key differences highlighted",
+        "direction": "timeline-first",
+        "interaction_model": "week-strip journey — each training path expands into a sequence of weeks showing classroom time, practice time, travel, and allowance moments",
         "suggested_libraries": [
           "framer-motion"
         ],
-        "distinctive_feature": "comparison table columns animate in as eligibility is confirmed; highlighted rows show best-fit scheme",
-        "avoid": "list of schemes without personalisation; form without scheme comparison; anything without the wizard",
-        "experience_goal": "parent finds the right tuition aid scheme for their child without reading every option"
+        "distinctive_feature": "switching paths reshapes the visible week strip so differences in rhythm and workload are obvious immediately",
+        "avoid": "table of programmes; long brochure page; generic filters above a card list",
+        "experience_goal": "user can imagine the lived shape of the pathway before committing"
       }
     },
     {
       "id": "GOOD_SG-099",
-      "title": "Community Cooler Spots SG",
+      "title": "Flash Flood Crossing",
       "platform": "website",
-      "folder": "mobile",
+      "folder": "web",
       "build_stack": "Next.js website",
       "category": "environment",
-      "summary": "Find practical public places for cooling off during very hot days.",
-      "target_user": "seniors, workers, and families",
-      "why_fast": "The interesting challenge is a heat overlay on a Singapore SVG map that intensifies in hot districts with animated cool-breeze effects on cool spots.",
+      "summary": "See safer crossing choices during sudden heavy rain.",
+      "target_user": "pedestrians, wheelchair users, and caregivers",
+      "why_fast": "The interesting challenge is a street-crossing cutaway that visualises shelter, drain edges, and higher-ground alternatives when rainwater builds quickly.",
       "stage": "poc",
       "poc": [
-        "searchable listings",
-        "simple filters or tags",
-        "detail pages with call-to-action"
+        "crossing diagram",
+        "safer route choice",
+        "rain notes"
       ],
-      "prototype_goal": "Simulate the core value of Community Cooler Spots SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Flash Flood Crossing in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -6383,21 +6450,20 @@
       },
       "simulation_mode": "Use seeded demo records, optimistic UI updates, and fake notifications or status changes so the end-to-end workflow is testable by one person.",
       "personas": [
-        "volunteer",
-        "coordinator",
-        "senior",
+        "resident",
         "caregiver",
-        "resident"
+        "senior"
       ],
       "core_entities": [
         "places",
-        "tags"
+        "entries",
+        "alerts"
       ],
       "primary_user_flow": [
-        "directory_list",
-        "filters_panel",
-        "detail_view",
-        "submit_update_modal"
+        "street_diagram",
+        "route_choice",
+        "rain_note",
+        "save_crossing"
       ],
       "demo_seed_data": [
         "3 to 8 sample places records tailored to Singapore context",
@@ -6416,19 +6482,19 @@
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
       ],
       "ui": {
-        "direction": "map-first",
-        "interaction_model": "heat-aware cooler spots map — a Singapore SVG map with a warm color heat overlay by district; cool spots shown as pins; filter by indoor/outdoor and distance",
+        "direction": "diagram-first",
+        "interaction_model": "street cutaway explorer — a side-view of a crossing with kerb, drain, shelter, and higher-ground alternatives that can be tapped to compare routes",
         "suggested_libraries": [
           "framer-motion"
         ],
-        "distinctive_feature": "map heat overlay that intensifies in high-temperature districts; cool spot pins have an animated cool-breeze effect",
-        "avoid": "list without map; no heat visualisation; generic location finder",
-        "experience_goal": "resident seeks relief from heat and immediately sees the nearest cool spot on the map"
+        "distinctive_feature": "water level overlays animate across the crossing so safer higher-ground paths stand out immediately",
+        "avoid": "plain rain advisory text; generic weather dashboard; list of tips with no spatial scene",
+        "experience_goal": "user can see the safer crossing choice instead of guessing from text alone"
       }
     },
     {
       "id": "GOOD_SG-100",
-      "title": "Affordable Protein SG",
+      "title": "Affordable Protein",
       "platform": "website",
       "folder": "web",
       "build_stack": "Next.js website",
@@ -6442,7 +6508,7 @@
         "generated plan or checklist",
         "save and share output"
       ],
-      "prototype_goal": "Simulate the core value of Affordable Protein SG in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Affordable Protein in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -6491,6 +6557,206 @@
         "distinctive_feature": "protein cost per gram shown as animated bar comparison; building a weekly plan animates items into a summary",
         "avoid": "generic nutrition table; form without visual meal building; anything without the hawker-specific pricing",
         "experience_goal": "resident builds an affordable, protein-sufficient weekly plan from hawker meals they already know"
+      }
+    },
+    {
+      "id": "GOOD_SG-101",
+      "title": "HDB Fire Escape",
+      "platform": "website",
+      "folder": "mobile",
+      "build_stack": "Next.js website",
+      "category": "safety",
+      "summary": "Practice the quickest way out of the flat with everyone in the home.",
+      "target_user": "families, seniors, and caregivers in HDB flats",
+      "why_fast": "The interesting challenge is a simple HDB floor-plan diagram that shows exits, mobility constraints, and meeting points without overwhelming the household.",
+      "stage": "poc",
+      "poc": [
+        "flat layout setup",
+        "escape route preview",
+        "meeting point reminder"
+      ],
+      "prototype_goal": "Simulate the core value of HDB Fire Escape in-browser with believable local data and zero backend dependencies.",
+      "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
+      "storage_strategy": {
+        "primary": "localStorage",
+        "secondary": "IndexedDB only if the POC needs larger offline caches, many records, or image/file blobs",
+        "server_database": "not allowed for the initial POC"
+      },
+      "simulation_mode": "Use seeded demo records, optimistic UI updates, and fake notifications or status changes so the end-to-end workflow is testable by one person.",
+      "personas": [
+        "resident",
+        "caregiver",
+        "senior"
+      ],
+      "core_entities": [
+        "places",
+        "plans",
+        "checklists"
+      ],
+      "primary_user_flow": [
+        "flat_diagram",
+        "route_preview",
+        "meeting_point",
+        "save_plan"
+      ],
+      "demo_seed_data": [
+        "3 to 8 sample places records tailored to Singapore context",
+        "2 to 3 personas with prefilled preferences, saved items, or history",
+        "at least 1 edge case record to demonstrate empty states, stale data, or exceptions"
+      ],
+      "success_signal": "A new user can switch into a persona, complete the main workflow in under 2 minutes, and understand the concept without any manual setup.",
+      "non_goals": [
+        "real identity verification or account systems",
+        "production-grade multi-user synchronization",
+        "complex backend integrations before concept validation"
+      ],
+      "build_notes": [
+        "Prefer deterministic mock data over external APIs.",
+        "Keep state resettable so demos can be rerun quickly.",
+        "Treat notifications, queues, and matching as simulations unless a real API is trivial."
+      ],
+      "ui": {
+        "direction": "diagram-first",
+        "interaction_model": "flat floor-plan escape guide — a simplified HDB flat diagram where users mark the room they start from and see the shortest exit path plus meeting point",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "the chosen escape path draws through the flat diagram room by room to the exit",
+        "avoid": "wall of safety text; generic emergency checklist page; anything without a flat diagram",
+        "experience_goal": "household can picture the route out before an emergency ever happens"
+      }
+    },
+    {
+      "id": "GOOD_SG-102",
+      "title": "Community Fridge Keeper",
+      "platform": "website",
+      "folder": "web",
+      "build_stack": "Next.js website",
+      "category": "food security",
+      "summary": "Coordinate what to restock, remove, and label at a shared community fridge.",
+      "target_user": "volunteers and resident organisers",
+      "why_fast": "The interesting challenge is a split-screen fridge board where incoming items and shelf space are matched visually instead of tracked in a plain list.",
+      "stage": "poc",
+      "poc": [
+        "fridge shelf board",
+        "restock flow",
+        "expiry watch"
+      ],
+      "prototype_goal": "Simulate the core value of Community Fridge Keeper in-browser with believable local data and zero backend dependencies.",
+      "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
+      "storage_strategy": {
+        "primary": "localStorage",
+        "secondary": "IndexedDB only if the POC needs larger offline caches, many records, or image/file blobs",
+        "server_database": "not allowed for the initial POC"
+      },
+      "simulation_mode": "Use seeded demo records, optimistic UI updates, and fake notifications or status changes so the end-to-end workflow is testable by one person.",
+      "personas": [
+        "volunteer",
+        "resident",
+        "coordinator"
+      ],
+      "core_entities": [
+        "entries",
+        "watchlists",
+        "alerts"
+      ],
+      "primary_user_flow": [
+        "shelf_board",
+        "item_match",
+        "expiry_watch",
+        "restock_note"
+      ],
+      "demo_seed_data": [
+        "3 to 8 sample entries records tailored to Singapore context",
+        "2 to 3 personas with prefilled preferences, saved items, or history",
+        "at least 1 edge case record to demonstrate empty states, stale data, or exceptions"
+      ],
+      "success_signal": "A new user can switch into a persona, complete the main workflow in under 2 minutes, and understand the concept without any manual setup.",
+      "non_goals": [
+        "real identity verification or account systems",
+        "production-grade multi-user synchronization",
+        "complex backend integrations before concept validation"
+      ],
+      "build_notes": [
+        "Prefer deterministic mock data over external APIs.",
+        "Keep state resettable so demos can be rerun quickly.",
+        "Treat notifications, queues, and matching as simulations unless a real API is trivial."
+      ],
+      "ui": {
+        "direction": "data-dense operations",
+        "interaction_model": "split-screen fridge board — incoming donations on one side and shelf zones on the other; assigning an item shows where it fits and how soon it should move",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "items animate onto the fridge shelves and change colour as their safe window gets shorter",
+        "avoid": "plain spreadsheet inventory; form-only item entry; static list of donated food",
+        "experience_goal": "volunteer can manage the fridge visually and keep it safe with less guesswork"
+      }
+    },
+    {
+      "id": "GOOD_SG-103",
+      "title": "Playground Shade Guide",
+      "platform": "website",
+      "folder": "web",
+      "build_stack": "Next.js website",
+      "category": "family access",
+      "summary": "See which play areas stay shaded at different times of day.",
+      "target_user": "parents, grandparents, and caregivers",
+      "why_fast": "The interesting challenge is mapping the movement of shade across a playground so a caregiver can choose the more comfortable time and corner before leaving home.",
+      "stage": "poc",
+      "poc": [
+        "shade arc view",
+        "time slider",
+        "play zone notes"
+      ],
+      "prototype_goal": "Simulate the core value of Playground Shade Guide in-browser with believable local data and zero backend dependencies.",
+      "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
+      "storage_strategy": {
+        "primary": "localStorage",
+        "secondary": "IndexedDB only if the POC needs larger offline caches, many records, or image/file blobs",
+        "server_database": "not allowed for the initial POC"
+      },
+      "simulation_mode": "Use seeded demo records, optimistic UI updates, and fake notifications or status changes so the end-to-end workflow is testable by one person.",
+      "personas": [
+        "caregiver",
+        "resident"
+      ],
+      "core_entities": [
+        "places",
+        "tags",
+        "history"
+      ],
+      "primary_user_flow": [
+        "playground_diagram",
+        "time_change",
+        "shade_zone_pick",
+        "save_time"
+      ],
+      "demo_seed_data": [
+        "3 to 8 sample places records tailored to Singapore context",
+        "2 to 3 personas with prefilled preferences, saved items, or history",
+        "at least 1 edge case record to demonstrate empty states, stale data, or exceptions"
+      ],
+      "success_signal": "A new user can switch into a persona, complete the main workflow in under 2 minutes, and understand the concept without any manual setup.",
+      "non_goals": [
+        "real identity verification or account systems",
+        "production-grade multi-user synchronization",
+        "complex backend integrations before concept validation"
+      ],
+      "build_notes": [
+        "Prefer deterministic mock data over external APIs.",
+        "Keep state resettable so demos can be rerun quickly.",
+        "Treat notifications, queues, and matching as simulations unless a real API is trivial."
+      ],
+      "ui": {
+        "direction": "ambient sensory interface",
+        "interaction_model": "sun-and-shade playground diagram — a simplified playground scene where moving the time changes the shaded zones across swings, slides, and benches",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "the shade visibly glides across the playground as the time changes, making the comfortable areas obvious at a glance",
+        "avoid": "generic map of playgrounds; text-only time advice; static list of amenities",
+        "experience_goal": "caregiver can choose a more comfortable play time without trial and error"
       }
     }
   ],

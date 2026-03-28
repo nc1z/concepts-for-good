@@ -1,10 +1,113 @@
+"use client";
+
 import Link from "next/link";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 import { pocCards } from "@/lib/pocs";
 
+function shuffleCards<T>(items: T[]) {
+  const next = [...items];
+
+  for (let index = next.length - 1; index > 0; index -= 1) {
+    const swapIndex = Math.floor(Math.random() * (index + 1));
+    const current = next[index];
+
+    next[index] = next[swapIndex];
+    next[swapIndex] = current;
+  }
+
+  return next;
+}
+
 export default function Home() {
+  const [query, setQuery] = useState("");
+  const [visibleCount, setVisibleCount] = useState(4);
+  const [showBackToTop, setShowBackToTop] = useState(false);
+  const [orderedCards, setOrderedCards] = useState(pocCards);
+  const sentinelRef = useRef<HTMLDivElement | null>(null);
+  const searchInputRef = useRef<HTMLInputElement | null>(null);
+
+  const filteredCards = useMemo(() => {
+    const normalized = query.trim().toLowerCase();
+
+    if (!normalized) {
+      return orderedCards;
+    }
+
+    return orderedCards.filter((card) =>
+      [
+        card.title,
+        card.category,
+        card.summary,
+        card.impact,
+        ...card.tags,
+      ]
+        .join(" ")
+        .toLowerCase()
+        .includes(normalized),
+    );
+  }, [orderedCards, query]);
+
+  useEffect(() => {
+    setOrderedCards(shuffleCards(pocCards));
+  }, []);
+
+  useEffect(() => {
+    setVisibleCount(4);
+  }, [query]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries;
+        if (!entry?.isIntersecting) return;
+
+        setVisibleCount((current) =>
+          Math.min(current + 3, filteredCards.length),
+        );
+      },
+      {
+        rootMargin: "220px 0px",
+      },
+    );
+
+    const node = sentinelRef.current;
+    if (node) observer.observe(node);
+
+    return () => observer.disconnect();
+  }, [filteredCards.length]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowBackToTop(window.scrollY > 700);
+    };
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const handleKeydown = (event: KeyboardEvent) => {
+      const isSearchShortcut = (event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k";
+
+      if (!isSearchShortcut) return;
+
+      event.preventDefault();
+      searchInputRef.current?.focus();
+      searchInputRef.current?.select();
+    };
+
+    window.addEventListener("keydown", handleKeydown);
+
+    return () => window.removeEventListener("keydown", handleKeydown);
+  }, []);
+
+  const visibleCards = filteredCards.slice(0, visibleCount);
+
   return (
-    <main className="shell">
+    <main id="top" className="shell">
       <div className="topbar">
         <a
           href="https://github.com/nc1z/concepts-for-good"
@@ -37,8 +140,36 @@ export default function Home() {
       </section>
 
       <section className="gallery">
+        <div className="gallery-controls">
+          <label className="gallery-search" htmlFor="gallery-search">
+            <span className="gallery-search__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path
+                  fill="currentColor"
+                  d="M10.5 4a6.5 6.5 0 1 0 4.03 11.6l4.43 4.43 1.04-1.04-4.43-4.43A6.5 6.5 0 0 0 10.5 4Zm0 1.5a5 5 0 1 1 0 10 5 5 0 0 1 0-10Z"
+                />
+              </svg>
+            </span>
+            <input
+              ref={searchInputRef}
+              id="gallery-search"
+              type="search"
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
+              placeholder="Search by topic, use case, or audience"
+            />
+            <span className="gallery-search__hint" aria-hidden="true">
+              <kbd>⌘</kbd>
+              <kbd>K</kbd>
+            </span>
+          </label>
+          <p className="gallery-count">
+            {filteredCards.length} idea{filteredCards.length === 1 ? "" : "s"}
+          </p>
+        </div>
+
         <div className="gallery-grid">
-          {pocCards.map((card) => (
+          {visibleCards.map((card) => (
             <article
               key={card.slug}
               className={`gallery-item gallery-item--${card.theme}`}
@@ -52,6 +183,12 @@ export default function Home() {
                 <p>{card.summary}</p>
               </div>
 
+              <div className="gallery-item__tags">
+                {card.tags.map((tag) => (
+                  <span key={tag}>{tag}</span>
+                ))}
+              </div>
+
               <div className="gallery-item__footer">
                 <p>{card.impact}</p>
                 <Link href={`/pocs/${card.slug}`} className="gallery-item__link">
@@ -61,7 +198,21 @@ export default function Home() {
             </article>
           ))}
         </div>
+
+        {filteredCards.length === 0 ? (
+          <p className="gallery-empty">
+            No ideas match that search yet. Try a broader word or topic.
+          </p>
+        ) : null}
+
+        <div ref={sentinelRef} className="gallery-sentinel" aria-hidden="true" />
       </section>
+
+      {showBackToTop ? (
+        <a href="#top" className="back-to-top">
+          Back to top
+        </a>
+      ) : null}
     </main>
   );
 }
