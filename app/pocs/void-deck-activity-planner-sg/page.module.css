@@ -1,0 +1,469 @@
+.page {
+  min-height: 100dvh;
+  background:
+    radial-gradient(circle at top left, rgba(255, 228, 186, 0.72), transparent 28%),
+    linear-gradient(180deg, #f6ecd7 0%, #efe0bf 100%);
+  color: #3f3128;
+  font-family: var(--font-voiddeck-body), sans-serif;
+}
+
+.shell {
+  width: min(1260px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 24px 0 56px;
+}
+
+.backLink {
+  display: inline-flex;
+  margin-bottom: 18px;
+  color: #71594a;
+  font-size: 0.92rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.hero {
+  display: block;
+  margin-bottom: 24px;
+}
+
+.heroCopy h1,
+.floorTopline h2,
+.panel h2,
+.noticeboardHeading h2,
+.noticeCard h3 {
+  font-family: var(--font-voiddeck-heading), serif;
+}
+
+.eyebrow,
+.floorLabel {
+  margin: 0 0 10px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #8c6a55;
+}
+
+.heroCopy h1 {
+  margin: 0;
+  font-size: clamp(2.2rem, 4vw, 4rem);
+  line-height: 0.98;
+  letter-spacing: -0.05em;
+}
+
+.lede {
+  max-width: 58ch;
+  margin: 16px 0 0;
+  font-size: 1.02rem;
+  line-height: 1.7;
+  color: #5b483d;
+}
+
+.panel,
+.noticeboard,
+.floorShell {
+  border: 1px solid rgba(121, 88, 67, 0.18);
+  box-shadow: 0 18px 40px rgba(87, 59, 33, 0.08);
+}
+
+.dayTabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+}
+
+.dayTab {
+  padding: 12px 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(122, 89, 66, 0.18);
+  background: rgba(255, 247, 230, 0.75);
+  color: #6a5447;
+  font-size: 0.92rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.18s ease, background 0.18s ease, color 0.18s ease;
+}
+
+.dayTab:hover {
+  transform: translateY(-1px);
+}
+
+.dayTabActive {
+  background: #6a946f;
+  color: #f7f0df;
+}
+
+.stage {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.floorShell {
+  border-radius: 32px;
+  padding: 22px;
+  background:
+    linear-gradient(135deg, rgba(255, 250, 241, 0.95), rgba(247, 234, 206, 0.95)),
+    linear-gradient(180deg, #f7ecda, #f0debc);
+}
+
+.floorTopline,
+.noticeboardHeading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.floorTopline h2,
+.panel h2,
+.noticeboardHeading h2 {
+  margin: 0;
+  font-size: 2rem;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.floorHint {
+  font-size: 0.9rem;
+  color: #7a6255;
+}
+
+.floorPlan {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 28px;
+  background:
+    linear-gradient(180deg, rgba(255, 253, 248, 0.98), rgba(244, 227, 192, 0.98));
+}
+
+.deckBase {
+  fill: #efe3c4;
+  stroke: rgba(115, 87, 61, 0.22);
+  stroke-width: 2;
+}
+
+.deckInset {
+  fill: #fffaf0;
+  stroke: rgba(115, 87, 61, 0.18);
+  stroke-width: 2;
+  stroke-dasharray: 8 10;
+}
+
+.walkway {
+  fill: #dcc7a0;
+}
+
+.columnBlock {
+  fill: rgba(135, 109, 90, 0.16);
+}
+
+.zone {
+  fill: rgba(184, 210, 188, 0.18);
+  stroke: rgba(94, 123, 101, 0.28);
+  stroke-width: 2;
+}
+
+.zoneLabel {
+  fill: #7f6352;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.slotGroup {
+  cursor: pointer;
+  outline: none;
+}
+
+.slotGroup:focus-visible .slotCard {
+  stroke: #3d2d26;
+  stroke-width: 3;
+}
+
+.slotCard {
+  fill: rgba(252, 238, 209, 0.92);
+  stroke: rgba(124, 97, 79, 0.2);
+  stroke-width: 2;
+  filter: drop-shadow(0 10px 16px rgba(108, 77, 52, 0.14));
+  transform-origin: center;
+}
+
+.slotLabel,
+.slotTime,
+.slotState {
+  pointer-events: none;
+}
+
+.slotLabel {
+  fill: #513f34;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.slotTime {
+  fill: #7b6253;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.slotState {
+  fill: #8f6d5b;
+  font-size: 11px;
+}
+
+.slotDot {
+  fill: var(--slot-tone);
+}
+
+.slotGroupOpen .slotCard {
+  stroke-dasharray: 8 8;
+}
+
+.slotGroupBooked .slotCard {
+  fill: color-mix(in srgb, var(--slot-tone) 22%, #fff4dc);
+  stroke: color-mix(in srgb, var(--slot-tone) 65%, #8f6d5b);
+}
+
+.slotGroupSelected .slotCard {
+  stroke: #3c5b49;
+  stroke-width: 3;
+}
+
+.sideRail {
+  display: grid;
+  gap: 18px;
+}
+
+.panel,
+.noticeboard {
+  border-radius: 28px;
+  padding: 22px;
+}
+
+.panel {
+  background: rgba(255, 251, 244, 0.92);
+}
+
+.panelTopline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #866759;
+}
+
+.panelLead {
+  margin: 12px 0 18px;
+  color: #644f44;
+  line-height: 1.6;
+}
+
+.activityList {
+  display: grid;
+  gap: 10px;
+}
+
+.activityCard {
+  padding: 14px 16px;
+  border-radius: 20px;
+  border: 1px solid rgba(126, 95, 74, 0.16);
+  background: #fff8eb;
+  text-align: left;
+  cursor: pointer;
+  transition: transform 0.18s ease, border-color 0.18s ease;
+}
+
+.activityCard strong,
+.activityCard span {
+  display: block;
+}
+
+.activityCard strong {
+  margin-bottom: 5px;
+  color: #46362d;
+}
+
+.activityCard span {
+  font-size: 0.86rem;
+  color: #7c6352;
+}
+
+.activityCard:hover {
+  transform: translateY(-1px);
+}
+
+.activityCardActive {
+  border-color: var(--activity-accent);
+  box-shadow: inset 0 0 0 1px var(--activity-accent);
+}
+
+.selectionNote,
+.bookedCard {
+  margin-top: 16px;
+  padding: 16px 18px;
+  border-radius: 22px;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--note-accent) 12%, #fff8e8),
+    #fff9ef
+  );
+  border: 1px solid color-mix(in srgb, var(--note-accent) 36%, rgba(133, 96, 70, 0.2));
+}
+
+.selectionNote p,
+.bookedCard p {
+  margin: 0 0 10px;
+  line-height: 1.6;
+  color: #604d40;
+}
+
+.selectionNote span,
+.bookedCard span,
+.bookedCard em {
+  display: block;
+  font-size: 0.86rem;
+  color: #7a6356;
+}
+
+.bookedCard strong {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 1.1rem;
+  color: #45352d;
+}
+
+.bookedCard em {
+  margin-top: 8px;
+  font-style: normal;
+}
+
+.pinButton {
+  width: 100%;
+  margin-top: 16px;
+  padding: 14px 18px;
+  border: 0;
+  border-radius: 999px;
+  background: #3f664a;
+  color: #fbf6ec;
+  font-size: 0.96rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.noticeboard {
+  background:
+    linear-gradient(180deg, rgba(139, 107, 77, 0.14), rgba(139, 107, 77, 0.08)),
+    #f6ead0;
+}
+
+.noticeList {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.noticeCard {
+  position: relative;
+  min-height: 172px;
+  padding: 22px 18px 18px;
+  border-radius: 8px 8px 24px 8px;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--note-accent) 18%, #fff8cc), #fff6dd);
+  box-shadow: 0 12px 22px rgba(116, 81, 52, 0.14);
+  transform: rotate(var(--note-rotate));
+}
+
+.noticePin {
+  position: absolute;
+  top: 10px;
+  right: 16px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #b64d43;
+  box-shadow: 0 3px 0 rgba(86, 37, 32, 0.18);
+}
+
+.noticeDay {
+  display: inline-block;
+  margin-bottom: 10px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #865744;
+}
+
+.noticeCard h3 {
+  margin: 0 0 8px;
+  font-size: 1.35rem;
+  line-height: 1.05;
+}
+
+.noticeCard p,
+.noticeCard strong,
+.noticeCard span {
+  display: block;
+}
+
+.noticeCard p,
+.noticeCard span {
+  margin: 0 0 6px;
+  color: #6f5647;
+}
+
+.noticeCard strong {
+  margin-bottom: 10px;
+  color: #4a3a31;
+}
+
+.emptyState {
+  margin: 8px 0 0;
+  color: #70584a;
+  line-height: 1.6;
+}
+
+@media (max-width: 980px) {
+  .stage {
+    grid-template-columns: 1fr;
+  }
+
+  .noticeList {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .shell {
+    width: min(100% - 20px, 1260px);
+    padding-bottom: 40px;
+  }
+
+  .heroCopy h1 {
+    font-size: clamp(1.9rem, 9vw, 3.1rem);
+  }
+
+  .floorShell,
+  .panel,
+  .noticeboard {
+    padding: 18px;
+    border-radius: 24px;
+  }
+
+  .floorPlan {
+    min-height: 360px;
+  }
+
+  .noticeList {
+    grid-template-columns: 1fr;
+  }
+}

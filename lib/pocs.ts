@@ -11,6 +11,18 @@ export type PocCard = {
 
 export const pocCards: PocCard[] = [
   {
+    slug: "void-deck-activity-planner-sg",
+    title: "Void Deck Activity Planner",
+    category: "Community care",
+    createdAt: "2026-03-28T20:15:00+08:00",
+    summary:
+      "See which void deck hours are still open this week and pin the next neighbourhood activity to the board.",
+    impact:
+      "A floor-plan planner that helps grassroots organisers balance shared block activities without calendar clutter.",
+    theme: "civic",
+    tags: ["Community", "Neighbourhood", "Events", "Grassroots"],
+  },
+  {
     slug: "rain-window-planner-sg",
     title: "Rain Window Planner",
     category: "Urban access",

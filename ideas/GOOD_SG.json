@@ -1222,7 +1222,7 @@
         "avoid": "generic calendar; list of activities without the spatial booking element",
         "experience_goal": "resident sees the void deck as a living community space they can participate in"
       },
-      "implemented": false,
+      "implemented": true,
       "built": true
     },
     {
