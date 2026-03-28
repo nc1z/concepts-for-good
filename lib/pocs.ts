@@ -11,6 +11,42 @@ export type PocCard = {
 
 export const pocCards: PocCard[] = [
   {
+    slug: "low-cost-exercise-sg",
+    title: "Low-Cost Exercise",
+    category: "Wellness",
+    createdAt: "2026-03-29T10:15:00+08:00",
+    summary:
+      "Follow a short routine that works in small spaces, with guided cards and a timer that keeps you moving.",
+    impact:
+      "A playful movement deck for residents who want a no-cost routine without joining a class.",
+    theme: "civic",
+    tags: ["Wellness", "Exercise", "Budget", "Daily routine"],
+  },
+  {
+    slug: "rest-day-planner-sg",
+    title: "Rest Day Planner",
+    category: "Inclusion",
+    createdAt: "2026-03-28T22:45:00+08:00",
+    summary:
+      "Build a rest day with affordable stops for calls home, errands, meals, and one proper break.",
+    impact:
+      "A playful Sunday board that turns useful low-cost stops into a route you can actually follow.",
+    theme: "civic",
+    tags: ["Inclusion", "Community", "Budget", "Wellbeing"],
+  },
+  {
+    slug: "community-cooking-circle-sg",
+    title: "Community Cooking Circle",
+    category: "Social connection",
+    createdAt: "2026-03-28T20:24:00+08:00",
+    summary:
+      "Join a neighbourhood cooking circle by taking a prep, cook, or welcome role before the meal begins.",
+    impact:
+      "A kitchen-flow board that shows where a small cooking session still needs hands before neighbours sit down together.",
+    theme: "civic",
+    tags: ["Community", "Food", "Seniors", "Neighbourhood"],
+  },
+  {
     slug: "void-deck-activity-planner-sg",
     title: "Void Deck Activity Planner",
     category: "Community care",

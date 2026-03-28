@@ -1297,7 +1297,8 @@
         "experience_goal": "joining a small shared cooking session feels welcoming and local"
       },
       "implementation_tags": [],
-      "implemented": false
+      "implemented": false,
+      "built": true
     },
     {
       "id": "GOOD_SG-155",
@@ -1445,6 +1446,7 @@
         "avoid": "text list of activity suggestions; no planner grid; generic recommendations page",
         "experience_goal": "domestic helper plans her rest day with activities she actually wants to do"
       },
+      "built": true,
       "implemented": false
     },
     {
