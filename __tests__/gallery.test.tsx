@@ -34,7 +34,7 @@ describe("Gallery page", () => {
 
   it("shows the site name in the hero", () => {
     render(<Home />);
-    const matches = screen.getAllByText(/SG Concepts for Good/i);
+    const matches = screen.getAllByText(/Good Ideas SG/i);
     expect(matches.length).toBeGreaterThan(0);
   });
 

@@ -15,13 +15,13 @@ const jetBrainsMono = JetBrains_Mono({
   subsets: ["latin"],
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://conceptsforgood.sg";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://goodideas.sg";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Concepts for Good",
-    template: "%s | Concepts for Good",
+    default: "Good Ideas SG",
+    template: "%s | Good Ideas SG",
   },
   description:
     "A gallery of Singapore-focused proof-of-concept apps for access, care, resilience, and community — built as fast, browser-based experiments.",
@@ -39,15 +39,15 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: siteUrl,
-    siteName: "Concepts for Good",
-    title: "Concepts for Good",
+    siteName: "Good Ideas SG",
+    title: "Good Ideas SG",
     description:
       "A gallery of Singapore-focused proof-of-concept apps for access, care, resilience, and community — built as fast, browser-based experiments.",
     locale: "en_SG",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Concepts for Good",
+    title: "Good Ideas SG",
     description:
       "A gallery of Singapore-focused proof-of-concept apps for access, care, resilience, and community.",
   },

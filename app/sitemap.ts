@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { pocCards } from "@/lib/pocs";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://conceptsforgood.sg";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://goodideas.sg";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const pocRoutes = pocCards.map((poc) => ({

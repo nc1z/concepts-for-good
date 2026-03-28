@@ -295,7 +295,7 @@ function HomeContent() {
       <section className="hero">
         <div className="hero__eyebrow">
           <span className="hero__eyebrow-dot" />
-          SG Concepts for Good
+          Good Ideas SG
         </div>
         <div className="hero__copy">
           <h1>Simple digital ideas that support everyday life in Singapore.</h1>
@@ -457,7 +457,7 @@ function HomeContent() {
       ) : null}
 
       <footer className="site-footer">
-        <p>SG Concepts for Good</p>
+        <p>Good Ideas SG</p>
         <p>
           By{" "}
           <a

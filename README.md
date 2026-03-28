@@ -1,10 +1,10 @@
-# Concepts for Good
+# Good Ideas SG
 
 A curated gallery of small, browser-based proof-of-concept apps built for Singapore — focused on access, care, resilience, and community.
 
 Each concept is independently scoped, visually distinct, and demoable without a backend or account.
 
-**[conceptsforgood.sg](https://conceptsforgood.sg)** &nbsp;·&nbsp; Built with Next.js, Claude, and Codex &nbsp;·&nbsp; By [Neil C](https://www.linkedin.com/in/neil-c)
+**[goodideas.sg](https://goodideas.sg)** &nbsp;·&nbsp; Built with Next.js, Claude, and Codex &nbsp;·&nbsp; By [Neil C](https://www.linkedin.com/in/neil-c)
 
 ---
 
