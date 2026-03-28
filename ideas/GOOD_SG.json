@@ -1296,7 +1296,8 @@
         "experience_goal": "joining a small shared cooking session feels welcoming and local"
       },
       "implementation_tags": [],
-      "implemented": false
+      "implemented": false,
+      "built": true
     },
     {
       "id": "GOOD_SG-155",
