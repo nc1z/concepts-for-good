@@ -30,18 +30,18 @@ export const pocCards: PocCard[] = [
     accent: "Care workflow",
   },
   {
-    slug: "free-meal-map-sg",
-    title: "Free Meal Map SG",
-    category: "Community Access",
-    status: "Placeholder concept",
+    slug: "budget-meal-basket-sg",
+    title: "Budget Meal Basket SG",
+    category: "Food Security",
+    status: "Browser concept",
     summary:
-      "A browse-first map and directory concept for low-barrier meal support points and community fridges across Singapore.",
-    impact: "Tests how discoverability, filters, and clear calls-to-action can make support information easier to use.",
-    accent: "Discovery layer",
+      "A guided meal-planning concept that builds a weekly basket from common Singapore ingredients and prices.",
+    impact:
+      "Shows how a simple browser-only flow can shape affordable weekly meals, saved baskets, and shareable summaries.",
+    accent: "Meal planning",
   },
 ];
 
 export function getPocBySlug(slug: string) {
   return pocCards.find((card) => card.slug === slug);
 }
-
