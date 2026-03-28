@@ -133,6 +133,26 @@
   color: #7a6255;
 }
 
+.floorBadgeRow {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+}
+
+.floorBadge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 0 14px;
+  border-radius: 999px;
+  background: rgba(255, 248, 232, 0.9);
+  border: 1px solid rgba(122, 89, 66, 0.14);
+  color: #6a5447;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
 .floorPlan {
   display: block;
   width: 100%;
@@ -233,6 +253,10 @@
 .slotGroupSelected .slotCard {
   stroke: #3c5b49;
   stroke-width: 3;
+}
+
+.mobileSlots {
+  display: none;
 }
 
 .sideRail {
@@ -443,6 +467,10 @@
 }
 
 @media (max-width: 720px) {
+  .backLink {
+    margin-bottom: 14px;
+  }
+
   .shell {
     width: min(100% - 20px, 1260px);
     padding-bottom: 40px;
@@ -459,11 +487,86 @@
     border-radius: 24px;
   }
 
+  .floorTopline,
+  .noticeboardHeading,
+  .panelTopline {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .floorHint {
+    font-size: 0.84rem;
+  }
+
   .floorPlan {
     min-height: 360px;
   }
 
+  .mobileSlots {
+    display: grid;
+    gap: 12px;
+    margin-top: 14px;
+  }
+
+  .mobileSlotButton {
+    padding: 14px 16px;
+    border-radius: 20px;
+    border: 1px solid rgba(122, 89, 66, 0.16);
+    background: rgba(255, 250, 240, 0.96);
+    color: #4d3c32;
+    text-align: left;
+    box-shadow: 0 10px 18px rgba(95, 68, 42, 0.08);
+  }
+
+  .mobileSlotButtonActive {
+    border-color: #3f664a;
+    box-shadow: inset 0 0 0 1px #3f664a;
+  }
+
+  .mobileSlotLabelRow,
+  .mobileSlotTime,
+  .mobileSlotState {
+    display: block;
+  }
+
+  .mobileSlotLabelRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 6px;
+  }
+
+  .mobileSlotLabelRow strong {
+    font-size: 1rem;
+  }
+
+  .mobileSlotLabelRow em {
+    font-style: normal;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #7d6555;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .mobileSlotTime {
+    margin-bottom: 6px;
+    font-size: 0.88rem;
+    color: #71594b;
+  }
+
+  .mobileSlotState {
+    font-size: 0.92rem;
+    color: #58473d;
+  }
+
   .noticeList {
     grid-template-columns: 1fr;
+  }
+
+  .noticeCard {
+    min-height: auto;
+    transform: none;
   }
 }

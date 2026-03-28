@@ -144,6 +144,19 @@ export default function VoidDeckActivityPlannerPage() {
               <div>
                 <p className={styles.floorLabel}>{selectedDay}</p>
                 <h2>The void deck</h2>
+                <div className={styles.floorBadgeRow}>
+                  <span className={styles.floorBadge}>
+                    {selectedDaySlots.filter((slot) => !bookings.some((booking) => booking.slotId === slot.id)).length}{" "}
+                    open hour
+                    {selectedDaySlots.filter((slot) => !bookings.some((booking) => booking.slotId === slot.id)).length === 1
+                      ? ""
+                      : "s"}
+                  </span>
+                  <span className={styles.floorBadge}>
+                    {selectedDaySlots.filter((slot) => bookings.some((booking) => booking.slotId === slot.id)).length}{" "}
+                    already pinned
+                  </span>
+                </div>
               </div>
               <span className={styles.floorHint}>Choose one time block</span>
             </div>
@@ -246,6 +259,32 @@ export default function VoidDeckActivityPlannerPage() {
                 );
               })}
             </svg>
+
+            <div className={styles.mobileSlots} aria-label={`${selectedDay} time blocks`}>
+              {selectedDaySlots.map((slot) => {
+                const booking = bookings.find((item) => item.slotId === slot.id);
+                const activity = activityOptions.find((item) => item.id === booking?.activityId);
+                const isSelected = slot.id === selectedSlot.id;
+
+                return (
+                  <button
+                    key={slot.id}
+                    type="button"
+                    className={`${styles.mobileSlotButton} ${isSelected ? styles.mobileSlotButtonActive : ""}`}
+                    onClick={() => setSelectedSlotId(slot.id)}
+                  >
+                    <span className={styles.mobileSlotLabelRow}>
+                      <strong>{slot.label}</strong>
+                      <em>{booking ? "Pinned" : "Open"}</em>
+                    </span>
+                    <span className={styles.mobileSlotTime}>{slot.timeRange}</span>
+                    <span className={styles.mobileSlotState}>
+                      {booking ? activity?.name : "Ready for the next gathering"}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
           </div>
 
           <div className={styles.sideRail}>
