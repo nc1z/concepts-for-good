@@ -3,6 +3,38 @@
   "region": "singapore",
   "lens": "public good and social impact in Singapore",
   "idea_count": 100,
+  "design_contract": {
+    "mandate": "Every idea must be built with a deliberately chosen visual direction and interaction model, and copy written for the target user — not for developers. Reading the ui field and CONTENT_RULES.md is mandatory before writing a single line of code.",
+    "anti_patterns": [
+      "Do not build a card grid unless ui.interaction_model explicitly says card grid",
+      "Do not repeat the same visual direction as any other POC already in the repo",
+      "Do not use generic dashboard chrome with sidebar + header + card body",
+      "Do not expose builder language (POC, component, scaffold, slice, demo, prototype, seed data, simulation) in the UI copy",
+      "Do not use forms as the primary UI unless ui.interaction_model says form-led",
+      "Do not skip installing suggested libraries — they exist to make the concept distinctive",
+      "Do not add components, sections, or buttons the target user would not want or need",
+      "Do not front-load all features — show only what the user needs for their current step",
+      "Do not write copy for a developer audience — write for the target user"
+    ],
+    "required_before_build": [
+      "Read the idea's ui.direction and understand what it means visually",
+      "Read ui.interaction_model and plan the layout around it, not a default Next.js template",
+      "Read ui.suggested_libraries and install them before writing UI code",
+      "Read ui.distinctive_feature — this is the one thing that must feel crafted",
+      "Read ui.avoid — never do these things for this concept",
+      "Read CONTENT_RULES.md completely before writing any copy",
+      "Answer: what does this app do, for whom, in one plain-language sentence? Put that on the first screen.",
+      "Answer: what is the single first action the target user should take? Make that the most prominent element on the first screen.",
+      "The first screen must communicate the concept's point of view within 5 seconds to a member of the target audience"
+    ],
+    "content_rules_summary": [
+      "Every word in the UI must be written for the target user, not for a developer",
+      "Banned words in user-facing copy: POC, prototype, demo, seed data, simulation, persona, component, scaffold, implementation, concept, generated, placeholder, mock, fake, test",
+      "Every component must pass: would the target user, right now, want this? Remove anything that fails",
+      "The first screen above the fold must contain: what this does (one line), who it is for (implicit), and the first action only",
+      "Empty states must prompt the next action, not explain the technology"
+    ]
+  },
   "ideas": [
     {
       "id": "GOOD_SG-001",
@@ -13,7 +45,7 @@
       "category": "food security",
       "summary": "Coordinate small end-of-day food rescue from willing food businesses.",
       "target_user": "volunteers and community groups in Singapore",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is simulating a live ops board with countdown timers and volunteer dispatch in the browser without any backend.",
       "stage": "poc",
       "poc": [
         "watchlist setup",
@@ -59,7 +91,18 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "data-dense operations",
+        "interaction_model": "ops dispatch board with live ticker — split screen showing active surplus listings left, volunteer status board right, with animated countdown timers per listing",
+        "suggested_libraries": [
+          "framer-motion",
+          "recharts"
+        ],
+        "distinctive_feature": "countdown timers per listing that animate urgency; listings visually expire and drop off the board",
+        "avoid": "card grid with static text; form-first layout; anything that feels like a directory",
+        "experience_goal": "user feels like they are working a live ops console, not browsing a website"
+      }
     },
     {
       "id": "GOOD_SG-002",
@@ -70,7 +113,7 @@
       "category": "food security",
       "summary": "Map low-barrier meal support points and community fridges in Singapore.",
       "target_user": "residents needing support and volunteers",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is building a spatial map exploration experience without a maps API, using SVG district zones as the primary canvas.",
       "stage": "poc",
       "poc": [
         "searchable listings",
@@ -117,7 +160,17 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "map-first",
+        "interaction_model": "full-bleed SVG district map of Singapore as primary canvas; clicking a district zone reveals a side drawer with locations in that zone; no list view as primary UI",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "district zones glow or pulse when they have active locations; clicking a zone animates a drawer slide-in with location details",
+        "avoid": "list of cards with a small map thumbnail; generic filter panel above a results list",
+        "experience_goal": "user feels like they are exploring a physical map, discovering places spatially"
+      }
     },
     {
       "id": "GOOD_SG-003",
@@ -128,7 +181,7 @@
       "category": "food security",
       "summary": "Build low-cost weekly meal ideas using common local ingredients.",
       "target_user": "Singapore households under budget pressure",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is making a live cost calculator where sliders instantly regenerate a full weekly meal plan in real time.",
       "stage": "poc",
       "poc": [
         "guided input form",
@@ -173,7 +226,18 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "editorial",
+        "interaction_model": "interactive cost-slider calculator — household size and budget sliders at top produce a live-updating weekly meal plan below with animated cost breakdown; recharts bar chart updates in real time",
+        "suggested_libraries": [
+          "framer-motion",
+          "recharts"
+        ],
+        "distinctive_feature": "sliders that animate the meal plan content in real time, with a cost-per-day number that counts up/down as you adjust",
+        "avoid": "static form submit pattern; showing results only after a button click; generic card grid for the meal plan",
+        "experience_goal": "user feels like they are playing with a live budget tool, not filling out a form"
+      }
     },
     {
       "id": "GOOD_SG-004",
@@ -184,7 +248,7 @@
       "category": "food security",
       "summary": "Plan efficient pickup and drop-off routes for small rescue runs.",
       "target_user": "volunteer drivers and coordinators",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is visualising a multi-stop rescue route as an animated SVG path the user can interactively reorder.",
       "stage": "poc",
       "poc": [
         "guided input form",
@@ -230,7 +294,17 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "diagram-first",
+        "interaction_model": "animated route diagram — a vertical timeline showing pickup stops in order, with an SVG animated path connecting them; user can drag to reorder stops or toggle which stops to include",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "animated dotted SVG path connecting stops in sequence; reordering a stop redraws the path with a smooth animation",
+        "avoid": "standard list of addresses; static map thumbnail; form-first without route visualization",
+        "experience_goal": "user feels like they are planning a physical journey, seeing the route take shape as they add stops"
+      }
     },
     {
       "id": "GOOD_SG-005",
@@ -241,7 +315,7 @@
       "category": "aging",
       "summary": "Coordinate simple check-ins for seniors living alone.",
       "target_user": "families, grassroots groups, and volunteers",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is making check-in streaks feel warm and human — radial rings, large type, and celebration moments for a non-technical audience.",
       "stage": "poc",
       "poc": [
         "quick entry flow",
@@ -289,7 +363,17 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "warm civic",
+        "interaction_model": "senior roster with radial streak rings — a large-type senior list on the left with circular streak visualization per senior; tapping a senior opens a quick check-in panel with large action buttons",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "radial streak ring per senior that fills as check-ins accumulate; a celebration animation on milestone streaks",
+        "avoid": "small dense table; small action buttons; anything that feels clinical or data-heavy",
+        "experience_goal": "user feels warmth and care; the interface communicates that these are people, not records"
+      }
     },
     {
       "id": "GOOD_SG-006",
@@ -300,7 +384,7 @@
       "category": "aging",
       "summary": "Send discreet reminders with optional caregiver visibility.",
       "target_user": "seniors and caregivers",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is representing a day's medication schedule as a circular clock-face SVG rather than a list of reminders.",
       "stage": "poc",
       "poc": [
         "watchlist setup",
@@ -344,7 +428,17 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "calm institutional",
+        "interaction_model": "clock-face timeline — a circular 24-hour clock face as the primary view showing medication times as arcs; tapping a time slot reveals the medication detail and a large confirm button",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "circular 24-hour clock rendered in SVG with medication times as colored arcs; the current time hand sweeps in real time",
+        "avoid": "list of reminders with checkboxes; notification dashboard; anything that looks like a todo app",
+        "experience_goal": "user feels calm and in control; the clock face makes the day's schedule immediately visible"
+      }
     },
     {
       "id": "GOOD_SG-007",
@@ -355,7 +449,7 @@
       "category": "aging",
       "summary": "Provide short guides for daily digital tasks like payments, forms, and appointments.",
       "target_user": "older adults in Singapore",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is designing a one-screen-at-a-time wizard with oversized tap targets that an elderly first-time smartphone user can follow unassisted.",
       "stage": "poc",
       "poc": [
         "searchable listings",
@@ -400,7 +494,17 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "tactile kiosk",
+        "interaction_model": "one-screen-at-a-time step wizard — enormous tap targets, one instruction per screen, no sidebars or headers; a large back/next button pair at the bottom; font size 24px minimum",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "the entire viewport shows one task instruction with a giant illustration or icon; each screen transition slides horizontally",
+        "avoid": "small text; multiple items visible at once; search-first interface; anything requiring precise tapping",
+        "experience_goal": "a 70-year-old with no smartphone experience can follow along without help"
+      }
     },
     {
       "id": "GOOD_SG-008",
@@ -411,7 +515,7 @@
       "category": "aging",
       "summary": "Coordinate short volunteer visits for seniors in the neighborhood.",
       "target_user": "community volunteers",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is building a weekly calendar booking grid where unvisited senior slots pulse as gentle visual reminders to coordinators.",
       "stage": "poc",
       "poc": [
         "guided input form",
@@ -461,7 +565,17 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "warm civic",
+        "interaction_model": "weekly calendar grid with visit slots — a 7-day grid showing upcoming visits color-coded by volunteer; clicking a day opens a booking panel; a sidebar shows senior profiles awaiting visits",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "visit slots animate into the calendar grid when booked; unvisited days have a gentle pulse highlight",
+        "avoid": "list of form fields; generic scheduling form without visual calendar; card grid of senior profiles",
+        "experience_goal": "coordinator sees the week at a glance and can immediately spot gaps in coverage"
+      }
     },
     {
       "id": "GOOD_SG-009",
@@ -472,7 +586,7 @@
       "category": "accessibility",
       "summary": "Share practical route notes for lifts, ramps, and accessible entrances.",
       "target_user": "wheelchair users, families, and caregivers",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is rendering a simplified mall floor plan in SVG and animating a step-free accessible route path when a destination is selected.",
       "stage": "poc",
       "poc": [
         "quick entry flow",
@@ -521,7 +635,17 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "diagram-first",
+        "interaction_model": "interactive floor plan SVG — a simplified mall floor plan as primary view; tapping a destination highlights the accessible route in a contrasting color with step-free icons at key points",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "animated SVG path that draws the accessible route step by step when a destination is selected",
+        "avoid": "list of directions as text steps; generic address lookup; anything without a spatial diagram",
+        "experience_goal": "user can see the accessible path before they enter the mall, not just a list of text directions"
+      }
     },
     {
       "id": "GOOD_SG-010",
@@ -532,7 +656,7 @@
       "category": "accessibility",
       "summary": "Track practical notes on lift access and alternate station choices.",
       "target_user": "mobility-impaired commuters",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is building a schematic MRT network diagram in SVG where stations show live-simulated lift status without any external API.",
       "stage": "poc",
       "poc": [
         "watchlist setup",
@@ -575,7 +699,17 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "map-first",
+        "interaction_model": "schematic MRT network diagram — a simplified line/circle MRT map rendered in SVG; tapping a station shows lift status (working/out of service/under maintenance) with community notes",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "stations with lift issues show a visual warning indicator on the map; clicking a station slides in a status panel",
+        "avoid": "alphabetical list of stations; generic search box with results list; anything without the network diagram",
+        "experience_goal": "mobility-impaired commuter can plan their journey by seeing the network and lift conditions at a glance"
+      }
     },
     {
       "id": "GOOD_SG-011",
@@ -586,7 +720,7 @@
       "category": "accessibility",
       "summary": "Curate calmer places for neurodivergent users and families.",
       "target_user": "neurodivergent residents and caregivers",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is designing a UI that IS the concept — so calm and minimal that browsing it feels like being in a quiet place.",
       "stage": "poc",
       "poc": [
         "searchable listings",
@@ -631,7 +765,17 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "minimalist",
+        "interaction_model": "ambient sensory-rating explorer — a very clean, low-stimulation interface showing places with sensory level indicators (noise, crowd, light) as horizontal bars; filtering by slider adjusts which places appear",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "sensory level bars that animate to reflect each place's profile; the overall UI palette and font size shift slightly toward calmer values as you filter for quieter places",
+        "avoid": "busy card grid; bold colors; animations that flash or pulse; dense information per card",
+        "experience_goal": "the interface itself demonstrates calm — visiting this page feels restful"
+      }
     },
     {
       "id": "GOOD_SG-012",
@@ -642,7 +786,7 @@
       "category": "accessibility",
       "summary": "Track clean, reliable accessible toilets and changing facilities.",
       "target_user": "caregivers, seniors, and disabled users",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is colour-coding map pins by amenity completeness and letting the map itself answer the question of which toilet is best.",
       "stage": "poc",
       "poc": [
         "searchable listings",
@@ -689,7 +833,17 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "map-first",
+        "interaction_model": "pin-drop proximity map — Singapore district map showing toilet locations as pins; sorted by distance from a selected zone; tapping a pin shows amenity tags (changing table, grab bars, wide door) and community notes",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "pins are color-coded by amenity completeness; a hover tooltip shows a quick preview before clicking",
+        "avoid": "alphabetical list without spatial context; generic form for submitting notes without map feedback",
+        "experience_goal": "caregiver or disabled user can immediately see what is near them without reading through a list"
+      }
     },
     {
       "id": "GOOD_SG-013",
@@ -700,7 +854,7 @@
       "category": "civic",
       "summary": "Match Singapore residents to short volunteer opportunities by area and cause.",
       "target_user": "busy adults and students",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is animating a skill-match glow at the moment a volunteer's skills align with a cause's needs.",
       "stage": "poc",
       "poc": [
         "searchable listings",
@@ -748,7 +902,17 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "editorial",
+        "interaction_model": "skill-match card flow — a horizontally scrollable set of cause cards on the left; selecting a cause reveals a skills-needed panel on the right; your available skills are shown as tags that light up when they match",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "skill tags animate a match glow when your selected skills align with a cause's needs",
+        "avoid": "generic signup form; list of opportunities without matching context; static card grid",
+        "experience_goal": "volunteer feels personally connected to a cause through the skill-match moment"
+      }
     },
     {
       "id": "GOOD_SG-014",
@@ -759,7 +923,7 @@
       "category": "civic",
       "summary": "Help professionals donate time for design, admin, tutoring, or tech needs.",
       "target_user": "professionals and nonprofits",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is building a tag cloud where tag size reflects real availability and clicking a tag filters results with a smooth animation.",
       "stage": "poc",
       "poc": [
         "searchable listings",
@@ -803,7 +967,17 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "editorial",
+        "interaction_model": "skills marketplace with tag cloud navigation — a tag cloud of skill categories at the top; clicking a tag filters a vertical list of people offering that skill; each person has a profile card with available times",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "tag cloud where tag size reflects availability; clicking a tag animates the list filtering",
+        "avoid": "form-first submit flow; generic directory without skill matching; table layout",
+        "experience_goal": "user discovers they can contribute a skill they had not thought of before"
+      }
     },
     {
       "id": "GOOD_SG-015",
@@ -814,7 +988,7 @@
       "category": "civic",
       "summary": "Track service hours and recurring commitments for community work.",
       "target_user": "volunteers and students",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is making a volunteer's accumulated hours feel meaningful through a live-updating stacked bar chart and animated totals.",
       "stage": "poc",
       "poc": [
         "quick entry flow",
@@ -863,7 +1037,18 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "data-dense operations",
+        "interaction_model": "hours log with weekly chart — a timeline log of recent sessions on the left; a recharts stacked bar chart showing hours by category per week on the right; a floating total counter at top",
+        "suggested_libraries": [
+          "recharts",
+          "framer-motion"
+        ],
+        "distinctive_feature": "the total hours counter animates up as you add sessions; weekly chart updates live",
+        "avoid": "static table of records; form without visual feedback; hidden analytics",
+        "experience_goal": "volunteer feels pride seeing their contribution visualized over time"
+      }
     },
     {
       "id": "GOOD_SG-016",
@@ -874,7 +1059,7 @@
       "category": "civic",
       "summary": "Help residents discover causes that match their interests and schedule.",
       "target_user": "first-time volunteers",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is building a radial SVG node explorer where cause categories expand outward from a central node as the user explores.",
       "stage": "poc",
       "poc": [
         "guided input form",
@@ -920,7 +1105,17 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "diagram-first",
+        "interaction_model": "radial category explorer — a central node with category spokes radiating outward in SVG; clicking a category node expands it to show specific causes; clicking a cause shows detail in a central panel",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "radial SVG diagram that animates expansion when a node is clicked; causes float into view from the spoke",
+        "avoid": "flat list of categories; card grid of causes; dropdown filter menus",
+        "experience_goal": "user discovers adjacent causes they would not have thought to search for"
+      }
     },
     {
       "id": "GOOD_SG-017",
@@ -931,7 +1126,7 @@
       "category": "support",
       "summary": "Explain common community support schemes in plain language.",
       "target_user": "households navigating support resources",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is rendering a CDC scheme decision tree as an interactive SVG flowchart that highlights the path to a specific result.",
       "stage": "poc",
       "poc": [
         "searchable listings",
@@ -974,7 +1169,17 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "calm institutional",
+        "interaction_model": "decision tree flowchart — an interactive branching SVG diagram; user answers yes/no questions and the diagram highlights the relevant branch leading to a specific scheme or contact",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "SVG tree where answered branches stay visible but de-emphasize; the active path is highlighted; result node pulses when reached",
+        "avoid": "multi-page form wizard; alphabetical list of schemes; search box as primary entry point",
+        "experience_goal": "resident with no knowledge of CDC programs can find the right one in under 2 minutes"
+      }
     },
     {
       "id": "GOOD_SG-018",
@@ -985,7 +1190,7 @@
       "category": "support",
       "summary": "Organize vouchers, bills, and support windows in one simple view.",
       "target_user": "lower-income Singapore households",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is showing a live eligibility meter in a sidebar that filters down to matching schemes as each question is answered.",
       "stage": "poc",
       "poc": [
         "guided input form",
@@ -1030,7 +1235,18 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "editorial",
+        "interaction_model": "step-by-step eligibility checker — a progress bar at top, one question per step, answers accumulated into a summary sidebar; final screen shows eligible schemes as a ranked list",
+        "suggested_libraries": [
+          "framer-motion",
+          "react-hook-form"
+        ],
+        "distinctive_feature": "a running eligibility meter in the sidebar that updates as you answer each question",
+        "avoid": "all questions visible at once; table of schemes without personalization; form without a results state",
+        "experience_goal": "family feels guided, not overwhelmed — the tool narrows down the options for them"
+      }
     },
     {
       "id": "GOOD_SG-019",
@@ -1041,7 +1257,7 @@
       "category": "support",
       "summary": "Prepare a simple document checklist before seeking assistance.",
       "target_user": "families applying for aid",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is building a large-print checklist where section completion collapses with an animation and a ring fills toward 100%.",
       "stage": "poc",
       "poc": [
         "guided input form",
@@ -1086,7 +1302,17 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "tactile kiosk",
+        "interaction_model": "large-print interactive checklist — oversized checkboxes, one document category per section, progress shown as a filled circle; a print-ready view toggle at the bottom",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "each section collapses when all items are checked with a satisfying animation; a completion ring fills as the overall checklist progresses",
+        "avoid": "small dense list; form with submit button; anything that does not feel print-ready or shareable",
+        "experience_goal": "user can check off documents and feel confident they have everything before an appointment"
+      }
     },
     {
       "id": "GOOD_SG-020",
@@ -1097,7 +1323,7 @@
       "category": "support",
       "summary": "Store important community contacts and case notes privately.",
       "target_user": "caregivers and households under stress",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is a 3D card-flip mechanic where each contact's phone number and address is revealed on the back face.",
       "stage": "poc",
       "poc": [
         "quick entry flow",
@@ -1144,7 +1370,17 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "minimalist",
+        "interaction_model": "flippable contact cards — a set of large contact cards per service category; front shows service name and icon; flipping reveals phone number, address, opening hours, and a call/map action",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "3D card flip animation; cards stack and fan out when category is selected",
+        "avoid": "plain list of contacts; address book UI; anything without the card metaphor",
+        "experience_goal": "user can quickly flip through contacts and find the right one without reading dense text"
+      }
     },
     {
       "id": "GOOD_SG-021",
@@ -1155,7 +1391,7 @@
       "category": "public health",
       "summary": "Send reminders for basic household mosquito prevention habits.",
       "target_user": "Singapore households",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is colouring a Singapore planning-area SVG map by simulated dengue risk level and showing a trend sparkline on hover.",
       "stage": "poc",
       "poc": [
         "watchlist setup",
@@ -1198,7 +1434,18 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "data-dense operations",
+        "interaction_model": "risk heatmap by zone — an SVG Singapore planning area map where each zone is colored by current dengue risk level; clicking a zone shows case trend chart and prevention tips",
+        "suggested_libraries": [
+          "recharts",
+          "framer-motion"
+        ],
+        "distinctive_feature": "zone colors pulse subtly on high-risk areas; hovering a zone shows a mini trend sparkline before clicking",
+        "avoid": "list of news updates; generic health checklist; anything without the spatial risk visualization",
+        "experience_goal": "resident immediately sees whether their area has elevated risk without reading through text"
+      }
     },
     {
       "id": "GOOD_SG-022",
@@ -1209,7 +1456,7 @@
       "category": "public health",
       "summary": "Suggest safer walking windows for seniors and families in hot weather.",
       "target_user": "seniors, caregivers, and walkers",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is overlaying shade and cool-spot data on a Singapore district SVG and animating a suggested walking route between them.",
       "stage": "poc",
       "poc": [
         "guided input form",
@@ -1255,7 +1502,17 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "map-first",
+        "interaction_model": "cool route planner — a Singapore district SVG map overlaid with shade and cool spots; user selects origin and destination zones; the map highlights a suggested shaded walking route",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "route path animates drawing between origin and destination; cool spots glow on the map",
+        "avoid": "generic directions list; static information page; anything without route visualization",
+        "experience_goal": "user plans a walk that avoids heat exposure, seeing the cool spots along the way"
+      }
     },
     {
       "id": "GOOD_SG-023",
@@ -1266,7 +1523,7 @@
       "category": "public health",
       "summary": "Help residents prepare clear questions before doctor visits.",
       "target_user": "patients and caregivers",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is drag-to-reorder question priority with smooth layout animations before a clinic appointment.",
       "stage": "poc",
       "poc": [
         "guided input form",
@@ -1312,7 +1569,17 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "editorial",
+        "interaction_model": "question builder with drag-to-prioritize — a two-panel layout; left panel shows suggested question prompts by category; right panel is the user's question list which can be drag-reordered; a print/share button at bottom",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "drag-to-reorder questions with smooth reorder animation; questions slide into priority order",
+        "avoid": "static checklist; form with text area; anything without drag reordering",
+        "experience_goal": "patient arrives at clinic feeling prepared, with their top questions ready in order"
+      }
     },
     {
       "id": "GOOD_SG-024",
@@ -1323,7 +1590,7 @@
       "category": "public health",
       "summary": "Track family vaccine notes and reminder timing privately.",
       "target_user": "families",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is rendering vaccination records as stamped dots on a physical card metaphor with a satisfying stamp animation per dose.",
       "stage": "poc",
       "poc": [
         "quick entry flow",
@@ -1368,7 +1635,17 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "tactile kiosk",
+        "interaction_model": "physical card metaphor — a card-style UI per family member showing vaccination status as colored dots; tapping a dot shows what the vaccine is and when it was given; an add button stamps new records",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "vaccination dots animate like stamps being applied; each card has a satisfying visual fill",
+        "avoid": "table of dates; form-first; anything that does not feel like holding a physical record",
+        "experience_goal": "family can see at a glance who is up to date and what is due next"
+      }
     },
     {
       "id": "GOOD_SG-025",
@@ -1379,7 +1656,7 @@
       "category": "wellness",
       "summary": "Find affordable or free exercise options across neighborhoods.",
       "target_user": "residents seeking healthier routines",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is building a card-deck exercise flow with a circular countdown timer ring and smooth horizontal swipe transitions.",
       "stage": "poc",
       "poc": [
         "searchable listings",
@@ -1422,7 +1699,17 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "playful utility",
+        "interaction_model": "exercise card deck with timer — a full-screen card per exercise with illustration and instructions; a large countdown timer; swipe or arrow to next exercise; a rest interval card between sets",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "card swipe transitions between exercises; the timer animates with a circular progress ring",
+        "avoid": "static list of exercises; table format; generic article with images",
+        "experience_goal": "user can exercise following the cards without reading instructions each time"
+      }
     },
     {
       "id": "GOOD_SG-026",
@@ -1433,7 +1720,7 @@
       "category": "wellness",
       "summary": "Suggest affordable healthier meal choices at common food spots.",
       "target_user": "working adults and families",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is a visual hawker meal-builder where adding a dish animates it into a daily plan with a live-updating cost bar.",
       "stage": "poc",
       "poc": [
         "guided input form",
@@ -1480,7 +1767,18 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "editorial",
+        "interaction_model": "hawker meal cost calculator — a visual menu grid of common hawker dishes with calorie and cost data; user builds a daily meal plan by adding items; a running total bar shows calories and spend for the day",
+        "suggested_libraries": [
+          "recharts",
+          "framer-motion"
+        ],
+        "distinctive_feature": "the daily cost bar splits into meal categories with animated transitions; adding a dish animates it into the plan",
+        "avoid": "generic nutrition table; form with dropdowns; anything without the meal-building interaction",
+        "experience_goal": "user plans an affordable and reasonably healthy day of hawker meals without a spreadsheet"
+      }
     },
     {
       "id": "GOOD_SG-027",
@@ -1491,7 +1789,7 @@
       "category": "wellness",
       "summary": "Create small community walking streaks for families and seniors.",
       "target_user": "neighbors and community groups",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is animating circular progress rings per team member that fill as steps are logged and trigger a team-goal celebration.",
       "stage": "poc",
       "poc": [
         "quick entry flow",
@@ -1537,7 +1835,18 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "playful utility",
+        "interaction_model": "team step counter with leaderboard — a set of animated circular progress rings per team member; the collective steps animate toward a shared goal; a leaderboard shows weekly standings",
+        "suggested_libraries": [
+          "framer-motion",
+          "recharts"
+        ],
+        "distinctive_feature": "animated ring fill that updates when a participant logs steps; a confetti burst when the team goal is reached",
+        "avoid": "static table; bland list of numbers; anything without animated progress rings",
+        "experience_goal": "user feels motivated by seeing the collective progress and their contribution to it"
+      }
     },
     {
       "id": "GOOD_SG-028",
@@ -1548,7 +1857,7 @@
       "category": "wellness",
       "summary": "Gentle hydration reminders designed for hot, humid days.",
       "target_user": "outdoor workers, seniors, and students",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is an SVG wave animation inside a water glass that sloshes satisfyingly every time the user logs a drink.",
       "stage": "poc",
       "poc": [
         "watchlist setup",
@@ -1595,7 +1904,17 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "playful utility",
+        "interaction_model": "animated water fill gauge — a large animated water glass or bottle that fills as the user logs glasses drunk; streak rings for consecutive days; a big single tap button to log",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "animated water fill that sloshes when tapped; a wave SVG animation inside the glass",
+        "avoid": "list of log entries; form; anything that does not use the fill metaphor",
+        "experience_goal": "logging water feels satisfying and playful, not like a chore"
+      }
     },
     {
       "id": "GOOD_SG-029",
@@ -1606,7 +1925,7 @@
       "category": "education equity",
       "summary": "Coordinate simple volunteer-led study or digital skills sessions near libraries.",
       "target_user": "students and volunteers",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is a horizontally scrolling editorial timeline of skill-share sessions where each card headline is the skill in large type.",
       "stage": "poc",
       "poc": [
         "searchable listings",
@@ -1652,7 +1971,17 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "editorial",
+        "interaction_model": "teacher card gallery with timeline — skill-share sessions displayed as editorial portrait cards; a horizontal timeline of upcoming sessions; clicking a card shows the session in a side drawer",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "timeline scrolls horizontally with session cards; each card shows the teacher's skill as a large typography headline",
+        "avoid": "generic event list; card grid without timeline; search-first without browsing",
+        "experience_goal": "user discovers a skill-share session they did not know they wanted to attend"
+      }
     },
     {
       "id": "GOOD_SG-030",
@@ -1663,7 +1992,7 @@
       "category": "education equity",
       "summary": "Match students to volunteer homework helpers for short online or local sessions.",
       "target_user": "students needing extra help",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is combining a session slot picker with a live timer and sliding notes panel within a single cohesive layout.",
       "stage": "poc",
       "poc": [
         "searchable listings",
@@ -1707,7 +2036,17 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "warm civic",
+        "interaction_model": "session scheduler with timer — a weekly slot picker showing available buddy sessions; booking a session starts a timer view with notes panel; a simple log of past sessions",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "session timer that animates remaining time; a notes area that slides in during the session",
+        "avoid": "form-only signup; generic calendar without the timer and notes flow",
+        "experience_goal": "student and buddy feel like they are in a focused shared session"
+      }
     },
     {
       "id": "GOOD_SG-031",
@@ -1718,7 +2057,7 @@
       "category": "education equity",
       "summary": "Help donors prepare and route used devices for student reuse.",
       "target_user": "households and nonprofits",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is animating a donation pipeline status tracker sidebar through stages as the intake form progresses.",
       "stage": "poc",
       "poc": [
         "guided input form",
@@ -1767,7 +2106,18 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "calm institutional",
+        "interaction_model": "step intake form with live status tracker — a 4-step form for submitting a device; a status tracker sidebar showing the donation pipeline stage; a thank-you confirmation with a reference number",
+        "suggested_libraries": [
+          "framer-motion",
+          "react-hook-form"
+        ],
+        "distinctive_feature": "status tracker sidebar animates through stages (submitted, assessed, matched, delivered) as the form progresses",
+        "avoid": "single long form without stages; no feedback after submission; list of accepted devices only",
+        "experience_goal": "donor feels their contribution is being tracked and will reach someone who needs it"
+      }
     },
     {
       "id": "GOOD_SG-032",
@@ -1778,7 +2128,7 @@
       "category": "education equity",
       "summary": "Track deadlines, documents, and essays for local aid opportunities.",
       "target_user": "students from lower-income families",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is a deadline timeline where scholarship proximity to deadline adds visual urgency — colour, weight, and animation.",
       "stage": "poc",
       "poc": [
         "quick entry flow",
@@ -1824,7 +2174,18 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "data-dense operations",
+        "interaction_model": "deadline timeline with progress checklist — a horizontal timeline showing scholarship deadlines; clicking a scholarship expands a checklist of required documents and steps; a progress ring shows overall readiness",
+        "suggested_libraries": [
+          "framer-motion",
+          "recharts"
+        ],
+        "distinctive_feature": "timeline with deadline proximity indicators; scholarships closer to deadline have more visual urgency",
+        "avoid": "static list of scholarships; form without timeline; nothing that makes deadlines feel real and proximate",
+        "experience_goal": "student sees all deadlines at once and knows which one to focus on first"
+      }
     },
     {
       "id": "GOOD_SG-033",
@@ -1835,7 +2196,7 @@
       "category": "inclusion",
       "summary": "Curate trusted support resources for migrant workers in Singapore.",
       "target_user": "migrant workers and volunteers",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is making the language selector the hero element with a full content slide transition when the language is switched.",
       "stage": "poc",
       "poc": [
         "searchable listings",
@@ -1880,7 +2241,17 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "multilingual first",
+        "interaction_model": "language-first resource hub — a prominent language selector at entry (English, Tamil, Bengali, Burmese, Mandarin); after selecting, all content renders in that language with large type and icon-led sections",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "language switcher is the hero element; content transitions with a slide when language changes",
+        "avoid": "English-only interface with a small translate link; dense text paragraphs; any UI that assumes literacy",
+        "experience_goal": "migrant worker immediately sees the interface in their language and feels the tool is made for them"
+      }
     },
     {
       "id": "GOOD_SG-034",
@@ -1891,7 +2262,7 @@
       "category": "inclusion",
       "summary": "Track appointments, paperwork, and support contacts simply.",
       "target_user": "workers and case helpers",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is building an incident record that grows visually as a timeline on the right while the user fills sequential form steps on the left.",
       "stage": "poc",
       "poc": [
         "quick entry flow",
@@ -1936,7 +2307,18 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "calm institutional",
+        "interaction_model": "incident timeline wizard — a sequential form collecting injury details as a timeline; each step adds an entry to a growing incident record on the right; final view is a printable incident summary",
+        "suggested_libraries": [
+          "framer-motion",
+          "react-hook-form"
+        ],
+        "distinctive_feature": "entries accumulate visually in a timeline as the form progresses; the timeline grows step by step",
+        "avoid": "single long form; no visual timeline; legal jargon in the copy",
+        "experience_goal": "worker documents their injury accurately and has a clear printable record at the end"
+      }
     },
     {
       "id": "GOOD_SG-035",
@@ -1947,7 +2329,7 @@
       "category": "inclusion",
       "summary": "Build practical phrase cards for health, transit, and work situations.",
       "target_user": "newcomers and migrant workers",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is large-format 3D flip cards that reveal a phrase in four languages with high-contrast type anyone can show to another person.",
       "stage": "poc",
       "poc": [
         "guided input form",
@@ -1992,7 +2374,17 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "tactile kiosk",
+        "interaction_model": "phrase flip card — a set of large flip cards showing a help phrase in English on the front; flipping shows the same phrase in Tamil, Bengali, Burmese, and Mandarin; a category filter at top",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "3D flip card animation; cards are large with high-contrast type",
+        "avoid": "table of translations; small type; anything that is not a physical card metaphor",
+        "experience_goal": "any person can show the card to communicate even without a common language"
+      }
     },
     {
       "id": "GOOD_SG-036",
@@ -2003,7 +2395,7 @@
       "category": "inclusion",
       "summary": "Curate essential guides for settling into life in Singapore.",
       "target_user": "new residents and support groups",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is illustrated completion animations per task and a progress ring that fills toward a warm completion state.",
       "stage": "poc",
       "poc": [
         "searchable listings",
@@ -2046,7 +2438,17 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "editorial",
+        "interaction_model": "onboarding checklist with progress — an illustrated checklist of first-week tasks in Singapore; completing a task animates a check and advances a progress bar; final screen shows a completion badge",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "each completed task animates with a satisfying check illustration; a progress ring fills toward completion",
+        "avoid": "plain list; PDF-style layout; no animation on completion",
+        "experience_goal": "new resident feels welcomed and guided through the first steps of settling in"
+      }
     },
     {
       "id": "GOOD_SG-037",
@@ -2057,7 +2459,7 @@
       "category": "sustainability",
       "summary": "List repair cafes, workshops, and helpful fix-it communities.",
       "target_user": "residents who want to repair rather than replace",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is showing repair skill availability as a visual board where booked slots fill up in real time.",
       "stage": "poc",
       "poc": [
         "searchable listings",
@@ -2100,7 +2502,17 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "editorial",
+        "interaction_model": "repair session booking board — a grid of repair skills offered at upcoming sessions; clicking a skill shows available sessions and a booking form; a status board shows current session queue",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "skill tiles animate when hovered; booked slots visually fill up on the board",
+        "avoid": "generic event listing; form without the skill board; anything that does not feel like a maker space",
+        "experience_goal": "user finds a repair session for their broken item and books a spot in one flow"
+      }
     },
     {
       "id": "GOOD_SG-038",
@@ -2111,7 +2523,7 @@
       "category": "sustainability",
       "summary": "Explain what can and cannot be recycled in plain language.",
       "target_user": "Singapore households",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is building an animated decision-tree SVG for material sorting where the active classification path stays highlighted.",
       "stage": "poc",
       "poc": [
         "searchable listings",
@@ -2154,7 +2566,17 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "diagram-first",
+        "interaction_model": "material classification tree — a branching SVG decision tree for sorting materials; user selects material type at the top and follows branches to the correct bin color; animated path highlights the route",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "animated highlight path through the decision tree as branches are selected",
+        "avoid": "list of rules; table of materials; search box without the tree diagram",
+        "experience_goal": "user learns recycling rules through active navigation of the tree, not passive reading"
+      }
     },
     {
       "id": "GOOD_SG-039",
@@ -2165,7 +2587,7 @@
       "category": "sustainability",
       "summary": "Find e-waste bins and track what devices still need proper disposal.",
       "target_user": "households and offices",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is fading rather than hiding drop-point pins when filtered out, maintaining spatial context while showing relevance.",
       "stage": "poc",
       "poc": [
         "searchable listings",
@@ -2208,7 +2630,17 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "map-first",
+        "interaction_model": "drop point map with item filter — a Singapore district SVG map showing e-waste drop points; a filter panel for item type (phone, laptop, battery) highlights relevant drop points; tapping a point shows accepted items and opening hours",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "drop points animate visibility based on item filter selection; filtered-out points fade rather than disappear",
+        "avoid": "list of addresses; no map; form to find nearest point without visual map",
+        "experience_goal": "user finds the nearest drop point for their specific item in one interaction"
+      }
     },
     {
       "id": "GOOD_SG-040",
@@ -2219,7 +2651,7 @@
       "category": "sustainability",
       "summary": "Track avoidable food waste at home and get simple reduction ideas.",
       "target_user": "households",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is a timeline where food items animate toward red as their expiry approaches and a recipe suggestion slides in on selection.",
       "stage": "poc",
       "poc": [
         "quick entry flow",
@@ -2264,7 +2696,17 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "editorial",
+        "interaction_model": "fridge inventory with expiry timeline — user adds food items with purchase date; items are displayed on a timeline sorted by days to expiry; items near expiry are visually urgent; suggested recipes for expiring items appear below",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "items on the timeline animate toward red as they approach expiry; a recipe suggestion slides in when an item is selected",
+        "avoid": "plain list of items; static checklist; no timeline or urgency visualization",
+        "experience_goal": "user sees what needs to be used today before it is wasted"
+      }
     },
     {
       "id": "GOOD_SG-041",
@@ -2275,7 +2717,7 @@
       "category": "local food",
       "summary": "Find community gardens, volunteer slots, and produce swaps.",
       "target_user": "gardeners and volunteers",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is a top-down SVG plot layout where plots animate between available and booked states.",
       "stage": "poc",
       "poc": [
         "searchable listings",
@@ -2319,7 +2761,17 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "map-first",
+        "interaction_model": "garden plot map with booking grid — an SVG top-down plot layout of the garden; clicking a plot shows current status and booking availability; a side panel shows upcoming activities",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "plots animate between available/booked states; a seasonal activity timeline at the bottom",
+        "avoid": "list of garden plots; form-first booking without the spatial map; generic calendar",
+        "experience_goal": "gardener sees the whole garden layout and picks their preferred plot spatially"
+      }
     },
     {
       "id": "GOOD_SG-042",
@@ -2330,7 +2782,7 @@
       "category": "local food",
       "summary": "Exchange seeds, cuttings, and gardening tips within neighborhoods.",
       "target_user": "home gardeners",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is a trade-match animation when two gardeners' offer and need align, making the connection feel like a discovery.",
       "stage": "poc",
       "poc": [
         "searchable listings",
@@ -2373,7 +2825,17 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "playful utility",
+        "interaction_model": "seed trade matching — a two-column layout: seeds you have and seeds you want; clicking a seed you have shows who wants it and enables a match; matched trades appear in an animated trade confirmation card",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "trade match animation when two seed needs align; seed cards have tactile illustrated icons",
+        "avoid": "form-based listing; list without matching visualization; text-only entries",
+        "experience_goal": "gardener discovers a neighbour who wants exactly what they have to offer"
+      }
     },
     {
       "id": "GOOD_SG-043",
@@ -2384,7 +2846,7 @@
       "category": "local food",
       "summary": "Notify nearby members when extra produce is available.",
       "target_user": "community gardeners",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is quantity indicators that visually deplete as harvest claims are made, creating a real sense of limited availability.",
       "stage": "poc",
       "poc": [
         "watchlist setup",
@@ -2428,7 +2890,17 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "editorial",
+        "interaction_model": "harvest board with availability timeline — a visual board showing what is ready to share; each harvest entry shows quantity, location, and pickup window; a timeline view at the bottom shows upcoming harvests",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "harvest entries animate in as they are posted; quantity indicators visually deplete as claims are made",
+        "avoid": "plain list; form-first without the board view; no visual availability indication",
+        "experience_goal": "community member sees what fresh produce is available right now and where to get it"
+      }
     },
     {
       "id": "GOOD_SG-044",
@@ -2439,7 +2911,7 @@
       "category": "local food",
       "summary": "Coordinate watering and simple chores in shared growing spaces.",
       "target_user": "community garden teams",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is a kanban board with garden-specific columns where task cards animate smoothly between stages.",
       "stage": "poc",
       "poc": [
         "guided input form",
@@ -2485,7 +2957,17 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "data-dense operations",
+        "interaction_model": "task relay board — a kanban-style board with garden-specific columns (To Water, To Plant, To Harvest, Done); volunteer names attached to tasks; animated task movement between columns",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "tasks animate between columns when status changes; due-soon tasks have a gentle urgency highlight",
+        "avoid": "card grid without columns; generic todo list; no kanban movement",
+        "experience_goal": "gardening coordinator sees the full task state and can assign work in one view"
+      }
     },
     {
       "id": "GOOD_SG-045",
@@ -2496,7 +2978,7 @@
       "category": "environment",
       "summary": "Turn haze days into practical actions for families and outdoor workers.",
       "target_user": "Singapore residents",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is a large circular gauge as the hero element with activity restriction cards that animate in or out based on the PSI level.",
       "stage": "poc",
       "poc": [
         "watchlist setup",
@@ -2541,7 +3023,18 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "data-dense operations",
+        "interaction_model": "air quality gauge dashboard — a large circular gauge as the hero showing current PSI level (simulated); below, activity cards that become available or restricted based on the current level",
+        "suggested_libraries": [
+          "framer-motion",
+          "recharts"
+        ],
+        "distinctive_feature": "gauge needle animates when level changes; activity restriction cards animate in/out based on current level",
+        "avoid": "list of advisory text; static health information page; no live gauge",
+        "experience_goal": "user sees current air quality and knows immediately what activities are safe today"
+      }
     },
     {
       "id": "GOOD_SG-046",
@@ -2552,7 +3045,7 @@
       "category": "environment",
       "summary": "Find malls, libraries, and other places useful for heat relief.",
       "target_user": "seniors, workers, and families",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is overlaying a heat-intensity effect on a Singapore SVG map with animated cool-breeze effects on cool-spot pins.",
       "stage": "poc",
       "poc": [
         "searchable listings",
@@ -2597,7 +3090,17 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "map-first",
+        "interaction_model": "cool spots explorer map — a Singapore SVG map with cool spots marked; markers are color-coded by type; tapping a spot shows opening hours and facilities; a heat overlay effect shows relative temperature by district",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "map has a heat overlay effect showing relative temperature by district; cool spots have an animated cool-breeze visual effect",
+        "avoid": "list without map; generic directory; no spatial heat visualization",
+        "experience_goal": "user on a hot day can immediately see where to go to cool down near their location"
+      }
     },
     {
       "id": "GOOD_SG-047",
@@ -2608,7 +3111,7 @@
       "category": "environment",
       "summary": "Track practical sheltered walking links for stormy days.",
       "target_user": "commuters, seniors, and parents",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is animated rain-drop effects on uncovered map areas that reinforce the shelter-finding need visually.",
       "stage": "poc",
       "poc": [
         "searchable listings",
@@ -2653,7 +3156,17 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "map-first",
+        "interaction_model": "shelter proximity finder — a Singapore district SVG map showing covered walkways and rain shelters; filtering by area zooms to that district; shelter markers animate a rain-drop effect when it is marked as raining",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "animated rain-drop effect on the map when filtering for wet weather conditions",
+        "avoid": "list of shelters; search-only without spatial map",
+        "experience_goal": "user caught in rain can find the nearest shelter by looking at the map, not reading addresses"
+      }
     },
     {
       "id": "GOOD_SG-048",
@@ -2664,7 +3177,7 @@
       "category": "environment",
       "summary": "Generate a small home flood-prep checklist for vulnerable households.",
       "target_user": "residents in flood-prone pockets",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is a zone-personalised preparedness checklist that appears after the user identifies their district on a risk map.",
       "stage": "poc",
       "poc": [
         "guided input form",
@@ -2709,7 +3222,17 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "calm institutional",
+        "interaction_model": "emergency preparedness checklist with zone risk assessment — an SVG zone map showing flood risk levels; clicking your zone shows a personalised preparedness checklist; progress rings per preparedness category",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "zone risk map where risk levels are animated; checklist items have animated completion states",
+        "avoid": "generic article with tips; list without zone personalisation; no visual risk map",
+        "experience_goal": "resident understands their zone's risk and has a clear action checklist to prepare"
+      }
     },
     {
       "id": "GOOD_SG-049",
@@ -2720,7 +3243,7 @@
       "category": "support",
       "summary": "Help low-income users prepare facts and documents before seeking help.",
       "target_user": "residents needing legal support",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is a sidebar eligibility panel that filters legal aid schemes in real time as eligibility questions are answered.",
       "stage": "poc",
       "poc": [
         "guided input form",
@@ -2765,7 +3288,18 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "calm institutional",
+        "interaction_model": "eligibility wizard with document checklist — a multi-step question flow for determining legal aid eligibility; each answered question updates a sidebar showing likely eligible schemes and required documents",
+        "suggested_libraries": [
+          "framer-motion",
+          "react-hook-form"
+        ],
+        "distinctive_feature": "sidebar eligibility panel updates in real time as questions are answered",
+        "avoid": "static FAQ; list of legal schemes; form without real-time eligibility feedback",
+        "experience_goal": "person facing a legal issue knows whether they qualify for aid and what to bring, before making the call"
+      }
     },
     {
       "id": "GOOD_SG-050",
@@ -2776,7 +3310,7 @@
       "category": "support",
       "summary": "Present helplines and service paths clearly by need.",
       "target_user": "people under stress and caregivers",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is reducing the entire UI to a single phone number and call button within two interactions for someone in distress.",
       "stage": "poc",
       "poc": [
         "searchable listings",
@@ -2820,7 +3354,17 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "minimalist",
+        "interaction_model": "situation-to-hotline matcher — a clean interface asking what is happening right now as the first screen; the user selects a situation category and immediately sees the most relevant hotline with a large call-to-action",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "the entire UI reduces to a single phone number and call button after situation selection",
+        "avoid": "long list of all hotlines; category tree navigation; anything that delays reaching the number",
+        "experience_goal": "someone in distress finds the right number in under 10 seconds"
+      }
     },
     {
       "id": "GOOD_SG-051",
@@ -2831,7 +3375,7 @@
       "category": "support",
       "summary": "Store emergency contact rules and safe check-in notes privately.",
       "target_user": "people needing added safety support",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is a radial support network diagram that grows visually as new contacts are added around the user at the centre.",
       "stage": "poc",
       "poc": [
         "quick entry flow",
@@ -2876,7 +3420,17 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "warm civic",
+        "interaction_model": "personal support network map — a circular diagram showing the user at centre with trusted contacts arranged by relationship tier; tapping a contact shows their role and contact details",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "radial contact diagram that animates when a new contact is added; the network visually grows",
+        "avoid": "address book list; generic contact form; anything that looks like a CRM",
+        "experience_goal": "user feels supported seeing their network visualised as a circle of people around them"
+      }
     },
     {
       "id": "GOOD_SG-052",
@@ -2887,7 +3441,7 @@
       "category": "support",
       "summary": "Create a discreet checklist for urgent safety planning.",
       "target_user": "people preparing for safe exits",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is a safety plan document that builds visually on the right side in real time as each wizard step is completed.",
       "stage": "poc",
       "poc": [
         "guided input form",
@@ -2934,7 +3488,18 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "calm institutional",
+        "interaction_model": "step-by-step safety plan builder — a sequential wizard where each step adds an entry to a printable safety plan; the plan builds visually on the right as the user completes each section",
+        "suggested_libraries": [
+          "framer-motion",
+          "react-hook-form"
+        ],
+        "distinctive_feature": "the plan document builds in real time on the right side as each wizard step is completed",
+        "avoid": "single long form; static tips page; anything without the live document preview",
+        "experience_goal": "user ends the flow with a complete, printable safety plan they can keep"
+      }
     },
     {
       "id": "GOOD_SG-053",
@@ -2945,7 +3510,7 @@
       "category": "family access",
       "summary": "Curate accessible and sensory-considerate play spots for children.",
       "target_user": "families and caregivers",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is filter toggles that animate playground map markers in and out based on selected accessibility features.",
       "stage": "poc",
       "poc": [
         "searchable listings",
@@ -2990,7 +3555,17 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "map-first",
+        "interaction_model": "playground map with feature icons — a Singapore district SVG map showing playground locations; filter buttons for accessibility features; matching playgrounds highlight on the map",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "filter toggles animate playground markers in/out based on selected features",
+        "avoid": "alphabetical list; table of features; anything without the spatial map",
+        "experience_goal": "parent with a disabled child finds the nearest suitable playground in one step"
+      }
     },
     {
       "id": "GOOD_SG-054",
@@ -3001,7 +3576,7 @@
       "category": "family access",
       "summary": "Track nursing rooms and baby-care facilities across malls and public spaces.",
       "target_user": "parents with infants",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is amenity filter chips that animate map markers to show only nursing rooms matching the selected facilities.",
       "stage": "poc",
       "poc": [
         "searchable listings",
@@ -3044,7 +3619,17 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "map-first",
+        "interaction_model": "nursing room finder with amenity filter — a district map showing nursing rooms; filter by amenity (microwave, sink, privacy screen); tapping shows a photo-style layout of facilities",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "amenity filter chips animate the map markers to show only matching rooms",
+        "avoid": "list of addresses; no amenity visualisation; generic location finder",
+        "experience_goal": "new mother can find a nursing room with specific facilities she needs before she needs it"
+      }
     },
     {
       "id": "GOOD_SG-055",
@@ -3055,7 +3640,7 @@
       "category": "family access",
       "summary": "Share practical notes for family-friendly toilets and changing spaces.",
       "target_user": "parents and caregivers",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is community rating stars that animate on hover and a distance-sort that works against a user-selected zone.",
       "stage": "poc",
       "poc": [
         "searchable listings",
@@ -3102,7 +3687,17 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "map-first",
+        "interaction_model": "family toilet locator — a compact Singapore district map showing family toilet locations; filtered by features; community rating stars per location",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "rating stars animate on hover; distance sort works against a selected zone",
+        "avoid": "undifferentiated toilet list; no feature filtering; no community input element",
+        "experience_goal": "parent with young child or elderly parent finds a suitable toilet quickly while out"
+      }
     },
     {
       "id": "GOOD_SG-056",
@@ -3113,7 +3708,7 @@
       "category": "family access",
       "summary": "Suggest easier stroller-friendly routes through common districts.",
       "target_user": "parents and caregivers",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is an animated route diagram that highlights step-free segments and flags barrier points on a schematic path.",
       "stage": "poc",
       "poc": [
         "guided input form",
@@ -3160,7 +3755,17 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "diagram-first",
+        "interaction_model": "step-free route planner — user selects start and end points on a district map; the UI shows a schematic route diagram highlighting lifts, ramps, and barrier-free paths; obstacles are marked and alternatives suggested",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "animated route diagram that highlights step-free segments and flags barrier points",
+        "avoid": "plain address input with no route diagram; list of accessible paths without spatial visualisation",
+        "experience_goal": "parent with stroller plans a route knowing exactly where the step-free paths are"
+      }
     },
     {
       "id": "GOOD_SG-057",
@@ -3171,7 +3776,7 @@
       "category": "community care",
       "summary": "List small neighborhood activities that build social connection.",
       "target_user": "residents and volunteers",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is calendar event dots that animate in as events are added and a sliding feed that responds to date selection.",
       "stage": "poc",
       "poc": [
         "searchable listings",
@@ -3216,7 +3821,17 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "editorial",
+        "interaction_model": "neighbourhood events board with calendar view — a two-panel layout; left shows a monthly mini-calendar with event dots; right shows a vertical feed of upcoming events for the selected week",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "calendar dots animate in as events are added; clicking a date slides in the event feed",
+        "avoid": "generic event list without calendar; card grid without the date-navigation flow",
+        "experience_goal": "resident feels a sense of community life happening around them"
+      }
     },
     {
       "id": "GOOD_SG-058",
@@ -3227,7 +3842,7 @@
       "category": "community care",
       "summary": "Help residents run low-cost community gatherings with checklists and reminders.",
       "target_user": "grassroots organizers",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is a void-deck floor-plan SVG where time blocks animate between available and booked states.",
       "stage": "poc",
       "poc": [
         "guided input form",
@@ -3273,7 +3888,17 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "warm civic",
+        "interaction_model": "venue booking with activity roster — an SVG floor plan of a void deck space showing time blocks; clicking a time block shows available activities and a booking form; a neighbour-facing activity board shows what is on this week",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "floor plan time blocks animate between available/booked states; activity board has a community noticeboard aesthetic",
+        "avoid": "generic calendar; list of activities without the spatial booking element",
+        "experience_goal": "resident sees the void deck as a living community space they can participate in"
+      }
     },
     {
       "id": "GOOD_SG-059",
@@ -3284,7 +3909,7 @@
       "category": "community care",
       "summary": "Post small local help requests like grocery pickup or companionship.",
       "target_user": "residents and volunteers",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is a community board where anonymous help cards animate onto the board and a fulfil animation fires when a request is met.",
       "stage": "poc",
       "poc": [
         "searchable listings",
@@ -3329,7 +3954,17 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "warm civic",
+        "interaction_model": "anonymous help board — a community board of help requests shown as handwritten-style cards; each card shows the type of help needed without personal details; responders can offer help with a single tap",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "cards animate onto the board as new requests arrive; a satisfying animation when a request is fulfilled",
+        "avoid": "generic form; list without the board aesthetic; anything that exposes personal information",
+        "experience_goal": "resident feels the warmth of a community where neighbours help each other"
+      }
     },
     {
       "id": "GOOD_SG-060",
@@ -3340,7 +3975,7 @@
       "category": "community care",
       "summary": "Track recurring neighborhood needs to guide volunteer action.",
       "target_user": "community groups",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is live-updating bar charts with animated trend arrows that make the community need pulse feel real.",
       "stage": "poc",
       "poc": [
         "quick entry flow",
@@ -3386,7 +4021,18 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "data-dense operations",
+        "interaction_model": "live need aggregator — a category breakdown of community needs as animated bar charts; each category shows count and trend; clicking a category shows the underlying requests in a feed",
+        "suggested_libraries": [
+          "recharts",
+          "framer-motion"
+        ],
+        "distinctive_feature": "bar charts animate as new needs are added; trend arrows animate on the category bars",
+        "avoid": "static report; form for submitting needs without visualisation; no live aggregation feel",
+        "experience_goal": "coordinator sees at a glance where community need is concentrated right now"
+      }
     },
     {
       "id": "GOOD_SG-061",
@@ -3397,7 +4043,7 @@
       "category": "biodiversity",
       "summary": "Create short family nature walks with simple noticing prompts.",
       "target_user": "families and schools",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is sighting pins that animate onto the trail map as they are logged with a star-pulse effect for rare species.",
       "stage": "poc",
       "poc": [
         "guided input form",
@@ -3443,7 +4089,17 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "map-first",
+        "interaction_model": "nature trail map with sighting spots — a Singapore green space SVG map showing trails and nature areas; user can log sightings at specific trail points; a sightings feed shows what others spotted recently",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "sighting pins animate onto the map as they are logged; rare sightings have a star pulse effect",
+        "avoid": "text list of species; generic article about nature in Singapore; anything without the map trail",
+        "experience_goal": "nature enthusiast discovers trails and is inspired to go out and spot something"
+      }
     },
     {
       "id": "GOOD_SG-062",
@@ -3454,7 +4110,7 @@
       "category": "biodiversity",
       "summary": "Log butterfly, bee, and pollinator sightings in neighborhoods.",
       "target_user": "students, gardeners, and families",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is a completionist collection mechanic where spotting a species stamps a seen badge and a progress bar counts the set.",
       "stage": "poc",
       "poc": [
         "quick entry flow",
@@ -3500,7 +4156,17 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "playful utility",
+        "interaction_model": "species spotter game — a field guide style interface; user browses illustrated species cards; tapping I spotted this logs it to a personal sightings journal with date and location zone; a completionist progress bar shows how many species spotted",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "spotting animation that stamps a seen badge on the species card; a progress bar counting toward full pollinator set",
+        "avoid": "list without illustrations; database-style browse; no game or collection mechanic",
+        "experience_goal": "user is motivated to go outside and spot more species to complete their collection"
+      }
     },
     {
       "id": "GOOD_SG-063",
@@ -3511,7 +4177,7 @@
       "category": "biodiversity",
       "summary": "List cleanup opportunities and lightweight volunteer logistics.",
       "target_user": "students and environmental volunteers",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is a coastal-zone dispatch board where volunteer assignment animates from roster to zone and a waste counter ticks up.",
       "stage": "poc",
       "poc": [
         "searchable listings",
@@ -3557,7 +4223,18 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "data-dense operations",
+        "interaction_model": "cleanup dispatch board — a coastal zone map on the left showing beach segments; a volunteer roster on the right; dispatching volunteers to a zone animates their assignment; a real-time waste collected counter at the top",
+        "suggested_libraries": [
+          "framer-motion",
+          "recharts"
+        ],
+        "distinctive_feature": "dispatch animation showing volunteer moving from roster to zone; waste counter animates up",
+        "avoid": "signup list; form without the dispatch board; anything without the ops feel",
+        "experience_goal": "coordinator dispatches volunteers to beach segments with the confidence of a real ops system"
+      }
     },
     {
       "id": "GOOD_SG-064",
@@ -3568,7 +4245,7 @@
       "category": "biodiversity",
       "summary": "Plan educational mangrove or nature visits with accessibility notes.",
       "target_user": "families and educators",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is editorial ecology panels that slide in per mangrove site with illustrated content and a tide-timing indicator.",
       "stage": "poc",
       "poc": [
         "guided input form",
@@ -3615,7 +4292,17 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "editorial",
+        "interaction_model": "trip planner with ecology panels — a Singapore coastal SVG map showing mangrove sites; clicking a site opens an editorial-style panel with ecology facts, what to look out for, and visit timing; a build-your-visit flow at the bottom",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "ecology fact panels slide in with rich illustrated editorial content; a tide-timing indicator per site",
+        "avoid": "generic list of locations; information brochure without the planning flow; no ecology storytelling",
+        "experience_goal": "visitor arrives at the mangrove site prepared and curious about what they will encounter"
+      }
     },
     {
       "id": "GOOD_SG-065",
@@ -3626,7 +4313,7 @@
       "category": "social norms",
       "summary": "Nudge everyday courtesy in trains, buses, and queues.",
       "target_user": "daily commuters",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is a story-reveal animation where choosing a response shows the narrative outcome with community impact.",
       "stage": "poc",
       "poc": [
         "watchlist setup",
@@ -3669,7 +4356,17 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "editorial",
+        "interaction_model": "scenario story cards — a set of illustrated scenario cards each showing a transit situation; user can choose how to respond; chosen response reveals a short story outcome with community impact",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "story reveal animation when a response is chosen; scenario cards have editorial illustration style",
+        "avoid": "generic tips list; quiz without narrative; text-heavy page without interactive scenarios",
+        "experience_goal": "user reflects on transit kindness through stories, not rules"
+      }
     },
     {
       "id": "GOOD_SG-066",
@@ -3680,7 +4377,7 @@
       "category": "social norms",
       "summary": "Save calmer commuting habits and reminders for stressful days.",
       "target_user": "commuters who prefer lower-sensory travel",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is a UI that embodies quiet — understated palette, gentle fades, and a carriage map that is as calm as the concept.",
       "stage": "poc",
       "poc": [
         "quick entry flow",
@@ -3725,7 +4422,17 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "minimalist",
+        "interaction_model": "MRT carriage map with quiet zone markers — a schematic side-view of an MRT train showing carriages; designated quiet carriages are highlighted; tapping a carriage shows community notes and current busyness rating",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "the entire UI is calm and minimal; carriage map uses understated colors; notes fade in gently",
+        "avoid": "loud colors; busy animations; anything that does not feel quiet itself",
+        "experience_goal": "the interface embodies the concept — visiting it feels like the quiet carriage"
+      }
     },
     {
       "id": "GOOD_SG-067",
@@ -3736,7 +4443,7 @@
       "category": "social norms",
       "summary": "Track tiny acts of neighborliness and kindness as habit reinforcement.",
       "target_user": "families, schools, and community groups",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is a streak ring that fills with a warm animation on each daily act, making kindness feel like a satisfying habit.",
       "stage": "poc",
       "poc": [
         "quick entry flow",
@@ -3784,7 +4491,17 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "playful utility",
+        "interaction_model": "daily acts tracker with streak — a set of illustrated daily kindness act cards; the user taps complete on acts done today; a streak ring counts consecutive active days; a share-your-act button at the bottom",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "streak ring fills with a warm animation on each completion; tapping complete triggers a small celebration",
+        "avoid": "boring checklist; no streak or habit mechanic; text-only list of acts",
+        "experience_goal": "user builds a daily habit of small acts through the satisfying streak mechanic"
+      }
     },
     {
       "id": "GOOD_SG-068",
@@ -3795,7 +4512,7 @@
       "category": "social norms",
       "summary": "Generate a short new-neighbor welcome note or guide.",
       "target_user": "residents and RC groups",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is welcome kit items animating into a physical-pack preview as the user assembles their neighbour's welcome.",
       "stage": "poc",
       "poc": [
         "guided input form",
@@ -3840,7 +4557,17 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "warm civic",
+        "interaction_model": "welcome kit builder — a customisable welcome pack builder where user picks from illustrated welcome cards, practical info items, and local tips to include; preview of the assembled kit renders on the right; a print or save button at the bottom",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "kit items animate into the preview as they are added; the assembled kit feels like a physical pack",
+        "avoid": "form for entering neighbour details; generic resource list; anything without the kit-building visual",
+        "experience_goal": "resident creates a warm, personal welcome pack for their new neighbour in minutes"
+      }
     },
     {
       "id": "GOOD_SG-069",
@@ -3851,7 +4578,7 @@
       "category": "mental health",
       "summary": "Curate low-cost or free support resources by need and urgency.",
       "target_user": "residents seeking support",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is a tree diagram that branches gently by need type so someone in distress is never shown more options than they can process.",
       "stage": "poc",
       "poc": [
         "searchable listings",
@@ -3894,7 +4621,17 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "calm institutional",
+        "interaction_model": "resource tree by situation — a gentle tree diagram branching by need type; each branch leads to curated resources; the interface avoids clinical language",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "tree branches animate open gently; active path stays highlighted; no overwhelming list of all resources at once",
+        "avoid": "alphabetical list; clinical-looking table; anything with a medical-form aesthetic",
+        "experience_goal": "person in distress can navigate to the right resource without being overwhelmed by too many options"
+      }
     },
     {
       "id": "GOOD_SG-070",
@@ -3905,7 +4642,7 @@
       "category": "mental health",
       "summary": "Send short grounding or breathing prompts during stressful days.",
       "target_user": "workers, students, and caregivers",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is a high-quality framer-motion breathing circle that shifts the background colour through the entire session cycle.",
       "stage": "poc",
       "poc": [
         "watchlist setup",
@@ -3952,7 +4689,17 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "playful utility",
+        "interaction_model": "animated breathing guide — a large animated circle that expands and contracts as a breathing pacer; a session selector at the top; a calm ambient background that shifts color through the session",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "the breathing circle is a high-quality framer-motion animation; background color shifts through the breathing cycle",
+        "avoid": "text instructions only; timer without animation; anything that feels like a productivity tool",
+        "experience_goal": "user feels genuinely calmer after completing one breathing cycle"
+      }
     },
     {
       "id": "GOOD_SG-071",
@@ -3963,7 +4710,7 @@
       "category": "mental health",
       "summary": "A light daily check-in with mood patterns and support suggestions.",
       "target_user": "adults managing stress",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is a multi-axis ring chart where each axis animates independently as each stress-check question is answered.",
       "stage": "poc",
       "poc": [
         "quick entry flow",
@@ -4010,7 +4757,18 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "editorial",
+        "interaction_model": "mood questionnaire with ring visualisation — a short 5-question check-in; each answered question updates a multi-axis ring chart showing stress dimensions; a personalised short tip appears at the end",
+        "suggested_libraries": [
+          "framer-motion",
+          "recharts"
+        ],
+        "distinctive_feature": "multi-axis ring chart that fills as each question is answered; axes animate independently",
+        "avoid": "plain questionnaire with score at end; no visual during the check-in; generic tip list",
+        "experience_goal": "user gains insight into which dimensions of their stress need attention today"
+      }
     },
     {
       "id": "GOOD_SG-072",
@@ -4021,7 +4779,7 @@
       "category": "mental health",
       "summary": "Help workers build a realistic stress-reduction plan.",
       "target_user": "Singapore workers and caregivers",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is a live radar chart that updates in real time as the user rates each life area, revealing depletion visually.",
       "stage": "poc",
       "poc": [
         "guided input form",
@@ -4068,7 +4826,18 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "editorial",
+        "interaction_model": "boundary-setting wheel — a life-areas wheel where user rates each area; low-rated areas are highlighted with practical boundary suggestions; a save-and-revisit feature for weekly check-ins",
+        "suggested_libraries": [
+          "framer-motion",
+          "recharts"
+        ],
+        "distinctive_feature": "life areas wheel rendered as a radar/spider chart that updates in real time as areas are rated",
+        "avoid": "plain questionnaire; static tips list; no visual wheel",
+        "experience_goal": "user sees which life areas are depleted and has actionable suggestions to restore balance"
+      }
     },
     {
       "id": "GOOD_SG-073",
@@ -4079,7 +4848,7 @@
       "category": "caregiving",
       "summary": "Explain caregiver-related support resources in plain language.",
       "target_user": "family caregivers",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is a grant sidebar that filters eligible schemes in real time as each caregiver eligibility question is answered.",
       "stage": "poc",
       "poc": [
         "searchable listings",
@@ -4125,7 +4894,18 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "calm institutional",
+        "interaction_model": "grant eligibility wizard — a step-by-step flow asking about care situation, relationship, and income; each step narrows eligible grants shown in a sidebar panel; final screen shows matched grants with application steps",
+        "suggested_libraries": [
+          "framer-motion",
+          "react-hook-form"
+        ],
+        "distinctive_feature": "grant sidebar panel filters in real time as eligibility questions are answered",
+        "avoid": "exhaustive list of all grants; PDF-style layout; form without real-time filtering",
+        "experience_goal": "caregiver discovers grants they were not aware of and knows the exact steps to apply"
+      }
     },
     {
       "id": "GOOD_SG-074",
@@ -4136,7 +4916,7 @@
       "category": "caregiving",
       "summary": "Track appointments, symptoms, and care notes over time.",
       "target_user": "family caregivers",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is a care visit timeline where new entries animate in and a vitals chart updates with each new data point.",
       "stage": "poc",
       "poc": [
         "quick entry flow",
@@ -4183,7 +4963,18 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "data-dense operations",
+        "interaction_model": "visit timeline with health journal — a vertical timeline of care visits per care recipient; each visit entry shows vitals, mood, and notes; a week-at-a-glance summary chart at the top",
+        "suggested_libraries": [
+          "recharts",
+          "framer-motion"
+        ],
+        "distinctive_feature": "timeline entries animate in as new visits are logged; vitals chart updates with the new data point",
+        "avoid": "generic form without timeline; list without health trends visualisation",
+        "experience_goal": "caregiver sees the care recipient's recent history at a glance and notices patterns over time"
+      }
     },
     {
       "id": "GOOD_SG-075",
@@ -4194,7 +4985,7 @@
       "category": "caregiving",
       "summary": "Coordinate short respite windows and helper schedules.",
       "target_user": "caregivers and relatives",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is drag-to-schedule self-care activities onto a day timeline so a caregiver's rest day feels actively planned.",
       "stage": "poc",
       "poc": [
         "guided input form",
@@ -4240,7 +5031,17 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "warm civic",
+        "interaction_model": "day-off planner with activity suggestions — a day-planner timeline for a respite day; a panel of self-care activity suggestions that can be dragged onto the timeline; a gentle reminder that rest is care",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "drag-to-schedule activities onto the day timeline with smooth animations",
+        "avoid": "form-only; list without timeline; anything that feels like a work scheduler",
+        "experience_goal": "caregiver plans a restful day for themselves and feels the UI is on their side"
+      }
     },
     {
       "id": "GOOD_SG-076",
@@ -4251,7 +5052,7 @@
       "category": "caregiving",
       "summary": "Store contacts, routines, and handoff notes for family support.",
       "target_user": "caregivers managing rotating helpers",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is role-clustered contact cards with a quick-dial simulation that makes finding the right helper feel immediate.",
       "stage": "poc",
       "poc": [
         "quick entry flow",
@@ -4297,7 +5098,17 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "warm civic",
+        "interaction_model": "role-based contact cards — a set of cards organised by care role; each card shows name, contact, and relationship; a quick-dial simulation when a card is tapped",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "cards are grouped into visual role clusters; quick-dial animation on tap",
+        "avoid": "plain address book list; generic contacts form; anything without role categorisation",
+        "experience_goal": "caregiver can find the right helper for any situation at a glance"
+      }
     },
     {
       "id": "GOOD_SG-077",
@@ -4308,7 +5119,7 @@
       "category": "urban access",
       "summary": "Find practical sheltered walking options for seniors and families.",
       "target_user": "pedestrians, parents, and older adults",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is an animated rain-drop effect on uncovered map areas that makes the need to find shelter feel tangible.",
       "stage": "poc",
       "poc": [
         "searchable listings",
@@ -4351,7 +5162,17 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "map-first",
+        "interaction_model": "rain shelter proximity finder — a Singapore district SVG map showing covered walkways and rain shelters; nearest shelters are ranked by distance with walk-time estimates",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "animated rain-drop effect on uncovered areas of the map; shelters glow when nearest",
+        "avoid": "list of addresses; no map; generic weather tip page",
+        "experience_goal": "user caught in rain finds the nearest shelter in one tap"
+      }
     },
     {
       "id": "GOOD_SG-078",
@@ -4362,7 +5183,7 @@
       "category": "urban access",
       "summary": "Save shaded benches and rest points for longer errands.",
       "target_user": "seniors and mobility-limited users",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is a shade-filter overlay that adds a visual shaded-area layer to the map and glows spots that are in shade.",
       "stage": "poc",
       "poc": [
         "quick entry flow",
@@ -4409,7 +5230,17 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "map-first",
+        "interaction_model": "rest spot map with shade and amenity tags — a Singapore walking-area SVG map showing benches and rest spots; filter by shade, near water, near toilet; tapping a spot shows amenity details",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "shade filter adds a visual overlay showing shaded areas of the map; spots in shade glow",
+        "avoid": "list of addresses; no spatial context; generic directory",
+        "experience_goal": "elderly person or someone feeling faint can find a shaded rest spot near them quickly"
+      }
     },
     {
       "id": "GOOD_SG-079",
@@ -4420,7 +5251,7 @@
       "category": "urban access",
       "summary": "Map drinking water refill points in public spaces.",
       "target_user": "walkers, cyclists, and low-income residents",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is animated water-drop pulse markers that fade cleanly when filtered, keeping the map readable at all times.",
       "stage": "poc",
       "poc": [
         "searchable listings",
@@ -4463,7 +5294,17 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "map-first",
+        "interaction_model": "water point map — a simple, clean Singapore district map showing free water points; filter by water type; tapping shows opening hours",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "map markers have an animated water-drop pulse; filtered-out markers fade cleanly",
+        "avoid": "list of locations; no map; overly complex UI for a simple need",
+        "experience_goal": "someone thirsty on a walk finds a free water point in their area immediately"
+      }
     },
     {
       "id": "GOOD_SG-080",
@@ -4474,7 +5315,7 @@
       "category": "urban access",
       "summary": "Curate practical public toilet notes for families, elders, and travelers.",
       "target_user": "families, caregivers, and tourists",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is animated cleanliness rating bars per toilet marker that update when community ratings change.",
       "stage": "poc",
       "poc": [
         "searchable listings",
@@ -4519,7 +5360,17 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "map-first",
+        "interaction_model": "toilet finder with accessibility and cleanliness filter — a Singapore district map showing public toilets; filter by accessibility and community cleanliness rating; tapping shows a quick-review panel",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "cleanliness rating shown as animated fill bars per toilet marker; rating updates animate",
+        "avoid": "list without map; no community rating; generic address lookup",
+        "experience_goal": "user finds a clean, accessible toilet nearby without guessing"
+      }
     },
     {
       "id": "GOOD_SG-081",
@@ -4530,7 +5381,7 @@
       "category": "education equity",
       "summary": "Offer or request school supplies within local communities.",
       "target_user": "families, teachers, and volunteers",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is a match animation when a school supply offer meets a request, making the connection feel like a discovery.",
       "stage": "poc",
       "poc": [
         "searchable listings",
@@ -4576,7 +5427,17 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "playful utility",
+        "interaction_model": "item grid with offer/request toggle — a grid of school supply items; each item can be toggled between offering and requesting; a match notification appears when a complementary offer/request is found",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "match animation when an offer meets a request; items animate between offer/request states",
+        "avoid": "plain list; form submission without visual matching; no item grid",
+        "experience_goal": "parent finds what their child needs from another family without any friction"
+      }
     },
     {
       "id": "GOOD_SG-082",
@@ -4587,7 +5448,7 @@
       "category": "education equity",
       "summary": "Help families pass on gently used uniforms and school items.",
       "target_user": "parents and schools",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is illustrated wear indicators that show uniform condition visually rather than through text labels.",
       "stage": "poc",
       "poc": [
         "searchable listings",
@@ -4631,7 +5492,17 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "editorial",
+        "interaction_model": "size-based browse with condition ratings — a browse interface organised by school level and size; each listing shows uniform condition as a star/condition rating; a quick-claim button connects claimer with donor",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "condition rating shown as animated wear indicators; listings animate in when filter is applied",
+        "avoid": "form-only listing submission; table without visual condition indication",
+        "experience_goal": "parent quickly finds a school uniform in the right size and condition for their child"
+      }
     },
     {
       "id": "GOOD_SG-083",
@@ -4642,7 +5513,7 @@
       "category": "education equity",
       "summary": "Encourage short reading sessions with parents or volunteers.",
       "target_user": "children and caregivers",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is an animated connection line between matched reading buddy profiles and a book shelf that slides items in and out.",
       "stage": "poc",
       "poc": [
         "quick entry flow",
@@ -4690,7 +5561,17 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "warm civic",
+        "interaction_model": "match view with book exchange — a split view showing a child reader profile on the left and available reading buddies on the right; a book exchange shelf in the middle; clicking a match sends a connection request",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "book exchange shelf animates books sliding in and out; match connection sends a visual connection line between profiles",
+        "avoid": "generic signup form; list without matching visualisation; no book shelf",
+        "experience_goal": "child and parent feel the warmth of finding a reading buddy, not completing a registration"
+      }
     },
     {
       "id": "GOOD_SG-084",
@@ -4701,7 +5582,7 @@
       "category": "education equity",
       "summary": "Find free or low-cost study spaces with practical notes.",
       "target_user": "students from all backgrounds",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is a horizontal opening-hours timeline that highlights currently open study spaces directly on the map.",
       "stage": "poc",
       "poc": [
         "searchable listings",
@@ -4745,7 +5626,17 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "map-first",
+        "interaction_model": "study space map with opening hours timeline — a Singapore district SVG map showing libraries and community centres; a horizontal timeline below shows current opening status for each; filtering by noise level, WiFi, and power outlets",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "study spaces show a live open/closed status indicator on the map; the timeline highlights currently open spaces",
+        "avoid": "plain list of locations; no opening hours visualisation; no filter for study-specific needs",
+        "experience_goal": "student finds an open study space with the right environment for their current needs"
+      }
     },
     {
       "id": "GOOD_SG-085",
@@ -4756,7 +5647,7 @@
       "category": "inclusion",
       "summary": "Curate wellbeing, legal, and community resources for domestic workers.",
       "target_user": "domestic workers and support groups",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is making the language switcher the hero element with a full slide transition so a domestic helper sees her language first.",
       "stage": "poc",
       "poc": [
         "searchable listings",
@@ -4799,7 +5690,17 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "warm civic",
+        "interaction_model": "rights guide with language switcher — a prominent language toggle at the top; rights are shown as large illustrated sections with clear plain language; a help contacts panel at the bottom",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "language switcher is the hero element with a slide transition between language content",
+        "avoid": "English-only page with small translate link; dense paragraph blocks; legal jargon",
+        "experience_goal": "domestic helper reads her rights clearly in her own language"
+      }
     },
     {
       "id": "GOOD_SG-086",
@@ -4810,7 +5711,7 @@
       "category": "inclusion",
       "summary": "Plan low-cost and useful activities for weekly rest days.",
       "target_user": "migrant and domestic workers",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is activity cards that animate into a day planner with a satisfying drop and a map view that shows the planned day spatially.",
       "stage": "poc",
       "poc": [
         "guided input form",
@@ -4855,7 +5756,17 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "playful utility",
+        "interaction_model": "day planner with activity map — a weekly planner grid showing a rest day; an activity browse panel with low-cost activities sorted by neighbourhood; clicking an activity adds it to the planner with a suggested time",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "activity cards animate into the day planner with a satisfying drop; a map view shows all planned activities for the day",
+        "avoid": "text list of activity suggestions; no planner grid; generic recommendations page",
+        "experience_goal": "domestic helper plans her rest day with activities she actually wants to do"
+      }
     },
     {
       "id": "GOOD_SG-087",
@@ -4866,7 +5777,7 @@
       "category": "inclusion",
       "summary": "Create practical phrase cards for healthcare, transport, and daily life.",
       "target_user": "workers and newcomers",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is very-large-type phrase cards with a flip animation so the screen can be shown to another person without explanation.",
       "stage": "poc",
       "poc": [
         "guided input form",
@@ -4911,7 +5822,17 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "tactile kiosk",
+        "interaction_model": "phrase book with language selection — a large-format phrase book organised by situation; each phrase is shown in English with translation below; a prominent language selector",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "phrase cards have very large type; tapping a phrase flips to show the translation in large text",
+        "avoid": "small text; search-first interface; anything requiring typing to find a phrase",
+        "experience_goal": "someone who cannot speak the local language can show the screen to get help immediately"
+      }
     },
     {
       "id": "GOOD_SG-088",
@@ -4922,7 +5843,7 @@
       "category": "inclusion",
       "summary": "A private wellbeing and admin reminder tool for migrant workers.",
       "target_user": "migrant workers",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is large animated mood buttons with expressive reactions and a weekly chart that shows wellbeing trend over time.",
       "stage": "poc",
       "poc": [
         "quick entry flow",
@@ -4967,7 +5888,18 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "warm civic",
+        "interaction_model": "quick wellbeing check-in — a simple daily check-in flow with 3 large mood buttons; a weekly wellbeing chart shows mood over time; a resources panel appears if mood is low; streak for consistent check-ins",
+        "suggested_libraries": [
+          "framer-motion",
+          "recharts"
+        ],
+        "distinctive_feature": "large animated mood buttons with expressive reactions; weekly chart shows mood trend",
+        "avoid": "text form; clinical assessment tone; anything that feels like a surveillance tool",
+        "experience_goal": "worker checks in daily because the interface is welcoming and the streak gives a reason to return"
+      }
     },
     {
       "id": "GOOD_SG-089",
@@ -4978,7 +5910,7 @@
       "category": "sustainability",
       "summary": "Guide residents through repair-vs-replace decisions with local options.",
       "target_user": "households",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is an animated cost comparison bar that renders repair-vs-replace side by side as a visual rather than a text recommendation.",
       "stage": "poc",
       "poc": [
         "guided input form",
@@ -5023,7 +5955,17 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "editorial",
+        "interaction_model": "repair decision wizard — a conversational decision flow: what is broken? what is wrong? how old is it? cost to repair vs replace is estimated with a visual comparison; a find-repair-shop button at the end",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "repair vs replace comparison renders as an animated visual side-by-side cost bar",
+        "avoid": "text checklist; static tips; form without a decision outcome",
+        "experience_goal": "user has a clear, honest recommendation on whether to repair or replace their item"
+      }
     },
     {
       "id": "GOOD_SG-090",
@@ -5034,7 +5976,7 @@
       "category": "sustainability",
       "summary": "Find donation, swap, and textile recycling options.",
       "target_user": "Singapore residents",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is illustrated wear diagrams on item cards that communicate condition at a glance without requiring text labels.",
       "stage": "poc",
       "poc": [
         "searchable listings",
@@ -5077,7 +6019,17 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "editorial",
+        "interaction_model": "item catalogue with condition ratings — a photo-style browse of reusable textile items; each item shows condition as illustrated wear state; a filter by type, size, and condition; a request button connects to the donor",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "condition shown as an illustrated wear diagram on the item card; filter animations are smooth",
+        "avoid": "list without photos or condition visualisation; form-first listing",
+        "experience_goal": "user browses like a curated second-hand shop, not a donation request form"
+      }
     },
     {
       "id": "GOOD_SG-091",
@@ -5088,7 +6040,7 @@
       "category": "sustainability",
       "summary": "Help households decide whether to donate, recycle, repair, or discard.",
       "target_user": "households",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is a drag-and-drop sorting game where wrong answers reveal the classification decision tree as the lesson.",
       "stage": "poc",
       "poc": [
         "guided input form",
@@ -5133,7 +6085,17 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "diagram-first",
+        "interaction_model": "sorting quiz game — item images drop from the top of the screen; user drags each item to the correct bin; correct sorts score points; a classification tree appears for wrong answers",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "drag-and-drop item to bin with satisfying animation; wrong answers reveal the classification tree explanation",
+        "avoid": "static information page; list of rules; no interactive game element",
+        "experience_goal": "user learns recycling rules through active gameplay and remembers them because of the game"
+      }
     },
     {
       "id": "GOOD_SG-092",
@@ -5144,7 +6106,7 @@
       "category": "sustainability",
       "summary": "Track maintenance for appliances and household gear to extend lifespan.",
       "target_user": "households and small offices",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is a lifecycle timeline with an interactive slider that dynamically shows how extending an item's life reduces its environmental score.",
       "stage": "poc",
       "poc": [
         "quick entry flow",
@@ -5189,7 +6151,18 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "timeline-first",
+        "interaction_model": "product lifecycle viewer — user selects a product category; a horizontal lifecycle timeline shows stages from manufacture to disposal; each stage has environmental impact data; an interactive slider shows how extending the item's life reduces impact",
+        "suggested_libraries": [
+          "framer-motion",
+          "recharts"
+        ],
+        "distinctive_feature": "lifecycle timeline with animated stage transitions; impact slider that dynamically updates the environmental score",
+        "avoid": "static infographic; list of facts; no interaction with the lifecycle stages",
+        "experience_goal": "user understands the environmental cost of disposal and is motivated to extend their item's life"
+      }
     },
     {
       "id": "GOOD_SG-093",
@@ -5200,7 +6173,7 @@
       "category": "health systems",
       "summary": "Track donation eligibility dates and personal reminders.",
       "target_user": "blood donors",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is a countdown ring to the next eligible donation date that makes the calendar feel like something to look forward to.",
       "stage": "poc",
       "poc": [
         "watchlist setup",
@@ -5243,7 +6216,17 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "warm civic",
+        "interaction_model": "donation eligibility tracker — a calm dashboard showing your donation history as a timeline; a countdown to when you are next eligible; a find-a-drive button to locate nearby blood drives; a blood type impact stat",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "countdown ring to next eligible donation date; donation history timeline with impact stats",
+        "avoid": "static reminder app; form without visual eligibility tracker; anything without the countdown",
+        "experience_goal": "donor feels their contribution matters and knows exactly when they can give again"
+      }
     },
     {
       "id": "GOOD_SG-094",
@@ -5254,7 +6237,7 @@
       "category": "health systems",
       "summary": "Store medical admin notes and appointment summaries simply.",
       "target_user": "patients and caregivers",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is a document timeline where new records animate in and past visit entries expand smoothly on tap.",
       "stage": "poc",
       "poc": [
         "quick entry flow",
@@ -5300,7 +6283,17 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "calm institutional",
+        "interaction_model": "medical record organiser with document timeline — a chronological timeline of clinic visits and documents; clicking a visit shows associated documents and notes; a quick-add panel for new documents",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "document timeline with animated entry when new records are added; visit entries expand smoothly",
+        "avoid": "generic file list; form-only entry; anything that feels like a bureaucratic filing system",
+        "experience_goal": "patient or caregiver quickly finds any document or note from a past visit"
+      }
     },
     {
       "id": "GOOD_SG-095",
@@ -5311,7 +6304,7 @@
       "category": "health systems",
       "summary": "Prepare a short question list before appointments.",
       "target_user": "patients seeking clearer care visits",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is questions that animate from a suggestion panel into a priority list with drag-to-reorder and smooth layout transitions.",
       "stage": "poc",
       "poc": [
         "guided input form",
@@ -5356,7 +6349,17 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "editorial",
+        "interaction_model": "appointment question builder — a two-panel layout; suggested questions from common symptom categories on the left; user's selected and custom questions on the right with drag-to-prioritise; a print-ready view",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "questions animate from left panel to right as they are selected; drag-to-reorder with smooth animations",
+        "avoid": "plain text area; no structured question categories; no drag reorder",
+        "experience_goal": "patient arrives at the clinic with the right questions in priority order and forgets nothing"
+      }
     },
     {
       "id": "GOOD_SG-096",
@@ -5367,7 +6370,7 @@
       "category": "health systems",
       "summary": "Create a simple family communication plan for urgent situations.",
       "target_user": "households and caregivers",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is a care network tree where branches animate as contacts are added and missing-detail nodes pulse as visual prompts.",
       "stage": "poc",
       "poc": [
         "guided input form",
@@ -5414,7 +6417,17 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "diagram-first",
+        "interaction_model": "care network tree visualisation — a tree diagram showing the patient at root with care contacts branching out by role; clicking a contact shows role, contact details, and notes",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "tree diagram animates branches as contacts are added; contact nodes pulse if contact details are missing",
+        "avoid": "list of contacts; generic address book; no tree visualisation",
+        "experience_goal": "caregiver sees the full care network in one diagram and quickly adds any missing contacts"
+      }
     },
     {
       "id": "GOOD_SG-097",
@@ -5425,7 +6438,7 @@
       "category": "urban access",
       "summary": "Suggest easier errand routes with fewer stairs and more lift access.",
       "target_user": "seniors and caregivers",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is an animated SVG path that draws the lift-accessible route through a simplified HDB floor plan when a destination is tapped.",
       "stage": "poc",
       "poc": [
         "guided input form",
@@ -5471,7 +6484,17 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "diagram-first",
+        "interaction_model": "HDB floor plan with lift path overlay — a simplified floor plan showing lifts, corridors, and unit locations; tapping a destination unit highlights the lift-accessible route; known lift outages are flagged",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "animated path that draws from origin to destination showing the lift-accessible route; lift outage nodes flash red",
+        "avoid": "address list; no floor diagram; generic accessible route without HDB-specific layout",
+        "experience_goal": "senior or caregiver navigates a HDB block knowing exactly where to go to avoid stairs"
+      }
     },
     {
       "id": "GOOD_SG-098",
@@ -5482,7 +6505,7 @@
       "category": "education equity",
       "summary": "Explain low-cost tutoring and education support options clearly.",
       "target_user": "students and lower-income families",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is a scheme comparison table where columns animate in as eligibility is confirmed and the best-fit row is highlighted.",
       "stage": "poc",
       "poc": [
         "searchable listings",
@@ -5526,7 +6549,17 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "calm institutional",
+        "interaction_model": "eligibility checker with scheme comparison — a 3-step wizard asking about income level, school level, and subject; a comparison table renders showing eligible schemes side by side with key differences highlighted",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "comparison table columns animate in as eligibility is confirmed; highlighted rows show best-fit scheme",
+        "avoid": "list of schemes without personalisation; form without scheme comparison; anything without the wizard",
+        "experience_goal": "parent finds the right tuition aid scheme for their child without reading every option"
+      }
     },
     {
       "id": "GOOD_SG-099",
@@ -5537,7 +6570,7 @@
       "category": "environment",
       "summary": "Find practical public places for cooling off during very hot days.",
       "target_user": "seniors, workers, and families",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is a heat overlay on a Singapore SVG map that intensifies in hot districts with animated cool-breeze effects on cool spots.",
       "stage": "poc",
       "poc": [
         "searchable listings",
@@ -5584,7 +6617,17 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "map-first",
+        "interaction_model": "heat-aware cooler spots map — a Singapore SVG map with a warm color heat overlay by district; cool spots shown as pins; filter by indoor/outdoor and distance",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "map heat overlay that intensifies in high-temperature districts; cool spot pins have an animated cool-breeze effect",
+        "avoid": "list without map; no heat visualisation; generic location finder",
+        "experience_goal": "resident seeks relief from heat and immediately sees the nearest cool spot on the map"
+      }
     },
     {
       "id": "GOOD_SG-100",
@@ -5595,7 +6638,7 @@
       "category": "food security",
       "summary": "Generate low-cost meal ideas focused on practical protein sources in Singapore.",
       "target_user": "budget-conscious households",
-      "why_fast": "Mostly forms, listings, search, and lightweight dashboards. Fits a fast AI-assisted web build.",
+      "why_fast": "The interesting challenge is a hawker meal-builder where protein sources animate into a weekly plan and a live cost bar updates as items are added.",
       "stage": "poc",
       "poc": [
         "guided input form",
@@ -5640,7 +6683,18 @@
         "Prefer deterministic mock data over external APIs.",
         "Keep state resettable so demos can be rerun quickly.",
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ]
+      ],
+      "ui": {
+        "direction": "editorial",
+        "interaction_model": "protein cost calculator with hawker context — a visual guide to protein sources at hawker centres with cost-per-gram data; user builds a weekly protein plan from the hawker sources; a running cost bar shows total weekly protein spend",
+        "suggested_libraries": [
+          "recharts",
+          "framer-motion"
+        ],
+        "distinctive_feature": "protein cost per gram shown as animated bar comparison; building a weekly plan animates items into a summary",
+        "avoid": "generic nutrition table; form without visual meal building; anything without the hawker-specific pricing",
+        "experience_goal": "resident builds an affordable, protein-sufficient weekly plan from hawker meals they already know"
+      }
     }
   ],
   "build_stage": "poc",

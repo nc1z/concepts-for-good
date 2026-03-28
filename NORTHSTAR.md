@@ -40,13 +40,19 @@ The PM agent (`automations/pm.md` / `$pm-round`) should treat this file as the p
   Early work should optimize for fast learning and believable demos, not production infrastructure. Avoid committing the project to heavy backend, compliance, or operational complexity before concept validation.
 
 - **Style / UX preferences**:
-  The eventual site should feel intentional and curated. The landing page is a gallery of POCs. Each app should have a focused user flow, Singapore-relevant seed data, and a clear “what this concept proves” story. Do not default to card-heavy dashboards or one repeated design pattern across all concepts. Different ideas should be allowed to adopt different visual languages, interaction models, and supporting libraries when that makes the concept clearer or more distinctive.
+  The eventual site should feel intentional and curated. The landing page is a gallery of POCs. Each app should have a focused user flow, Singapore-relevant seed data, and a clear “what this concept proves” story. Do not default to card-heavy dashboards or one repeated design pattern across all concepts. Different ideas must adopt different visual languages, interaction models, and supporting libraries. Two POCs that look similar have failed the design bar.
 
 - **Communication tone**:
   Be concise, direct, and product-minded. Comments and issues should explain the user problem, the smallest useful scope, and why the work matters now.
 
 - **Frontend ideation rule**:
-  Treat `FRONTEND_IDEATION.md` as a mandatory implementation brief for user-facing work. The UI should not expose builder language, should not force every feature into a card, and should deliberately explore different design directions such as minimalist, warm civic, brutalist, map-first, timeline-first, or other concept-fit styles.
+  Treat `FRONTEND_IDEATION.md` as a mandatory implementation brief for user-facing work. The UI should not expose builder language, should not force every feature into a card, and must deliberately explore different design directions. Each concept in `challenge/GOOD_SG.json` now has a `ui` field specifying the exact visual direction, interaction model, required libraries, and distinctive feature for that concept. These are requirements, not suggestions. Any agent implementing UI must read both `FRONTEND_IDEATION.md` and the concept's `ui` field before writing any code, answer all 7 questions in the mandatory pre-build checklist, and run `npm install` for required libraries.
+
+- **Content quality rule**:
+  Treat `CONTENT_RULES.md` as a mandatory brief for any user-facing copy. Copy must be written for the target user named in the idea, not for a developer audience. The first screen of every app must communicate what it does and what to do first in under 5 seconds. No developer language, no explanatory sections about what the prototype proves, no components that exist only for structural completeness. Every element must earn its place.
+
+- **The recurring failure pattern to avoid**:
+  White background + header + filter row + card grid is not a design. It is the absence of a design decision. If a POC looks like a generic SaaS dashboard, it must be rebuilt. The standard is: a stranger opening the page should understand the concept's point of view within 3 seconds, and the layout should feel unmistakably designed for that specific concept.
 
 ---
 
