@@ -295,14 +295,14 @@ function HomeContent() {
       <section className="hero">
         <div className="hero__eyebrow">
           <span className="hero__eyebrow-dot" />
-          Good Ideas SG
+          SG Concepts for Good
         </div>
         <div className="hero__copy">
           <h1>Simple digital ideas that support everyday life in Singapore.</h1>
           <p className="hero__lede">
             Explore rapid prototypes and proof of concepts made possible with AI.
           </p>
-          <p className="hero__note">* Concepts are autonomously ideated and built by AI agent team</p>
+          <p className="hero__note">* Concepts are autonomously ideated and built by an AI agent team</p>
         </div>
       </section>
 
