@@ -1,0 +1,3 @@
+display_name: Dev Round
+short_description: Implement one READY GitHub issue if none are IN-PROGRESS; mark IN-PROGRESS, branch, commit, push, open PR with gh/git only; never merge or push to default.
+default_prompt: Run one dev round: if any issue has label `IN-PROGRESS`, report and stop. Otherwise list open `READY` issues, pick one, immediately add `IN-PROGRESS`, sync main, create a branch, implement scoped changes, commit, push, and open a PR referencing the issue. Do not merge or push to the default branch or change READY labels.
