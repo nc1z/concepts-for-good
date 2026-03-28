@@ -4,9 +4,11 @@ import { notFound } from "next/navigation";
 import { getPocBySlug, pocCards } from "@/lib/pocs";
 
 export function generateStaticParams() {
-  return pocCards.map((card) => ({
-    slug: card.slug,
-  }));
+  return pocCards
+    .filter((card) => card.slug !== "budget-meal-basket-sg")
+    .map((card) => ({
+      slug: card.slug,
+    }));
 }
 
 export default async function PocDetailPage({
@@ -65,4 +67,3 @@ export default async function PocDetailPage({
     </main>
   );
 }
-
