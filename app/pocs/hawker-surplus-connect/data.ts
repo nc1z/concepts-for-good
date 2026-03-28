@@ -7,8 +7,10 @@ export type Listing = {
   source: string;
   portions: number;
   readyBy: string;
+  pickupPoint: string;
   notes: string;
   tags: string[];
+  priority: "watch" | "ready" | "urgent";
 };
 
 export type AlertItem = {
@@ -23,7 +25,14 @@ export type Watchlist = {
   areas: string[];
   minimumPortions: number;
   cadence: "instant" | "hourly" | "digest";
-  radiusKm: number;
+};
+
+export type Volunteer = {
+  id: string;
+  name: string;
+  base: string;
+  mode: string;
+  capacity: number;
 };
 
 export const personas: Array<{
@@ -33,36 +42,54 @@ export const personas: Array<{
 }> = [
   {
     id: "volunteer",
-    label: "Volunteer",
-    description: "Scan nearby stalls, respond to alerts, and mark pickups as handled.",
+    label: "Volunteer view",
+    description: "Track nearby pickups, confirm handoff windows, and claim the next run.",
   },
   {
     id: "coordinator",
-    label: "Coordinator",
-    description: "Tune watchlists, watch alerts roll in, and assign runs before closing time.",
+    label: "Coordinator view",
+    description: "Tune watch zones, assign runners, and keep the dispatch lane moving.",
   },
+];
+
+export const zoneOptions = [
+  "Tiong Bahru",
+  "Bedok",
+  "Jurong East",
+  "Toa Payoh",
+  "Punggol",
+];
+
+export const volunteers: Volunteer[] = [
+  { id: "v1", name: "Afiq", base: "Bukit Merah", mode: "Bike", capacity: 2 },
+  { id: "v2", name: "Mei", base: "Kallang", mode: "Car", capacity: 3 },
+  { id: "v3", name: "Harish", base: "Bedok", mode: "Van", capacity: 4 },
 ];
 
 export const seededListings: Listing[] = [
   {
     id: "listing-1",
-    name: "Nasi Lemak and Drinks Stall",
+    name: "Nasi Lemak & Drinks Stall",
     area: "Tiong Bahru",
-    source: "Hawker center",
+    source: "Hawker centre",
     portions: 28,
     readyBy: "8:45 pm",
-    notes: "Rice sets and packaged drinks after the dinner wave.",
-    tags: ["hot food", "pickup soon", "west"],
+    pickupPoint: "Loading bay beside Seng Poh Road",
+    notes: "Packed rice sets with drinks. Best handled in one clean pickup wave.",
+    tags: ["Hot food", "Fast handoff"],
+    priority: "ready",
   },
   {
     id: "listing-2",
-    name: "Bakery Counter",
+    name: "Bedok Bakery Counter",
     area: "Bedok",
     source: "Neighbourhood bakery",
     portions: 42,
     readyBy: "9:10 pm",
-    notes: "Bread bundles and unsold pastries for same-night collection.",
-    tags: ["baked goods", "high volume", "east"],
+    pickupPoint: "Rear service lane near Block 214",
+    notes: "Bread bundles and pastries with room to split across two volunteer stops.",
+    tags: ["High volume", "Bread"],
+    priority: "urgent",
   },
   {
     id: "listing-3",
@@ -71,18 +98,22 @@ export const seededListings: Listing[] = [
     source: "Food court",
     portions: 18,
     readyBy: "8:20 pm",
-    notes: "Fresh bottles with a short hold window and simple packing needs.",
-    tags: ["chilled", "short window", "west"],
+    pickupPoint: "Mall taxi stand pickup corner",
+    notes: "Short shelf life. Best routed to a nearby fridge or same-night handoff.",
+    tags: ["Chilled", "Short window"],
+    priority: "watch",
   },
   {
     id: "listing-4",
     name: "Chicken Rice Stall",
     area: "Toa Payoh",
-    source: "Hawker center",
+    source: "Hawker centre",
     portions: 33,
     readyBy: "8:55 pm",
-    notes: "A steady flow of plated meals after peak dinner orders.",
-    tags: ["popular", "family packs", "central"],
+    pickupPoint: "Drop-off point facing Lorong 5",
+    notes: "Consistent evening volume and straightforward packaging for family-sized portions.",
+    tags: ["Popular", "Family packs"],
+    priority: "ready",
   },
   {
     id: "listing-5",
@@ -91,39 +122,39 @@ export const seededListings: Listing[] = [
     source: "Weekend market",
     portions: 24,
     readyBy: "9:30 pm",
-    notes: "Chilled dessert cups and fruit bowls with clear handling notes.",
-    tags: ["dessert", "weekend", "north-east"],
+    pickupPoint: "Waterway Point side entrance",
+    notes: "Chilled dessert cups with stable carry boxes and a later pickup window.",
+    tags: ["Dessert", "Late window"],
+    priority: "watch",
   },
 ];
 
 export const seededAlerts: AlertItem[] = [
   {
     id: "alert-1",
-    headline: "Tiong Bahru stall marked surplus ready",
-    detail: "Volunteer pickup window opened with 28 portions available.",
+    headline: "Bedok bakery volume jumped",
+    detail: "The next run may need a vehicle with more than two crate slots.",
     time: "2 min ago",
-    severity: "ready",
+    severity: "urgent",
   },
   {
     id: "alert-2",
-    headline: "Bedok bakery updated count",
-    detail: "Higher volume than expected. Collection can be split across two runs.",
-    time: "14 min ago",
-    severity: "watching",
+    headline: "Tiong Bahru stall confirmed early pack-up",
+    detail: "Collection window moved slightly earlier to 8:45 pm.",
+    time: "9 min ago",
+    severity: "ready",
   },
   {
     id: "alert-3",
-    headline: "Toa Payoh route is nearly full",
-    detail: "Coordinator should confirm a driver before the 8:55 pm cutoff.",
-    time: "24 min ago",
-    severity: "urgent",
+    headline: "Punggol dessert cart marked watch only",
+    detail: "Worth monitoring, but not the first route to dispatch tonight.",
+    time: "16 min ago",
+    severity: "watching",
   },
 ];
 
 export const initialWatchlist: Watchlist = {
-  areas: ["Tiong Bahru", "Bedok"],
+  areas: ["Tiong Bahru", "Bedok", "Toa Payoh"],
   minimumPortions: 20,
   cadence: "instant",
-  radiusKm: 6,
 };
-

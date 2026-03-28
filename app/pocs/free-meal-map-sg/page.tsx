@@ -1,444 +1,388 @@
 "use client";
 
+import Link from "next/link";
+import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useMemo, useState } from "react";
 
-import {
-  filterOptions,
-  personas,
-  places,
-  type MealSupportPlace,
-  type PersonaId,
-} from "./data";
+import { filterOptions, personas, places, type PersonaId } from "./data";
 import styles from "./free-meal-map-sg.module.css";
-
-type UpdateRecord = {
-  note: string;
-  postedAt: string;
-  label: string;
-};
 
 type SavedState = {
   personaId: PersonaId;
+  filter: string;
+  search: string;
   selectedPlaceId: string;
   savedPlaceIds: string[];
   checklistByPlace: Record<string, boolean[]>;
-  updatesByPlace: Record<string, UpdateRecord[]>;
+  notesByPlace: Record<string, string[]>;
 };
 
-const STORAGE_KEY = "cfg-free-meal-map-sg";
+const STORAGE_KEY = "cfg-free-meal-map-sg-v2";
 
-function getDefaultChecklist(place: MealSupportPlace, personaId: PersonaId) {
-  const base =
-    personaId === "resident"
-      ? ["Check opening hours", "Save to my plan", "Share with family"]
-      : personaId === "volunteer"
-        ? ["Confirm stock", "Add a visit note", "Mark refill needed"]
-        : ["Review location", "Plan route", "Follow up later today"];
+function getChecklist(personaId: PersonaId) {
+  if (personaId === "resident") {
+    return ["Check opening hours", "Save this stop", "Share with someone nearby"];
+  }
 
-  return base.map((label, index) => ({
-    label,
-    done: index === 0 && place.kind === "Community fridge",
-  }));
+  if (personaId === "volunteer") {
+    return ["Check stock level", "Mark what is low", "Plan a quick refill visit"];
+  }
+
+  return ["Save for route planning", "Review access notes", "Follow up later today"];
 }
 
 export default function FreeMealMapPage() {
   const [personaId, setPersonaId] = useState<PersonaId>("resident");
-  const [selectedFilter, setSelectedFilter] = useState("All");
+  const [filter, setFilter] = useState("All");
   const [search, setSearch] = useState("");
   const [selectedPlaceId, setSelectedPlaceId] = useState(places[0].id);
   const [savedPlaceIds, setSavedPlaceIds] = useState<string[]>([]);
-  const [checklistByPlace, setChecklistByPlace] = useState<
-    Record<string, boolean[]>
-  >({});
-  const [updatesByPlace, setUpdatesByPlace] = useState<
-    Record<string, UpdateRecord[]>
-  >({});
-  const [updateDraft, setUpdateDraft] = useState("");
-  const [updateTone, setUpdateTone] = useState("Checked in");
+  const [checklistByPlace, setChecklistByPlace] = useState<Record<string, boolean[]>>(
+    {},
+  );
+  const [notesByPlace, setNotesByPlace] = useState<Record<string, string[]>>({});
+  const [noteDraft, setNoteDraft] = useState("");
   const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
-    try {
-      const stored = window.localStorage.getItem(STORAGE_KEY);
-      if (!stored) {
-        setHydrated(true);
-        return;
-      }
+    const raw = window.localStorage.getItem(STORAGE_KEY);
 
-      const parsed = JSON.parse(stored) as Partial<SavedState>;
-      if (parsed.personaId) setPersonaId(parsed.personaId);
-      if (parsed.selectedPlaceId) setSelectedPlaceId(parsed.selectedPlaceId);
-      if (parsed.savedPlaceIds) setSavedPlaceIds(parsed.savedPlaceIds);
-      if (parsed.checklistByPlace) setChecklistByPlace(parsed.checklistByPlace);
-      if (parsed.updatesByPlace) setUpdatesByPlace(parsed.updatesByPlace);
-    } catch {
-      // Ignore malformed local state and fall back to defaults.
-    } finally {
-      setHydrated(true);
+    if (raw) {
+      try {
+        const parsed = JSON.parse(raw) as SavedState;
+        setPersonaId(parsed.personaId);
+        setFilter(parsed.filter);
+        setSearch(parsed.search);
+        setSelectedPlaceId(parsed.selectedPlaceId);
+        setSavedPlaceIds(parsed.savedPlaceIds);
+        setChecklistByPlace(parsed.checklistByPlace);
+        setNotesByPlace(parsed.notesByPlace);
+      } catch {
+        window.localStorage.removeItem(STORAGE_KEY);
+      }
     }
+
+    setHydrated(true);
   }, []);
 
   useEffect(() => {
-    if (!hydrated) return;
+    if (!hydrated) {
+      return;
+    }
 
     const payload: SavedState = {
       personaId,
+      filter,
+      search,
       selectedPlaceId,
       savedPlaceIds,
       checklistByPlace,
-      updatesByPlace,
+      notesByPlace,
     };
 
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
   }, [
     checklistByPlace,
+    filter,
     hydrated,
+    notesByPlace,
     personaId,
     savedPlaceIds,
+    search,
     selectedPlaceId,
-    updatesByPlace,
   ]);
 
   const filteredPlaces = useMemo(() => {
     const query = search.trim().toLowerCase();
 
     return places.filter((place) => {
+      const matchesFilter = filter === "All" || place.kind === filter;
       const matchesSearch =
         !query ||
-        [place.name, place.kind, place.area, place.address, place.summary]
-          .concat(place.tags)
-          .some((value) => value.toLowerCase().includes(query));
+        [
+          place.name,
+          place.area,
+          place.address,
+          place.summary,
+          place.stock,
+          place.nextStep,
+          ...place.tags,
+        ].some((item) => item.toLowerCase().includes(query));
 
-      const matchesFilter =
-        selectedFilter === "All" ||
-        (selectedFilter === "Open now"
-          ? place.tags.includes("Open now")
-          : place.kind === selectedFilter);
-
-      return matchesSearch && matchesFilter;
+      return matchesFilter && matchesSearch;
     });
-  }, [search, selectedFilter]);
+  }, [filter, search]);
 
   useEffect(() => {
-    if (!filteredPlaces.length) return;
-
-    const stillVisible = filteredPlaces.some(
-      (place) => place.id === selectedPlaceId,
-    );
-
-    if (!stillVisible) {
-      setSelectedPlaceId(filteredPlaces[0].id);
+    if (!filteredPlaces.find((place) => place.id === selectedPlaceId)) {
+      setSelectedPlaceId(filteredPlaces[0]?.id ?? places[0].id);
     }
   }, [filteredPlaces, selectedPlaceId]);
 
   const selectedPlace =
     filteredPlaces.find((place) => place.id === selectedPlaceId) ??
     places.find((place) => place.id === selectedPlaceId) ??
-    filteredPlaces[0] ??
     places[0];
 
   const persona = personas.find((entry) => entry.id === personaId) ?? personas[0];
+  const checklistTemplate = getChecklist(personaId);
+  const checklist = checklistByPlace[selectedPlace.id] ?? checklistTemplate.map(() => false);
+  const notes = notesByPlace[selectedPlace.id] ?? [];
 
-  const checklist = checklistByPlace[selectedPlace.id] ?? [];
-  const updates = updatesByPlace[selectedPlace.id] ?? [];
+  function toggleSaved(placeId: string) {
+    setSavedPlaceIds((current) =>
+      current.includes(placeId)
+        ? current.filter((item) => item !== placeId)
+        : [placeId, ...current],
+    );
+  }
 
-  const checklistTemplate = useMemo(
-    () => getDefaultChecklist(selectedPlace, personaId),
-    [personaId, selectedPlace],
-  );
-
-  const toggleChecklistItem = (index: number) => {
+  function toggleChecklist(index: number) {
     setChecklistByPlace((current) => {
-      const existing = current[selectedPlace.id] ?? checklistTemplate.map((item) => item.done);
+      const existing = current[selectedPlace.id] ?? checklistTemplate.map(() => false);
       const next = existing.map((value, itemIndex) =>
         itemIndex === index ? !value : value,
       );
 
-      return { ...current, [selectedPlace.id]: next };
+      return {
+        ...current,
+        [selectedPlace.id]: next,
+      };
     });
-  };
+  }
 
-  const toggleSavedPlace = () => {
-    setSavedPlaceIds((current) =>
-      current.includes(selectedPlace.id)
-        ? current.filter((id) => id !== selectedPlace.id)
-        : [selectedPlace.id, ...current],
-    );
-  };
+  function addNote() {
+    const trimmed = noteDraft.trim();
 
-  const submitUpdate = () => {
-    if (!updateDraft.trim()) return;
+    if (!trimmed) {
+      return;
+    }
 
-    const record: UpdateRecord = {
-      note: updateDraft.trim(),
-      postedAt: "Just now",
-      label: updateTone,
-    };
-
-    setUpdatesByPlace((current) => ({
+    setNotesByPlace((current) => ({
       ...current,
-      [selectedPlace.id]: [record, ...(current[selectedPlace.id] ?? [])],
+      [selectedPlace.id]: [`Just now — ${trimmed}`, ...(current[selectedPlace.id] ?? [])],
     }));
-    setUpdateDraft("");
-  };
+    setNoteDraft("");
+  }
 
-  const resetDemo = () => {
-    setSavedPlaceIds([]);
-    setChecklistByPlace({});
-    setUpdatesByPlace({});
+  function resetDemo() {
     setPersonaId("resident");
-    setSelectedFilter("All");
+    setFilter("All");
     setSearch("");
     setSelectedPlaceId(places[0].id);
-    setUpdateDraft("");
-    setUpdateTone("Checked in");
+    setSavedPlaceIds([]);
+    setChecklistByPlace({});
+    setNotesByPlace({});
+    setNoteDraft("");
     window.localStorage.removeItem(STORAGE_KEY);
-  };
+  }
 
   return (
-    <main className={styles.shell}>
+    <main className={styles.page}>
+      <header className={styles.topline}>
+        <Link href="/" className={styles.backLink}>
+          Back to gallery
+        </Link>
+        <button type="button" className={styles.resetLink} onClick={resetDemo}>
+          Reset map state
+        </button>
+      </header>
+
       <section className={styles.hero}>
-        <div className={styles.heroCopy}>
-          <p className={styles.kicker}>SG Concepts for Good</p>
-          <h1>Free Meal Map SG</h1>
-          <p className={styles.lede}>
-            Find meal support points and community fridges across Singapore in
-            one calm, browser-only directory.
-          </p>
+        <div>
+          <p className={styles.kicker}>Free Meal Map SG</p>
+          <h1>Explore meal support in a calmer, more local way.</h1>
         </div>
-
-        <div className={styles.heroPanel}>
-          <div>
-            <span className={styles.heroPanelLabel}>Current view</span>
-            <strong>{persona.name}</strong>
-            <p>{persona.focus}</p>
-          </div>
-          <button type="button" className={styles.resetButton} onClick={resetDemo}>
-            Reset demo state
-          </button>
-        </div>
+        <p className={styles.lede}>
+          This prototype is map-led rather than directory-led. Start from the
+          neighbourhood, then move into details, notes, and revisit plans.
+        </p>
       </section>
 
-      <section className={styles.dashboard}>
-        <aside className={styles.sidebar}>
-          <div className={styles.panel}>
-            <p className={styles.panelLabel}>Choose a role</p>
-            <div className={styles.personaList}>
-              {personas.map((entry) => (
-                <button
-                  key={entry.id}
-                  type="button"
-                  className={`${styles.personaButton} ${
-                    entry.id === personaId ? styles.personaButtonActive : ""
-                  }`}
-                  onClick={() => setPersonaId(entry.id)}
-                >
-                  <span>{entry.name}</span>
-                  <small>{entry.role}</small>
-                </button>
-              ))}
-            </div>
-          </div>
+      <section className={styles.controls}>
+        <div className={styles.personaRow}>
+          {personas.map((entry) => (
+            <button
+              key={entry.id}
+              type="button"
+              className={`${styles.personaButton} ${
+                personaId === entry.id ? styles.personaButtonActive : ""
+              }`}
+              onClick={() => setPersonaId(entry.id)}
+            >
+              <strong>{entry.name}</strong>
+              <span>{entry.focus}</span>
+            </button>
+          ))}
+        </div>
 
-          <div className={styles.panel}>
-            <p className={styles.panelLabel}>Filters</p>
-            <div className={styles.filterList}>
-              {filterOptions.map((option) => (
-                <button
-                  key={option}
-                  type="button"
-                  className={`${styles.filterButton} ${
-                    option === selectedFilter ? styles.filterButtonActive : ""
-                  }`}
-                  onClick={() => setSelectedFilter(option)}
-                >
-                  {option}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div className={styles.panel}>
-            <p className={styles.panelLabel}>Search</p>
-            <label className={styles.searchField}>
-              <span className={styles.srOnly}>Search locations</span>
-              <input
-                value={search}
-                onChange={(event) => setSearch(event.target.value)}
-                placeholder="Search by place, area, or tag"
-              />
-            </label>
-          </div>
-        </aside>
-
-        <section className={styles.listing}>
-          <div className={styles.listHeader}>
-            <div>
-              <p className={styles.panelLabel}>Directory</p>
-              <h2>{filteredPlaces.length} places near Singapore communities</h2>
-            </div>
-            <p className={styles.listHint}>
-              Saved plan: {savedPlaceIds.length} stop
-              {savedPlaceIds.length === 1 ? "" : "s"}
-            </p>
-          </div>
-
-          <div className={styles.cardGrid}>
-            {filteredPlaces.map((place) => {
-              const active = place.id === selectedPlace.id;
-              const saved = savedPlaceIds.includes(place.id);
-
-              return (
-                <button
-                  key={place.id}
-                  type="button"
-                  className={`${styles.placeCard} ${
-                    active ? styles.placeCardActive : ""
-                  }`}
-                  onClick={() => setSelectedPlaceId(place.id)}
-                >
-                  <div className={styles.placeCardTop}>
-                    <span className={styles.kind}>{place.kind}</span>
-                    {saved ? <span className={styles.savedTag}>Saved</span> : null}
-                  </div>
-                  <h3>{place.name}</h3>
-                  <p>{place.summary}</p>
-                  <div className={styles.placeMeta}>
-                    <span>{place.area}</span>
-                    <span>{place.hoursLabel}</span>
-                  </div>
-                </button>
-              );
-            })}
-          </div>
-        </section>
-
-        <aside className={styles.detailPane}>
-          <div className={styles.panel}>
-            <p className={styles.panelLabel}>Selected place</p>
-            <div className={styles.detailHeader}>
-              <div>
-                <h2>{selectedPlace.name}</h2>
-                <p>{selectedPlace.summary}</p>
-              </div>
+        <div className={styles.searchRow}>
+          <input
+            type="search"
+            value={search}
+            onChange={(event) => setSearch(event.target.value)}
+            placeholder="Search by area, kind, or hint"
+            className={styles.searchInput}
+          />
+          <div className={styles.filterRow}>
+            {filterOptions.map((option) => (
               <button
+                key={option}
                 type="button"
-                className={`${styles.saveButton} ${
-                  savedPlaceIds.includes(selectedPlace.id) ? styles.saveButtonActive : ""
+                className={`${styles.filterButton} ${
+                  option === filter ? styles.filterButtonActive : ""
                 }`}
-                onClick={toggleSavedPlace}
+                onClick={() => setFilter(option)}
               >
-                {savedPlaceIds.includes(selectedPlace.id) ? "Saved to plan" : "Save to plan"}
+                {option}
               </button>
-            </div>
-
-            <dl className={styles.detailFacts}>
-              <div>
-                <dt>Area</dt>
-                <dd>{selectedPlace.area}</dd>
-              </div>
-              <div>
-                <dt>Hours</dt>
-                <dd>{selectedPlace.hours}</dd>
-              </div>
-              <div>
-                <dt>Contact</dt>
-                <dd>{selectedPlace.contact}</dd>
-              </div>
-              <div>
-                <dt>Stock</dt>
-                <dd>{selectedPlace.stock}</dd>
-              </div>
-            </dl>
-
-            <div className={styles.tagRow}>
-              {selectedPlace.tags.map((tag) => (
-                <span key={tag} className={styles.tag}>
-                  {tag}
-                </span>
-              ))}
-            </div>
+            ))}
           </div>
-
-          <div className={styles.panel}>
-            <p className={styles.panelLabel}>Update panel</p>
-            <div className={styles.updateControls}>
-              <label>
-                <span>Quick note</span>
-                <select
-                  value={updateTone}
-                  onChange={(event) => setUpdateTone(event.target.value)}
-                >
-                  <option>Checked in</option>
-                  <option>Needs refill</option>
-                  <option>All clear</option>
-                  <option>Route planned</option>
-                </select>
-              </label>
-              <label className={styles.textareaField}>
-                <span>Add a short update</span>
-                <textarea
-                  value={updateDraft}
-                  onChange={(event) => setUpdateDraft(event.target.value)}
-                  placeholder="Example: fridge is tidy, fruit shelf still needs support by evening."
-                  rows={4}
-                />
-              </label>
-              <button
-                type="button"
-                className={styles.primaryButton}
-                onClick={submitUpdate}
-              >
-                Submit update
-              </button>
-            </div>
-          </div>
-
-          <div className={styles.panel}>
-            <p className={styles.panelLabel}>Checklist</p>
-            <div className={styles.checklist}>
-              {checklistTemplate.map((item, index) => {
-                const checked = checklist[index] ?? item.done;
-
-                return (
-                  <button
-                    key={item.label}
-                    type="button"
-                    className={`${styles.checklistItem} ${
-                      checked ? styles.checklistItemChecked : ""
-                    }`}
-                    onClick={() => toggleChecklistItem(index)}
-                  >
-                    <span className={styles.checkmark} aria-hidden="true">
-                      {checked ? "✓" : ""}
-                    </span>
-                    <span>{item.label}</span>
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-
-          <div className={styles.panel}>
-            <p className={styles.panelLabel}>Recent updates</p>
-            <div className={styles.updateFeed}>
-              {updates.length ? (
-                updates.map((entry, index) => (
-                  <article key={`${entry.postedAt}-${index}`} className={styles.updateItem}>
-                    <span>{entry.label}</span>
-                    <p>{entry.note}</p>
-                    <small>{entry.postedAt}</small>
-                  </article>
-                ))
-              ) : (
-                <p className={styles.emptyState}>
-                  No local updates yet. Submit a note to create one.
-                </p>
-              )}
-            </div>
-          </div>
-        </aside>
+        </div>
       </section>
+
+      <section className={styles.layout}>
+        <div className={styles.mapStage}>
+          <div className={styles.mapHeader}>
+            <div>
+              <p>Map explorer</p>
+              <h2>{persona.helper}</h2>
+            </div>
+            <span>{filteredPlaces.length} visible stops</span>
+          </div>
+
+          <div className={styles.mapCanvas}>
+            <svg
+              className={styles.mapOutline}
+              viewBox="0 0 800 420"
+              aria-hidden="true"
+            >
+              <path
+                d="M124 146C170 108 216 84 276 72c82-16 135 2 200 18 64 16 126 44 162 95 37 53 28 114-3 152-28 34-69 56-111 70-86 28-169 22-254 5-70-13-136-44-173-98-31-46-31-110 3-164 25-39 78-57 176-80"
+                pathLength="1"
+              />
+              <path
+                d="M587 285c40 8 92 40 142 70"
+                pathLength="1"
+              />
+            </svg>
+
+            {filteredPlaces.map((place) => (
+              <button
+                key={place.id}
+                type="button"
+                className={`${styles.hotspot} ${
+                  place.id === selectedPlace.id ? styles.hotspotActive : ""
+                }`}
+                style={{ left: `${place.x}%`, top: `${place.y}%` }}
+                onClick={() => setSelectedPlaceId(place.id)}
+              >
+                <span>{place.area}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className={styles.listRail}>
+          <p>Visible places</p>
+          <div className={styles.placeList}>
+            {filteredPlaces.map((place) => (
+              <button
+                key={place.id}
+                type="button"
+                className={`${styles.placeRow} ${
+                  selectedPlace.id === place.id ? styles.placeRowActive : ""
+                }`}
+                onClick={() => setSelectedPlaceId(place.id)}
+              >
+                <strong>{place.name}</strong>
+                <span>
+                  {place.kind} · {place.area}
+                </span>
+              </button>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <AnimatePresence mode="wait">
+        <motion.section
+          key={selectedPlace.id}
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 12 }}
+          className={styles.drawer}
+        >
+          <div className={styles.drawerLead}>
+            <div>
+              <p>{selectedPlace.kind}</p>
+              <h2>{selectedPlace.name}</h2>
+            </div>
+            <button
+              type="button"
+              className={styles.saveButton}
+              onClick={() => toggleSaved(selectedPlace.id)}
+            >
+              {savedPlaceIds.includes(selectedPlace.id) ? "Saved" : "Save stop"}
+            </button>
+          </div>
+
+          <div className={styles.drawerMeta}>
+            <span>{selectedPlace.area}</span>
+            <span>{selectedPlace.hours}</span>
+            <span>{selectedPlace.updated}</span>
+          </div>
+
+          <div className={styles.drawerGrid}>
+            <div className={styles.storyCol}>
+              <p>{selectedPlace.summary}</p>
+              <ul className={styles.detailList}>
+                <li>{selectedPlace.address}</li>
+                <li>{selectedPlace.stock}</li>
+                <li>{selectedPlace.nextStep}</li>
+                <li>{selectedPlace.contact}</li>
+              </ul>
+            </div>
+
+            <div className={styles.checklistCol}>
+              <h3>Visit checklist</h3>
+              <div className={styles.checklist}>
+                {checklistTemplate.map((item, index) => (
+                  <label key={item} className={styles.checkItem}>
+                    <input
+                      type="checkbox"
+                      checked={Boolean(checklist[index])}
+                      onChange={() => toggleChecklist(index)}
+                    />
+                    <span>{item}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+
+            <div className={styles.notesCol}>
+              <h3>Quick note</h3>
+              <div className={styles.noteComposer}>
+                <textarea
+                  value={noteDraft}
+                  onChange={(event) => setNoteDraft(event.target.value)}
+                  placeholder="Add a visit update or reminder"
+                />
+                <button type="button" onClick={addNote}>
+                  Add note
+                </button>
+              </div>
+              <div className={styles.notesFeed}>
+                {notes.length ? (
+                  notes.map((note) => <p key={note}>{note}</p>)
+                ) : (
+                  <p>No notes yet for this stop.</p>
+                )}
+              </div>
+            </div>
+          </div>
+        </motion.section>
+      </AnimatePresence>
     </main>
   );
 }
