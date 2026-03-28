@@ -1445,6 +1445,7 @@
         "avoid": "text list of activity suggestions; no planner grid; generic recommendations page",
         "experience_goal": "domestic helper plans her rest day with activities she actually wants to do"
       },
+      "built": true,
       "implemented": false
     },
     {
