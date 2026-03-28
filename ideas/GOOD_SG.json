@@ -1521,7 +1521,8 @@
         "experience_goal": "children feel encouraged to start and finish small chunks of work"
       },
       "implementation_tags": [],
-      "implemented": false
+      "implemented": false,
+      "built": true
     },
     {
       "id": "GOOD_SG-156",
