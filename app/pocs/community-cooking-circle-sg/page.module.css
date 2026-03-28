@@ -1,0 +1,495 @@
+.page {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, rgba(255, 201, 146, 0.22), transparent 28%),
+    radial-gradient(circle at right 20%, rgba(119, 163, 109, 0.18), transparent 32%),
+    linear-gradient(180deg, #f7efdf 0%, #f2e3cd 52%, #ead7bc 100%);
+  color: #40271c;
+}
+
+.shell {
+  width: min(1180px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 22px 0 56px;
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  color: rgba(64, 39, 28, 0.72);
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.hero {
+  margin-top: 22px;
+}
+
+.heroCopy,
+.sessionCard,
+.board,
+.flowSection,
+.readyBanner {
+  border: 1px solid rgba(92, 57, 40, 0.14);
+  background: rgba(255, 249, 238, 0.88);
+  box-shadow: 0 20px 50px rgba(111, 74, 45, 0.09);
+}
+
+.heroCopy {
+  padding: 34px;
+  border-radius: 34px;
+}
+
+.eyebrow,
+.boardLabel,
+.flowLabel,
+.heroNoteLabel,
+.stageLabel {
+  margin: 0 0 12px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #a4552e;
+}
+
+.heroTitle,
+.boardTitle,
+.flowTitle,
+.stageTitle,
+.sessionTitle {
+  font-family: var(--font-cooking-circle-display), serif;
+}
+
+.heroTitle {
+  margin: 0;
+  max-width: 16ch;
+  font-size: clamp(2.4rem, 5.8vw, 4.8rem);
+  line-height: 0.97;
+  letter-spacing: -0.05em;
+}
+
+.heroLede {
+  margin: 18px 0 0;
+  max-width: 48ch;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: rgba(64, 39, 28, 0.8);
+}
+
+.sessionStrip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 22px;
+}
+
+.sessionCard {
+  padding: 18px 18px 20px;
+  border-radius: 24px;
+  text-align: left;
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.sessionCard:hover,
+.sessionCardActive {
+  transform: translateY(-3px);
+  border-color: rgba(164, 85, 46, 0.34);
+  box-shadow: 0 26px 46px rgba(111, 74, 45, 0.14);
+}
+
+.sessionCardTop,
+.sessionMeta,
+.boardTop,
+.stageHeader,
+.roleCardTop,
+.flowHeader,
+.flowStationTop,
+.boardSummary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.sessionTime,
+.sessionNeighbourhood,
+.sessionMeta,
+.boardVenue,
+.flowSummary,
+.roleNote,
+.stageNote,
+.stageFooter,
+.flowEmpty,
+.dishTokenNote,
+.summaryText {
+  color: rgba(64, 39, 28, 0.7);
+}
+
+.sessionTime,
+.sessionNeighbourhood {
+  font-size: 0.83rem;
+  font-weight: 700;
+}
+
+.sessionTitle {
+  margin: 14px 0 6px;
+  font-size: 1.56rem;
+  line-height: 1.02;
+  letter-spacing: -0.04em;
+}
+
+.sessionVenue {
+  margin: 0 0 14px;
+  font-size: 0.94rem;
+  line-height: 1.5;
+}
+
+.sessionMeta {
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.board {
+  margin-top: 22px;
+  padding: 28px;
+  border-radius: 32px;
+}
+
+.boardTitle {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1;
+  letter-spacing: -0.05em;
+}
+
+.boardVenue {
+  margin: 10px 0 0;
+  font-size: 0.98rem;
+}
+
+.hostNote {
+  margin: 14px 0 0;
+  max-width: 48ch;
+  font-size: 0.98rem;
+  line-height: 1.65;
+  color: rgba(64, 39, 28, 0.76);
+}
+
+.summaryPill {
+  display: grid;
+  gap: 4px;
+  min-width: 116px;
+  padding: 14px 16px;
+  border-radius: 18px;
+  background: #fff4e5;
+}
+
+.summaryPillOpen {
+  background: rgba(255, 241, 226, 0.96);
+  box-shadow: 0 0 0 1px rgba(192, 96, 57, 0.16);
+}
+
+.summaryNumber {
+  font-family: var(--font-cooking-circle-display), serif;
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+.summaryText {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.stageGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 26px;
+}
+
+.stageColumn {
+  min-height: 100%;
+  padding: 18px;
+  border-radius: 26px;
+  background:
+    linear-gradient(180deg, rgba(255, 252, 246, 0.94), rgba(249, 239, 222, 0.96));
+  border: 1px solid rgba(103, 68, 44, 0.12);
+}
+
+.stageColumnNeedsHelp {
+  box-shadow:
+    inset 0 0 0 1px rgba(213, 124, 74, 0.12),
+    0 0 0 5px rgba(221, 152, 103, 0.08);
+}
+
+.stageTitle {
+  margin: 0;
+  font-size: 1.48rem;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.stageBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 68px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.stageBadgeOpen {
+  background: rgba(255, 230, 208, 0.95);
+  color: #b14c1b;
+}
+
+.stageBadgeReady {
+  background: rgba(221, 241, 205, 0.92);
+  color: #3f6f2b;
+}
+
+.stageNote {
+  margin: 12px 0 18px;
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+.roleList {
+  display: grid;
+  gap: 12px;
+}
+
+.roleCard {
+  padding: 14px;
+  border-radius: 20px;
+  border: 1px solid rgba(93, 56, 38, 0.12);
+  background: rgba(255, 251, 244, 0.96);
+}
+
+.roleCardOpen {
+  box-shadow:
+    0 0 0 1px rgba(218, 149, 105, 0.1),
+    0 0 22px rgba(233, 177, 139, 0.28);
+}
+
+.roleCardFilled {
+  background: rgba(246, 239, 228, 0.98);
+}
+
+.roleCardYou {
+  border-color: rgba(98, 141, 80, 0.3);
+  background: rgba(238, 248, 229, 0.96);
+}
+
+.roleTitle {
+  margin: 0;
+  max-width: 17ch;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.roleStatus {
+  flex-shrink: 0;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.roleStatusOpen {
+  color: #b14c1b;
+}
+
+.roleStatusFilled {
+  color: #476e35;
+}
+
+.roleNote {
+  margin: 10px 0 14px;
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.roleButton {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 14px;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.roleButtonOpen {
+  background: #ba5a2c;
+  color: #fff7ed;
+}
+
+.roleButtonFilled {
+  background: rgba(64, 39, 28, 0.08);
+  color: rgba(64, 39, 28, 0.7);
+}
+
+.roleButton:disabled {
+  cursor: default;
+}
+
+.stageFooter {
+  margin: 16px 0 0;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.flowSection {
+  margin-top: 22px;
+  padding: 24px;
+  border-radius: 30px;
+}
+
+.flowTitle {
+  margin: 0;
+  font-size: 2rem;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.flowSummary {
+  margin: 0;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.flowBoard {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 22px;
+}
+
+.flowStation {
+  min-height: 220px;
+  padding: 16px;
+  border-radius: 24px;
+  border: 1px dashed rgba(103, 68, 44, 0.18);
+  background: rgba(248, 240, 226, 0.76);
+}
+
+.flowStationActive {
+  border-style: solid;
+  border-color: rgba(98, 141, 80, 0.3);
+  background: rgba(237, 247, 227, 0.96);
+}
+
+.flowStationNumber {
+  display: inline-flex;
+  min-width: 30px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #a4552e;
+}
+
+.flowStationLabel {
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+.flowTokenStack {
+  display: grid;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.dishToken {
+  display: grid;
+  gap: 4px;
+  padding: 12px 12px 13px;
+  border-radius: 18px;
+  background: #fffdf8;
+  border: 1px solid rgba(90, 61, 43, 0.12);
+}
+
+.dishTokenName {
+  font-size: 0.96rem;
+  font-weight: 700;
+}
+
+.dishTokenNote,
+.flowEmpty {
+  font-size: 0.85rem;
+  line-height: 1.55;
+}
+
+.flowEmpty {
+  padding-top: 12px;
+}
+
+.readyBanner {
+  margin-top: 18px;
+  padding: 16px 18px;
+  border-radius: 20px;
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: #355f29;
+  background: rgba(232, 246, 218, 0.95);
+}
+
+button.sessionCard,
+button.roleButton {
+  border: none;
+  cursor: pointer;
+  font: inherit;
+}
+
+@media (max-width: 980px) {
+  .stageGrid,
+  .flowBoard,
+  .sessionStrip {
+    grid-template-columns: 1fr;
+  }
+
+  .boardTop,
+  .flowHeader {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .boardSummary {
+    width: 100%;
+  }
+
+  .summaryPill {
+    flex: 1;
+  }
+}
+
+@media (max-width: 640px) {
+  .shell {
+    width: min(100% - 24px, 100%);
+    padding-bottom: 40px;
+  }
+
+  .heroCopy,
+  .board,
+  .flowSection {
+    padding: 20px;
+  }
+
+  .heroTitle {
+    font-size: 2.5rem;
+  }
+
+  .boardSummary {
+    flex-direction: column;
+  }
+}
