@@ -10,37 +10,37 @@ export type PocCard = {
 
 export const pocCards: PocCard[] = [
   {
-    slug: "hawker-surplus-connect",
-    title: "Hawker Surplus Connect",
+    slug: "food-donation-route-sg",
+    title: "Food Donation Route SG",
     category: "Food security",
     summary:
-      "A live rescue board for matching end-of-day surplus with nearby volunteers before closing time.",
+      "Plan your pickup and dropoff route for tonight's food rescue run, stop by stop.",
     impact:
-      "Tests whether clearer watch zones, dispatch timing, and simulated pickup coordination can make small rescue runs easier to act on.",
+      "Tests whether a visual route planner with reorderable stops reduces the planning friction for volunteer drivers.",
     theme: "ops",
-    preview: ["Dispatch board", "Live alerts", "Volunteer roster"],
+    preview: ["Route timeline", "Drag to reorder", "Stop tracker"],
   },
   {
-    slug: "free-meal-map-sg",
-    title: "Free Meal Map SG",
-    category: "Community access",
+    slug: "medication-reminder-sg",
+    title: "Medication Reminder SG",
+    category: "Health & ageing",
     summary:
-      "A calmer way to explore meal support points and community fridges across Singapore.",
+      "A calm daily medication schedule built around a 24-hour clock face — see what's next and mark each dose as taken.",
     impact:
-      "Tests whether a map-led experience can make support options easier to discover, compare, and revisit without friction.",
-    theme: "civic",
-    preview: ["Map explorer", "Area hotspots", "Visit checklist"],
-  },
-  {
-    slug: "budget-meal-basket-sg",
-    title: "Budget Meal Basket SG",
-    category: "Household planning",
-    summary:
-      "A guided weekly basket planner built around local prices, household size, and everyday meal rhythms.",
-    impact:
-      "Tests whether a more visual planning flow can help households shape affordable weeknight meals with less guesswork.",
+      "Tests whether a clock-face visualisation makes it easier for seniors and caregivers to track and confirm daily medications at a glance.",
     theme: "editorial",
-    preview: ["Guided planner", "Budget chart", "Save and share"],
+    preview: ["24-hour clock", "Mark as taken", "Daily schedule"],
+  },
+  {
+    slug: "senior-check-in-sg",
+    title: "Senior Check-In SG",
+    category: "Community care",
+    summary:
+      "A warm check-in board for volunteers and families to track daily contact with seniors living alone.",
+    impact:
+      "Tests whether visible streaks and simple one-tap check-ins can make consistent care coordination easier for grassroots groups.",
+    theme: "civic",
+    preview: ["Streak rings", "Quick check-in", "Care notes"],
   },
 ];
 

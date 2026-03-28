@@ -22,7 +22,7 @@ If no: the page fails. Rewrite the headline and lede before pushing.
 
 ### Real examples from this repo
 
-**Bad (free-meal-map-sg hero lede):**
+**Bad hero lede:**
 > "This prototype is map-led rather than directory-led. Start from the neighbourhood, then move into details, notes, and revisit plans."
 
 This sentence explains the app's architecture to a developer. A resident who needs a meal does not care that the app is "map-led rather than directory-led". They care where they can get food today.
@@ -30,7 +30,7 @@ This sentence explains the app's architecture to a developer. A resident who nee
 **Good:**
 > "Find places near you where free meals and community food support are available."
 
-**Bad (hawker-surplus-connect hero lede):**
+**Bad hero lede:**
 > "A browser-only operations board for watch zones, live pickup windows, and volunteer assignment across Singapore neighbourhoods."
 
 "Browser-only operations board" is builder language. "Watch zones" is internal jargon. "Live pickup windows" is unexplained. A volunteer reading this first line does not know what to do.
@@ -57,12 +57,12 @@ Every one of these has appeared in this repo's POC pages and must never appear o
 - Any text that explains the architecture, technology, or design rationale of the app
 - A "persona switcher" row at the top — this is a developer testing tool, not a user feature
 - A "Reset map state" or "Reset planner" or "Reset dispatch state" button in the header
-- A kicker that just restates the app's technical name ("Budget Meal Basket SG") with no human framing
+- A kicker that just restates the app's technical name with no human framing
 - A lede that begins with "This prototype..." or "A browser-only..." or "A guided planner for..."
 
 ### What passes this test
 
-- A headline that names the benefit or task, not the tool: "Find food support near you" not "Free Meal Map SG"
+- A headline that names the benefit or task, not the tool: "Find food support near you" not the internal app name
 - A lede that speaks to the user's situation, not the app's features: "If you or someone you know needs a free or low-cost meal, this shows you what is available near you." not "Map-led rather than directory-led"
 - A single prominent action: "Search by area", "Start planning", "See tonight's runs"
 
@@ -184,7 +184,7 @@ Before writing any copy for any component, answer three questions:
 
 **Failure: lede copy written for a developer**
 
-The `hawker-surplus-connect` hero lede:
+Example hero lede:
 > "A browser-only operations board for watch zones, live pickup windows, and volunteer assignment across Singapore neighbourhoods."
 
 - Who is reading this? A food rescue volunteer or coordinator.
@@ -200,7 +200,7 @@ The `hawker-surplus-connect` hero lede:
 
 **Failure: empty state written for no one**
 
-`budget-meal-basket-sg` saved plans empty state:
+Example saved plans empty state:
 > "No saved plans yet."
 
 - Who is reading this? A household trying to plan meals on a budget.
@@ -212,7 +212,7 @@ The `hawker-surplus-connect` hero lede:
 
 **Failure: a system-internal alert shown to users**
 
-`hawker-surplus-connect` alert when switching persona:
+Example alert shown when switching views:
 > "Coordinator board loaded. Assignment controls and watch zones are active."
 
 - Who is reading this? A coordinator using the app.
@@ -276,20 +276,20 @@ These things must never appear anywhere a user can read them:
 - A feature list describing what the app contains instead of what the user can do
 - Any text that reads as if it is explaining the app to a developer rather than guiding a user
 
-### Specifically: the "Demo controls" section in hawker-surplus-connect
+### Specifically: visible developer-only controls
 
-The sidebar of `hawker-surplus-connect` contains:
+Example:
 ```
 Demo controls
 Reset or rerun the night
 [Reset dispatch state button]
 ```
 
-This entire section must be removed from user-facing UI. It is a developer testing panel. Real coordinators do not have a "Reset or rerun the night" button.
+This entire section must be removed from user-facing UI. It is a developer testing panel, not a real feature.
 
 ### Specifically: persona switcher buttons
 
-The persona switcher rows in `free-meal-map-sg` and `hawker-surplus-connect` expose the multi-persona system directly to the user. Real users do not switch personas. A volunteer does not press "Switch to coordinator view" because they are a volunteer, not a coordinator.
+Visible persona switcher rows expose the multi-persona system directly to the user. Real users do not switch personas. A volunteer does not press "Switch to coordinator view" because they are a volunteer, not a coordinator.
 
 If role-based views are needed, use onboarding (ask who they are on first visit) or a profile/settings menu — not a prominently placed button strip on the main page.
 
@@ -319,9 +319,9 @@ When they complete that task, show them the next step.
 
 The user's first useful outcome must require at most two interactions. If it requires more, the first screen is showing too much or hiding the entry point.
 
-- `free-meal-map-sg`: The user should be able to tap an area and see food support details within two taps. The persona switcher and filter row should not be on the first screen.
-- `budget-meal-basket-sg`: The user should be able to see a default weekly basket immediately, without pressing "Generate weekly basket" first. The output should be live.
-- `hawker-surplus-connect`: The user (a coordinator) should see tonight's runs immediately. The zone filter and roster are secondary.
+- A map-led support app should let the user tap an area and see relevant details within two taps. The filter row should not dominate the first screen.
+- A meal-planning app should show a sensible default week immediately, without forcing a submit click first. The output should feel live.
+- A coordination app should show the active runs immediately. Secondary controls like filters and rosters should come later.
 
 ---
 
@@ -346,40 +346,21 @@ Run this checklist on every user-facing page before pushing. If any item fails, 
 
 ---
 
-## Appendix: Before/After Rewrites from This Repo
+## Appendix: Before/After Rewrites
 
-These are real strings found in this repo's POC pages and their correct replacements.
+These are representative bad-to-good rewrites for patterns that commonly fail the rules above.
 
-### free-meal-map-sg
-
-| Location | Bad copy (found in repo) | Good copy |
+| Location | Bad copy | Good copy |
 |---|---|---|
-| Hero lede | "This prototype is map-led rather than directory-led. Start from the neighbourhood, then move into details, notes, and revisit plans." | "Find places near you where free meals and community food support are available." |
+| Hero lede | "This prototype is map-led rather than directory-led." | "Find food support near you." |
 | Header button | "Reset map state" | Remove entirely |
-| Map section header | "Map explorer" | Remove or use: "Your area" |
+| Section header | "Map explorer" | "Your area" or remove entirely |
 | List label | "Visible places" | "Nearby stops" |
-| Notes empty state | "No notes yet for this stop." | "Add a note about this stop — hours, what was available, or a reminder to return." |
-| Persona row | [Three persona buttons] | Remove from main UI — use onboarding or profile |
-
-### budget-meal-basket-sg
-
-| Location | Bad copy (found in repo) | Good copy |
-|---|---|---|
-| Hero lede | "A guided planner for household size, pantry strength, and time pressure, with a live weekly basket and day-by-day cost curve." | "Plan a week of meals for your household and see what it will cost before you shop." |
-| Submit button | "Generate weekly basket" | "Build my week" (or remove — output should update live) |
-| Header button | "Reset planner" | Remove entirely |
+| Empty state | "No saved plans yet." | "Save a basket here to compare a few options before you shop." |
+| Submit button | "Generate weekly basket" | "Build my week" or remove if the output updates live |
 | Output label | "Current plan" | "Your week" |
 | Copy button | "Copy summary" | "Copy this plan" |
-| Saved plans empty | "No saved plans yet." | "Save a basket here to compare a few options before you shop." |
-
-### hawker-surplus-connect
-
-| Location | Bad copy (found in repo) | Good copy |
-|---|---|---|
-| Hero lede | "A browser-only operations board for watch zones, live pickup windows, and volunteer assignment across Singapore neighbourhoods." | "Coordinate tonight's food rescue runs from hawker centres across your area." |
-| Persona strip | [Coordinator / Volunteer buttons] | Remove from main UI — use onboarding |
+| Persona strip | [Role buttons visible on the main page] | Remove from the main UI and use onboarding or profile settings instead |
 | Dispatch button | "Simulate alert" | Remove entirely |
-| Sidebar section | "Demo controls / Reset or rerun the night / [Reset dispatch state]" | Remove entirely |
-| Alert message | "Coordinator board loaded. Assignment controls and watch zones are active." | Remove — let the interface speak for itself |
-| Alert message | "Volunteer board loaded. Nearby runs and claim flow are active." | Remove |
-| Sidebar label | "Watch settings / Where should the board listen?" | "Areas you cover" |
+| Sidebar section | "Demo controls / Reset or rerun the night / [Reset state]" | Remove entirely |
+| System alert | "Coordinator board loaded. Assignment controls are active." | Remove and let the interface speak for itself |

@@ -1,0 +1,525 @@
+/* ── Page shell ────────────────────────────────────────────── */
+.page {
+  min-height: 100vh;
+  background: #fdf6f0;
+  color: #2d1f14;
+}
+
+/* ── Top bar ───────────────────────────────────────────────── */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 40px;
+  background: rgba(253, 246, 240, 0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(196, 98, 45, 0.12);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #8a5a3a;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 150ms ease;
+}
+
+.backLink:hover {
+  color: #c4622d;
+}
+
+.appLabel {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #c4622d;
+  opacity: 0.7;
+}
+
+/* ── Hero ──────────────────────────────────────────────────── */
+.hero {
+  padding: 56px 40px 48px;
+  max-width: 860px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.heroKicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 20px;
+  padding: 6px 16px;
+  border-radius: 999px;
+  background: rgba(196, 98, 45, 0.10);
+  color: #c4622d;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.heroKickerDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: #c4622d;
+}
+
+.heroTitle {
+  margin: 0 0 16px;
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  line-height: 1.15;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: #2d1f14;
+}
+
+.heroLede {
+  margin: 0 auto;
+  max-width: 540px;
+  font-size: 1.1rem;
+  line-height: 1.65;
+  color: #7a4f35;
+}
+
+/* ── Senior grid ───────────────────────────────────────────── */
+.rosterSection {
+  padding: 0 40px 80px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.rosterGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+
+/* ── Senior card ───────────────────────────────────────────── */
+.card {
+  background: #fff;
+  border-radius: 24px;
+  padding: 28px;
+  box-shadow:
+    0 2px 8px rgba(196, 98, 45, 0.06),
+    0 8px 32px rgba(196, 98, 45, 0.08);
+  border: 1.5px solid rgba(196, 98, 45, 0.10);
+  cursor: pointer;
+  transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 4px 16px rgba(196, 98, 45, 0.10),
+    0 16px 48px rgba(196, 98, 45, 0.14);
+  border-color: rgba(196, 98, 45, 0.24);
+}
+
+.cardNeedsFollowUp {
+  border-color: rgba(196, 98, 45, 0.35);
+  background: linear-gradient(180deg, #fff 0%, #fff8f4 100%);
+}
+
+.cardCheckedIn {
+  border-color: rgba(56, 142, 60, 0.22);
+  background: linear-gradient(180deg, #fff 0%, #f5fbf5 100%);
+}
+
+/* ── Ring + name row ───────────────────────────────────────── */
+.cardTop {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.ringWrap {
+  position: relative;
+  flex-shrink: 0;
+  width: 88px;
+  height: 88px;
+}
+
+.ringWrap svg {
+  width: 88px;
+  height: 88px;
+  overflow: visible;
+}
+
+.ringCenter {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.ringStreakNum {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #2d1f14;
+  line-height: 1;
+}
+
+.ringStreakLabel {
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #8a5a3a;
+  line-height: 1;
+  margin-top: 2px;
+}
+
+.cardNameBlock {
+  flex: 1;
+  min-width: 0;
+}
+
+.cardName {
+  margin: 0 0 4px;
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #2d1f14;
+  line-height: 1.2;
+}
+
+.cardNeighbourhood {
+  margin: 0 0 6px;
+  font-size: 0.82rem;
+  color: #8a5a3a;
+  font-weight: 600;
+}
+
+.lastCheckin {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.8rem;
+  color: #7a4f35;
+  font-weight: 500;
+}
+
+.lastCheckinNeedsAttention {
+  color: #c4622d;
+  font-weight: 700;
+}
+
+/* ── Streak label ──────────────────────────────────────────── */
+.streakLabel {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #8a5a3a;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: rgba(196, 98, 45, 0.08);
+  display: inline-block;
+  width: fit-content;
+}
+
+.streakLabelMilestone {
+  background: rgba(196, 98, 45, 0.15);
+  color: #c4622d;
+}
+
+/* ── Card action ───────────────────────────────────────────── */
+.checkInBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 14px 20px;
+  border-radius: 14px;
+  border: none;
+  background: linear-gradient(135deg, #d4793a 0%, #c4622d 100%);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 160ms ease, transform 120ms ease;
+  margin-top: auto;
+}
+
+.checkInBtn:hover {
+  opacity: 0.92;
+  transform: scale(1.01);
+}
+
+.checkInBtn:active {
+  transform: scale(0.98);
+}
+
+.checkedBadge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 14px 20px;
+  border-radius: 14px;
+  background: rgba(56, 142, 60, 0.10);
+  color: #2e7d32;
+  font-size: 1rem;
+  font-weight: 700;
+  margin-top: auto;
+  border: 1.5px solid rgba(56, 142, 60, 0.22);
+}
+
+/* ── Modal overlay ─────────────────────────────────────────── */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(45, 31, 20, 0.45);
+  backdrop-filter: blur(4px);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modal {
+  background: #fdf6f0;
+  border-radius: 28px;
+  padding: 36px;
+  max-width: 520px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 32px 80px rgba(45, 31, 20, 0.28);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.modalCloseRow {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: -8px;
+}
+
+.modalCloseBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #8a5a3a;
+  font-size: 1.2rem;
+  padding: 4px 8px;
+  border-radius: 8px;
+  transition: background 150ms ease;
+}
+
+.modalCloseBtn:hover {
+  background: rgba(196, 98, 45, 0.10);
+}
+
+.modalAvatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #d4793a, #c4622d);
+  color: #fff;
+  font-size: 2rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modalHeader {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.modalHeaderText {
+  flex: 1;
+}
+
+.modalName {
+  margin: 0 0 4px;
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #2d1f14;
+}
+
+.modalMeta {
+  margin: 0;
+  font-size: 0.88rem;
+  color: #7a4f35;
+  font-weight: 500;
+}
+
+.modalSection {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.modalSectionLabel {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #c4622d;
+  opacity: 0.8;
+}
+
+.modalSectionValue {
+  font-size: 0.95rem;
+  color: #2d1f14;
+  line-height: 1.55;
+}
+
+.modalHistoryList {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.modalHistoryItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.88rem;
+  color: #5a3a22;
+}
+
+.historyDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  flex-shrink: 0;
+}
+
+.historyDotChecked {
+  background: #c4622d;
+}
+
+.historyDotMissed {
+  background: #e0d4ca;
+  border: 1.5px solid #c4b8ad;
+}
+
+.modalCheckInBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 18px 24px;
+  border-radius: 16px;
+  border: none;
+  background: linear-gradient(135deg, #d4793a 0%, #c4622d 100%);
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 160ms ease, transform 120ms ease;
+}
+
+.modalCheckInBtn:hover {
+  opacity: 0.92;
+  transform: scale(1.01);
+}
+
+.modalCheckedBadge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 18px 24px;
+  border-radius: 16px;
+  background: rgba(56, 142, 60, 0.10);
+  color: #2e7d32;
+  font-size: 1.1rem;
+  font-weight: 700;
+  border: 1.5px solid rgba(56, 142, 60, 0.22);
+}
+
+/* ── Milestone celebration overlay ────────────────────────── */
+.celebrationOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.celebrationBox {
+  background: #fff;
+  border-radius: 28px;
+  padding: 40px 48px;
+  text-align: center;
+  box-shadow: 0 32px 80px rgba(196, 98, 45, 0.3);
+  border: 2px solid rgba(196, 98, 45, 0.25);
+  max-width: 380px;
+}
+
+.celebrationEmoji {
+  font-size: 3rem;
+  margin-bottom: 12px;
+}
+
+.celebrationTitle {
+  margin: 0 0 8px;
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #c4622d;
+}
+
+.celebrationSub {
+  margin: 0;
+  font-size: 1rem;
+  color: #7a4f35;
+  line-height: 1.5;
+}
+
+/* ── Responsive ────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .rosterGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 680px) {
+  .topbar {
+    padding: 16px 20px;
+  }
+
+  .hero {
+    padding: 40px 20px 36px;
+  }
+
+  .rosterSection {
+    padding: 0 20px 60px;
+  }
+
+  .rosterGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .modal {
+    padding: 24px;
+  }
+}
