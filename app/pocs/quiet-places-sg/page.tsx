@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { CSSProperties, useEffect, useState } from "react";
@@ -50,10 +51,11 @@ export default function QuietPlacesPage() {
             Slide to keep only the places that feel quieter, softer, and easier to settle into.
           </p>
         </div>
-        <img
+        <Image
           src="/undraw/undraw_focused_m9bj.svg"
           alt=""
-          aria-hidden="true"
+          width={520}
+          height={420}
           className={styles.heroIllustration}
         />
       </section>

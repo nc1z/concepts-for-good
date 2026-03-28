@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { Cormorant_Garamond, Manrope } from "next/font/google";
 import { animate } from "animejs";
@@ -84,10 +85,11 @@ export default function VolunteerMatchPage() {
               Move through live opportunities and keep the strengths you can bring close at hand.
             </p>
           </div>
-          <img
+          <Image
             src="/undraw/undraw_referral_ihsd.svg"
             alt=""
-            aria-hidden="true"
+            width={520}
+            height={420}
             className={styles.heroIllustration}
           />
         </section>

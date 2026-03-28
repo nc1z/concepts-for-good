@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { IBM_Plex_Sans, Space_Grotesk } from "next/font/google";
 import { animate } from "animejs";
@@ -134,10 +135,11 @@ export default function VolunteerHoursPage() {
               <span>{totalHours.toFixed(1)} hours this week</span>
             </div>
           </div>
-          <img
+          <Image
             src="/undraw/undraw_accomplishments_tb6k.svg"
             alt=""
-            aria-hidden="true"
+            width={520}
+            height={420}
             className={styles.heroIllustration}
           />
         </section>
@@ -187,10 +189,11 @@ export default function VolunteerHoursPage() {
               })
             ) : (
               <div className={styles.emptyBlock}>
-                <img
+                <Image
                   src="/undraw/undraw_goals_dwgr.svg"
                   alt=""
-                  aria-hidden="true"
+                  width={320}
+                  height={240}
                   className={styles.emptyIllustration}
                 />
                 <p className={styles.emptyState}>

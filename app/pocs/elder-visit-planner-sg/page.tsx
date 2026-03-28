@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { Manrope } from "next/font/google";
 import { motion } from "framer-motion";
@@ -88,10 +89,11 @@ export default function ElderVisitPlannerPage() {
               Pick a day, add a volunteer visit, and keep track of which seniors still need someone to drop by.
             </p>
           </div>
-          <img
+          <Image
             src="/undraw/undraw_events-calendar_sudy.svg"
             alt=""
-            aria-hidden="true"
+            width={520}
+            height={420}
             className={styles.heroIllustration}
           />
         </section>

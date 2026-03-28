@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { Lexend } from "next/font/google";
 import { AnimatePresence, motion } from "framer-motion";
@@ -219,10 +220,11 @@ export default function DigitalHelpForSeniorsPage() {
                 <p className={styles.lede}>
                   If using a phone feels confusing, this guide shows one thing to do on each screen.
                 </p>
-                <img
+                <Image
                   src="/undraw/undraw_continuous-learning_a1ld.svg"
                   alt=""
-                  aria-hidden="true"
+                  width={520}
+                  height={420}
                   className={styles.welcomeIllustration}
                 />
                 <div className={styles.finishButtons}>

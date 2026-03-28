@@ -40,11 +40,12 @@ function formatSGD(amount: number): string {
 }
 
 function assignmentLabel(bill: Bill, people: Person[]): string {
-  if (bill.assignment.type === "sole") {
-    const person = people.find((p) => p.id === bill.assignment.personId);
+  const { assignment } = bill;
+  if (assignment.type === "sole") {
+    const person = people.find((p) => p.id === assignment.personId);
     return person?.name ?? "Unassigned";
   }
-  const parts = Object.entries(bill.assignment.ratios)
+  const parts = Object.entries(assignment.ratios)
     .filter(([, r]) => r > 0)
     .map(([id, r]) => {
       const person = people.find((p) => p.id === id);
@@ -54,8 +55,9 @@ function assignmentLabel(bill: Bill, people: Person[]): string {
 }
 
 function assignmentDotColor(bill: Bill, people: Person[]): string {
-  if (bill.assignment.type === "sole") {
-    return people.find((p) => p.id === bill.assignment.personId)?.color ?? "#b0a99a";
+  const { assignment } = bill;
+  if (assignment.type === "sole") {
+    return people.find((p) => p.id === assignment.personId)?.color ?? "#b0a99a";
   }
   // Multiple — return a neutral warm tone
   return "#b0a99a";

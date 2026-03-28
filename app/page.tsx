@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 
 import { pocCards } from "@/lib/pocs";
 
@@ -32,6 +32,14 @@ function hashWithSeed(value: string, seed: number) {
 }
 
 export default function Home() {
+  return (
+    <Suspense>
+      <HomeContent />
+    </Suspense>
+  );
+}
+
+function HomeContent() {
   const pathname = usePathname();
   const router = useRouter();
   const searchParams = useSearchParams();

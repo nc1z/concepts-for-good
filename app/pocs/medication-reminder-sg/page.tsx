@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { DM_Sans } from "next/font/google";
 import { AnimatePresence, motion } from "framer-motion";
@@ -289,10 +290,11 @@ export default function MedicationReminderPage() {
             See all of today&apos;s medications at a glance and mark each one as taken.
           </p>
         </div>
-        <img
+        <Image
           src="/undraw/undraw_reminders_o8j5.svg"
           alt=""
-          aria-hidden="true"
+          width={520}
+          height={420}
           className={styles.heroIllustration}
         />
       </section>

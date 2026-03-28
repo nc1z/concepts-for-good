@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { Nunito } from "next/font/google";
 import { AnimatePresence, motion } from "framer-motion";
@@ -518,10 +519,11 @@ export default function SeniorCheckInSgPage() {
         <p className={styles.heroLede}>
           Mark today&apos;s check-ins for seniors in your care and keep their streak going.
         </p>
-        <img
+        <Image
           src="/undraw/undraw_love_9mug.svg"
           alt=""
-          aria-hidden="true"
+          width={520}
+          height={420}
           className={styles.heroIllustration}
         />
       </section>

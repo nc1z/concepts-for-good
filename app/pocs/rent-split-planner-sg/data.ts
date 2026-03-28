@@ -73,16 +73,18 @@ export function getBillOwnerColor(
   bill: Bill,
   people: Person[]
 ): string {
-  if (bill.assignment.type === "sole") {
-    return people.find((p) => p.id === bill.assignment.personId)?.color ?? "#aaa";
+  const { assignment } = bill;
+  if (assignment.type === "sole") {
+    return people.find((p) => p.id === assignment.personId)?.color ?? "#aaa";
   }
   // For split bills, return a neutral
   return "#b0a99a";
 }
 
 export function getBillOwnerName(bill: Bill, people: Person[]): string | null {
-  if (bill.assignment.type === "sole") {
-    return people.find((p) => p.id === bill.assignment.personId)?.name ?? null;
+  const { assignment } = bill;
+  if (assignment.type === "sole") {
+    return people.find((p) => p.id === assignment.personId)?.name ?? null;
   }
   return null;
 }

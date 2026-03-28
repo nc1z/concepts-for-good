@@ -1,6 +1,13 @@
 import { render, screen } from "@testing-library/react";
 import { vi } from "vitest";
 
+// Mock next/navigation — provides App Router context for hooks
+vi.mock("next/navigation", () => ({
+  useRouter: () => ({ replace: vi.fn(), push: vi.fn() }),
+  usePathname: () => "/",
+  useSearchParams: () => new URLSearchParams(),
+}));
+
 // Mock next/link — renders a plain anchor in tests
 vi.mock("next/link", () => ({
   default: ({ href, children, ...props }: React.AnchorHTMLAttributes<HTMLAnchorElement> & { href: string }) => (
