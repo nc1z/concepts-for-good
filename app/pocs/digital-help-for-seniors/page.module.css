@@ -1,0 +1,294 @@
+.page {
+  --bg-soft: #f6efe2;
+  --bg-strong: #ead6b4;
+  --panel: #fffaf2;
+  --panel-strong: #fff4df;
+  --text: #1f2e2c;
+  --text-soft: #596563;
+  --line: rgba(55, 78, 73, 0.12);
+  --accent: #0d6a66;
+  --accent-strong: #074946;
+  --accent-soft: rgba(13, 106, 102, 0.12);
+  min-height: 100vh;
+  padding: 24px;
+  background:
+    radial-gradient(circle at top, rgba(255, 255, 255, 0.94), transparent 44%),
+    linear-gradient(180deg, var(--bg-soft) 0%, #f3e5cf 100%);
+  color: var(--text);
+  font-family: var(--font-kiosk), sans-serif;
+}
+
+.frame {
+  width: min(980px, 100%);
+  min-height: calc(100vh - 48px);
+  margin: 0 auto;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 20px;
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  width: fit-content;
+  min-height: 56px;
+  padding: 0 22px;
+  border-radius: 999px;
+  background: rgba(255, 250, 242, 0.82);
+  border: 1px solid var(--line);
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.backLink span {
+  font-size: 1.4rem;
+  line-height: 1;
+}
+
+.screenWrap {
+  position: relative;
+  overflow: hidden;
+  border-radius: 40px;
+  border: 1px solid var(--line);
+  background:
+    radial-gradient(circle at top right, rgba(13, 106, 102, 0.08), transparent 26%),
+    linear-gradient(180deg, rgba(255, 250, 242, 0.96), rgba(251, 244, 231, 0.98));
+  box-shadow: 0 28px 60px rgba(79, 66, 42, 0.14);
+}
+
+.screen {
+  min-height: clamp(720px, calc(100vh - 220px), 820px);
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: 28px;
+  padding: clamp(32px, 4vw, 56px);
+  text-align: center;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 52px;
+  padding: 0 20px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.eyebrowDot {
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  background: var(--accent);
+}
+
+.title {
+  width: min(14ch, 100%);
+  margin: 0;
+  font-size: clamp(2.8rem, 6vw, 5rem);
+  line-height: 1.02;
+  letter-spacing: -0.045em;
+}
+
+.lede {
+  width: min(22ch, 100%);
+  margin: 0;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  line-height: 1.4;
+  color: var(--text-soft);
+}
+
+.startButton,
+.taskButton,
+.navButton,
+.ghostButton {
+  border: 0;
+  cursor: pointer;
+  font: inherit;
+}
+
+.startButton {
+  min-width: min(100%, 360px);
+  min-height: 92px;
+  padding: 18px 28px;
+  border-radius: 30px;
+  background: linear-gradient(180deg, #14817b, var(--accent-strong));
+  color: white;
+  font-size: clamp(1.6rem, 3vw, 2.1rem);
+  font-weight: 800;
+  box-shadow: 0 22px 42px rgba(13, 106, 102, 0.24);
+}
+
+.helper {
+  width: min(28ch, 100%);
+  margin: 0;
+  font-size: 1.2rem;
+  line-height: 1.55;
+  color: var(--text-soft);
+}
+
+.taskGrid {
+  width: min(100%, 760px);
+  display: grid;
+  gap: 18px;
+}
+
+.taskButton {
+  display: grid;
+  justify-items: start;
+  gap: 12px;
+  width: 100%;
+  padding: 28px;
+  border-radius: 32px;
+  background: var(--panel);
+  border: 2px solid transparent;
+  text-align: left;
+  box-shadow: 0 20px 34px rgba(85, 68, 42, 0.08);
+}
+
+.taskButton:focus-visible,
+.taskButton:hover {
+  border-color: rgba(13, 106, 102, 0.42);
+}
+
+.taskCategory {
+  color: var(--accent-strong);
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.taskTitle {
+  margin: 0;
+  font-size: clamp(1.9rem, 4vw, 2.5rem);
+  line-height: 1.12;
+}
+
+.taskIntro {
+  margin: 0;
+  font-size: 1.2rem;
+  line-height: 1.5;
+  color: var(--text-soft);
+}
+
+.stepMeta {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 60px;
+  padding: 0 24px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid var(--line);
+  color: var(--accent-strong);
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+
+.sceneWrap {
+  width: min(100%, 540px);
+  padding: clamp(20px, 3vw, 28px);
+  border-radius: 36px;
+  background:
+    radial-gradient(circle at top, rgba(255, 255, 255, 0.94), transparent 58%),
+    linear-gradient(180deg, rgba(255, 244, 223, 0.95), rgba(247, 233, 205, 0.96));
+  border: 1px solid rgba(13, 106, 102, 0.12);
+}
+
+.sceneSvg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.stepTitle {
+  width: min(14ch, 100%);
+  margin: 0;
+  font-size: clamp(2.5rem, 5vw, 4.2rem);
+  line-height: 1.06;
+  letter-spacing: -0.045em;
+}
+
+.stepBody {
+  width: min(20ch, 100%);
+  margin: 0;
+  font-size: clamp(1.45rem, 2.8vw, 1.95rem);
+  line-height: 1.45;
+}
+
+.stepCue {
+  width: min(24ch, 100%);
+  margin: 0;
+  font-size: 1.2rem;
+  line-height: 1.55;
+  color: var(--text-soft);
+}
+
+.nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.navButton,
+.ghostButton {
+  min-height: 84px;
+  border-radius: 28px;
+  font-size: clamp(1.35rem, 2vw, 1.7rem);
+  font-weight: 800;
+}
+
+.navButton {
+  background: linear-gradient(180deg, #14817b, var(--accent-strong));
+  color: white;
+}
+
+.ghostButton {
+  background: rgba(255, 250, 242, 0.88);
+  color: var(--text);
+  border: 1px solid var(--line);
+}
+
+.finishButtons {
+  width: min(100%, 760px);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+@media (max-width: 760px) {
+  .page {
+    padding: 14px;
+  }
+
+  .frame {
+    min-height: calc(100vh - 28px);
+  }
+
+  .screen {
+    min-height: calc(100vh - 170px);
+    padding: 24px 18px;
+  }
+
+  .title,
+  .stepTitle {
+    width: 100%;
+  }
+
+  .taskButton {
+    padding: 22px;
+  }
+
+  .nav,
+  .finishButtons {
+    grid-template-columns: 1fr;
+  }
+}

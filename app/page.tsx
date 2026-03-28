@@ -28,9 +28,9 @@ export default function Home() {
           SG Concepts for Good
         </div>
         <div className="hero__copy">
-          <h1>Early digital concepts for public good in Singapore.</h1>
+          <h1>Simple digital ideas that support everyday life in Singapore.</h1>
           <p className="hero__lede">
-            Explore public-facing digital ideas taking shape for Singapore.
+            Explore rapid prototypes and proof of concepts made possible with AI.
           </p>
           <p className="hero__note">* These concepts are agentically generated.</p>
         </div>
@@ -45,18 +45,11 @@ export default function Home() {
             >
               <div className="gallery-item__topline">
                 <span>{card.category}</span>
-                <span className="gallery-item__status">Live demo</span>
               </div>
 
               <div className="gallery-item__body">
                 <h2>{card.title}</h2>
                 <p>{card.summary}</p>
-              </div>
-
-              <div className="gallery-item__preview">
-                {card.preview.map((label) => (
-                  <span key={label}>{label}</span>
-                ))}
               </div>
 
               <div className="gallery-item__footer">

@@ -16,7 +16,7 @@ export const pocCards: PocCard[] = [
     summary:
       "Plan your pickup and dropoff route for tonight's food rescue run, stop by stop.",
     impact:
-      "Tests whether a visual route planner with reorderable stops reduces the planning friction for volunteer drivers.",
+      "A visual route planner with reorderable stops for volunteer drivers.",
     theme: "ops",
     preview: ["Route timeline", "Drag to reorder", "Stop tracker"],
   },
@@ -27,7 +27,7 @@ export const pocCards: PocCard[] = [
     summary:
       "A calm daily medication schedule built around a 24-hour clock face — see what's next and mark each dose as taken.",
     impact:
-      "Tests whether a clock-face visualisation makes it easier for seniors and caregivers to track and confirm daily medications at a glance.",
+      "A clock-face medication guide for seniors and caregivers to follow through the day.",
     theme: "editorial",
     preview: ["24-hour clock", "Mark as taken", "Daily schedule"],
   },
@@ -38,9 +38,20 @@ export const pocCards: PocCard[] = [
     summary:
       "A warm check-in board for volunteers and families to track daily contact with seniors living alone.",
     impact:
-      "Tests whether visible streaks and simple one-tap check-ins can make consistent care coordination easier for grassroots groups.",
+      "A warm daily check-in flow for volunteers and families supporting seniors living alone.",
     theme: "civic",
     preview: ["Streak rings", "Quick check-in", "Care notes"],
+  },
+  {
+    slug: "digital-help-for-seniors",
+    title: "Digital Help for Seniors",
+    category: "Digital confidence",
+    summary:
+      "A step-by-step phone helper for common tasks like paying a bill, opening an appointment, or scanning a QR code.",
+    impact:
+      "A large-step phone guide for older adults doing everyday digital tasks.",
+    theme: "civic",
+    preview: ["Large steps", "Phone guides", "Simple progress"],
   },
 ];
 
