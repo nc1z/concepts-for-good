@@ -1,41 +1,82 @@
 # Concepts for Good
 
-A `Next.js` gallery of Singapore-for-good proof-of-concept apps.
+A curated gallery of small, browser-based proof-of-concept apps built for Singapore — focused on access, care, resilience, and community.
 
-The current app is a polished landing page with three placeholder concept cards and route-ready detail pages. The longer-term goal is to expand this into a browsable collection of small public-good POCs built from the local planning dataset in `ideas/GOOD_SG.json`.
+Each concept is independently scoped, visually distinct, and demoable without a backend or account.
 
-## What is in the repo
+**[conceptsforgood.sg](https://conceptsforgood.sg)** &nbsp;·&nbsp; Built with Next.js, Claude, and Codex &nbsp;·&nbsp; By [Neil C](https://www.linkedin.com/in/neil-c)
 
-- `app/`: the `Next.js` app router site
-- `lib/pocs.ts`: placeholder gallery card data
-- `ideas/GOOD_SG.json`: local idea bank for future Singapore-focused POCs
-- `NORTHSTAR.md`: product and PM planning brief
-- `skills/` and `automations/`: Codex automation instructions for backlog triage and implementation
+---
 
-## Getting started
+## What's inside
 
-### Requirements
+17 live concepts across six themes:
 
-- Node.js 18.20+ or newer
-- npm
+| Theme | Examples |
+|---|---|
+| Urban access | Rain Window Planner, Carpark Chance, Traffic Camera Check |
+| Accessibility | MRT Lift Note, Accessible Mall Route, Quiet Places |
+| Community care | Senior Check-In, Elder Visit Planner |
+| Health & ageing | Medication Reminder |
+| Civic life | Volunteer Match, Skills for Good, Volunteer Hours |
+| Cost of living | Rent Split Planner |
 
-### Run locally
+All POCs use seeded local data, `localStorage`, and persona-switch buttons — no auth, no server database.
+
+---
+
+## How it's structured
+
+```mermaid
+graph LR
+    A[ideas/GOOD_SG.json\n160 ideas] -->|agent picks next unbuilt| B[app/pocs/<slug>/]
+    B --> C[lib/pocs.ts\ngallery card registry]
+    C --> D[/ landing page\ngallery + search + filter]
+    D --> E[/pocs/<slug>\nindividual POC page]
+```
+
+```
+app/
+├── layout.tsx          root metadata + fonts
+├── page.tsx            gallery landing page
+└── pocs/
+    └── <slug>/
+        ├── layout.tsx  per-page SEO metadata
+        ├── page.tsx    POC app (client component)
+        ├── data.ts     seed data + types
+        └── page.module.css
+
+lib/pocs.ts             card registry (title, summary, tags, theme)
+ideas/GOOD_SG.json      idea bank — source of truth for new POCs
+rules/                  mandatory design + content guidelines
+automations/            Codex agent prompts (PM + Dev rounds)
+skills/                 reusable agent skill definitions
+```
+
+---
+
+## Running locally
+
+**Requirements:** Node.js 18.20+
 
 ```bash
 npm install
-npm run dev
+npm run dev        # http://localhost:3000
+npm run build      # production build check
+npm run lint       # eslint
+npm run test       # vitest
 ```
 
-Then open `http://localhost:3000`.
+---
 
-### Quality checks
+## How new POCs get built
 
-```bash
-npm run lint
-npm run build
-```
+A Dev agent reads `ideas/GOOD_SG.json`, picks the first idea without `"built": true`, implements it as a Next.js POC, and opens a PR labelled `agent`. The PM agent handles backlog triage and idea prioritisation.
 
-## Notes
+Design and content rules live in `rules/` — every POC must pass them before shipping.
 
-- The current version is intentionally a foundation release: gallery shell first, richer POCs later.
-- Planning and issue generation should stay aligned with `NORTHSTAR.md`.
+---
+
+## Contributing
+
+See [CONTRIBUTING.md](./CONTRIBUTING.md).
