@@ -11,6 +11,18 @@ export type PocCard = {
 
 export const pocCards: PocCard[] = [
   {
+    slug: "taxi-gap-watch-sg",
+    title: "Taxi Gap Watch",
+    category: "Urban access",
+    createdAt: "2026-03-28T21:40:00+08:00",
+    summary:
+      "See when taxi supply around your route is thinning so you can leave before the hard wait starts.",
+    impact:
+      "A timing-strip planner that helps shift workers, caregivers, and seniors catch a safer pickup window.",
+    theme: "ops",
+    tags: ["Transport", "Late-night travel", "Caregiving", "data.gov.sg"],
+  },
+  {
     slug: "rain-window-planner-sg",
     title: "Rain Window Planner",
     category: "Urban access",

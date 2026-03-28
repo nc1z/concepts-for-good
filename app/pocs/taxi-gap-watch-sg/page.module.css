@@ -1,0 +1,427 @@
+.page {
+  min-height: 100dvh;
+  background:
+    radial-gradient(circle at top left, rgba(94, 234, 212, 0.18), transparent 22%),
+    radial-gradient(circle at 80% 20%, rgba(248, 196, 113, 0.18), transparent 20%),
+    linear-gradient(180deg, #07111f 0%, #0c1d31 38%, #102843 100%);
+  color: #eff6ff;
+  font-family: var(--font-taxi-gap-heading), sans-serif;
+}
+
+.shell {
+  width: min(1200px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 24px 0 56px;
+}
+
+.backLink {
+  display: inline-flex;
+  margin-bottom: 18px;
+  color: #8fdcca;
+  font-size: 0.92rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(300px, 0.7fr);
+  gap: 18px;
+  align-items: end;
+  margin-bottom: 22px;
+}
+
+.heroCopy h1,
+.tidePanel h2,
+.guidanceCard h2 {
+  margin: 0;
+  font-family: var(--font-taxi-gap-heading), sans-serif;
+  letter-spacing: -0.05em;
+}
+
+.eyebrow,
+.panelLabel {
+  margin: 0 0 12px;
+  color: #7abdc8;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.heroCopy h1 {
+  font-size: clamp(2.5rem, 5vw, 4.8rem);
+  line-height: 0.92;
+  max-width: 12ch;
+}
+
+.lede {
+  max-width: 54ch;
+  margin: 16px 0 0;
+  color: #bad0e5;
+  font-size: 1.02rem;
+  line-height: 1.7;
+}
+
+.heroMeta {
+  display: grid;
+  gap: 12px;
+}
+
+.metaCard,
+.tidePanel,
+.guidanceCard,
+.snapshotCard,
+.tripCard,
+.feedNotice {
+  border: 1px solid rgba(133, 168, 201, 0.18);
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.22);
+}
+
+.metaCard {
+  padding: 18px;
+  border-radius: 24px;
+  background: linear-gradient(180deg, rgba(12, 30, 50, 0.84), rgba(12, 30, 50, 0.72));
+}
+
+.metaCard span,
+.metaCard em {
+  display: block;
+  color: #9db4c9;
+}
+
+.metaCard strong {
+  display: block;
+  margin: 8px 0 6px;
+  font-size: 1.6rem;
+  line-height: 1;
+}
+
+.metaCard em,
+.refreshButton,
+.tooltip strong,
+.tooltip span {
+  font-family: var(--font-taxi-gap-mono), monospace;
+}
+
+.zoneRail {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.zoneButton,
+.snapshotRow {
+  border: 1px solid rgba(143, 176, 210, 0.16);
+  background: rgba(12, 27, 45, 0.7);
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+}
+
+.zoneButton {
+  min-height: 118px;
+  padding: 16px;
+  border-radius: 22px;
+}
+
+.zoneButton:hover,
+.snapshotRow:hover {
+  transform: translateY(-1px);
+  border-color: rgba(142, 242, 219, 0.34);
+}
+
+.zoneButtonActive,
+.snapshotRowActive {
+  border-color: rgba(142, 242, 219, 0.58);
+  background: rgba(13, 37, 56, 0.92);
+}
+
+.zoneButtonTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.zoneButtonTop strong,
+.snapshotRow strong {
+  display: block;
+  font-size: 1rem;
+}
+
+.zoneStatus {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 0 10px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.statusSteady {
+  background: rgba(94, 234, 212, 0.16);
+  color: #98f4e2;
+}
+
+.statusWatch {
+  background: rgba(248, 196, 113, 0.16);
+  color: #f3cf8c;
+}
+
+.statusTight {
+  background: rgba(249, 115, 22, 0.14);
+  color: #fcb276;
+}
+
+.zoneCatchment,
+.snapshotRow em {
+  display: block;
+  color: #8ca4bb;
+  font-size: 0.86rem;
+  font-style: normal;
+  line-height: 1.5;
+}
+
+.feedNotice {
+  margin-bottom: 18px;
+  padding: 14px 18px;
+  border-radius: 18px;
+  background: rgba(53, 33, 6, 0.48);
+  color: #f4d8a1;
+}
+
+.stage {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.8fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.tidePanel,
+.guidanceCard,
+.snapshotCard,
+.tripCard {
+  border-radius: 30px;
+  background: linear-gradient(180deg, rgba(8, 23, 39, 0.94), rgba(9, 26, 44, 0.88));
+}
+
+.tidePanel {
+  padding: 24px;
+}
+
+.panelTopline {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.tidePanel h2,
+.guidanceCard h2 {
+  font-size: 2.15rem;
+  line-height: 0.96;
+}
+
+.panelLead {
+  margin: 14px 0 22px;
+  max-width: 56ch;
+  color: #a7bfd4;
+  line-height: 1.7;
+}
+
+.refreshButton {
+  padding: 10px 14px;
+  border: 1px solid rgba(143, 176, 210, 0.18);
+  border-radius: 999px;
+  background: rgba(18, 41, 64, 0.86);
+  color: #d6e5f2;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.chartWrap {
+  margin-bottom: 20px;
+  border-radius: 24px;
+  padding: 12px 12px 4px;
+  background: linear-gradient(180deg, rgba(10, 32, 53, 0.82), rgba(8, 24, 41, 0.92));
+}
+
+.strip {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 12px;
+  align-items: end;
+}
+
+.stripCell {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 14px 12px;
+  border-radius: 24px 24px 18px 18px;
+  min-height: 104px;
+}
+
+.stripCell span,
+.stripCell em {
+  display: block;
+}
+
+.stripCell span {
+  color: #b5c9dd;
+  font-size: 0.8rem;
+}
+
+.stripCell strong {
+  font-size: 1.22rem;
+  line-height: 1;
+}
+
+.stripCell em {
+  color: #7f98b1;
+  font-size: 0.82rem;
+  font-style: normal;
+}
+
+.stripSteady {
+  background: linear-gradient(180deg, rgba(94, 234, 212, 0.22), rgba(17, 46, 69, 0.78));
+}
+
+.stripWatch {
+  background: linear-gradient(180deg, rgba(248, 196, 113, 0.24), rgba(23, 41, 61, 0.82));
+}
+
+.stripTight {
+  background: linear-gradient(180deg, rgba(249, 115, 22, 0.24), rgba(29, 35, 52, 0.86));
+}
+
+.sideRail {
+  display: grid;
+  gap: 18px;
+}
+
+.guidanceCard,
+.snapshotCard,
+.tripCard {
+  padding: 22px;
+}
+
+.guidanceCard p,
+.tripAdvice p {
+  margin: 12px 0 0;
+  color: #aec2d5;
+  line-height: 1.7;
+}
+
+.guidanceFoot {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  margin-top: 18px;
+  color: #81a0bb;
+  font-size: 0.84rem;
+}
+
+.snapshotList {
+  display: grid;
+  gap: 10px;
+}
+
+.snapshotRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: 18px;
+}
+
+.snapshotMetric {
+  color: #ebf5ff;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.tripAdvice strong {
+  display: block;
+  font-size: 1.15rem;
+}
+
+.tooltip {
+  display: grid;
+  gap: 4px;
+  padding: 12px 14px;
+  border: 1px solid rgba(142, 242, 219, 0.22);
+  border-radius: 16px;
+  background: rgba(6, 17, 28, 0.94);
+  box-shadow: 0 18px 32px rgba(0, 0, 0, 0.28);
+}
+
+.tooltip strong {
+  color: #f8fbff;
+  font-size: 0.82rem;
+}
+
+.tooltip span,
+.tooltip em {
+  color: #b8cade;
+  font-size: 0.78rem;
+  font-style: normal;
+}
+
+@media (max-width: 1080px) {
+  .hero,
+  .stage {
+    grid-template-columns: 1fr;
+  }
+
+  .zoneRail {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  .shell {
+    width: min(100% - 20px, 1200px);
+    padding-bottom: 40px;
+  }
+
+  .heroCopy h1 {
+    max-width: none;
+    font-size: clamp(2rem, 11vw, 3.5rem);
+  }
+
+  .zoneRail,
+  .strip {
+    grid-template-columns: 1fr;
+  }
+
+  .panelTopline,
+  .guidanceFoot,
+  .zoneButtonTop,
+  .snapshotRow {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .tidePanel,
+  .guidanceCard,
+  .snapshotCard,
+  .tripCard {
+    padding: 18px;
+    border-radius: 24px;
+  }
+
+  .stripCell {
+    min-height: 96px;
+    height: auto !important;
+  }
+}
