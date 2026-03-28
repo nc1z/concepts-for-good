@@ -47,5 +47,5 @@ Instead of describing the interface, describe the next user action.
 
 ## Enforcement
 
-For user-facing work, treat this file as an extension of `FRONTEND_IDEATION.md` and `CONTENT_RULES.md`.
+For user-facing work, treat this file as an extension of `rules/FRONTEND_IDEATION.md` and `rules/CONTENT_RULES.md`.
 If a sentence reads like it came from the build prompt, remove it before pushing.

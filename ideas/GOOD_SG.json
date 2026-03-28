@@ -4,7 +4,7 @@
   "lens": "public good and social impact in Singapore",
   "idea_count": 150,
   "design_contract": {
-    "mandate": "Every idea must be built with a deliberately chosen visual direction and interaction model, and copy written for the target user — not for developers. Reading the ui field and CONTENT_RULES.md is mandatory before writing a single line of code.",
+    "mandate": "Every idea must be built with a deliberately chosen visual direction and interaction model, and copy written for the target user — not for developers. Reading the ui field and rules/CONTENT_RULES.md is mandatory before writing a single line of code.",
     "anti_patterns": [
       "Do not build a card grid unless ui.interaction_model explicitly says card grid",
       "Do not repeat the same visual direction as any other POC already in the repo",
@@ -22,7 +22,7 @@
       "Read ui.suggested_libraries and install them before writing UI code",
       "Read ui.distinctive_feature — this is the one thing that must feel crafted",
       "Read ui.avoid — never do these things for this concept",
-      "Read CONTENT_RULES.md completely before writing any copy",
+      "Read rules/CONTENT_RULES.md completely before writing any copy",
       "Answer: what does this app do, for whom, in one plain-language sentence? Put that on the first screen.",
       "Answer: what is the single first action the target user should take? Make that the most prominent element on the first screen.",
       "The first screen must communicate the concept's point of view within 5 seconds to a member of the target audience"

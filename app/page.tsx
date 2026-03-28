@@ -170,7 +170,7 @@ export default function Home() {
           <p className="hero__lede">
             Explore rapid prototypes and proof of concepts made possible with AI.
           </p>
-          <p className="hero__note">* These concepts are agentically generated.</p>
+          <p className="hero__note">* Concepts are autonomously ideated and built by AI agent team</p>
         </div>
       </section>
 

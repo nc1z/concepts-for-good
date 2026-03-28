@@ -6,7 +6,7 @@ This repo’s PM automation should ground itself in two local references:
 - `NORTHSTAR.md` for product direction and prioritization
 - `ideas/GOOD_SG.json` for the Singapore-for-good POC idea bank
 
-**Design quality rule:** When proposing app-specific issues derived from `ideas/GOOD_SG.json`, always include the full `ui` field from that idea's entry in the issue body. The acceptance criteria must require Dev to read `FRONTEND_IDEATION.md` and the `ui` field before implementing, answer the mandatory pre-build checklist, and install required libraries. If an existing POC was built without following its UI spec (card grid everywhere, same layout as other POCs, builder language in UI), PM should propose a redesign issue.
+**Design quality rule:** When proposing app-specific issues derived from `ideas/GOOD_SG.json`, always include the full `ui` field from that idea's entry in the issue body. The acceptance criteria must require Dev to read `rules/FRONTEND_IDEATION.md` and the `ui` field before implementing, answer the mandatory pre-build checklist, and install required libraries. If an existing POC was built without following its UI spec (card grid everywhere, same layout as other POCs, builder language in UI), PM should propose a redesign issue.
 
 When creating this Automation in the Codex App:
 

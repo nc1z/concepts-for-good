@@ -24,9 +24,9 @@ If the user asked for a new POC or significant redesign, your job is to plan fir
 ## Required reading before planning
 
 Read these before writing the plan:
-- `FRONTEND_IDEATION.md`
-- `CONTENT_RULES.md`
-- `ANTIPATTERNS_CODEX.md`
+- `rules/FRONTEND_IDEATION.md`
+- `rules/CONTENT_RULES.md`
+- `rules/ANTIPATTERNS_CODEX.md`
 - the concept entry in `ideas/GOOD_SG.json`, especially its `ui` field
 
 Also inspect at least two existing POCs that already feel specific and intentional.

@@ -2,7 +2,7 @@
 
 This file is mandatory reading for any agent implementing UI in this repository.
 **Read this file completely before writing a single line of UI code.**
-You must also read `ANTIPATTERNS_CODEX.md` before writing any user-facing UI copy or helper text.
+You must also read `rules/ANTIPATTERNS_CODEX.md` before writing any user-facing UI copy or helper text.
 
 ---
 
@@ -157,7 +157,7 @@ These libraries exist to make concepts distinctive. If a concept spec lists them
 
 ## Content and copy rules
 
-**Full rules are in [`CONTENT_RULES.md`](./CONTENT_RULES.md). Read it completely before writing any copy.** The summary below is mandatory reading, but `CONTENT_RULES.md` is the authoritative source.
+**Full rules are in [`CONTENT_RULES.md`](./CONTENT_RULES.md). Read it completely before writing any copy.** The summary below is mandatory reading, but `rules/CONTENT_RULES.md` is the authoritative source.
 Also read [`ANTIPATTERNS_CODEX.md`](./ANTIPATTERNS_CODEX.md) for Codex-specific instruction leakage failures.
 
 ### The one-sentence rule
@@ -190,7 +190,7 @@ Every label, button, and heading must describe what the user does, not what the 
 - [ ] First action obvious without reading instructions?
 - [ ] Would the target audience (not a developer) feel this was made for them?
 
-See `CONTENT_RULES.md` for the full rules, before/after rewrites from existing POC pages, and the complete 12-item checklist.
+See `rules/CONTENT_RULES.md` for the full rules, before/after rewrites from existing POC pages, and the complete 12-item checklist.
 
 ---
 

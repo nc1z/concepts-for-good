@@ -1,7 +1,7 @@
 # Content Rules — Mandatory Brief for All User-Facing Copy
 
 This file is authoritative. All other files that reference content quality point here. **Read this file completely before writing a single word of user-facing copy.**
-Also read `ANTIPATTERNS_CODEX.md` before writing helper text, reassurance copy, or any line near the hero/first screen.
+Also read `rules/ANTIPATTERNS_CODEX.md` before writing helper text, reassurance copy, or any line near the hero/first screen.
 
 Every rule in this file is a hard rule. Vague rules ("write clearly", "be user-friendly") are not here. These are specific, testable, enforceable rules.
 
