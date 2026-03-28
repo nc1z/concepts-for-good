@@ -109,7 +109,8 @@
       },
       "implementation_tags": [
         "drag-reorder"
-      ]
+      ],
+      "implemented": true
     },
     {
       "id": "GOOD_SG-005",
@@ -183,7 +184,8 @@
         "distinctive_feature": "radial streak ring per senior that fills as check-ins accumulate; a celebration animation on milestone streaks",
         "avoid": "small dense table; small action buttons; anything that feels clinical or data-heavy",
         "experience_goal": "user feels warmth and care; the interface communicates that these are people, not records"
-      }
+      },
+      "implemented": true
     },
     {
       "id": "GOOD_SG-006",
@@ -253,7 +255,8 @@
         "distinctive_feature": "circular 24-hour clock rendered in SVG with medication times as colored arcs; the current time hand sweeps in real time",
         "avoid": "list of reminders with checkboxes; notification dashboard; anything that looks like a todo app",
         "experience_goal": "user feels calm and in control; the clock face makes the day's schedule immediately visible"
-      }
+      },
+      "implemented": true
     },
     {
       "id": "GOOD_SG-007",
@@ -324,7 +327,8 @@
         "distinctive_feature": "the entire viewport shows one task instruction with a giant illustration or icon; each screen transition slides horizontally",
         "avoid": "small text; multiple items visible at once; search-first interface; anything requiring precise tapping",
         "experience_goal": "a 70-year-old with no smartphone experience can follow along without help"
-      }
+      },
+      "implemented": true
     },
     {
       "id": "GOOD_SG-008",
@@ -400,7 +404,8 @@
         "distinctive_feature": "visit slots animate into the calendar grid when booked; unvisited days have a gentle pulse highlight",
         "avoid": "list of form fields; generic scheduling form without visual calendar; card grid of senior profiles",
         "experience_goal": "coordinator sees the week at a glance and can immediately spot gaps in coverage"
-      }
+      },
+      "implemented": true
     },
     {
       "id": "GOOD_SG-009",
@@ -475,7 +480,8 @@
         "distinctive_feature": "animated SVG path that draws the accessible route step by step when a destination is selected",
         "avoid": "list of directions as text steps; generic address lookup; anything without a spatial diagram",
         "experience_goal": "user can see the accessible path before they enter the mall, not just a list of text directions"
-      }
+      },
+      "implemented": true
     },
     {
       "id": "GOOD_SG-010",
@@ -544,7 +550,8 @@
         "distinctive_feature": "stations with lift issues show a visual warning indicator on the map; clicking a station slides in a status panel",
         "avoid": "alphabetical list of stations; generic search box with results list; anything without the network diagram",
         "experience_goal": "mobility-impaired commuter can plan their journey by seeing the network and lift conditions at a glance"
-      }
+      },
+      "implemented": true
     },
     {
       "id": "GOOD_SG-011",
@@ -615,7 +622,8 @@
         "distinctive_feature": "sensory level bars that animate to reflect each place's profile; the overall UI palette and font size shift slightly toward calmer values as you filter for quieter places",
         "avoid": "busy card grid; bold colors; animations that flash or pulse; dense information per card",
         "experience_goal": "the interface itself demonstrates calm — visiting this page feels restful"
-      }
+      },
+      "implemented": true
     },
     {
       "id": "GOOD_SG-012",
@@ -691,7 +699,8 @@
       },
       "implementation_tags": [
         "react-simple-maps"
-      ]
+      ],
+      "implemented": true
     },
     {
       "id": "GOOD_SG-013",
@@ -765,7 +774,8 @@
         "distinctive_feature": "skill tags animate a match glow when your selected skills align with a cause's needs",
         "avoid": "generic signup form; list of opportunities without matching context; static card grid",
         "experience_goal": "volunteer feels personally connected to a cause through the skill-match moment"
-      }
+      },
+      "implemented": true
     },
     {
       "id": "GOOD_SG-014",
@@ -835,7 +845,8 @@
         "distinctive_feature": "tag cloud where tag size reflects availability; clicking a tag animates the list filtering",
         "avoid": "form-first submit flow; generic directory without skill matching; table layout",
         "experience_goal": "user discovers they can contribute a skill they had not thought of before"
-      }
+      },
+      "implemented": true
     },
     {
       "id": "GOOD_SG-015",
@@ -911,7 +922,8 @@
         "distinctive_feature": "the total hours counter animates up as you add sessions; weekly chart updates live",
         "avoid": "static table of records; form without visual feedback; hidden analytics",
         "experience_goal": "volunteer feels pride seeing their contribution visualized over time"
-      }
+      },
+      "implemented": true
     },
     {
       "id": "GOOD_SG-104",
@@ -985,7 +997,8 @@
       },
       "implementation_tags": [
         "drag-reorder"
-      ]
+      ],
+      "implemented": false
     },
     {
       "id": "GOOD_SG-134",
@@ -1057,7 +1070,8 @@
         "avoid": "event RSVP dashboard; spreadsheet signup; generic calendar invite tool",
         "experience_goal": "the potluck feels communal, balanced, and easy to coordinate"
       },
-      "implementation_tags": []
+      "implementation_tags": [],
+      "implemented": false
     },
     {
       "id": "GOOD_SG-154",
@@ -1136,7 +1150,8 @@
       "implementation_tags": [
         "public-api",
         "realtime-cache"
-      ]
+      ],
+      "implemented": false
     },
     {
       "id": "GOOD_SG-058",
@@ -1203,7 +1218,8 @@
         "distinctive_feature": "floor plan time blocks animate between available/booked states; activity board has a community noticeboard aesthetic",
         "avoid": "generic calendar; list of activities without the spatial booking element",
         "experience_goal": "resident sees the void deck as a living community space they can participate in"
-      }
+      },
+      "implemented": false
     },
     {
       "id": "GOOD_SG-153",
@@ -1276,7 +1292,8 @@
         "avoid": "cooking class marketplace; eventbrite clone; chef-centric branding",
         "experience_goal": "joining a small shared cooking session feels welcoming and local"
       },
-      "implementation_tags": []
+      "implementation_tags": [],
+      "implemented": false
     },
     {
       "id": "GOOD_SG-155",
@@ -1355,7 +1372,8 @@
       "implementation_tags": [
         "public-api",
         "trend-view"
-      ]
+      ],
+      "implemented": false
     },
     {
       "id": "GOOD_SG-086",
@@ -1421,7 +1439,8 @@
         "distinctive_feature": "activity cards animate into the day planner with a satisfying drop; a map view shows all planned activities for the day",
         "avoid": "text list of activity suggestions; no planner grid; generic recommendations page",
         "experience_goal": "domestic helper plans her rest day with activities she actually wants to do"
-      }
+      },
+      "implemented": false
     },
     {
       "id": "GOOD_SG-116",
@@ -1494,7 +1513,8 @@
         "avoid": "gamified productivity app; harsh alarm timer; leaderboard for children",
         "experience_goal": "children feel encouraged to start and finish small chunks of work"
       },
-      "implementation_tags": []
+      "implementation_tags": [],
+      "implemented": false
     },
     {
       "id": "GOOD_SG-156",
@@ -1573,7 +1593,8 @@
       "implementation_tags": [
         "public-api",
         "image-feed"
-      ]
+      ],
+      "implemented": false
     },
     {
       "id": "GOOD_SG-149",
@@ -1645,7 +1666,8 @@
         "avoid": "food delivery style; rigid RSVP management; tiny allergen labels buried in text",
         "experience_goal": "organisers can host more thoughtfully without extra stress"
       },
-      "implementation_tags": []
+      "implementation_tags": [],
+      "implemented": false
     },
     {
       "id": "GOOD_SG-049",
@@ -1712,7 +1734,8 @@
         "distinctive_feature": "sidebar eligibility panel updates in real time as questions are answered",
         "avoid": "static FAQ; list of legal schemes; form without real-time eligibility feedback",
         "experience_goal": "person facing a legal issue knows whether they qualify for aid and what to bring, before making the call"
-      }
+      },
+      "implemented": false
     },
     {
       "id": "GOOD_SG-157",
@@ -1791,7 +1814,8 @@
       "implementation_tags": [
         "public-api",
         "forecast"
-      ]
+      ],
+      "implemented": false
     },
     {
       "id": "GOOD_SG-136",
@@ -1863,7 +1887,8 @@
         "avoid": "cold scheduling app; judgmental fairness score; generic calendar grid only",
         "experience_goal": "couples can discuss family obligations with less friction"
       },
-      "implementation_tags": []
+      "implementation_tags": [],
+      "implemented": false
     },
     {
       "id": "GOOD_SG-059",
@@ -1929,7 +1954,8 @@
         "distinctive_feature": "cards animate onto the board as new requests arrive; a satisfying animation when a request is fulfilled",
         "avoid": "generic form; list without the board aesthetic; anything that exposes personal information",
         "experience_goal": "resident feels the warmth of a community where neighbours help each other"
-      }
+      },
+      "implemented": false
     },
     {
       "id": "GOOD_SG-158",
@@ -2008,7 +2034,8 @@
       "implementation_tags": [
         "public-api",
         "health-timing"
-      ]
+      ],
+      "implemented": false
     },
     {
       "id": "GOOD_SG-137",
@@ -2081,7 +2108,8 @@
         "avoid": "banking dashboard; export-heavy accounting interface; too many categories",
         "experience_goal": "tracking small spending feels low-effort and understandable"
       },
-      "implementation_tags": []
+      "implementation_tags": [],
+      "implemented": false
     },
     {
       "id": "GOOD_SG-091",
@@ -2147,7 +2175,8 @@
         "distinctive_feature": "items physically slide from the tray into a ready stack, making the packed state visible at a glance",
         "avoid": "small checkbox list; long clinic FAQ page; dense appointment admin dashboard",
         "experience_goal": "user leaves with fewer forgotten papers or medicine details"
-      }
+      },
+      "implemented": false
     },
     {
       "id": "GOOD_SG-159",
@@ -2226,7 +2255,8 @@
       "implementation_tags": [
         "public-api",
         "task-planner"
-      ]
+      ],
+      "implemented": false
     },
     {
       "id": "GOOD_SG-133",
@@ -2299,7 +2329,8 @@
         "avoid": "tourism app look; cluttered map pins; youth-oriented social feed",
         "experience_goal": "social plans feel possible for seniors with varying energy and mobility"
       },
-      "implementation_tags": []
+      "implementation_tags": [],
+      "implemented": false
     },
     {
       "id": "GOOD_SG-092",
@@ -2366,7 +2397,8 @@
         "distinctive_feature": "lifecycle timeline with animated stage transitions; impact slider that dynamically updates the environmental score",
         "avoid": "static infographic; list of facts; no interaction with the lifecycle stages",
         "experience_goal": "user understands the environmental cost of disposal and is motivated to extend their item's life"
-      }
+      },
+      "implemented": false
     },
     {
       "id": "GOOD_SG-160",
@@ -2445,7 +2477,8 @@
       "implementation_tags": [
         "public-api",
         "family-planning"
-      ]
+      ],
+      "implemented": false
     },
     {
       "id": "GOOD_SG-139",
@@ -2517,7 +2550,8 @@
         "avoid": "school ERP clone; email inbox layout; legalistic forms wall",
         "experience_goal": "caregivers stop missing small but important school admin items"
       },
-      "implementation_tags": []
+      "implementation_tags": [],
+      "implemented": false
     },
     {
       "id": "GOOD_SG-122",
@@ -2589,7 +2623,8 @@
         "avoid": "restaurant deal app; dating app pattern; luxury lifestyle imagery",
         "experience_goal": "couples feel they can still make time for each other on a budget"
       },
-      "implementation_tags": []
+      "implementation_tags": [],
+      "implemented": false
     },
     {
       "id": "GOOD_SG-161",
@@ -2668,7 +2703,8 @@
       "implementation_tags": [
         "public-api",
         "accessibility-weather"
-      ]
+      ],
+      "implemented": false
     },
     {
       "id": "GOOD_SG-022",
@@ -2735,7 +2771,8 @@
         "distinctive_feature": "route path animates drawing between origin and destination; cool spots glow on the map",
         "avoid": "generic directions list; static information page; anything without route visualization",
         "experience_goal": "user plans a walk that avoids heat exposure, seeing the cool spots along the way"
-      }
+      },
+      "implemented": false
     },
     {
       "id": "GOOD_SG-124",
@@ -2808,7 +2845,8 @@
         "avoid": "standard calendar app clone; tiny event chips; enterprise scheduling UI",
         "experience_goal": "family logistics become legible instead of chaotic"
       },
-      "implementation_tags": []
+      "implementation_tags": [],
+      "implemented": false
     },
     {
       "id": "GOOD_SG-162",
@@ -2888,7 +2926,8 @@
       "implementation_tags": [
         "public-api",
         "multi-source"
-      ]
+      ],
+      "implemented": false
     },
     {
       "id": "GOOD_SG-090",
@@ -2952,7 +2991,8 @@
         "distinctive_feature": "condition shown as an illustrated wear diagram on the item card; filter animations are smooth",
         "avoid": "list without photos or condition visualisation; form-first listing",
         "experience_goal": "user browses like a curated second-hand shop, not a donation request form"
-      }
+      },
+      "implemented": false
     },
     {
       "id": "GOOD_SG-121",
@@ -3024,7 +3064,8 @@
         "avoid": "map pin clutter; grocery delivery app look; endless catalog of products",
         "experience_goal": "the market trip feels shorter, safer, and less tiring"
       },
-      "implementation_tags": []
+      "implementation_tags": [],
+      "implemented": false
     },
     {
       "id": "GOOD_SG-163",
@@ -3102,7 +3143,8 @@
       "implementation_tags": [
         "public-api",
         "ops-readiness"
-      ]
+      ],
+      "implemented": false
     },
     {
       "id": "GOOD_SG-132",
@@ -3174,7 +3216,8 @@
         "avoid": "social media feed; public profile chasing; event management dashboard",
         "experience_goal": "playdates feel easy to suggest without pressure"
       },
-      "implementation_tags": []
+      "implementation_tags": [],
+      "implemented": false
     },
     {
       "id": "GOOD_SG-054",
@@ -3238,7 +3281,8 @@
         "distinctive_feature": "amenity filter chips animate the map markers to show only matching rooms",
         "avoid": "list of addresses; no amenity visualisation; generic location finder",
         "experience_goal": "new mother can find a nursing room with specific facilities she needs before she needs it"
-      }
+      },
+      "implemented": false
     },
     {
       "id": "GOOD_SG-146",
@@ -3311,7 +3355,8 @@
         "avoid": "gig cleaning marketplace; wage framing; productivity scoreboards",
         "experience_goal": "asking for and giving help feels balanced and humane"
       },
-      "implementation_tags": []
+      "implementation_tags": [],
+      "implemented": false
     },
     {
       "id": "GOOD_SG-044",
@@ -3378,7 +3423,8 @@
         "distinctive_feature": "tasks animate between columns when status changes; due-soon tasks have a gentle urgency highlight",
         "avoid": "card grid without columns; generic todo list; no kanban movement",
         "experience_goal": "gardening coordinator sees the full task state and can assign work in one view"
-      }
+      },
+      "implemented": false
     },
     {
       "id": "GOOD_SG-140",
@@ -3450,7 +3496,8 @@
         "avoid": "social feed; friend count metrics; gamified popularity cues",
         "experience_goal": "more students feel included at lunch with less awkwardness"
       },
-      "implementation_tags": []
+      "implementation_tags": [],
+      "implemented": false
     },
     {
       "id": "GOOD_SG-084",
@@ -3516,7 +3563,8 @@
         "distinctive_feature": "deadline cards slide closer together as the due date approaches, making the week visually denser",
         "avoid": "form-first renewal flow; table of dates; generic task list with no sense of time",
         "experience_goal": "user can see the renewal path in one glance and knows what must happen next"
-      }
+      },
+      "implemented": false
     },
     {
       "id": "GOOD_SG-142",
@@ -3589,7 +3637,8 @@
         "avoid": "recipe-heavy cooking app; calorie tracker; supermarket checkout look",
         "experience_goal": "meal planning feels tied to real household budget decisions"
       },
-      "implementation_tags": []
+      "implementation_tags": [],
+      "implemented": false
     },
     {
       "id": "GOOD_SG-071",
@@ -3658,7 +3707,8 @@
         "distinctive_feature": "multi-axis ring chart that fills as each question is answered; axes animate independently",
         "avoid": "plain questionnaire with score at end; no visual during the check-in; generic tip list",
         "experience_goal": "user gains insight into which dimensions of their stress need attention today"
-      }
+      },
+      "implemented": false
     },
     {
       "id": "GOOD_SG-112",
@@ -3731,7 +3781,8 @@
         "avoid": "e-commerce listing; loyalty points interface; banner-heavy promotion page",
         "experience_goal": "savings tips feel human and shareable instead of commercial"
       },
-      "implementation_tags": []
+      "implementation_tags": [],
+      "implemented": false
     },
     {
       "id": "GOOD_SG-096",
@@ -3797,7 +3848,8 @@
         "distinctive_feature": "the return path brightens after the outward leg completes, making the way back feel always present",
         "avoid": "busy city map; sports tracking dashboard; list of route steps with no visual loop",
         "experience_goal": "caregiver feels reassured by the visible return path and predictable stopping points"
-      }
+      },
+      "implemented": false
     },
     {
       "id": "GOOD_SG-152",
@@ -3869,7 +3921,8 @@
         "avoid": "travel booking look; deal-site clutter; luxury family lifestyle cues",
         "experience_goal": "a modest weekend still feels intentional and enjoyable"
       },
-      "implementation_tags": []
+      "implementation_tags": [],
+      "implemented": false
     },
     {
       "id": "GOOD_SG-053",
@@ -3938,7 +3991,8 @@
       },
       "implementation_tags": [
         "react-simple-maps"
-      ]
+      ],
+      "implemented": false
     },
     {
       "id": "GOOD_SG-123",
@@ -4010,7 +4064,8 @@
         "avoid": "bank dashboard; stock app styling; dense savings spreadsheet",
         "experience_goal": "saving feels joint and motivating rather than abstract"
       },
-      "implementation_tags": []
+      "implementation_tags": [],
+      "implemented": false
     },
     {
       "id": "GOOD_SG-109",
@@ -4083,7 +4138,8 @@
         "avoid": "coupon spam; supermarket ad style; endless scrolling catalog",
         "experience_goal": "user feels in control of weekly groceries without doing manual math"
       },
-      "implementation_tags": []
+      "implementation_tags": [],
+      "implemented": false
     },
     {
       "id": "GOOD_SG-037",
@@ -4147,7 +4203,8 @@
         "distinctive_feature": "skill tiles animate when hovered; booked slots visually fill up on the board",
         "avoid": "generic event listing; form without the skill board; anything that does not feel like a maker space",
         "experience_goal": "user finds a repair session for their broken item and books a spot in one flow"
-      }
+      },
+      "implemented": false
     },
     {
       "id": "GOOD_SG-111",
@@ -4220,7 +4277,8 @@
         "avoid": "meal-prep spreadsheet; calorie counting interface; generic recipe feed",
         "experience_goal": "packing lunch feels easy and waste-conscious"
       },
-      "implementation_tags": []
+      "implementation_tags": [],
+      "implemented": false
     },
     {
       "id": "GOOD_SG-085",
@@ -4284,7 +4342,8 @@
         "distinctive_feature": "language switcher is the hero element with a slide transition between language content",
         "avoid": "English-only page with small translate link; dense paragraph blocks; legal jargon",
         "experience_goal": "domestic helper reads her rights clearly in her own language"
-      }
+      },
+      "implemented": false
     },
     {
       "id": "GOOD_SG-117",
@@ -4356,7 +4415,8 @@
         "avoid": "essay-length intake form; school admin portal styling; generic checklist dump",
         "experience_goal": "caregiver walks into the meeting feeling prepared and clear"
       },
-      "implementation_tags": []
+      "implementation_tags": [],
+      "implemented": false
     },
     {
       "id": "GOOD_SG-074",
@@ -4425,7 +4485,8 @@
         "distinctive_feature": "timeline entries animate in as new visits are logged; vitals chart updates with the new data point",
         "avoid": "generic form without timeline; list without health trends visualisation",
         "experience_goal": "caregiver sees the care recipient's recent history at a glance and notices patterns over time"
-      }
+      },
+      "implemented": false
     },
     {
       "id": "GOOD_SG-108",
@@ -4497,7 +4558,8 @@
         "avoid": "calendar app clone; giant booking form; enterprise admin dashboard",
         "experience_goal": "shared laundry use feels orderly and less frustrating"
       },
-      "implementation_tags": []
+      "implementation_tags": [],
+      "implemented": false
     },
     {
       "id": "GOOD_SG-029",
@@ -4564,7 +4626,8 @@
         "distinctive_feature": "timeline scrolls horizontally with session cards; each card shows the teacher's skill as a large typography headline",
         "avoid": "generic event list; card grid without timeline; search-first without browsing",
         "experience_goal": "user discovers a skill-share session they did not know they wanted to attend"
-      }
+      },
+      "implemented": false
     },
     {
       "id": "GOOD_SG-151",
@@ -4636,7 +4699,8 @@
         "avoid": "shaming scorecards; corporate rota styling; dense spreadsheet table",
         "experience_goal": "families can discuss care load using something concrete and visible"
       },
-      "implementation_tags": []
+      "implementation_tags": [],
+      "implemented": false
     },
     {
       "id": "GOOD_SG-147",
@@ -4708,7 +4772,8 @@
         "avoid": "tenant legal pack; hostile rule list; text-heavy PDF replacement",
         "experience_goal": "shared living expectations feel clear and respectful from day one"
       },
-      "implementation_tags": []
+      "implementation_tags": [],
+      "implemented": false
     },
     {
       "id": "GOOD_SG-017",
@@ -4775,7 +4840,8 @@
       },
       "implementation_tags": [
         "flowchart"
-      ]
+      ],
+      "implemented": false
     },
     {
       "id": "GOOD_SG-128",
@@ -4848,7 +4914,8 @@
         "avoid": "marketplace clone; payment checkout; social feed noise",
         "experience_goal": "sharing extra food feels normal, fast, and safe"
       },
-      "implementation_tags": []
+      "implementation_tags": [],
+      "implemented": false
     },
     {
       "id": "GOOD_SG-082",
@@ -4913,7 +4980,8 @@
         "distinctive_feature": "condition rating shown as animated wear indicators; listings animate in when filter is applied",
         "avoid": "form-only listing submission; table without visual condition indication",
         "experience_goal": "parent quickly finds a school uniform in the right size and condition for their child"
-      }
+      },
+      "implemented": false
     },
     {
       "id": "GOOD_SG-114",
@@ -4986,7 +5054,8 @@
         "avoid": "restaurant app clone; coupon marketplace; dense map pin clutter",
         "experience_goal": "caregivers can make a realistic plan for hungry children without guesswork"
       },
-      "implementation_tags": []
+      "implementation_tags": [],
+      "implemented": false
     },
     {
       "id": "GOOD_SG-120",
@@ -5059,7 +5128,8 @@
         "avoid": "charity admin dashboard; donation checkout clone; guilt-heavy messaging",
         "experience_goal": "giver can build something practical and respectful quickly"
       },
-      "implementation_tags": []
+      "implementation_tags": [],
+      "implemented": false
     },
     {
       "id": "GOOD_SG-056",
@@ -5127,7 +5197,8 @@
         "distinctive_feature": "animated route diagram that highlights step-free segments and flags barrier points",
         "avoid": "plain address input with no route diagram; list of accessible paths without spatial visualisation",
         "experience_goal": "parent with stroller plans a route knowing exactly where the step-free paths are"
-      }
+      },
+      "implemented": false
     },
     {
       "id": "GOOD_SG-131",
@@ -5199,7 +5270,8 @@
         "avoid": "ride-hailing clone; map-first fleet view; rating-heavy trust mechanics",
         "experience_goal": "families can see practical ride-sharing options quickly"
       },
-      "implementation_tags": []
+      "implementation_tags": [],
+      "implemented": false
     },
     {
       "id": "GOOD_SG-097",
@@ -5266,7 +5338,8 @@
         "distinctive_feature": "choosing a transfer point overlays animated door-swing and wheelchair path guides on the curbside diagram",
         "avoid": "list of text notes only; generic map pin view; anything without a spatial cutaway",
         "experience_goal": "family can quickly tell whether arrival and transfer will be manageable"
-      }
+      },
+      "implemented": false
     },
     {
       "id": "GOOD_SG-113",
@@ -5338,7 +5411,8 @@
         "avoid": "fleet dashboard; map-heavy courier layout; dense permission form",
         "experience_goal": "families feel supported by a visible local care network"
       },
-      "implementation_tags": []
+      "implementation_tags": [],
+      "implemented": false
     },
     {
       "id": "GOOD_SG-050",
@@ -5403,7 +5477,8 @@
         "distinctive_feature": "the entire UI reduces to a single phone number and call button after situation selection",
         "avoid": "long list of all hotlines; category tree navigation; anything that delays reaching the number",
         "experience_goal": "someone in distress finds the right number in under 10 seconds"
-      }
+      },
+      "implemented": false
     },
     {
       "id": "GOOD_SG-125",
@@ -5476,7 +5551,8 @@
         "avoid": "delivery app clone; gig-worker styling; dense map interface",
         "experience_goal": "asking for or offering a small errand feels normal and reciprocal"
       },
-      "implementation_tags": []
+      "implementation_tags": [],
+      "implemented": false
     },
     {
       "id": "GOOD_SG-035",
@@ -5542,7 +5618,8 @@
         "distinctive_feature": "3D flip card animation; cards are large with high-contrast type",
         "avoid": "table of translations; small type; anything that is not a physical card metaphor",
         "experience_goal": "any person can show the card to communicate even without a common language"
-      }
+      },
+      "implemented": false
     },
     {
       "id": "GOOD_SG-105",
@@ -5614,7 +5691,8 @@
         "avoid": "plain todo list; generic kanban software look; legalistic document wall",
         "experience_goal": "moving feels manageable because the home is broken into concrete, visible steps"
       },
-      "implementation_tags": []
+      "implementation_tags": [],
+      "implemented": false
     },
     {
       "id": "GOOD_SG-141",
@@ -5687,7 +5765,8 @@
         "avoid": "delivery platform clone; gig economy language; big request forms",
         "experience_goal": "asking for a few minutes of physical help feels normal and easy"
       },
-      "implementation_tags": []
+      "implementation_tags": [],
+      "implemented": false
     },
     {
       "id": "GOOD_SG-020",
@@ -5755,7 +5834,8 @@
         "distinctive_feature": "3D card flip animation; cards stack and fan out when category is selected",
         "avoid": "plain list of contacts; address book UI; anything without the card metaphor",
         "experience_goal": "user can quickly flip through contacts and find the right one without reading dense text"
-      }
+      },
+      "implemented": false
     },
     {
       "id": "GOOD_SG-040",
@@ -5821,7 +5901,8 @@
         "distinctive_feature": "items on the timeline animate toward red as they approach expiry; a recipe suggestion slides in when an item is selected",
         "avoid": "plain list of items; static checklist; no timeline or urgency visualization",
         "experience_goal": "user sees what needs to be used today before it is wasted"
-      }
+      },
+      "implemented": false
     },
     {
       "id": "GOOD_SG-143",
@@ -5893,7 +5974,8 @@
         "avoid": "wedding registry clone; shopping cart patterns; commercial upsell look",
         "experience_goal": "community help feels practical and grounded in setting up a home"
       },
-      "implementation_tags": []
+      "implementation_tags": [],
+      "implemented": false
     },
     {
       "id": "GOOD_SG-148",
@@ -5966,7 +6048,8 @@
         "avoid": "food blog clutter; autoplay videos; tiny text ingredient lists",
         "experience_goal": "cooking feels achievable for users who need simplicity and clarity"
       },
-      "implementation_tags": []
+      "implementation_tags": [],
+      "implemented": false
     },
     {
       "id": "GOOD_SG-070",
@@ -6034,7 +6117,8 @@
         "distinctive_feature": "the breathing circle is a high-quality framer-motion animation; background color shifts through the breathing cycle",
         "avoid": "text instructions only; timer without animation; anything that feels like a productivity tool",
         "experience_goal": "user feels genuinely calmer after completing one breathing cycle"
-      }
+      },
+      "implemented": false
     },
     {
       "id": "GOOD_SG-135",
@@ -6107,7 +6191,8 @@
         "avoid": "event platform clone; loud promotional banners; public popularity metrics",
         "experience_goal": "joining feels casual and neighbourly"
       },
-      "implementation_tags": []
+      "implementation_tags": [],
+      "implemented": false
     },
     {
       "id": "GOOD_SG-048",
@@ -6173,7 +6258,8 @@
         "distinctive_feature": "zone risk map where risk levels are animated; checklist items have animated completion states",
         "avoid": "generic article with tips; list without zone personalisation; no visual risk map",
         "experience_goal": "resident understands their zone's risk and has a clear action checklist to prepare"
-      }
+      },
+      "implemented": false
     },
     {
       "id": "GOOD_SG-115",
@@ -6246,7 +6332,8 @@
         "avoid": "marketplace app clone; seller ratings obsession; endless product cards",
         "experience_goal": "families feel the exchange is dignified, practical, and local"
       },
-      "implementation_tags": []
+      "implementation_tags": [],
+      "implemented": false
     },
     {
       "id": "GOOD_SG-126",
@@ -6318,7 +6405,8 @@
         "avoid": "expense app clone; warehouse inventory layout; generic reminders list",
         "experience_goal": "shared cleaning costs feel fair and predictable"
       },
-      "implementation_tags": []
+      "implementation_tags": [],
+      "implemented": false
     },
     {
       "id": "GOOD_SG-027",
@@ -6386,7 +6474,8 @@
         "distinctive_feature": "animated ring fill that updates when a participant logs steps; a confetti burst when the team goal is reached",
         "avoid": "static table; bland list of numbers; anything without animated progress rings",
         "experience_goal": "user feels motivated by seeing the collective progress and their contribution to it"
-      }
+      },
+      "implemented": false
     },
     {
       "id": "GOOD_SG-145",
@@ -6459,7 +6548,8 @@
         "avoid": "farming sim game; enterprise task app; endless horticulture data",
         "experience_goal": "shared greenery feels collectively cared for"
       },
-      "implementation_tags": []
+      "implementation_tags": [],
+      "implemented": false
     },
     {
       "id": "GOOD_SG-094",
@@ -6525,7 +6615,8 @@
         "distinctive_feature": "highlighting a phrase on the notice pulls a matching action card into view with a smooth editorial reveal",
         "avoid": "paragraph summary only; chatbot layout; dumping the whole letter into a plain text block",
         "experience_goal": "resident can move from official wording to practical action without asking someone else to interpret the letter"
-      }
+      },
+      "implemented": false
     },
     {
       "id": "GOOD_SG-129",
@@ -6598,7 +6689,8 @@
         "avoid": "large volunteer ops dashboard; food delivery marketplace; generic signup list",
         "experience_goal": "small acts of meal help become easy to coordinate"
       },
-      "implementation_tags": []
+      "implementation_tags": [],
+      "implemented": false
     },
     {
       "id": "GOOD_SG-118",
@@ -6670,7 +6762,8 @@
         "avoid": "spreadsheet of centres; heavy admin forms; government-portal visual language",
         "experience_goal": "parents can see the state of the search without juggling messages and memory"
       },
-      "implementation_tags": []
+      "implementation_tags": [],
+      "implemented": false
     },
     {
       "id": "GOOD_SG-072",
@@ -6739,7 +6832,8 @@
         "distinctive_feature": "life areas wheel rendered as a radar/spider chart that updates in real time as areas are rated",
         "avoid": "plain questionnaire; static tips list; no visual wheel",
         "experience_goal": "user sees which life areas are depleted and has actionable suggestions to restore balance"
-      }
+      },
+      "implemented": false
     },
     {
       "id": "GOOD_SG-150",
@@ -6812,7 +6906,8 @@
         "avoid": "marketplace listings; donation vanity feed; bureaucratic request form",
         "experience_goal": "families can get or give basics with less stigma"
       },
-      "implementation_tags": []
+      "implementation_tags": [],
+      "implemented": false
     },
     {
       "id": "GOOD_SG-102",
@@ -6879,7 +6974,8 @@
         "distinctive_feature": "items animate onto the fridge shelves and change colour as their safe window gets shorter",
         "avoid": "plain spreadsheet inventory; form-only item entry; static list of donated food",
         "experience_goal": "volunteer can manage the fridge visually and keep it safe with less guesswork"
-      }
+      },
+      "implemented": false
     },
     {
       "id": "GOOD_SG-127",
@@ -6951,7 +7047,8 @@
         "avoid": "janitorial checklist app; perfectionist task wall; punitive productivity language",
         "experience_goal": "deep cleaning feels doable in realistic chunks"
       },
-      "implementation_tags": []
+      "implementation_tags": [],
+      "implemented": false
     },
     {
       "id": "GOOD_SG-110",
@@ -7025,7 +7122,8 @@
       },
       "implementation_tags": [
         "drag-reorder"
-      ]
+      ],
+      "implemented": false
     },
     {
       "id": "GOOD_SG-066",
@@ -7091,7 +7189,8 @@
         "distinctive_feature": "the entire UI is calm and minimal; carriage map uses understated colors; notes fade in gently",
         "avoid": "loud colors; busy animations; anything that does not feel quiet itself",
         "experience_goal": "the interface embodies the concept — visiting it feels like the quiet carriage"
-      }
+      },
+      "implemented": false
     },
     {
       "id": "GOOD_SG-106",
@@ -7163,7 +7262,8 @@
         "avoid": "complaint filing dashboard; punitive language; legalistic warning templates",
         "experience_goal": "resident feels encouraged to de-escalate and communicate clearly"
       },
-      "implementation_tags": []
+      "implementation_tags": [],
+      "implemented": false
     },
     {
       "id": "GOOD_SG-080",
@@ -7230,7 +7330,8 @@
         "distinctive_feature": "available waiting bays pulse gently while the route line from entrance to selected seat draws itself across the diagram",
         "avoid": "text-only waiting tips; generic list of locations; anything without a visual seating layout",
         "experience_goal": "user can judge whether there is a practical place to wait before they arrive"
-      }
+      },
+      "implemented": false
     },
     {
       "id": "GOOD_SG-130",
@@ -7302,7 +7403,8 @@
         "avoid": "finance dashboard; preachy budgeting lecture; parental control app feel",
         "experience_goal": "families can talk about spending in a concrete, non-shaming way"
       },
-      "implementation_tags": []
+      "implementation_tags": [],
+      "implemented": false
     },
     {
       "id": "GOOD_SG-107",
@@ -7375,7 +7477,8 @@
         "avoid": "task app clone; punitive leaderboard; cluttered table of chores",
         "experience_goal": "households see chores as a shared rhythm instead of a constant argument"
       },
-      "implementation_tags": []
+      "implementation_tags": [],
+      "implemented": false
     },
     {
       "id": "GOOD_SG-098",
@@ -7441,7 +7544,8 @@
         "distinctive_feature": "switching paths reshapes the visible week strip so differences in rhythm and workload are obvious immediately",
         "avoid": "table of programmes; long brochure page; generic filters above a card list",
         "experience_goal": "user can imagine the lived shape of the pathway before committing"
-      }
+      },
+      "implemented": false
     },
     {
       "id": "GOOD_SG-119",
@@ -7514,7 +7618,8 @@
         "avoid": "event invitation app; generic sign-up form; baby registry marketplace",
         "experience_goal": "helpers can contribute practical care without adding chaos"
       },
-      "implementation_tags": []
+      "implementation_tags": [],
+      "implemented": false
     },
     {
       "id": "GOOD_SG-099",
@@ -7581,7 +7686,8 @@
         "distinctive_feature": "water level overlays animate across the crossing so safer higher-ground paths stand out immediately",
         "avoid": "plain rain advisory text; generic weather dashboard; list of tips with no spatial scene",
         "experience_goal": "user can see the safer crossing choice instead of guessing from text alone"
-      }
+      },
+      "implemented": false
     },
     {
       "id": "GOOD_SG-138",
@@ -7654,7 +7760,8 @@
         "avoid": "list of notifications; bank-app debt anxiety styling; complex spreadsheet",
         "experience_goal": "users can anticipate tighter weeks before they arrive"
       },
-      "implementation_tags": []
+      "implementation_tags": [],
+      "implemented": false
     },
     {
       "id": "GOOD_SG-078",
@@ -7722,7 +7829,8 @@
         "distinctive_feature": "shade filter adds a visual overlay showing shaded areas of the map; spots in shade glow",
         "avoid": "list of addresses; no spatial context; generic directory",
         "experience_goal": "elderly person or someone feeling faint can find a shaded rest spot near them quickly"
-      }
+      },
+      "implemented": false
     },
     {
       "id": "GOOD_SG-063",
@@ -7790,7 +7898,8 @@
         "distinctive_feature": "dispatch animation showing volunteer moving from roster to zone; waste counter animates up",
         "avoid": "signup list; form without the dispatch board; anything without the ops feel",
         "experience_goal": "coordinator dispatches volunteers to beach segments with the confidence of a real ops system"
-      }
+      },
+      "implemented": false
     },
     {
       "id": "GOOD_SG-144",
@@ -7863,7 +7972,8 @@
         "avoid": "document management app; scan inbox clone; legalistic formatting",
         "experience_goal": "residents can understand what matters this week quickly"
       },
-      "implementation_tags": []
+      "implementation_tags": [],
+      "implemented": false
     },
     {
       "id": "GOOD_SG-093",
@@ -7927,7 +8037,8 @@
         "distinctive_feature": "countdown ring to next eligible donation date; donation history timeline with impact stats",
         "avoid": "static reminder app; form without visual eligibility tracker; anything without the countdown",
         "experience_goal": "donor feels their contribution matters and knows exactly when they can give again"
-      }
+      },
+      "implemented": false
     },
     {
       "id": "GOOD_SG-062",
@@ -7994,7 +8105,8 @@
         "distinctive_feature": "spotting animation that stamps a seen badge on the species card; a progress bar counting toward full pollinator set",
         "avoid": "list without illustrations; database-style browse; no game or collection mechanic",
         "experience_goal": "user is motivated to go outside and spot more species to complete their collection"
-      }
+      },
+      "implemented": false
     },
     {
       "id": "GOOD_SG-088",
@@ -8061,7 +8173,8 @@
         "distinctive_feature": "large animated mood buttons with expressive reactions; weekly chart shows mood trend",
         "avoid": "text form; clinical assessment tone; anything that feels like a surveillance tool",
         "experience_goal": "worker checks in daily because the interface is welcoming and the streak gives a reason to return"
-      }
+      },
+      "implemented": false
     },
     {
       "id": "GOOD_SG-036",
@@ -8125,7 +8238,8 @@
         "distinctive_feature": "each completed task animates with a satisfying check illustration; a progress ring fills toward completion",
         "avoid": "plain list; PDF-style layout; no animation on completion",
         "experience_goal": "new resident feels welcomed and guided through the first steps of settling in"
-      }
+      },
+      "implemented": false
     },
     {
       "id": "GOOD_SG-087",
@@ -8191,7 +8305,8 @@
         "distinctive_feature": "tapping a line item draws a visual connector from the payslip section to a simple explanation panel",
         "avoid": "long FAQ list; hidden glossary terms; spreadsheet-like table as the main interface",
         "experience_goal": "user feels they can inspect salary details line by line without legal training"
-      }
+      },
+      "implemented": false
     },
     {
       "id": "GOOD_SG-032",
@@ -8259,7 +8374,8 @@
         "distinctive_feature": "timeline with deadline proximity indicators; scholarships closer to deadline have more visual urgency",
         "avoid": "static list of scholarships; form without timeline; nothing that makes deadlines feel real and proximate",
         "experience_goal": "student sees all deadlines at once and knows which one to focus on first"
-      }
+      },
+      "implemented": false
     },
     {
       "id": "GOOD_SG-018",
@@ -8326,7 +8442,8 @@
         "distinctive_feature": "a running eligibility meter in the sidebar that updates as you answer each question",
         "avoid": "all questions visible at once; table of schemes without personalization; form without a results state",
         "experience_goal": "family feels guided, not overwhelmed — the tool narrows down the options for them"
-      }
+      },
+      "implemented": false
     },
     {
       "id": "GOOD_SG-028",
@@ -8394,7 +8511,8 @@
         "distinctive_feature": "animated water fill that sloshes when tapped; a wave SVG animation inside the glass",
         "avoid": "list of log entries; form; anything that does not use the fill metaphor",
         "experience_goal": "logging water feels satisfying and playful, not like a chore"
-      }
+      },
+      "implemented": false
     },
     {
       "id": "GOOD_SG-081",
@@ -8464,7 +8582,8 @@
       },
       "implementation_tags": [
         "flowchart"
-      ]
+      ],
+      "implemented": false
     },
     {
       "id": "GOOD_SG-034",
@@ -8531,7 +8650,8 @@
         "distinctive_feature": "entries accumulate visually in a timeline as the form progresses; the timeline grows step by step",
         "avoid": "single long form; no visual timeline; legal jargon in the copy",
         "experience_goal": "worker documents their injury accurately and has a clear printable record at the end"
-      }
+      },
+      "implemented": false
     },
     {
       "id": "GOOD_SG-033",
@@ -8597,7 +8717,8 @@
         "distinctive_feature": "language switcher is the hero element; content transitions with a slide when language changes",
         "avoid": "English-only interface with a small translate link; dense text paragraphs; any UI that assumes literacy",
         "experience_goal": "migrant worker immediately sees the interface in their language and feels the tool is made for them"
-      }
+      },
+      "implemented": false
     },
     {
       "id": "GOOD_SG-103",
@@ -8663,7 +8784,8 @@
         "distinctive_feature": "the shade visibly glides across the playground as the time changes, making the comfortable areas obvious at a glance",
         "avoid": "generic map of playgrounds; text-only time advice; static list of amenities",
         "experience_goal": "caregiver can choose a more comfortable play time without trial and error"
-      }
+      },
+      "implemented": false
     },
     {
       "id": "GOOD_SG-075",
@@ -8733,7 +8855,8 @@
       },
       "implementation_tags": [
         "drag-reorder"
-      ]
+      ],
+      "implemented": false
     },
     {
       "id": "GOOD_SG-039",
@@ -8797,7 +8920,8 @@
         "distinctive_feature": "drop points animate visibility based on item filter selection; filtered-out points fade rather than disappear",
         "avoid": "list of addresses; no map; form to find nearest point without visual map",
         "experience_goal": "user finds the nearest drop point for their specific item in one interaction"
-      }
+      },
+      "implemented": false
     },
     {
       "id": "GOOD_SG-064",
@@ -8865,7 +8989,8 @@
         "distinctive_feature": "ecology fact panels slide in with rich illustrated editorial content; a tide-timing indicator per site",
         "avoid": "generic list of locations; information brochure without the planning flow; no ecology storytelling",
         "experience_goal": "visitor arrives at the mangrove site prepared and curious about what they will encounter"
-      }
+      },
+      "implemented": false
     },
     {
       "id": "GOOD_SG-024",
@@ -8931,7 +9056,8 @@
         "distinctive_feature": "vaccination dots animate like stamps being applied; each card has a satisfying visual fill",
         "avoid": "table of dates; form-first; anything that does not feel like holding a physical record",
         "experience_goal": "family can see at a glance who is up to date and what is due next"
-      }
+      },
+      "implemented": false
     },
     {
       "id": "GOOD_SG-079",
@@ -8998,7 +9124,8 @@
       },
       "implementation_tags": [
         "react-simple-maps"
-      ]
+      ],
+      "implemented": false
     },
     {
       "id": "GOOD_SG-047",
@@ -9067,7 +9194,8 @@
       },
       "implementation_tags": [
         "react-simple-maps"
-      ]
+      ],
+      "implemented": false
     },
     {
       "id": "GOOD_SG-083",
@@ -9133,7 +9261,8 @@
         "distinctive_feature": "a large illustrated hospital bag fills up item by item as the caregiver confirms what is ready",
         "avoid": "small checkbox lists; multi-column discharge form; anything requiring scanning a long page",
         "experience_goal": "caregiver feels guided through the handoff home without missing a critical item"
-      }
+      },
+      "implemented": false
     },
     {
       "id": "GOOD_SG-025",
@@ -9197,7 +9326,8 @@
         "distinctive_feature": "card swipe transitions between exercises; the timer animates with a circular progress ring",
         "avoid": "static list of exercises; table format; generic article with images",
         "experience_goal": "user can exercise following the cards without reading instructions each time"
-      }
+      },
+      "implemented": false
     },
     {
       "id": "GOOD_SG-052",
@@ -9266,7 +9396,8 @@
         "distinctive_feature": "the plan document builds in real time on the right side as each wizard step is completed",
         "avoid": "single long form; static tips page; anything without the live document preview",
         "experience_goal": "user ends the flow with a complete, printable safety plan they can keep"
-      }
+      },
+      "implemented": false
     },
     {
       "id": "GOOD_SG-051",
@@ -9335,7 +9466,8 @@
       },
       "implementation_tags": [
         "graph-nodes"
-      ]
+      ],
+      "implemented": false
     },
     {
       "id": "GOOD_SG-061",
@@ -9402,7 +9534,8 @@
         "distinctive_feature": "sighting pins animate onto the map as they are logged; rare sightings have a star pulse effect",
         "avoid": "text list of species; generic article about nature in Singapore; anything without the map trail",
         "experience_goal": "nature enthusiast discovers trails and is inspired to go out and spot something"
-      }
+      },
+      "implemented": false
     },
     {
       "id": "GOOD_SG-073",
@@ -9470,7 +9603,8 @@
         "distinctive_feature": "grant sidebar panel filters in real time as eligibility questions are answered",
         "avoid": "exhaustive list of all grants; PDF-style layout; form without real-time filtering",
         "experience_goal": "caregiver discovers grants they were not aware of and knows the exact steps to apply"
-      }
+      },
+      "implemented": false
     },
     {
       "id": "GOOD_SG-101",
@@ -9537,7 +9671,8 @@
         "distinctive_feature": "the chosen escape path draws through the flat diagram room by room to the exit",
         "avoid": "wall of safety text; generic emergency checklist page; anything without a flat diagram",
         "experience_goal": "household can picture the route out before an emergency ever happens"
-      }
+      },
+      "implemented": false
     },
     {
       "id": "GOOD_SG-021",
@@ -9602,7 +9737,8 @@
         "distinctive_feature": "zone colors pulse subtly on high-risk areas; hovering a zone shows a mini trend sparkline before clicking",
         "avoid": "list of news updates; generic health checklist; anything without the spatial risk visualization",
         "experience_goal": "resident immediately sees whether their area has elevated risk without reading through text"
-      }
+      },
+      "implemented": false
     },
     {
       "id": "GOOD_SG-043",
@@ -9667,7 +9803,8 @@
         "distinctive_feature": "harvest entries animate in as they are posted; quantity indicators visually deplete as claims are made",
         "avoid": "plain list; form-first without the board view; no visual availability indication",
         "experience_goal": "community member sees what fresh produce is available right now and where to get it"
-      }
+      },
+      "implemented": false
     },
     {
       "id": "GOOD_SG-016",
@@ -9737,7 +9874,8 @@
       },
       "implementation_tags": [
         "graph-nodes"
-      ]
+      ],
+      "implemented": false
     },
     {
       "id": "GOOD_SG-065",
@@ -9801,7 +9939,8 @@
         "distinctive_feature": "story reveal animation when a response is chosen; scenario cards have editorial illustration style",
         "avoid": "generic tips list; quiz without narrative; text-heavy page without interactive scenarios",
         "experience_goal": "user reflects on transit kindness through stories, not rules"
-      }
+      },
+      "implemented": false
     },
     {
       "id": "GOOD_SG-067",
@@ -9870,7 +10009,8 @@
         "distinctive_feature": "streak ring fills with a warm animation on each completion; tapping complete triggers a small celebration",
         "avoid": "boring checklist; no streak or habit mechanic; text-only list of acts",
         "experience_goal": "user builds a daily habit of small acts through the satisfying streak mechanic"
-      }
+      },
+      "implemented": false
     },
     {
       "id": "GOOD_SG-046",
@@ -9939,7 +10079,8 @@
       },
       "implementation_tags": [
         "react-simple-maps"
-      ]
+      ],
+      "implemented": false
     },
     {
       "id": "GOOD_SG-069",
@@ -10003,7 +10144,8 @@
         "distinctive_feature": "tree branches animate open gently; active path stays highlighted; no overwhelming list of all resources at once",
         "avoid": "alphabetical list; clinical-looking table; anything with a medical-form aesthetic",
         "experience_goal": "person in distress can navigate to the right resource without being overwhelmed by too many options"
-      }
+      },
+      "implemented": false
     },
     {
       "id": "GOOD_SG-060",
@@ -10071,7 +10213,8 @@
         "distinctive_feature": "bar charts animate as new needs are added; trend arrows animate on the category bars",
         "avoid": "static report; form for submitting needs without visualisation; no live aggregation feel",
         "experience_goal": "coordinator sees at a glance where community need is concentrated right now"
-      }
+      },
+      "implemented": false
     },
     {
       "id": "GOOD_SG-019",
@@ -10137,7 +10280,8 @@
         "distinctive_feature": "each section collapses when all items are checked with a satisfying animation; a completion ring fills as the overall checklist progresses",
         "avoid": "small dense list; form with submit button; anything that does not feel print-ready or shareable",
         "experience_goal": "user can check off documents and feel confident they have everything before an appointment"
-      }
+      },
+      "implemented": false
     },
     {
       "id": "GOOD_SG-055",
@@ -10205,7 +10349,8 @@
         "distinctive_feature": "rating stars animate on hover; distance sort works against a selected zone",
         "avoid": "undifferentiated toilet list; no feature filtering; no community input element",
         "experience_goal": "parent with young child or elderly parent finds a suitable toilet quickly while out"
-      }
+      },
+      "implemented": false
     },
     {
       "id": "GOOD_SG-057",
@@ -10271,7 +10416,8 @@
         "distinctive_feature": "calendar dots animate in as events are added; clicking a date slides in the event feed",
         "avoid": "generic event list without calendar; card grid without the date-navigation flow",
         "experience_goal": "resident feels a sense of community life happening around them"
-      }
+      },
+      "implemented": false
     },
     {
       "id": "GOOD_SG-042",
@@ -10335,7 +10481,8 @@
         "distinctive_feature": "trade match animation when two seed needs align; seed cards have tactile illustrated icons",
         "avoid": "form-based listing; list without matching visualization; text-only entries",
         "experience_goal": "gardener discovers a neighbour who wants exactly what they have to offer"
-      }
+      },
+      "implemented": false
     },
     {
       "id": "GOOD_SG-038",
@@ -10402,7 +10549,8 @@
       },
       "implementation_tags": [
         "flowchart"
-      ]
+      ],
+      "implemented": false
     },
     {
       "id": "GOOD_SG-045",
@@ -10469,7 +10617,8 @@
         "distinctive_feature": "gauge needle animates when level changes; activity restriction cards animate in/out based on current level",
         "avoid": "list of advisory text; static health information page; no live gauge",
         "experience_goal": "user sees current air quality and knows immediately what activities are safe today"
-      }
+      },
+      "implemented": false
     },
     {
       "id": "GOOD_SG-077",
@@ -10533,7 +10682,8 @@
         "distinctive_feature": "animated rain-drop effect on uncovered areas of the map; shelters glow when nearest",
         "avoid": "list of addresses; no map; generic weather tip page",
         "experience_goal": "user caught in rain finds the nearest shelter in one tap"
-      }
+      },
+      "implemented": false
     },
     {
       "id": "GOOD_SG-041",
@@ -10598,7 +10748,8 @@
         "distinctive_feature": "plots animate between available/booked states; a seasonal activity timeline at the bottom",
         "avoid": "list of garden plots; form-first booking without the spatial map; generic calendar",
         "experience_goal": "gardener sees the whole garden layout and picks their preferred plot spatially"
-      }
+      },
+      "implemented": false
     },
     {
       "id": "GOOD_SG-031",
@@ -10669,7 +10820,8 @@
         "distinctive_feature": "status tracker sidebar animates through stages (submitted, assessed, matched, delivered) as the form progresses",
         "avoid": "single long form without stages; no feedback after submission; list of accepted devices only",
         "experience_goal": "donor feels their contribution is being tracked and will reach someone who needs it"
-      }
+      },
+      "implemented": false
     },
     {
       "id": "GOOD_SG-023",
@@ -10739,7 +10891,8 @@
       },
       "implementation_tags": [
         "drag-reorder"
-      ]
+      ],
+      "implemented": false
     },
     {
       "id": "GOOD_SG-089",
@@ -10805,7 +10958,8 @@
         "distinctive_feature": "a claimed slot snaps into the board like a physical ticket with an animated stamp effect",
         "avoid": "plain booking form; generic calendar widget; soft anonymous cards with no queue feel",
         "experience_goal": "user feels the session is active, tangible, and easy to join"
-      }
+      },
+      "implemented": false
     },
     {
       "id": "GOOD_SG-026",
@@ -10874,7 +11028,8 @@
         "distinctive_feature": "the daily cost bar splits into meal categories with animated transitions; adding a dish animates it into the plan",
         "avoid": "generic nutrition table; form with dropdowns; anything without the meal-building interaction",
         "experience_goal": "user plans an affordable and reasonably healthy day of hawker meals without a spreadsheet"
-      }
+      },
+      "implemented": false
     },
     {
       "id": "GOOD_SG-076",
@@ -10941,7 +11096,8 @@
         "distinctive_feature": "cards are grouped into visual role clusters; quick-dial animation on tap",
         "avoid": "plain address book list; generic contacts form; anything without role categorisation",
         "experience_goal": "caregiver can find the right helper for any situation at a glance"
-      }
+      },
+      "implemented": false
     },
     {
       "id": "GOOD_SG-030",
@@ -11006,7 +11162,8 @@
         "distinctive_feature": "session timer that animates remaining time; a notes area that slides in during the session",
         "avoid": "form-only signup; generic calendar without the timer and notes flow",
         "experience_goal": "student and buddy feel like they are in a focused shared session"
-      }
+      },
+      "implemented": false
     },
     {
       "id": "GOOD_SG-100",
@@ -11073,7 +11230,8 @@
         "distinctive_feature": "protein cost per gram shown as animated bar comparison; building a weekly plan animates items into a summary",
         "avoid": "generic nutrition table; form without visual meal building; anything without the hawker-specific pricing",
         "experience_goal": "resident builds an affordable, protein-sufficient weekly plan from hawker meals they already know"
-      }
+      },
+      "implemented": false
     },
     {
       "id": "GOOD_SG-068",
@@ -11139,7 +11297,8 @@
         "distinctive_feature": "kit items animate into the preview as they are added; the assembled kit feels like a physical pack",
         "avoid": "form for entering neighbour details; generic resource list; anything without the kit-building visual",
         "experience_goal": "resident creates a warm, personal welcome pack for their new neighbour in minutes"
-      }
+      },
+      "implemented": false
     },
     {
       "id": "GOOD_SG-095",
@@ -11206,7 +11365,8 @@
         "distinctive_feature": "handoff tokens animate along the relay line when a neighbour takes responsibility for the next leg",
         "avoid": "plain to-do list; request form with no movement between people; generic kanban board",
         "experience_goal": "user sees community help as a shared flow rather than one person doing everything alone"
-      }
+      },
+      "implemented": false
     }
   ],
   "build_stage": "poc",
