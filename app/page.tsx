@@ -30,8 +30,10 @@ export default function Home() {
         <div className="hero__copy">
           <h1>Simple digital ideas that support everyday life in Singapore.</h1>
           <p className="hero__lede">
-            Explore early concepts for community care, food support, and easier
-            access to helpful services.
+            Explore early concepts for public good in Singapore.
+          </p>
+          <p className="hero__note">
+            * These concepts are agentically generated.
           </p>
         </div>
       </section>

@@ -143,6 +143,14 @@ a {
   line-height: 1.65;
 }
 
+.hero__note {
+  margin: 0;
+  color: rgba(74, 97, 125, 0.88);
+  font-size: 0.8rem;
+  font-style: italic;
+  line-height: 1.5;
+}
+
 .hero__copy {
   display: grid;
   gap: 16px;
