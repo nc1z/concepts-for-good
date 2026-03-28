@@ -40,10 +40,13 @@ The PM agent (`automations/pm.md` / `$pm-round`) should treat this file as the p
   Early work should optimize for fast learning and believable demos, not production infrastructure. Avoid committing the project to heavy backend, compliance, or operational complexity before concept validation.
 
 - **Style / UX preferences**:
-  The eventual site should feel intentional and curated. The landing page is a gallery of POCs. Each app should have a focused user flow, Singapore-relevant seed data, and a clear “what this concept proves” story.
+  The eventual site should feel intentional and curated. The landing page is a gallery of POCs. Each app should have a focused user flow, Singapore-relevant seed data, and a clear “what this concept proves” story. Do not default to card-heavy dashboards or one repeated design pattern across all concepts. Different ideas should be allowed to adopt different visual languages, interaction models, and supporting libraries when that makes the concept clearer or more distinctive.
 
 - **Communication tone**:
   Be concise, direct, and product-minded. Comments and issues should explain the user problem, the smallest useful scope, and why the work matters now.
+
+- **Frontend ideation rule**:
+  Treat `FRONTEND_IDEATION.md` as a mandatory implementation brief for user-facing work. The UI should not expose builder language, should not force every feature into a card, and should deliberately explore different design directions such as minimalist, warm civic, brutalist, map-first, timeline-first, or other concept-fit styles.
 
 ---
 
