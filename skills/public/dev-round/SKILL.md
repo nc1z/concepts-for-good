@@ -28,28 +28,56 @@ Act as the Dev agent for one round. Your backlog is `ideas/GOOD_SG.json`, not Gi
 
 - `pwd` and `gh repo view` to confirm repo and auth.
 
-### 2) Find the next idea to build
+### 2) Check open PRs — avoid duplicate work
+
+- List all open PRs (including drafts): `gh pr list --state open --json number,title,headRefName --limit 50`
+- Extract every idea ID already claimed. A PR claims an idea if its **title** contains `GOOD_SG-<ID>` or its **branch name** matches `dev/<idea-id-slug>`.
+- Build a set of **claimed idea IDs** from this list. You will skip these in the next step.
+
+### 3) Find the next idea to build
 
 - Read `ideas/GOOD_SG.json`.
-- Scan `ideas` array in order. Pick the **first** entry where `"built"` is absent or is not `true`.
+- Scan `ideas` array in order. Pick the **first** entry where:
+  - `"built"` is absent or is not `true`, **AND**
+  - the idea's ID is **not** in the claimed set from step 2.
 - Note its `id`, `title`, `folder`, `category`, and the full `ui` field.
-- If every entry has `"built": true`: report "All ideas in GOOD_SG.json are already built. Nothing to do." and stop.
+- If no such entry exists: report "All ideas are either built or already claimed by an open PR. Nothing to do." and stop.
 
-### 3) Sync and branch
+### 4) Sync and branch
 
 - `git fetch origin` then `git checkout main` (or `master`) then `git pull origin main`.
 - Create branch: `git checkout -b dev/<idea-id-slug>` (e.g. `dev/good-sg-012`).
 
-### 4) Mark the idea as in-progress
+### 5) Claim the idea — open a draft PR immediately
 
-- In `ideas/GOOD_SG.json`, set `"built": true` on the chosen idea's entry. Commit this immediately on the branch so no other Dev agent picks the same idea:
+This is the most important concurrency step. Push the branch and open a draft PR **before** doing any implementation, so other agents see the claim.
+
+- Push the branch (empty is fine): `git push -u origin <branch>`
+- Ensure the `agent` label exists: `gh label list | grep agent` — if missing, create it: `gh label create agent --color "0075ca" --description "Opened by an AI agent"`.
+- Open a **draft** PR right now:
+  ```
+  gh pr create \
+    --draft \
+    --title "WIP: feat: add <idea-title> POC (GOOD_SG-<ID>)" \
+    --body "## Work in progress
+
+  Claiming idea \`GOOD_SG-<ID>\` — **<idea-title>**.
+
+  This draft PR is a concurrency lock. Implementation is in progress. Do not pick this idea up." \
+    --label agent
+  ```
+- Note the PR number. All subsequent commits will appear on this PR automatically.
+
+### 6) Mark the idea as built in the JSON
+
+- In `ideas/GOOD_SG.json`, set `"built": true` on the chosen idea's entry. Commit and push:
   ```
   git add ideas/GOOD_SG.json
   git commit -m "chore: mark GOOD_SG-<ID> as built [skip ci]"
-  git push -u origin <branch>
+  git push
   ```
 
-### 5) Frontend plan gate (mandatory before any UI code)
+### 7) Frontend plan gate (mandatory before any UI code)
 
 - **Step A:** Read `rules/FRONTEND_IDEATION.md`, `rules/ANTIPATTERNS_CODEX.md`, `skills/public/frontend-plan-first/SKILL.md` completely.
 - **Step B:** Read the idea's `ui` field from GOOD_SG.json. Note `ui.direction`, `ui.interaction_model`, `ui.suggested_libraries`, `ui.distinctive_feature`, `ui.avoid`.
@@ -58,7 +86,7 @@ Act as the Dev agent for one round. Your backlog is `ideas/GOOD_SG.json`, not Gi
 - **Step E:** Run `npm install <library>` for every library in `ui.suggested_libraries` not already in `package.json`.
 - Only after Steps A–E may you write any UI code.
 
-### 6) Implement
+### 8) Implement
 
 - Create the POC in `app/pocs/<slug>/` following repo conventions (Next.js page, CSS module, data file).
 - Register the new card in `lib/pocs.ts` (add entry to `pocCards` array with correct metadata).
@@ -66,7 +94,7 @@ Act as the Dev agent for one round. Your backlog is `ideas/GOOD_SG.json`, not Gi
 - Every button, label, heading, and empty state must pass `rules/CONTENT_RULES.md`. Never use banned words (`POC`, `demo`, `prototype`, `simulation`, `seed data`, `placeholder`, `mock`, `fake`, `component`, `scaffold`) in the UI.
 - Before pushing, run the content quality checklist in `rules/CONTENT_RULES.md` (Section J). All items must pass.
 
-### 7) Commit with bot co-author
+### 9) Commit with bot co-author
 
 - Stage all changes: `git add -A && git status`.
 - Choose a **random** name from this list: `Apollo_bot`, `Athena_bot`, `Hermes_bot`, `Artemis_bot`, `Orion_bot`, `Cassini_bot`, `Voyager_bot`, `Kepler_bot`, `Sagan_bot`, `Halley_bot`. Pick by any method (e.g. use the last digit of the idea number to index into the list).
@@ -76,16 +104,15 @@ Act as the Dev agent for one round. Your backlog is `ideas/GOOD_SG.json`, not Gi
 
   Co-Authored-By: <BotName> <bot@concepts-for-good>"
   ```
-- `git push -u origin <branch>` (branch was already pushed in step 4; this pushes the implementation).
+- `git push` (branch was already pushed in step 5).
 
-### 8) Open PR labelled `agent`
+### 10) Promote draft PR to ready and update its body
 
-- Ensure the `agent` label exists: `gh label list | grep agent` — if missing, create it: `gh label create agent --color "0075ca" --description "Opened by an AI agent"`.
-- Write a PR body to a temp file:
+- Update the PR body with the full implementation summary:
   ```
-  ## POC: <idea-title>
+  gh pr edit <PR-number> --body "## POC: <idea-title>
 
-  Implements idea `<GOOD_SG-ID>` from `ideas/GOOD_SG.json`.
+  Implements idea \`<GOOD_SG-ID>\` from \`ideas/GOOD_SG.json\`.
 
   **Target user:** <target_user from idea>
   **Category:** <category>
@@ -95,12 +122,12 @@ Act as the Dev agent for one round. Your backlog is `ideas/GOOD_SG.json`, not Gi
   - Distinctive feature: <ui.distinctive_feature>
 
   ### Libraries installed
-  - <list from ui.suggested_libraries>
+  - <list from ui.suggested_libraries>"
   ```
-- Open PR: `gh pr create --title "feat: add <idea-title> POC (GOOD_SG-<ID>)" --body-file pr_body.txt --label agent`
+- Mark the PR ready for review: `gh pr ready <PR-number>`
 - Do **not** run `gh pr merge`.
 
-### 9) Report
+### 11) Report
 
 - Share idea ID/title, branch name, PR number/URL.
 - Note: "Co-authored by <BotName>. PR is labelled `agent`."
@@ -109,4 +136,4 @@ Act as the Dev agent for one round. Your backlog is `ideas/GOOD_SG.json`, not Gi
 
 - Keep scope tight to the single idea; avoid touching other POCs.
 - If `npm install` fails for a suggested library, try the closest alternative and note it in the PR body.
-- If the branch already exists remotely (another agent claimed this idea), pick the next unbuilt idea instead.
+- If the branch already exists remotely or an open PR already references the idea, skip it and pick the next unbuilt idea instead (go back to step 3).
