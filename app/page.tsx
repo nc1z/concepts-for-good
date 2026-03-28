@@ -30,8 +30,7 @@ export default function Home() {
         <div className="hero__copy">
           <h1>Early digital concepts for public good in Singapore.</h1>
           <p className="hero__lede">
-            Three interactive prototypes are live below, each with its own look,
-            flow, and idea.
+            Explore public-facing digital ideas taking shape for Singapore.
           </p>
           <p className="hero__note">* These concepts are agentically generated.</p>
         </div>
