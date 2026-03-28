@@ -55,6 +55,34 @@ a {
   padding: 32px 0 72px;
 }
 
+.topbar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 4px;
+}
+
+.topbar__github {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  color: var(--text);
+  transition:
+    transform 180ms ease,
+    color 180ms ease;
+}
+
+.topbar__github:hover {
+  transform: translateY(-1px);
+  color: var(--blue-strong);
+}
+
+.topbar__github svg {
+  width: 22px;
+  height: 22px;
+}
+
 .hero,
 .gallery,
 .detail-hero,
