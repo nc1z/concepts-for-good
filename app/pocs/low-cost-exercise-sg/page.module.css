@@ -1,0 +1,514 @@
+.page {
+  min-height: 100dvh;
+  background:
+    radial-gradient(circle at 16% 14%, rgba(255, 122, 89, 0.2), transparent 24%),
+    radial-gradient(circle at 86% 12%, rgba(123, 140, 255, 0.22), transparent 22%),
+    linear-gradient(180deg, #fff8ee 0%, #f8f4ff 100%);
+  color: #2f2433;
+  font-family: var(--font-low-cost-exercise-body), sans-serif;
+}
+
+.shell {
+  width: min(1220px, calc(100% - 28px));
+  margin: 0 auto;
+  padding: 24px 0 56px;
+}
+
+.backLink {
+  display: inline-flex;
+  margin-bottom: 18px;
+  color: #6d4d74;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.hero,
+.stage {
+  display: grid;
+  gap: 20px;
+}
+
+.hero {
+  grid-template-columns: minmax(0, 1.08fr) minmax(280px, 0.92fr);
+  align-items: end;
+  margin-bottom: 24px;
+}
+
+.heroCopy h1,
+.heroPanel,
+.activeCard h2,
+.progressHeader h2,
+.railText strong,
+.timerCenter strong {
+  font-family: var(--font-low-cost-exercise-display), sans-serif;
+}
+
+.eyebrow,
+.cardKicker {
+  margin: 0 0 10px;
+  color: #82598a;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.heroCopy h1 {
+  max-width: 11ch;
+  margin: 0;
+  font-size: clamp(2.8rem, 6vw, 5rem);
+  line-height: 0.92;
+  letter-spacing: -0.05em;
+}
+
+.lede,
+.cardSummary,
+.cardFacts dd,
+.footerNote p {
+  color: #5f5165;
+  line-height: 1.62;
+}
+
+.lede {
+  max-width: 42ch;
+  margin: 16px 0 0;
+  font-size: 1.04rem;
+}
+
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  margin-top: 22px;
+}
+
+.heroMeta {
+  color: #755f7c;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.heroPanel,
+.activeCard,
+.progressPanel,
+.highlightPill,
+.railButton,
+.footerNote {
+  border: 1px solid rgba(83, 61, 92, 0.12);
+  box-shadow: 0 24px 48px rgba(93, 70, 102, 0.1);
+}
+
+.heroPanel {
+  display: grid;
+  gap: 12px;
+  padding: 20px;
+  border-radius: 34px;
+  background:
+    linear-gradient(180deg, rgba(255, 253, 249, 0.9), rgba(244, 239, 255, 0.92));
+}
+
+.highlightPill {
+  padding: 14px 16px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.76);
+  color: #5d5062;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.stage {
+  grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+  align-items: start;
+}
+
+.deckShell {
+  position: relative;
+  min-height: 680px;
+}
+
+.cardStack {
+  position: absolute;
+  inset: 20px 24px auto;
+  pointer-events: none;
+}
+
+.stackCardOne,
+.stackCardTwo {
+  position: absolute;
+  inset: 0;
+  display: block;
+  border-radius: 38px;
+  background: rgba(255, 255, 255, 0.54);
+}
+
+.stackCardOne {
+  transform: rotate(-2.4deg) translateY(20px);
+}
+
+.stackCardTwo {
+  transform: rotate(2.4deg) translateY(36px);
+}
+
+.activeCard {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(260px, 0.44fr) minmax(0, 0.56fr);
+  gap: 24px;
+  min-height: 640px;
+  padding: 28px;
+  border-radius: 38px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.82)),
+    var(--card-surface);
+}
+
+.cardTimer,
+.finishCard {
+  display: grid;
+  place-items: center;
+  border-radius: 30px;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--card-accent) 14%, white), rgba(255, 255, 255, 0.86));
+}
+
+.cardTimer {
+  position: relative;
+  min-height: 100%;
+  overflow: hidden;
+}
+
+.timerRing {
+  width: min(100%, 280px);
+  height: auto;
+  transform: rotate(-90deg);
+}
+
+.timerTrack,
+.timerProgress {
+  fill: none;
+  stroke-width: 18;
+}
+
+.timerTrack {
+  stroke: rgba(88, 66, 97, 0.12);
+}
+
+.timerProgress {
+  stroke: color-mix(in srgb, var(--card-accent) 78%, #432d4e);
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.7s linear;
+}
+
+.timerCenter {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 6px;
+  text-align: center;
+}
+
+.timerLabel,
+.timerCost,
+.cardFacts dt,
+.kindBadge,
+.progressHint,
+.railText em {
+  color: #735f7b;
+  font-size: 0.84rem;
+}
+
+.timerCenter strong {
+  font-size: clamp(2.9rem, 7vw, 4.6rem);
+  line-height: 0.88;
+}
+
+.timerCost {
+  display: inline-flex;
+  min-height: 34px;
+  padding: 0 14px;
+  align-items: center;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.72);
+  font-weight: 700;
+}
+
+.cardBody,
+.finishCard {
+  align-self: stretch;
+}
+
+.cardBody {
+  display: grid;
+  align-content: start;
+  gap: 18px;
+}
+
+.cardHeader {
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.cardHeader h2,
+.progressHeader h2 {
+  margin: 0;
+  font-size: clamp(2rem, 3vw, 3rem);
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+}
+
+.kindBadge {
+  display: inline-flex;
+  min-height: 38px;
+  padding: 0 14px;
+  align-items: center;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.76);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.cardSummary {
+  margin: 0;
+  font-size: 1.02rem;
+}
+
+.cardFacts {
+  display: grid;
+  gap: 14px;
+  margin: 0;
+}
+
+.cardFacts div {
+  padding: 14px 16px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.cardFacts dt,
+.cardFacts dd {
+  margin: 0;
+}
+
+.cardFacts dt {
+  margin-bottom: 6px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.cardActions,
+.finishActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.primaryButton,
+.secondaryButton,
+.ghostButton {
+  min-height: 52px;
+  padding: 0 18px;
+  border-radius: 999px;
+  border: none;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.primaryButton:hover,
+.secondaryButton:hover,
+.ghostButton:hover,
+.railButton:hover {
+  transform: translateY(-1px);
+}
+
+.primaryButton {
+  background: #2f2433;
+  color: #fff8f1;
+}
+
+.secondaryButton {
+  background: rgba(255, 255, 255, 0.8);
+  color: #403248;
+}
+
+.ghostButton {
+  background: transparent;
+  color: #5d4d64;
+}
+
+.finishCard {
+  align-content: center;
+  gap: 18px;
+  padding: 36px;
+  text-align: left;
+}
+
+.finishCard h2 {
+  margin: 0;
+  font-size: clamp(2.4rem, 4vw, 3.4rem);
+  line-height: 0.95;
+}
+
+.progressPanel {
+  display: grid;
+  gap: 18px;
+  padding: 22px;
+  border-radius: 34px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.86), rgba(247, 241, 255, 0.92));
+}
+
+.progressHeader {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: flex-end;
+}
+
+.progressRail {
+  display: grid;
+  gap: 12px;
+}
+
+.railButton {
+  display: grid;
+  grid-template-columns: 52px minmax(0, 1fr);
+  gap: 14px;
+  align-items: center;
+  padding: 14px;
+  border-radius: 24px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.88), color-mix(in srgb, var(--rail-accent) 12%, white));
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.railButtonCurrent {
+  border-color: color-mix(in srgb, var(--rail-accent) 42%, #4b3b54);
+}
+
+.railButtonDone .railIndex {
+  background: color-mix(in srgb, var(--rail-accent) 48%, white);
+  color: #2f2433;
+}
+
+.railIndex {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 18px;
+  background: rgba(74, 56, 82, 0.1);
+  font-weight: 800;
+}
+
+.railText strong,
+.railText em {
+  display: block;
+}
+
+.railText strong {
+  margin-bottom: 4px;
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.railText em {
+  font-style: normal;
+  line-height: 1.45;
+}
+
+.footerNote {
+  padding: 18px;
+  border-radius: 26px;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.footerNote strong,
+.footerNote p {
+  display: block;
+}
+
+.footerNote strong {
+  margin-bottom: 8px;
+  font-size: 1rem;
+}
+
+.footerNote p {
+  margin: 0;
+}
+
+@media (max-width: 1120px) {
+  .hero,
+  .stage,
+  .activeCard {
+    grid-template-columns: 1fr;
+  }
+
+  .deckShell {
+    min-height: auto;
+  }
+
+  .activeCard {
+    min-height: auto;
+  }
+
+  .cardTimer {
+    min-height: 280px;
+  }
+}
+
+@media (max-width: 720px) {
+  .shell {
+    width: min(100% - 20px, 1220px);
+    padding-bottom: 40px;
+  }
+
+  .heroCopy h1 {
+    max-width: none;
+    font-size: clamp(2.3rem, 12vw, 4rem);
+  }
+
+  .heroActions,
+  .cardActions,
+  .finishActions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .progressHeader,
+  .cardHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .progressHint {
+    max-width: none;
+  }
+
+  .activeCard,
+  .progressPanel,
+  .heroPanel {
+    padding: 18px;
+    border-radius: 26px;
+  }
+
+  .railButton {
+    grid-template-columns: 42px minmax(0, 1fr);
+  }
+
+  .railIndex {
+    width: 42px;
+    height: 42px;
+    border-radius: 14px;
+  }
+}

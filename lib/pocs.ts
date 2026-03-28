@@ -11,6 +11,18 @@ export type PocCard = {
 
 export const pocCards: PocCard[] = [
   {
+    slug: "low-cost-exercise-sg",
+    title: "Low-Cost Exercise",
+    category: "Wellness",
+    createdAt: "2026-03-29T10:15:00+08:00",
+    summary:
+      "Follow a short routine that works in small spaces, with guided cards and a timer that keeps you moving.",
+    impact:
+      "A playful movement deck for residents who want a no-cost routine without joining a class.",
+    theme: "civic",
+    tags: ["Wellness", "Exercise", "Budget", "Daily routine"],
+  },
+  {
     slug: "rest-day-planner-sg",
     title: "Rest Day Planner",
     category: "Inclusion",
