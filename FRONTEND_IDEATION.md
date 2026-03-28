@@ -37,7 +37,7 @@ Use `skills/public/frontend-plan-first/SKILL.md` whenever the task is to build o
 
 Before writing any UI code, you must answer ALL of these questions. Write down your answers in your working notes or PR description.
 
-1. **What is the `ui.direction` for this concept?** (from `challenge/GOOD_SG.json`) Write out what this design language means visually and how it will show up in this UI.
+1. **What is the `ui.direction` for this concept?** (from `ideas/GOOD_SG.json`) Write out what this design language means visually and how it will show up in this UI.
 2. **What is the `ui.interaction_model`?** Write out the specific layout and primary interaction this concept requires.
 3. **What libraries does `ui.suggested_libraries` require?** Have you run `npm install` for each? If not, do it now.
 4. **What is `ui.distinctive_feature`?** This is the one thing that must feel crafted. If you do not build this, the POC is not done.

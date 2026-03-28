@@ -518,6 +518,12 @@ export default function SeniorCheckInSgPage() {
         <p className={styles.heroLede}>
           Mark today&apos;s check-ins for seniors in your care and keep their streak going.
         </p>
+        <img
+          src="/undraw/undraw_love_9mug.svg"
+          alt=""
+          aria-hidden="true"
+          className={styles.heroIllustration}
+        />
       </section>
 
       {/* Senior roster */}

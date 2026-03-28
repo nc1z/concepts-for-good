@@ -47,10 +47,25 @@
 }
 
 .hero {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  max-width: 900px;
+  margin-bottom: 28px;
+}
+
+.heroContent {
   display: grid;
   gap: 14px;
-  max-width: 760px;
-  margin-bottom: 28px;
+  flex: 1;
+  min-width: 0;
+}
+
+.heroIllustration {
+  flex-shrink: 0;
+  width: 220px;
+  height: auto;
+  opacity: 0.92;
 }
 
 .kicker {
@@ -369,6 +384,12 @@
 
   .detailPanel {
     position: static;
+  }
+}
+
+@media (max-width: 700px) {
+  .heroIllustration {
+    display: none;
   }
 }
 

@@ -90,6 +90,14 @@
   color: #7a4f35;
 }
 
+.heroIllustration {
+  display: block;
+  width: 200px;
+  height: auto;
+  margin: 20px auto 0;
+  opacity: 0.9;
+}
+
 /* ── Senior grid ───────────────────────────────────────────── */
 .rosterSection {
   padding: 0 40px 80px;
@@ -499,6 +507,12 @@
 @media (max-width: 1024px) {
   .rosterGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .heroIllustration {
+    display: none;
   }
 }
 

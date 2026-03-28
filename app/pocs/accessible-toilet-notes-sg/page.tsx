@@ -1,9 +1,9 @@
 "use client";
 
+import { geoMercator, geoPath, type GeoProjection } from "d3-geo";
 import Link from "next/link";
 import { IBM_Plex_Sans } from "next/font/google";
 import { AnimatePresence, motion } from "framer-motion";
-import { ComposableMap, Geographies, Geography, Marker } from "react-simple-maps";
 import { useMemo, useState } from "react";
 
 import {
@@ -22,7 +22,15 @@ const ibmPlexSans = IBM_Plex_Sans({
   weight: ["400", "500", "600", "700"],
 });
 
-type GeographyItem = { rsmKey: string } & Record<string, unknown>;
+const MAP_WIDTH = 1000;
+const MAP_HEIGHT = 620;
+
+function createProjection() {
+  return geoMercator()
+    .center([103.82, 1.35])
+    .scale(52000)
+    .translate([MAP_WIDTH / 2, MAP_HEIGHT / 2]);
+}
 
 function formatDistance(distanceKm: number) {
   if (distanceKm < 1) {
@@ -66,6 +74,15 @@ export default function AccessibleToiletNotesPage() {
 
   const visibleSpots = mappedSpots.filter((spot) => spot.passesFilters);
   const selected = visibleSpots.find((spot) => spot.id === selectedId) ?? visibleSpots[0] ?? null;
+  const projection = useMemo<GeoProjection>(() => createProjection(), []);
+  const islandPath = useMemo(
+    () => geoPath(projection)(singaporeOutline as never) ?? "",
+    [projection],
+  );
+  const projectedAnchor = useMemo(
+    () => projection(anchor.coordinates) ?? [0, 0],
+    [anchor.coordinates, projection],
+  );
 
   return (
     <main className={`${styles.page} ${ibmPlexSans.variable}`}>
@@ -124,58 +141,57 @@ export default function AccessibleToiletNotesPage() {
               })}
             </div>
 
-            <ComposableMap
-              projection="geoMercator"
-              projectionConfig={{ center: [103.82, 1.35], scale: 52000 }}
+            <svg
+              viewBox={`0 0 ${MAP_WIDTH} ${MAP_HEIGHT}`}
               className={styles.map}
+              aria-label="Map of nearby accessible toilet locations in Singapore"
             >
-              <Geographies geography={singaporeOutline}>
-                {({ geographies }: { geographies: GeographyItem[] }) =>
-                  geographies.map((geo: GeographyItem) => (
-                    <Geography key={geo.rsmKey} geography={geo} className={styles.island} />
-                  ))
-                }
-              </Geographies>
+              <path d={islandPath} className={styles.island} />
 
-              <Marker coordinates={anchor.coordinates}>
-                <g className={styles.anchorMarker}>
-                  <circle r={22} className={styles.anchorHalo} />
-                  <circle r={8} className={styles.anchorDot} />
-                </g>
-              </Marker>
+              <g
+                className={styles.anchorMarker}
+                transform={`translate(${projectedAnchor[0]}, ${projectedAnchor[1]})`}
+              >
+                <circle r={22} className={styles.anchorHalo} />
+                <circle r={8} className={styles.anchorDot} />
+              </g>
 
               {mappedSpots.map((spot) => {
                 const isSelected = spot.id === selected?.id;
+                const projectedSpot = projection(spot.coordinates);
+
+                if (!projectedSpot) return null;
+
                 return (
-                  <Marker key={spot.id} coordinates={spot.coordinates}>
-                    <g
-                      className={[
-                        styles.marker,
-                        markerTone(spot.overall),
-                        isSelected ? styles.markerSelected : "",
-                        spot.passesFilters ? "" : styles.markerMuted,
-                      ]
-                        .filter(Boolean)
-                        .join(" ")}
-                      onClick={() => setSelectedId(spot.id)}
-                      onKeyDown={(event) => {
-                        if (event.key === "Enter" || event.key === " ") {
-                          setSelectedId(spot.id);
-                        }
-                      }}
-                      role="button"
-                      tabIndex={0}
-                      aria-label={`${spot.name}, ${formatDistance(spot.distanceKm)}`}
-                    >
-                      <circle r={isSelected ? 13 : 10} />
-                      <text y="4" textAnchor="middle">
-                        {spot.changing >= 80 ? "+" : "•"}
-                      </text>
-                    </g>
-                  </Marker>
+                  <g
+                    key={spot.id}
+                    className={[
+                      styles.marker,
+                      markerTone(spot.overall),
+                      isSelected ? styles.markerSelected : "",
+                      spot.passesFilters ? "" : styles.markerMuted,
+                    ]
+                      .filter(Boolean)
+                      .join(" ")}
+                    transform={`translate(${projectedSpot[0]}, ${projectedSpot[1]})`}
+                    onClick={() => setSelectedId(spot.id)}
+                    onKeyDown={(event) => {
+                      if (event.key === "Enter" || event.key === " ") {
+                        setSelectedId(spot.id);
+                      }
+                    }}
+                    role="button"
+                    tabIndex={0}
+                    aria-label={`${spot.name}, ${formatDistance(spot.distanceKm)}`}
+                  >
+                    <circle r={isSelected ? 13 : 10} />
+                    <text y="4" textAnchor="middle">
+                      {spot.changing >= 80 ? "+" : "•"}
+                    </text>
+                  </g>
                 );
               })}
-            </ComposableMap>
+            </svg>
 
             <div className={styles.mapCaption}>
               <span>{visibleSpots.length} places match this view</span>

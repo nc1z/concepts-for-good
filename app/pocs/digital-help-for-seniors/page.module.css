@@ -105,6 +105,12 @@
   color: var(--text-soft);
 }
 
+.welcomeIllustration {
+  width: min(280px, 60%);
+  height: auto;
+  opacity: 0.88;
+}
+
 .startButton,
 .taskButton,
 .navButton,

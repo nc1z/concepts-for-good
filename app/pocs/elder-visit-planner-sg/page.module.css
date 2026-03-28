@@ -46,9 +46,24 @@
 }
 
 .hero {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  max-width: 900px;
+}
+
+.heroContent {
   display: grid;
   gap: 14px;
-  max-width: 740px;
+  flex: 1;
+  min-width: 0;
+}
+
+.heroIllustration {
+  flex-shrink: 0;
+  width: 220px;
+  height: auto;
+  opacity: 0.92;
 }
 
 .eyebrow {
@@ -359,6 +374,12 @@
 @media (max-width: 920px) {
   .summaryBar {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .heroIllustration {
+    display: none;
   }
 }
 

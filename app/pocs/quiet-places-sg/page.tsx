@@ -43,11 +43,19 @@ export default function QuietPlacesPage() {
       </div>
 
       <section className={styles.hero}>
-        <p className={styles.kicker}>Quiet Places</p>
-        <h1>Find calmer places for your next outing.</h1>
-        <p className={styles.lede}>
-          Slide to keep only the places that feel quieter, softer, and easier to settle into.
-        </p>
+        <div className={styles.heroContent}>
+          <p className={styles.kicker}>Quiet Places</p>
+          <h1>Find calmer places for your next outing.</h1>
+          <p className={styles.lede}>
+            Slide to keep only the places that feel quieter, softer, and easier to settle into.
+          </p>
+        </div>
+        <img
+          src="/undraw/undraw_focused_m9bj.svg"
+          alt=""
+          aria-hidden="true"
+          className={styles.heroIllustration}
+        />
       </section>
 
       <section className={styles.control}>

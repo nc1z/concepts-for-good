@@ -11,8 +11,21 @@ export default function Home() {
   const [sortOrder, setSortOrder] = useState<"desc" | "asc">("desc");
   const [visibleCount, setVisibleCount] = useState(4);
   const [showBackToTop, setShowBackToTop] = useState(false);
+  const [attrOpen, setAttrOpen] = useState(false);
   const sentinelRef = useRef<HTMLDivElement | null>(null);
   const searchInputRef = useRef<HTMLInputElement | null>(null);
+  const attrRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (!attrOpen) return;
+    function handleClick(e: MouseEvent) {
+      if (attrRef.current && !attrRef.current.contains(e.target as Node)) {
+        setAttrOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClick);
+    return () => document.removeEventListener("mousedown", handleClick);
+  }, [attrOpen]);
 
   const categories = useMemo(
     () => ["All", ...new Set(pocCards.map((card) => card.category))],
@@ -105,6 +118,32 @@ export default function Home() {
   return (
     <main id="top" className="shell">
       <div className="topbar">
+        <div className="topbar__attributions" ref={attrRef}>
+          <button
+            type="button"
+            className="topbar__attr-btn"
+            onClick={() => setAttrOpen((v) => !v)}
+            aria-expanded={attrOpen}
+          >
+            Attributions
+            <svg viewBox="0 0 10 6" aria-hidden="true" className={attrOpen ? "topbar__attr-chevron topbar__attr-chevron--open" : "topbar__attr-chevron"}>
+              <path d="M1 1l4 4 4-4" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
+          {attrOpen && (
+            <div className="topbar__attr-popover" role="dialog" aria-label="Attributions">
+              <p className="topbar__attr-heading">Attributions</p>
+              <ul className="topbar__attr-list">
+                <li>
+                  <a href="https://undraw.co/illustrations" target="_blank" rel="noopener noreferrer">
+                    unDraw
+                  </a>
+                  <span>Open-source illustrations</span>
+                </li>
+              </ul>
+            </div>
+          )}
+        </div>
         <a
           href="https://github.com/nc1z/concepts-for-good"
           target="_blank"

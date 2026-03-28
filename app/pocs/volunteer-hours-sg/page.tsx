@@ -123,15 +123,23 @@ export default function VolunteerHoursPage() {
         </header>
 
         <section className={styles.hero}>
-          <p className={styles.eyebrow}>Volunteer Hours</p>
-          <h1>Keep a running journal of the week.</h1>
-          <p className={styles.lede}>
-            Drop each shift onto the timeline and watch the week fill with the time you gave.
-          </p>
-          <div className={styles.ribbon}>
-            <div ref={fillRef} className={styles.ribbonFill} />
-            <span>{totalHours.toFixed(1)} hours this week</span>
+          <div className={styles.heroContent}>
+            <p className={styles.eyebrow}>Volunteer Hours</p>
+            <h1>Keep a running journal of the week.</h1>
+            <p className={styles.lede}>
+              Drop each shift onto the timeline and watch the week fill with the time you gave.
+            </p>
+            <div className={styles.ribbon}>
+              <div ref={fillRef} className={styles.ribbonFill} />
+              <span>{totalHours.toFixed(1)} hours this week</span>
+            </div>
           </div>
+          <img
+            src="/undraw/undraw_accomplishments_tb6k.svg"
+            alt=""
+            aria-hidden="true"
+            className={styles.heroIllustration}
+          />
         </section>
 
         <section className={styles.weekStrip}>
@@ -178,9 +186,17 @@ export default function VolunteerHoursPage() {
                 );
               })
             ) : (
-              <p className={styles.emptyState}>
-                Nothing is logged for this day yet. Add a shift below to start the timeline here.
-              </p>
+              <div className={styles.emptyBlock}>
+                <img
+                  src="/undraw/undraw_goals_dwgr.svg"
+                  alt=""
+                  aria-hidden="true"
+                  className={styles.emptyIllustration}
+                />
+                <p className={styles.emptyState}>
+                  Nothing is logged for this day yet. Add a shift below to start the timeline here.
+                </p>
+              </div>
             )}
           </div>
         </section>

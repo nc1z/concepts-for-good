@@ -282,11 +282,19 @@ export default function MedicationReminderPage() {
 
       {/* Hero */}
       <section className={styles.hero}>
-        <p className={styles.heroEyebrow}>Health &amp; ageing</p>
-        <h1 className={styles.heroTitle}>Your medications for today</h1>
-        <p className={styles.heroLede}>
-          See all of today&apos;s medications at a glance and mark each one as taken.
-        </p>
+        <div className={styles.heroText}>
+          <p className={styles.heroEyebrow}>Health &amp; ageing</p>
+          <h1 className={styles.heroTitle}>Your medications for today</h1>
+          <p className={styles.heroLede}>
+            See all of today&apos;s medications at a glance and mark each one as taken.
+          </p>
+        </div>
+        <img
+          src="/undraw/undraw_reminders_o8j5.svg"
+          alt=""
+          aria-hidden="true"
+          className={styles.heroIllustration}
+        />
       </section>
 
       {/* Main layout: clock + panel */}

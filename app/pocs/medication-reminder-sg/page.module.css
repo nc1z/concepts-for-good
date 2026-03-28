@@ -35,9 +35,24 @@
 
 /* ─── Hero ───────────────────────────────────────────────────────── */
 .hero {
+  display: flex;
+  align-items: center;
+  gap: 40px;
   padding: 32px 32px 0;
   max-width: 1280px;
   margin: 0 auto;
+}
+
+.heroText {
+  flex: 1;
+  min-width: 0;
+}
+
+.heroIllustration {
+  flex-shrink: 0;
+  width: 200px;
+  height: auto;
+  opacity: 0.9;
 }
 
 .heroEyebrow {
@@ -369,6 +384,12 @@
   }
 }
 
+@media (max-width: 700px) {
+  .heroIllustration {
+    display: none;
+  }
+}
+
 @media (max-width: 640px) {
   .topline {
     padding: 16px 20px;
@@ -376,6 +397,7 @@
 
   .hero {
     padding: 24px 20px 0;
+    flex-direction: column;
   }
 
   .layout {

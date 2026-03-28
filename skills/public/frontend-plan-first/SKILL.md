@@ -27,7 +27,7 @@ Read these before writing the plan:
 - `FRONTEND_IDEATION.md`
 - `CONTENT_RULES.md`
 - `ANTIPATTERNS_CODEX.md`
-- the concept entry in `challenge/GOOD_SG.json`, especially its `ui` field
+- the concept entry in `ideas/GOOD_SG.json`, especially its `ui` field
 
 Also inspect at least two existing POCs that already feel specific and intentional.
 Start with:

@@ -81,11 +81,19 @@ export default function ElderVisitPlannerPage() {
         </div>
 
         <section className={styles.hero}>
-          <p className={styles.eyebrow}>Community care</p>
-          <h1 className={styles.title}>See the week at a glance and fill the visits still missing.</h1>
-          <p className={styles.lede}>
-            Pick a day, add a volunteer visit, and keep track of which seniors still need someone to drop by.
-          </p>
+          <div className={styles.heroContent}>
+            <p className={styles.eyebrow}>Community care</p>
+            <h1 className={styles.title}>See the week at a glance and fill the visits still missing.</h1>
+            <p className={styles.lede}>
+              Pick a day, add a volunteer visit, and keep track of which seniors still need someone to drop by.
+            </p>
+          </div>
+          <img
+            src="/undraw/undraw_events-calendar_sudy.svg"
+            alt=""
+            aria-hidden="true"
+            className={styles.heroIllustration}
+          />
         </section>
 
         <div className={styles.layout}>

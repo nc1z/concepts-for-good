@@ -219,6 +219,12 @@ export default function DigitalHelpForSeniorsPage() {
                 <p className={styles.lede}>
                   If using a phone feels confusing, this guide shows one thing to do on each screen.
                 </p>
+                <img
+                  src="/undraw/undraw_continuous-learning_a1ld.svg"
+                  alt=""
+                  aria-hidden="true"
+                  className={styles.welcomeIllustration}
+                />
                 <div className={styles.finishButtons}>
                   <button type="button" className={styles.ghostButton} onClick={goBack}>
                     Back

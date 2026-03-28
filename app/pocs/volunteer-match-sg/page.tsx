@@ -77,11 +77,19 @@ export default function VolunteerMatchPage() {
         </header>
 
         <section className={styles.hero}>
-          <p className={styles.eyebrow}>Volunteer Match</p>
-          <h1>See which kind of help fits you best right now.</h1>
-          <p className={styles.lede}>
-            Move through live opportunities and keep the strengths you can bring close at hand.
-          </p>
+          <div className={styles.heroContent}>
+            <p className={styles.eyebrow}>Volunteer Match</p>
+            <h1>See which kind of help fits you best right now.</h1>
+            <p className={styles.lede}>
+              Move through live opportunities and keep the strengths you can bring close at hand.
+            </p>
+          </div>
+          <img
+            src="/undraw/undraw_referral_ihsd.svg"
+            alt=""
+            aria-hidden="true"
+            className={styles.heroIllustration}
+          />
         </section>
 
         <section className={styles.skillBench}>

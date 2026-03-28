@@ -55,10 +55,25 @@
 }
 
 .hero {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  max-width: 900px;
+  margin: 30px 0 24px;
+}
+
+.heroContent {
   display: grid;
   gap: 12px;
-  max-width: 760px;
-  margin: 30px 0 24px;
+  flex: 1;
+  min-width: 0;
+}
+
+.heroIllustration {
+  flex-shrink: 0;
+  width: 220px;
+  height: auto;
+  opacity: 0.92;
 }
 
 .eyebrow {
@@ -279,5 +294,11 @@
 
   .orbit {
     min-height: 520px;
+  }
+}
+
+@media (max-width: 700px) {
+  .heroIllustration {
+    display: none;
   }
 }
