@@ -2179,14 +2179,16 @@
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
       ],
       "ui": {
-        "direction": "tactile kiosk",
-        "interaction_model": "packing tray interface — a large tray of appointment essentials where each item is tapped into a ready stack before the user leaves home",
+        "direction": "countertop prep board",
+        "interaction_model": "packing tray with drag-to-bag cards — oversized document and medicine cards sit on a shallow tray; choosing a visit type lays out the required items; user drags each card into a bag-ready rail while missing essentials stay dimmed on the tray",
         "suggested_libraries": [
-          "framer-motion"
+          "@dnd-kit/core",
+          "framer-motion",
+          "react-aria-components"
         ],
-        "distinctive_feature": "items physically slide from the tray into a ready stack, making the packed state visible at a glance",
-        "avoid": "small checkbox list; long clinic FAQ page; dense appointment admin dashboard",
-        "experience_goal": "user leaves with fewer forgotten papers or medicine details"
+        "distinctive_feature": "when the last required item lands in the bag-ready rail, the tray compresses into a leave-home card showing clinic time, payment item, and medicine note in one glanceable strip",
+        "avoid": "small checkbox list; long clinic FAQ page; dense appointment admin dashboard; printable checklist as the main experience",
+        "experience_goal": "user leaves with fewer forgotten papers, payment cards, or medicine details"
       },
       "implemented": false
     },
@@ -8208,14 +8210,16 @@
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
       ],
       "ui": {
-        "direction": "warm civic",
-        "interaction_model": "donation eligibility tracker — a calm dashboard showing your donation history as a timeline; a countdown to when you are next eligible; a find-a-drive button to locate nearby blood drives; a blood type impact stat",
+        "direction": "donor pulse board",
+        "interaction_model": "eligibility ring with donation trail — a large eligibility ring anchors the first screen while a vertical trail of past donations shows cooldown windows, blood type demand notes, and the next practical action",
         "suggested_libraries": [
+          "react-circular-progressbar",
+          "date-fns",
           "framer-motion"
         ],
-        "distinctive_feature": "countdown ring to next eligible donation date; donation history timeline with impact stats",
-        "avoid": "static reminder app; form without visual eligibility tracker; anything without the countdown",
-        "experience_goal": "donor feels their contribution matters and knows exactly when they can give again"
+        "distinctive_feature": "the eligibility ring visibly refills through the cooldown period and drops a bright next-best donation marker into the trail as soon as the donor updates their last visit date",
+        "avoid": "generic habit tracker; sterile medical dashboard; reminder settings page as the first screen; abstract stats without next-date context",
+        "experience_goal": "donor feels momentum building toward the next donation instead of staring at a passive reminder"
       },
       "implemented": false
     },
@@ -8750,14 +8754,16 @@
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
       ],
       "ui": {
-        "direction": "calm institutional",
-        "interaction_model": "decision tree flowchart — a yes/no branching path that highlights each suspicious sign and leads to a clear next action",
+        "direction": "annotated evidence board",
+        "interaction_model": "message evidence board — a suspicious SMS, WhatsApp chat, or email sits in a large reading pane; tapping any line pins a matching warning card to the side rail and updates the footer with the safest next move",
         "suggested_libraries": [
-          "framer-motion"
+          "react-virtuoso",
+          "framer-motion",
+          "rough-notation"
         ],
-        "distinctive_feature": "the active branch glows while earlier answered branches stay visible but fade into the background",
-        "avoid": "alarmist red warning dashboard; long legal text; chat-style message feed as the main layout",
-        "experience_goal": "user feels helped to pause and check, not frightened or rushed"
+        "distinctive_feature": "flagged lines in the message are tethered to warning cards with animated threads so the user can see exactly why an urgent transfer request or Singpass link is risky",
+        "avoid": "alarmist red warning dashboard; long legal text; chatbot pretending to judge the scam; recommendations with no visible reasoning",
+        "experience_goal": "user feels helped to pause, inspect the message, and choose a calmer next step"
       },
       "implementation_tags": [
         "flowchart"
@@ -9842,14 +9848,16 @@
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
       ],
       "ui": {
-        "direction": "diagram-first",
-        "interaction_model": "flat floor-plan escape guide — a simplified HDB flat diagram where users mark the room they start from and see the shortest exit path plus meeting point",
+        "direction": "flat cutaway rehearsal",
+        "interaction_model": "room-to-door rehearsal strip — the flat plan sits above a step strip showing bedroom door, corridor turn, shoe rack obstacle, and stairwell choice; tapping a family member toggles mobility constraints and redraws the safest path plus backup route",
         "suggested_libraries": [
+          "@dnd-kit/core",
+          "react-zoom-pan-pinch",
           "framer-motion"
         ],
-        "distinctive_feature": "the chosen escape path draws through the flat diagram room by room to the exit",
-        "avoid": "wall of safety text; generic emergency checklist page; anything without a flat diagram",
-        "experience_goal": "household can picture the route out before an emergency ever happens"
+        "distinctive_feature": "rehearsal mode sends an animated glow from the chosen room to the front door and calls out bottlenecks such as blocked service yards or tight turns with alternate arrows",
+        "avoid": "wall of safety text; generic emergency checklist page; static floor plan with no rehearsal state; anything without a flat diagram",
+        "experience_goal": "household can rehearse a believable route out before an emergency ever happens"
       },
       "implemented": false
     },
