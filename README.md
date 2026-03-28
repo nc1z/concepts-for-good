@@ -29,10 +29,10 @@ All POCs use seeded local data, `localStorage`, and persona-switch buttons — n
 
 ```mermaid
 graph LR
-    A[ideas/GOOD_SG.json\n160 ideas] -->|agent picks next unbuilt| B[app/pocs/<slug>/]
-    B --> C[lib/pocs.ts\ngallery card registry]
-    C --> D[/ landing page\ngallery + search + filter]
-    D --> E[/pocs/<slug>\nindividual POC page]
+    A["ideas/GOOD_SG.json"] -->|"agent picks next unbuilt"| B["app/pocs/slug/"]
+    B --> C["lib/pocs.ts"]
+    C --> D["/ gallery"]
+    D --> E["/pocs/slug"]
 ```
 
 ```

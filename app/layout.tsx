@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { JetBrains_Mono, Public_Sans } from "next/font/google";
+import Script from "next/script";
 
 import "./globals.css";
 import { Providers } from "./providers";
@@ -78,6 +79,18 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${publicSans.variable} ${jetBrainsMono.variable}`}>
         <Providers>{children}</Providers>
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-822XHZJVRE"
+          strategy="afterInteractive"
+        />
+        <Script id="gtag-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-822XHZJVRE');
+          `}
+        </Script>
       </body>
     </html>
   );
