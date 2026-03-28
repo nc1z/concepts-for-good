@@ -427,11 +427,19 @@ a {
 .gallery-item__topline {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   gap: 16px;
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
+}
+
+.gallery-item__topline time {
+  flex-shrink: 0;
+  color: rgba(74, 97, 125, 0.82);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
 }
 
 .gallery-item__status {

@@ -14,7 +14,7 @@ export const pocCards: PocCard[] = [
     slug: "food-donation-route-sg",
     title: "Food Donation Route",
     category: "Food security",
-    createdAt: "2026-03-27T09:00:00+08:00",
+    createdAt: "2026-03-28T13:52:00+08:00",
     summary:
       "Plan your pickup and dropoff route for tonight's food rescue run, stop by stop.",
     impact:
@@ -26,7 +26,7 @@ export const pocCards: PocCard[] = [
     slug: "medication-reminder-sg",
     title: "Medication Reminder",
     category: "Health & ageing",
-    createdAt: "2026-03-27T09:30:00+08:00",
+    createdAt: "2026-03-28T13:57:00+08:00",
     summary:
       "A calm daily medication schedule built around a 24-hour clock face — see what's next and mark each dose as taken.",
     impact:
@@ -38,7 +38,7 @@ export const pocCards: PocCard[] = [
     slug: "senior-check-in-sg",
     title: "Senior Check-In",
     category: "Community care",
-    createdAt: "2026-03-27T10:00:00+08:00",
+    createdAt: "2026-03-28T14:02:00+08:00",
     summary:
       "A warm check-in board for volunteers and families to track daily contact with seniors living alone.",
     impact:
@@ -50,7 +50,7 @@ export const pocCards: PocCard[] = [
     slug: "digital-help-for-seniors",
     title: "Digital Help for Seniors",
     category: "Digital confidence",
-    createdAt: "2026-03-28T09:00:00+08:00",
+    createdAt: "2026-03-28T14:20:00+08:00",
     summary:
       "A step-by-step phone helper for common tasks like paying a bill, opening an appointment, or scanning a QR code.",
     impact:
@@ -62,7 +62,7 @@ export const pocCards: PocCard[] = [
     slug: "elder-visit-planner-sg",
     title: "Elder Visit Planner",
     category: "Community care",
-    createdAt: "2026-03-28T09:30:00+08:00",
+    createdAt: "2026-03-28T15:05:00+08:00",
     summary:
       "A weekly planner for organising volunteer visits for seniors across the neighbourhood.",
     impact:
@@ -74,7 +74,7 @@ export const pocCards: PocCard[] = [
     slug: "accessible-mall-route-sg",
     title: "Accessible Mall Route",
     category: "Accessibility",
-    createdAt: "2026-03-28T10:00:00+08:00",
+    createdAt: "2026-03-28T15:11:00+08:00",
     summary:
       "A mall route guide for lifts, ramps, and stairs-free entrances before you head out.",
     impact:
@@ -86,7 +86,7 @@ export const pocCards: PocCard[] = [
     slug: "mrt-lift-note-sg",
     title: "MRT Lift Note",
     category: "Accessibility",
-    createdAt: "2026-03-28T11:00:00+08:00",
+    createdAt: "2026-03-28T16:47:00+08:00",
     summary:
       "Check lift access across key MRT stations before you travel, with alternate stops when something is down.",
     impact:
@@ -98,7 +98,7 @@ export const pocCards: PocCard[] = [
     slug: "quiet-places-sg",
     title: "Quiet Places",
     category: "Accessibility",
-    createdAt: "2026-03-28T11:10:00+08:00",
+    createdAt: "2026-03-28T16:54:00+08:00",
     summary:
       "Browse calmer places around Singapore with sensory cues for noise, crowd level, and light.",
     impact:
@@ -110,7 +110,7 @@ export const pocCards: PocCard[] = [
     slug: "accessible-toilet-notes-sg",
     title: "Accessible Toilet Notes",
     category: "Accessibility",
-    createdAt: "2026-03-28T11:20:00+08:00",
+    createdAt: "2026-03-28T17:01:00+08:00",
     summary:
       "See nearby accessible toilets with notes on cleanliness, changing facilities, opening hours, and access.",
     impact:
@@ -122,7 +122,7 @@ export const pocCards: PocCard[] = [
     slug: "volunteer-match-sg",
     title: "Volunteer Match",
     category: "Civic life",
-    createdAt: "2026-03-28T12:00:00+08:00",
+    createdAt: "2026-03-28T17:08:00+08:00",
     summary:
       "Match your skills to volunteer opportunities by cause, neighbourhood, and the kind of help needed.",
     impact:
@@ -134,7 +134,7 @@ export const pocCards: PocCard[] = [
     slug: "skills-for-good-sg",
     title: "Skills for Good",
     category: "Civic life",
-    createdAt: "2026-03-28T12:10:00+08:00",
+    createdAt: "2026-03-28T17:15:00+08:00",
     summary:
       "Browse people offering design, admin, tutoring, and tech support for community work across Singapore.",
     impact:
@@ -146,7 +146,7 @@ export const pocCards: PocCard[] = [
     slug: "volunteer-hours-sg",
     title: "Volunteer Hours",
     category: "Civic life",
-    createdAt: "2026-03-28T12:20:00+08:00",
+    createdAt: "2026-03-28T17:22:00+08:00",
     summary:
       "Log service hours, see your week build, and track recurring community commitments in one place.",
     impact:

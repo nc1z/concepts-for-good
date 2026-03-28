@@ -10,14 +10,16 @@
   },
   "dependencies": {
     "animejs": "^4.3.6",
+    "axios": "^1.14.0",
     "d3-geo": "^3.1.1",
     "framer-motion": "^12.38.0",
-    "next": "^15.3.5",
+    "next": "15.3.9",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-force-graph-2d": "^1.29.1",
     "react-hook-form": "^7.72.0",
     "recharts": "^3.8.1",
+    "swr": "^2.4.1",
     "three": "^0.183.2"
   },
   "devDependencies": {

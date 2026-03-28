@@ -5,6 +5,21 @@ import { useEffect, useMemo, useRef, useState } from "react";
 
 import { pocCards } from "@/lib/pocs";
 
+const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+function formatCardTimestamp(value: string) {
+  const date = new Date(value);
+  const day = date.getDate();
+  const month = MONTHS[date.getMonth()] ?? "";
+  const year = date.getFullYear();
+  const hours24 = date.getHours();
+  const minutes = String(date.getMinutes()).padStart(2, "0");
+  const suffix = hours24 >= 12 ? "pm" : "am";
+  const hours12 = hours24 % 12 || 12;
+
+  return `${day} ${month} ${year}, ${hours12}:${minutes} ${suffix}`;
+}
+
 export default function Home() {
   const [query, setQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState("All");
@@ -246,6 +261,7 @@ export default function Home() {
             >
               <div className="gallery-item__topline">
                 <span>{card.category}</span>
+                <time dateTime={card.createdAt}>{formatCardTimestamp(card.createdAt)}</time>
               </div>
 
               <div className="gallery-item__body">

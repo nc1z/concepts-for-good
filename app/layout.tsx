@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { JetBrains_Mono, Public_Sans } from "next/font/google";
 
 import "./globals.css";
+import { Providers } from "./providers";
 
 const publicSans = Public_Sans({
   variable: "--font-sans",
@@ -27,9 +28,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${publicSans.variable} ${jetBrainsMono.variable}`}>
-        {children}
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
 }
-

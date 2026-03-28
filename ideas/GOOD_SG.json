@@ -2,7 +2,7 @@
   "dataset": "GOOD_SG",
   "region": "singapore",
   "lens": "public good and social impact in Singapore",
-  "idea_count": 150,
+  "idea_count": 160,
   "design_contract": {
     "mandate": "Every idea must be built with a deliberately chosen visual direction and interaction model, and copy written for the target user — not for developers. Reading the ui field and rules/CONTENT_RULES.md is mandatory before writing a single line of code.",
     "anti_patterns": [
@@ -1060,6 +1060,85 @@
       "implementation_tags": []
     },
     {
+      "id": "GOOD_SG-154",
+      "title": "Carpark Chance",
+      "platform": "website",
+      "folder": "web",
+      "build_stack": "Next.js website",
+      "category": "urban access",
+      "tags": [
+        "HDB API",
+        "Carparks",
+        "Caregiver trips"
+      ],
+      "summary": "Check nearby HDB carpark availability before a clinic run, elder visit, or heavy errand trip.",
+      "target_user": "caregivers, volunteer drivers, and families travelling with seniors",
+      "why_fast": "The interesting challenge is turning live carpark availability into an at-a-glance arrival confidence board rather than a plain table of lots.",
+      "stage": "poc",
+      "poc": [
+        "nearby carpark view",
+        "availability pulse",
+        "backup pick"
+      ],
+      "prototype_goal": "Simulate the core value of Carpark Chance in-browser with believable local data and zero backend dependencies.",
+      "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
+      "storage_strategy": {
+        "primary": "localStorage",
+        "secondary": "IndexedDB only if the POC needs larger offline caches, many records, or image/file blobs",
+        "server_database": "not allowed for the initial POC"
+      },
+      "simulation_mode": "Use seeded demo records, optimistic UI updates, and fake notifications or status changes so the end-to-end workflow is testable by one person.",
+      "personas": [
+        "caregiver",
+        "volunteer",
+        "resident"
+      ],
+      "core_entities": [
+        "carparks",
+        "availability",
+        "backup_routes"
+      ],
+      "primary_user_flow": [
+        "anchor_select",
+        "availability_scan",
+        "backup_compare",
+        "save_trip"
+      ],
+      "demo_seed_data": [
+        "3 to 8 sample carparks records tailored to Singapore context",
+        "2 to 3 personas with prefilled preferences, saved items, or history",
+        "at least 1 edge case record to demonstrate empty states, stale data, or exceptions"
+      ],
+      "success_signal": "A new user can switch into a persona, complete the main workflow in under 2 minutes, and understand the concept without any manual setup.",
+      "non_goals": [
+        "real identity verification or account systems",
+        "production-grade multi-user synchronization",
+        "complex backend integrations before concept validation"
+      ],
+      "build_notes": [
+        "Prefer deterministic mock data over external APIs unless the idea explicitly depends on a public API.",
+        "Keep state resettable so demos can be rerun quickly.",
+        "Treat notifications, queues, and matching as simulations unless a real API is trivial.",
+        "Use the data.gov.sg HDB Carpark Availability API with conservative SWR refresh intervals and stale-while-revalidate caching."
+      ],
+      "ui": {
+        "direction": "map-first",
+        "interaction_model": "arrival confidence map — nearby carparks glow by availability and confidence, with a side rail showing first-choice and fallback stops",
+        "suggested_libraries": [
+          "framer-motion",
+          "axios",
+          "swr"
+        ],
+        "distinctive_feature": "carpark pins visibly pulse up or down as lot availability changes, making backup choices obvious before departure",
+        "avoid": "plain spreadsheet of lot counts; raw JSON view; map buried under filters",
+        "experience_goal": "driver feels prepared before setting off instead of circling once they arrive"
+      },
+      "implementation_tags": [
+        "public-api",
+        "realtime-cache"
+      ]
+    },
+    {
       "id": "GOOD_SG-058",
       "title": "Void Deck Activity Planner",
       "platform": "website",
@@ -1198,6 +1277,85 @@
         "experience_goal": "joining a small shared cooking session feels welcoming and local"
       },
       "implementation_tags": []
+    },
+    {
+      "id": "GOOD_SG-155",
+      "title": "Taxi Gap Watch",
+      "platform": "website",
+      "folder": "web",
+      "build_stack": "Next.js website",
+      "category": "urban access",
+      "tags": [
+        "LTA API",
+        "Taxi availability",
+        "Late-night travel"
+      ],
+      "summary": "See when taxi supply is thinning so you can leave earlier or try a safer pickup plan.",
+      "target_user": "shift workers, caregivers, and seniors planning evening travel",
+      "why_fast": "The interesting challenge is turning citywide taxi availability into a simple timing story rather than a raw count feed.",
+      "stage": "poc",
+      "poc": [
+        "zone snapshot",
+        "trend strip",
+        "leave-now nudge"
+      ],
+      "prototype_goal": "Simulate the core value of Taxi Gap Watch in-browser with believable local data and zero backend dependencies.",
+      "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
+      "storage_strategy": {
+        "primary": "localStorage",
+        "secondary": "IndexedDB only if the POC needs larger offline caches, many records, or image/file blobs",
+        "server_database": "not allowed for the initial POC"
+      },
+      "simulation_mode": "Use seeded demo records, optimistic UI updates, and fake notifications or status changes so the end-to-end workflow is testable by one person.",
+      "personas": [
+        "worker",
+        "caregiver",
+        "senior"
+      ],
+      "core_entities": [
+        "zones",
+        "taxi_counts",
+        "time_windows"
+      ],
+      "primary_user_flow": [
+        "zone_pick",
+        "trend_view",
+        "time_compare",
+        "travel_note"
+      ],
+      "demo_seed_data": [
+        "3 to 8 sample zones records tailored to Singapore context",
+        "2 to 3 personas with prefilled preferences, saved items, or history",
+        "at least 1 edge case record to demonstrate empty states, stale data, or exceptions"
+      ],
+      "success_signal": "A new user can switch into a persona, complete the main workflow in under 2 minutes, and understand the concept without any manual setup.",
+      "non_goals": [
+        "real identity verification or account systems",
+        "production-grade multi-user synchronization",
+        "complex backend integrations before concept validation"
+      ],
+      "build_notes": [
+        "Prefer deterministic mock data over external APIs unless the idea explicitly depends on a public API.",
+        "Keep state resettable so demos can be rerun quickly.",
+        "Treat notifications, queues, and matching as simulations unless a real API is trivial.",
+        "Use the data.gov.sg LTA Taxi Availability API with SWR deduping and a long enough refresh interval to avoid unnecessary polling."
+      ],
+      "ui": {
+        "direction": "timeline-first",
+        "interaction_model": "availability tide chart — a horizontal timing strip shows taxi supply rising and thinning across the next few windows",
+        "suggested_libraries": [
+          "recharts",
+          "axios",
+          "swr"
+        ],
+        "distinctive_feature": "the timing strip visually drains as taxi supply tightens, making risky pickup windows obvious at a glance",
+        "avoid": "single giant number with no trend context; ride-hailing app clone; noisy transport dashboard",
+        "experience_goal": "user can choose a safer travel window without reading charts like an analyst"
+      },
+      "implementation_tags": [
+        "public-api",
+        "trend-view"
+      ]
     },
     {
       "id": "GOOD_SG-086",
@@ -1339,6 +1497,85 @@
       "implementation_tags": []
     },
     {
+      "id": "GOOD_SG-156",
+      "title": "Traffic Camera Check",
+      "platform": "website",
+      "folder": "web",
+      "build_stack": "Next.js website",
+      "category": "safety",
+      "tags": [
+        "LTA API",
+        "Traffic images",
+        "Volunteer driving"
+      ],
+      "summary": "Check live road camera views before a volunteer delivery run or caregiver pickup trip.",
+      "target_user": "volunteer drivers, family drivers, and dispatch coordinators",
+      "why_fast": "The interesting challenge is arranging live traffic images into a useful route storyboard instead of an overwhelming camera wall.",
+      "stage": "poc",
+      "poc": [
+        "route camera strip",
+        "camera compare",
+        "delay note"
+      ],
+      "prototype_goal": "Simulate the core value of Traffic Camera Check in-browser with believable local data and zero backend dependencies.",
+      "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
+      "storage_strategy": {
+        "primary": "localStorage",
+        "secondary": "IndexedDB only if the POC needs larger offline caches, many records, or image/file blobs",
+        "server_database": "not allowed for the initial POC"
+      },
+      "simulation_mode": "Use seeded demo records, optimistic UI updates, and fake notifications or status changes so the end-to-end workflow is testable by one person.",
+      "personas": [
+        "volunteer",
+        "caregiver",
+        "coordinator"
+      ],
+      "core_entities": [
+        "cameras",
+        "routes",
+        "snapshots"
+      ],
+      "primary_user_flow": [
+        "route_pick",
+        "camera_strip",
+        "delay_assess",
+        "backup_route"
+      ],
+      "demo_seed_data": [
+        "3 to 8 sample cameras records tailored to Singapore context",
+        "2 to 3 personas with prefilled preferences, saved items, or history",
+        "at least 1 edge case record to demonstrate empty states, stale data, or exceptions"
+      ],
+      "success_signal": "A new user can switch into a persona, complete the main workflow in under 2 minutes, and understand the concept without any manual setup.",
+      "non_goals": [
+        "real identity verification or account systems",
+        "production-grade multi-user synchronization",
+        "complex backend integrations before concept validation"
+      ],
+      "build_notes": [
+        "Prefer deterministic mock data over external APIs unless the idea explicitly depends on a public API.",
+        "Keep state resettable so demos can be rerun quickly.",
+        "Treat notifications, queues, and matching as simulations unless a real API is trivial.",
+        "Use the data.gov.sg LTA Traffic Images API and cache image metadata aggressively in-memory while letting the browser handle actual image caching."
+      ],
+      "ui": {
+        "direction": "diagram-first",
+        "interaction_model": "route storyboard — selected road cameras line up along a route strip so the journey reads like a visual sequence",
+        "suggested_libraries": [
+          "framer-motion",
+          "axios",
+          "swr"
+        ],
+        "distinctive_feature": "camera frames sit directly on the route sequence, so pinch points and clearer segments are visible in one reading path",
+        "avoid": "generic CCTV gallery; raw camera list; endless wall of thumbnails",
+        "experience_goal": "driver can judge whether a route still feels manageable before leaving"
+      },
+      "implementation_tags": [
+        "public-api",
+        "image-feed"
+      ]
+    },
+    {
       "id": "GOOD_SG-149",
       "title": "Halal Potluck Match",
       "platform": "website",
@@ -1478,6 +1715,85 @@
       }
     },
     {
+      "id": "GOOD_SG-157",
+      "title": "Rain Window Planner",
+      "platform": "website",
+      "folder": "web",
+      "build_stack": "Next.js website",
+      "category": "urban access",
+      "tags": [
+        "NEA API",
+        "2-hour forecast",
+        "Mobility planning"
+      ],
+      "summary": "Pick the driest short window for a clinic visit, school run, or market trip.",
+      "target_user": "caregivers, wheelchair users, and parents on tight schedules",
+      "why_fast": "The interesting challenge is making short rain windows feel actionable through a simple window picker instead of a forecast paragraph.",
+      "stage": "poc",
+      "poc": [
+        "area forecast",
+        "time window compare",
+        "leave suggestion"
+      ],
+      "prototype_goal": "Simulate the core value of Rain Window Planner in-browser with believable local data and zero backend dependencies.",
+      "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
+      "storage_strategy": {
+        "primary": "localStorage",
+        "secondary": "IndexedDB only if the POC needs larger offline caches, many records, or image/file blobs",
+        "server_database": "not allowed for the initial POC"
+      },
+      "simulation_mode": "Use seeded demo records, optimistic UI updates, and fake notifications or status changes so the end-to-end workflow is testable by one person.",
+      "personas": [
+        "caregiver",
+        "resident",
+        "student"
+      ],
+      "core_entities": [
+        "areas",
+        "forecast_windows",
+        "plans"
+      ],
+      "primary_user_flow": [
+        "area_pick",
+        "window_compare",
+        "leave_now_or_later",
+        "save_plan"
+      ],
+      "demo_seed_data": [
+        "3 to 8 sample areas records tailored to Singapore context",
+        "2 to 3 personas with prefilled preferences, saved items, or history",
+        "at least 1 edge case record to demonstrate empty states, stale data, or exceptions"
+      ],
+      "success_signal": "A new user can switch into a persona, complete the main workflow in under 2 minutes, and understand the concept without any manual setup.",
+      "non_goals": [
+        "real identity verification or account systems",
+        "production-grade multi-user synchronization",
+        "complex backend integrations before concept validation"
+      ],
+      "build_notes": [
+        "Prefer deterministic mock data over external APIs unless the idea explicitly depends on a public API.",
+        "Keep state resettable so demos can be rerun quickly.",
+        "Treat notifications, queues, and matching as simulations unless a real API is trivial.",
+        "Use the data.gov.sg NEA 2-hour Weather Forecast API with SWR caching and no sub-minute refresh behaviour."
+      ],
+      "ui": {
+        "direction": "ambient sensory interface",
+        "interaction_model": "rain-window board — the next two hours appear as a sequence of wet and dry bands that the user can compare at a glance",
+        "suggested_libraries": [
+          "framer-motion",
+          "axios",
+          "swr"
+        ],
+        "distinctive_feature": "dryer windows open up visually as brighter slices in the board, making a good departure time instantly legible",
+        "avoid": "weather app clone; hourly table; map-first storm radar imitation",
+        "experience_goal": "user can time a short trip with less uncertainty and less rushing"
+      },
+      "implementation_tags": [
+        "public-api",
+        "forecast"
+      ]
+    },
+    {
       "id": "GOOD_SG-136",
       "title": "Family Visit Balance",
       "platform": "website",
@@ -1614,6 +1930,85 @@
         "avoid": "generic form; list without the board aesthetic; anything that exposes personal information",
         "experience_goal": "resident feels the warmth of a community where neighbours help each other"
       }
+    },
+    {
+      "id": "GOOD_SG-158",
+      "title": "Cleaner Air Hour",
+      "platform": "website",
+      "folder": "web",
+      "build_stack": "Next.js website",
+      "category": "public health",
+      "tags": [
+        "NEA API",
+        "PM2.5",
+        "Outdoor activity"
+      ],
+      "summary": "Find the better hour for an outdoor walk, school activity, or elder exercise session.",
+      "target_user": "seniors, caregivers, teachers, and families",
+      "why_fast": "The interesting challenge is turning air-quality readings into a calm timing guide that helps users decide when to go out.",
+      "stage": "poc",
+      "poc": [
+        "region view",
+        "timing compare",
+        "activity fit"
+      ],
+      "prototype_goal": "Simulate the core value of Cleaner Air Hour in-browser with believable local data and zero backend dependencies.",
+      "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
+      "storage_strategy": {
+        "primary": "localStorage",
+        "secondary": "IndexedDB only if the POC needs larger offline caches, many records, or image/file blobs",
+        "server_database": "not allowed for the initial POC"
+      },
+      "simulation_mode": "Use seeded demo records, optimistic UI updates, and fake notifications or status changes so the end-to-end workflow is testable by one person.",
+      "personas": [
+        "senior",
+        "caregiver",
+        "teacher"
+      ],
+      "core_entities": [
+        "regions",
+        "pm25_readings",
+        "activity_windows"
+      ],
+      "primary_user_flow": [
+        "region_pick",
+        "hour_compare",
+        "activity_match",
+        "save_window"
+      ],
+      "demo_seed_data": [
+        "3 to 8 sample regions records tailored to Singapore context",
+        "2 to 3 personas with prefilled preferences, saved items, or history",
+        "at least 1 edge case record to demonstrate empty states, stale data, or exceptions"
+      ],
+      "success_signal": "A new user can switch into a persona, complete the main workflow in under 2 minutes, and understand the concept without any manual setup.",
+      "non_goals": [
+        "real identity verification or account systems",
+        "production-grade multi-user synchronization",
+        "complex backend integrations before concept validation"
+      ],
+      "build_notes": [
+        "Prefer deterministic mock data over external APIs unless the idea explicitly depends on a public API.",
+        "Keep state resettable so demos can be rerun quickly.",
+        "Treat notifications, queues, and matching as simulations unless a real API is trivial.",
+        "Use the data.gov.sg PM2.5 API with stale-while-revalidate cache windows and avoid hyper-frequent refreshes for a metric that moves relatively slowly."
+      ],
+      "ui": {
+        "direction": "calm institutional",
+        "interaction_model": "air-quality timing rail — each upcoming period appears as a clean, readable rail from better to worse conditions",
+        "suggested_libraries": [
+          "recharts",
+          "axios",
+          "swr"
+        ],
+        "distinctive_feature": "activity chips snap onto cleaner periods only, so the recommendation feels grounded in the actual air reading",
+        "avoid": "panic-heavy pollution dashboard; over-detailed charts; environmental command centre aesthetic",
+        "experience_goal": "users feel informed, not alarmed, when choosing an outdoor time"
+      },
+      "implementation_tags": [
+        "public-api",
+        "health-timing"
+      ]
     },
     {
       "id": "GOOD_SG-137",
@@ -1755,6 +2150,85 @@
       }
     },
     {
+      "id": "GOOD_SG-159",
+      "title": "Heat Break Finder",
+      "platform": "website",
+      "folder": "web",
+      "build_stack": "Next.js website",
+      "category": "wellness",
+      "tags": [
+        "NEA API",
+        "Temperature",
+        "Heat safety"
+      ],
+      "summary": "Find a better time for outdoor chores, walks, or volunteer work when the heat is less punishing.",
+      "target_user": "seniors, outdoor volunteers, cleaners, and caregivers",
+      "why_fast": "The interesting challenge is turning live temperature readings into a practical timing guide for short daily tasks.",
+      "stage": "poc",
+      "poc": [
+        "station view",
+        "heat curve",
+        "cooler slot pick"
+      ],
+      "prototype_goal": "Simulate the core value of Heat Break Finder in-browser with believable local data and zero backend dependencies.",
+      "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
+      "storage_strategy": {
+        "primary": "localStorage",
+        "secondary": "IndexedDB only if the POC needs larger offline caches, many records, or image/file blobs",
+        "server_database": "not allowed for the initial POC"
+      },
+      "simulation_mode": "Use seeded demo records, optimistic UI updates, and fake notifications or status changes so the end-to-end workflow is testable by one person.",
+      "personas": [
+        "senior",
+        "volunteer",
+        "worker"
+      ],
+      "core_entities": [
+        "stations",
+        "temperature_readings",
+        "time_slots"
+      ],
+      "primary_user_flow": [
+        "station_pick",
+        "heat_curve",
+        "cooler_slot_pick",
+        "task_note"
+      ],
+      "demo_seed_data": [
+        "3 to 8 sample stations records tailored to Singapore context",
+        "2 to 3 personas with prefilled preferences, saved items, or history",
+        "at least 1 edge case record to demonstrate empty states, stale data, or exceptions"
+      ],
+      "success_signal": "A new user can switch into a persona, complete the main workflow in under 2 minutes, and understand the concept without any manual setup.",
+      "non_goals": [
+        "real identity verification or account systems",
+        "production-grade multi-user synchronization",
+        "complex backend integrations before concept validation"
+      ],
+      "build_notes": [
+        "Prefer deterministic mock data over external APIs unless the idea explicitly depends on a public API.",
+        "Keep state resettable so demos can be rerun quickly.",
+        "Treat notifications, queues, and matching as simulations unless a real API is trivial.",
+        "Use the data.gov.sg Air Temperature API with SWR and a measured refresh interval rather than live-second polling."
+      ],
+      "ui": {
+        "direction": "editorial",
+        "interaction_model": "heat curve planner — a large temperature curve anchors the page, with task cards settling into more manageable slots",
+        "suggested_libraries": [
+          "recharts",
+          "axios",
+          "swr"
+        ],
+        "distinctive_feature": "task cards physically settle into cooler parts of the curve, making timing tradeoffs instantly visible",
+        "avoid": "weather app clone; alarmist heat map; generic line-chart dashboard without task context",
+        "experience_goal": "the user can time a necessary outing around the heat instead of just enduring it"
+      },
+      "implementation_tags": [
+        "public-api",
+        "task-planner"
+      ]
+    },
+    {
       "id": "GOOD_SG-133",
       "title": "Elder Social Outing",
       "platform": "website",
@@ -1893,6 +2367,85 @@
         "avoid": "static infographic; list of facts; no interaction with the lifecycle stages",
         "experience_goal": "user understands the environmental cost of disposal and is motivated to extend their item's life"
       }
+    },
+    {
+      "id": "GOOD_SG-160",
+      "title": "UV Safe Outing",
+      "platform": "website",
+      "folder": "web",
+      "build_stack": "Next.js website",
+      "category": "public health",
+      "tags": [
+        "NEA API",
+        "UV index",
+        "Family outings"
+      ],
+      "summary": "Choose a lower-exposure time for playground visits, walks, or sports practice.",
+      "target_user": "parents, coaches, and caregivers",
+      "why_fast": "The interesting challenge is expressing UV intensity in a way that feels actionable for families instead of scientific.",
+      "stage": "poc",
+      "poc": [
+        "uv timing",
+        "outing compare",
+        "protection prompt"
+      ],
+      "prototype_goal": "Simulate the core value of UV Safe Outing in-browser with believable local data and zero backend dependencies.",
+      "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
+      "storage_strategy": {
+        "primary": "localStorage",
+        "secondary": "IndexedDB only if the POC needs larger offline caches, many records, or image/file blobs",
+        "server_database": "not allowed for the initial POC"
+      },
+      "simulation_mode": "Use seeded demo records, optimistic UI updates, and fake notifications or status changes so the end-to-end workflow is testable by one person.",
+      "personas": [
+        "caregiver",
+        "teacher",
+        "resident"
+      ],
+      "core_entities": [
+        "uv_readings",
+        "time_windows",
+        "outing_types"
+      ],
+      "primary_user_flow": [
+        "outing_pick",
+        "uv_window_view",
+        "time_compare",
+        "save_plan"
+      ],
+      "demo_seed_data": [
+        "3 to 8 sample uv_readings records tailored to Singapore context",
+        "2 to 3 personas with prefilled preferences, saved items, or history",
+        "at least 1 edge case record to demonstrate empty states, stale data, or exceptions"
+      ],
+      "success_signal": "A new user can switch into a persona, complete the main workflow in under 2 minutes, and understand the concept without any manual setup.",
+      "non_goals": [
+        "real identity verification or account systems",
+        "production-grade multi-user synchronization",
+        "complex backend integrations before concept validation"
+      ],
+      "build_notes": [
+        "Prefer deterministic mock data over external APIs unless the idea explicitly depends on a public API.",
+        "Keep state resettable so demos can be rerun quickly.",
+        "Treat notifications, queues, and matching as simulations unless a real API is trivial.",
+        "Use the data.gov.sg Ultraviolet Index API with in-memory caching and restrained refresh frequency because family planning does not need second-by-second updates."
+      ],
+      "ui": {
+        "direction": "playful utility",
+        "interaction_model": "sun arc planner — UV intensity rides across a simple sun arc while outing plans tuck under gentler periods",
+        "suggested_libraries": [
+          "framer-motion",
+          "axios",
+          "swr"
+        ],
+        "distinctive_feature": "the sun arc brightens and softens by hour so safer outing windows read immediately",
+        "avoid": "medical dashboard tone; generic weather card stack; sunscreen product upsell patterns",
+        "experience_goal": "caregivers can make a quick outdoor decision without decoding a technical metric"
+      },
+      "implementation_tags": [
+        "public-api",
+        "family-planning"
+      ]
     },
     {
       "id": "GOOD_SG-139",
@@ -2039,6 +2592,85 @@
       "implementation_tags": []
     },
     {
+      "id": "GOOD_SG-161",
+      "title": "Wet Ground Alert",
+      "platform": "website",
+      "folder": "web",
+      "build_stack": "Next.js website",
+      "category": "accessibility",
+      "tags": [
+        "NEA API",
+        "Rainfall",
+        "Wheelchair access"
+      ],
+      "summary": "Use recent rainfall to judge whether a route, market area, or estate is likely to be wet and harder to navigate.",
+      "target_user": "wheelchair users, caregivers, and residents with mobility concerns",
+      "why_fast": "The interesting challenge is translating rainfall intensity into route caution rather than showing raw weather numbers.",
+      "stage": "poc",
+      "poc": [
+        "area snapshot",
+        "caution overlay",
+        "alternate route cue"
+      ],
+      "prototype_goal": "Simulate the core value of Wet Ground Alert in-browser with believable local data and zero backend dependencies.",
+      "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
+      "storage_strategy": {
+        "primary": "localStorage",
+        "secondary": "IndexedDB only if the POC needs larger offline caches, many records, or image/file blobs",
+        "server_database": "not allowed for the initial POC"
+      },
+      "simulation_mode": "Use seeded demo records, optimistic UI updates, and fake notifications or status changes so the end-to-end workflow is testable by one person.",
+      "personas": [
+        "resident",
+        "caregiver",
+        "senior"
+      ],
+      "core_entities": [
+        "rainfall_stations",
+        "areas",
+        "route_cues"
+      ],
+      "primary_user_flow": [
+        "area_select",
+        "rainfall_scan",
+        "caution_view",
+        "alternate_pick"
+      ],
+      "demo_seed_data": [
+        "3 to 8 sample rainfall_stations records tailored to Singapore context",
+        "2 to 3 personas with prefilled preferences, saved items, or history",
+        "at least 1 edge case record to demonstrate empty states, stale data, or exceptions"
+      ],
+      "success_signal": "A new user can switch into a persona, complete the main workflow in under 2 minutes, and understand the concept without any manual setup.",
+      "non_goals": [
+        "real identity verification or account systems",
+        "production-grade multi-user synchronization",
+        "complex backend integrations before concept validation"
+      ],
+      "build_notes": [
+        "Prefer deterministic mock data over external APIs unless the idea explicitly depends on a public API.",
+        "Keep state resettable so demos can be rerun quickly.",
+        "Treat notifications, queues, and matching as simulations unless a real API is trivial.",
+        "Use the data.gov.sg Rainfall API with cached station reads and area-level summarisation to keep requests modest and the UI understandable."
+      ],
+      "ui": {
+        "direction": "map-first",
+        "interaction_model": "caution overlay map — neighbourhood areas gain a subtle wetness overlay based on recent rainfall intensity",
+        "suggested_libraries": [
+          "framer-motion",
+          "axios",
+          "swr"
+        ],
+        "distinctive_feature": "a wetness veil spreads and recedes across the map, making caution zones legible without a dense legend",
+        "avoid": "storm radar imitation; raw station table; map cluttered with tiny labels",
+        "experience_goal": "user can judge whether a route may feel more slippery or frustrating before heading out"
+      },
+      "implementation_tags": [
+        "public-api",
+        "accessibility-weather"
+      ]
+    },
+    {
       "id": "GOOD_SG-022",
       "title": "Heat Safe Walk",
       "platform": "website",
@@ -2179,6 +2811,86 @@
       "implementation_tags": []
     },
     {
+      "id": "GOOD_SG-162",
+      "title": "Commute Conditions Snapshot",
+      "platform": "website",
+      "folder": "web",
+      "build_stack": "Next.js website",
+      "category": "urban access",
+      "tags": [
+        "LTA API",
+        "NEA API",
+        "Trip planning"
+      ],
+      "summary": "See rain, traffic camera conditions, and taxi supply together before a short essential trip.",
+      "target_user": "caregivers, shift workers, and residents making time-sensitive trips",
+      "why_fast": "The interesting challenge is combining several public feeds into one calm departure snapshot without making it feel like an ops dashboard.",
+      "stage": "poc",
+      "poc": [
+        "departure snapshot",
+        "condition cards",
+        "go-now choice"
+      ],
+      "prototype_goal": "Simulate the core value of Commute Conditions Snapshot in-browser with believable local data and zero backend dependencies.",
+      "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
+      "storage_strategy": {
+        "primary": "localStorage",
+        "secondary": "IndexedDB only if the POC needs larger offline caches, many records, or image/file blobs",
+        "server_database": "not allowed for the initial POC"
+      },
+      "simulation_mode": "Use seeded demo records, optimistic UI updates, and fake notifications or status changes so the end-to-end workflow is testable by one person.",
+      "personas": [
+        "caregiver",
+        "worker",
+        "resident"
+      ],
+      "core_entities": [
+        "conditions",
+        "departure_windows",
+        "routes"
+      ],
+      "primary_user_flow": [
+        "trip_type_pick",
+        "snapshot_view",
+        "condition_compare",
+        "decision_save"
+      ],
+      "demo_seed_data": [
+        "3 to 8 sample conditions records tailored to Singapore context",
+        "2 to 3 personas with prefilled preferences, saved items, or history",
+        "at least 1 edge case record to demonstrate empty states, stale data, or exceptions"
+      ],
+      "success_signal": "A new user can switch into a persona, complete the main workflow in under 2 minutes, and understand the concept without any manual setup.",
+      "non_goals": [
+        "real identity verification or account systems",
+        "production-grade multi-user synchronization",
+        "complex backend integrations before concept validation"
+      ],
+      "build_notes": [
+        "Prefer deterministic mock data over external APIs unless the idea explicitly depends on a public API.",
+        "Keep state resettable so demos can be rerun quickly.",
+        "Treat notifications, queues, and matching as simulations unless a real API is trivial.",
+        "Combine the data.gov.sg 2-hour forecast, Taxi Availability, and Traffic Images APIs with shared axios helpers and SWR caches tuned per feed.",
+        "Do not refresh all feeds at the same interval; weather, taxi counts, and camera metadata should each use their own cadence."
+      ],
+      "ui": {
+        "direction": "split-screen matching",
+        "interaction_model": "departure snapshot board — weather, taxi, and route condition panels sit side by side and resolve into a simple go-now, wait, or reroute recommendation",
+        "suggested_libraries": [
+          "framer-motion",
+          "axios",
+          "swr"
+        ],
+        "distinctive_feature": "the three conditions visually converge toward one departure recommendation instead of leaving the user to mentally combine them",
+        "avoid": "transport command centre look; giant KPI dashboard; multiple maps competing for attention",
+        "experience_goal": "the user gets a quick, practical read on whether now is a sensible time to leave"
+      },
+      "implementation_tags": [
+        "public-api",
+        "multi-source"
+      ]
+    },
+    {
       "id": "GOOD_SG-090",
       "title": "Textile Reuse",
       "platform": "website",
@@ -2313,6 +3025,84 @@
         "experience_goal": "the market trip feels shorter, safer, and less tiring"
       },
       "implementation_tags": []
+    },
+    {
+      "id": "GOOD_SG-163",
+      "title": "Volunteer Run Weather Check",
+      "platform": "website",
+      "folder": "web",
+      "build_stack": "Next.js website",
+      "category": "food security",
+      "tags": [
+        "NEA API",
+        "LTA API",
+        "Volunteer logistics"
+      ],
+      "summary": "Check rain and road conditions before committing to a food rescue or donation run.",
+      "target_user": "volunteer drivers and community coordinators",
+      "why_fast": "The interesting challenge is surfacing route risk and weather risk in a single volunteer-friendly readiness check.",
+      "stage": "poc",
+      "poc": [
+        "run readiness",
+        "camera picks",
+        "weather note"
+      ],
+      "prototype_goal": "Simulate the core value of Volunteer Run Weather Check in-browser with believable local data and zero backend dependencies.",
+      "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
+      "storage_strategy": {
+        "primary": "localStorage",
+        "secondary": "IndexedDB only if the POC needs larger offline caches, many records, or image/file blobs",
+        "server_database": "not allowed for the initial POC"
+      },
+      "simulation_mode": "Use seeded demo records, optimistic UI updates, and fake notifications or status changes so the end-to-end workflow is testable by one person.",
+      "personas": [
+        "volunteer",
+        "coordinator"
+      ],
+      "core_entities": [
+        "runs",
+        "weather_checks",
+        "camera_checks"
+      ],
+      "primary_user_flow": [
+        "run_select",
+        "readiness_check",
+        "camera_peek",
+        "confirm_or_delay"
+      ],
+      "demo_seed_data": [
+        "3 to 8 sample runs records tailored to Singapore context",
+        "2 to 3 personas with prefilled preferences, saved items, or history",
+        "at least 1 edge case record to demonstrate empty states, stale data, or exceptions"
+      ],
+      "success_signal": "A new user can switch into a persona, complete the main workflow in under 2 minutes, and understand the concept without any manual setup.",
+      "non_goals": [
+        "real identity verification or account systems",
+        "production-grade multi-user synchronization",
+        "complex backend integrations before concept validation"
+      ],
+      "build_notes": [
+        "Prefer deterministic mock data over external APIs unless the idea explicitly depends on a public API.",
+        "Keep state resettable so demos can be rerun quickly.",
+        "Treat notifications, queues, and matching as simulations unless a real API is trivial.",
+        "Use NEA forecast data and LTA traffic images via cached axios clients and SWR to avoid repeatedly hitting the same public endpoints across cards."
+      ],
+      "ui": {
+        "direction": "data-dense operations",
+        "interaction_model": "run-readiness board — each volunteer run gains a readiness stripe composed of weather, road, and timing confidence",
+        "suggested_libraries": [
+          "framer-motion",
+          "axios",
+          "swr"
+        ],
+        "distinctive_feature": "the readiness stripe updates in segments, so volunteers can see whether rain or road conditions are the real blocker",
+        "avoid": "generic kanban board with timestamps; raw API status dump; route planner duplicate of Food Donation Route",
+        "experience_goal": "coordinators can make a quick go or delay call without juggling separate sources"
+      },
+      "implementation_tags": [
+        "public-api",
+        "ops-readiness"
+      ]
     },
     {
       "id": "GOOD_SG-132",
@@ -10428,13 +11218,17 @@
     "database_policy": "Use IndexedDB only when localStorage becomes too limited for record size, quantity, or offline assets.",
     "backend_policy": "Avoid a server backend for the first pass unless the concept cannot be demonstrated without it.",
     "simulation_policy": "Workflows should be demoable by one person using seeded Singapore-specific data and fake state transitions.",
-    "sharing_policy": "Export, copy-link, or local JSON import/export is acceptable; real accounts and cross-device sync are out of scope."
+    "sharing_policy": "Export, copy-link, or local JSON import/export is acceptable; real accounts and cross-device sync are out of scope.",
+    "public_api_policy": "Public APIs from data.gov.sg are allowed when they materially improve the concept. Use axios helpers plus SWR for in-memory stale-while-revalidate caching, dedupe requests across components, and choose conservative refresh intervals instead of aggressive polling.",
+    "public_api_refresh_guidance": "Prefer per-feed refresh intervals matched to the data type. Avoid sub-minute polling unless the endpoint truly requires it, and fall back gracefully when a cached response is temporarily stale."
   },
   "reference_guidance": [
     "Treat each idea as a POC, not a production MVP.",
     "Assume the builder will reference this JSON directly when scaffolding the app.",
     "Default to browser-only state, seeded data, and simulation-heavy flows.",
     "If a multi-sided workflow exists, expose simple buttons to switch personas instead of building auth.",
-    "Use IndexedDB only if the POC genuinely needs larger offline storage than localStorage can comfortably handle."
+    "Use IndexedDB only if the POC genuinely needs larger offline storage than localStorage can comfortably handle.",
+    "When a concept uses a public API, prefer axios for fetch helpers and SWR for in-memory caching, deduping, and stale-while-revalidate behaviour.",
+    "Do not fetch public APIs more often than necessary; tune refresh intervals to the feed rather than polling every few seconds."
   ]
 }
