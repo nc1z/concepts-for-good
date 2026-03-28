@@ -11,6 +11,18 @@ export type PocCard = {
 
 export const pocCards: PocCard[] = [
   {
+    slug: "community-cooking-circle-sg",
+    title: "Community Cooking Circle",
+    category: "Social connection",
+    createdAt: "2026-03-28T20:24:00+08:00",
+    summary:
+      "Join a neighbourhood cooking circle by taking a prep, cook, or welcome role before the meal begins.",
+    impact:
+      "A kitchen-flow board that shows where a small cooking session still needs hands before neighbours sit down together.",
+    theme: "civic",
+    tags: ["Community", "Food", "Seniors", "Neighbourhood"],
+  },
+  {
     slug: "rain-window-planner-sg",
     title: "Rain Window Planner",
     category: "Urban access",
