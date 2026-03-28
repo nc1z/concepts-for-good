@@ -158,6 +158,10 @@ This is the most important concurrency step. Push the branch and open a draft PR
   ### Libraries installed
   - <list from ui.suggested_libraries>"
   ```
+- Rename the PR title to remove the `WIP: ` prefix:
+  ```
+  gh pr edit <PR-number> --title "feat: add <idea-title> POC (GOOD_SG-<ID>)"
+  ```
 - Mark the PR ready for review: `gh pr ready <PR-number>`
 - Do **not** run `gh pr merge`.
 
