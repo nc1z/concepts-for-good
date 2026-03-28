@@ -11,6 +11,18 @@ export type PocCard = {
 
 export const pocCards: PocCard[] = [
   {
+    slug: "rest-day-planner-sg",
+    title: "Rest Day Planner",
+    category: "Inclusion",
+    createdAt: "2026-03-28T22:45:00+08:00",
+    summary:
+      "Build a rest day with affordable stops for calls home, errands, meals, and one proper break.",
+    impact:
+      "A playful Sunday board that turns useful low-cost stops into a route you can actually follow.",
+    theme: "civic",
+    tags: ["Inclusion", "Community", "Budget", "Wellbeing"],
+  },
+  {
     slug: "community-cooking-circle-sg",
     title: "Community Cooking Circle",
     category: "Social connection",

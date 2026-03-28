@@ -1,0 +1,468 @@
+.page {
+  min-height: 100dvh;
+  background:
+    radial-gradient(circle at top left, rgba(246, 143, 111, 0.26), transparent 24%),
+    radial-gradient(circle at 88% 14%, rgba(139, 142, 249, 0.24), transparent 18%),
+    linear-gradient(180deg, #fff9ee 0%, #fff2d8 100%);
+  color: #2f2233;
+  font-family: var(--font-rest-day-body), sans-serif;
+}
+
+.shell {
+  width: min(1220px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 24px 0 56px;
+}
+
+.backLink {
+  display: inline-flex;
+  margin-bottom: 18px;
+  color: #7f5174;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+  gap: 18px;
+  align-items: end;
+  margin-bottom: 22px;
+}
+
+.heroCopy h1,
+.panelTopline h2,
+.summarySticker strong,
+.neighbourhoodCard strong,
+.activityCard strong,
+.slotHeader strong,
+.plannedCard strong {
+  font-family: var(--font-rest-day-display), cursive;
+}
+
+.eyebrow,
+.panelLabel {
+  margin: 0 0 10px;
+  color: #8f5b69;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.heroCopy h1 {
+  margin: 0;
+  max-width: 11ch;
+  font-size: clamp(2.7rem, 5vw, 4.8rem);
+  line-height: 0.92;
+  letter-spacing: -0.04em;
+}
+
+.lede {
+  max-width: 42ch;
+  margin: 16px 0 0;
+  color: #5c4b61;
+  font-size: 1.05rem;
+  line-height: 1.65;
+}
+
+.heroSummary {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.summarySticker,
+.browserPanel,
+.plannerPanel,
+.mapPanel,
+.neighbourhoodCard,
+.activityCard,
+.plannedCard,
+.slotEmpty {
+  border: 1px solid rgba(109, 77, 102, 0.14);
+  box-shadow: 0 18px 36px rgba(103, 72, 83, 0.08);
+}
+
+.summarySticker {
+  padding: 16px 14px;
+  border-radius: 22px;
+  background: rgba(255, 252, 246, 0.88);
+  text-align: center;
+}
+
+.summarySticker span,
+.summarySticker strong {
+  display: block;
+}
+
+.summarySticker span {
+  color: #7d6977;
+  font-size: 0.82rem;
+}
+
+.summarySticker strong {
+  margin-top: 8px;
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.neighbourhoodStrip {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.neighbourhoodCard {
+  min-height: 148px;
+  padding: 16px;
+  border-radius: 24px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(255, 247, 230, 0.92)),
+    linear-gradient(135deg, color-mix(in srgb, var(--neighbourhood-accent) 22%, white), #fff3db);
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: transform 0.18s ease, border-color 0.18s ease;
+}
+
+.neighbourhoodCard:hover,
+.activityCard:hover {
+  transform: translateY(-2px) rotate(-0.4deg);
+}
+
+.neighbourhoodCardActive {
+  border-color: color-mix(in srgb, var(--neighbourhood-accent) 50%, #7d6977);
+  box-shadow: 0 22px 44px rgba(103, 72, 83, 0.12);
+}
+
+.neighbourhoodCard strong,
+.neighbourhoodCard span,
+.neighbourhoodCard em {
+  display: block;
+}
+
+.neighbourhoodCard strong {
+  margin-bottom: 8px;
+  font-size: 1.35rem;
+  line-height: 1;
+}
+
+.neighbourhoodCard span,
+.neighbourhoodCard em {
+  color: #6d5968;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  font-style: normal;
+}
+
+.neighbourhoodCard em {
+  margin-top: 10px;
+}
+
+.stage {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.browserPanel,
+.plannerPanel,
+.mapPanel {
+  border-radius: 32px;
+  background: rgba(255, 251, 244, 0.9);
+  padding: 22px;
+}
+
+.panelTopline {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.panelTopline h2 {
+  margin: 0;
+  font-size: 2rem;
+  line-height: 0.98;
+}
+
+.panelHint {
+  max-width: 18ch;
+  color: #7c6777;
+  font-size: 0.9rem;
+  text-align: right;
+}
+
+.activityDeck {
+  display: grid;
+  gap: 12px;
+}
+
+.activityCard {
+  position: relative;
+  padding: 20px 18px 18px;
+  border-radius: 28px;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--activity-accent) 18%, white), #fff6e8);
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.activityBadge {
+  display: inline-flex;
+  margin-bottom: 10px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(47, 34, 51, 0.08);
+  color: #654e5f;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.activityCard strong {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.activityCard p {
+  margin: 0;
+  color: #5b4a60;
+  line-height: 1.55;
+}
+
+.activityMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.activityMeta span,
+.routeListItem strong,
+.routeListItem span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  padding: 0 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.72);
+  color: #654e5f;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.sideRail {
+  display: grid;
+  gap: 18px;
+}
+
+.plannerGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.slotColumn {
+  display: grid;
+  gap: 12px;
+}
+
+.slotHeader strong,
+.slotHeader span,
+.plannedCard span,
+.plannedCard strong,
+.plannedCard p,
+.plannedCard em {
+  display: block;
+}
+
+.slotHeader strong {
+  font-size: 1.32rem;
+  line-height: 1;
+}
+
+.slotHeader span,
+.slotNote {
+  color: #765f71;
+  font-size: 0.86rem;
+  line-height: 1.45;
+}
+
+.slotNote {
+  margin: 0;
+}
+
+.plannedCard,
+.slotEmpty {
+  min-height: 214px;
+  padding: 16px;
+  border-radius: 26px;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--activity-accent, #f7ead0) 20%, white), #fff8ea);
+}
+
+.plannedCard {
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.plannedTime {
+  margin-bottom: 8px;
+  color: #7c6777;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.plannedCard strong {
+  margin-bottom: 8px;
+  font-size: 1.42rem;
+  line-height: 1;
+}
+
+.plannedCard p {
+  margin: 0 0 8px;
+  color: #5d4d61;
+}
+
+.plannedCard em {
+  color: #7c6777;
+  font-size: 0.86rem;
+  font-style: normal;
+  line-height: 1.5;
+}
+
+.slotEmpty,
+.emptyState {
+  color: #705c6a;
+  line-height: 1.6;
+}
+
+.routeMap {
+  width: 100%;
+  height: auto;
+  margin-bottom: 16px;
+  border-radius: 28px;
+  background:
+    linear-gradient(180deg, rgba(255, 251, 243, 0.94), rgba(255, 244, 222, 0.94));
+}
+
+.routeLine {
+  fill: none;
+  stroke: rgba(110, 87, 121, 0.28);
+  stroke-width: 10;
+  stroke-linecap: round;
+  stroke-dasharray: 8 14;
+}
+
+.mapNode {
+  cursor: pointer;
+}
+
+.mapNodeCircle {
+  fill: color-mix(in srgb, var(--node-accent) 18%, white);
+  stroke: color-mix(in srgb, var(--node-accent) 56%, #6e5779);
+  stroke-width: 3;
+}
+
+.mapNodeLabel {
+  fill: #49374f;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.mapNodeName {
+  fill: #6e5779;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.mapToken {
+  fill: color-mix(in srgb, var(--token-accent) 26%, white);
+  stroke: color-mix(in srgb, var(--token-accent) 64%, #6e5779);
+  stroke-width: 2;
+}
+
+.mapTokenLabel {
+  fill: #49374f;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.routeList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.routeListItem {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.routeListItem strong {
+  background: color-mix(in srgb, var(--activity-accent) 24%, white);
+}
+
+@media (max-width: 1120px) {
+  .hero,
+  .stage {
+    grid-template-columns: 1fr;
+  }
+
+  .neighbourhoodStrip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 780px) {
+  .shell {
+    width: min(100% - 20px, 1220px);
+    padding-bottom: 40px;
+  }
+
+  .heroCopy h1 {
+    max-width: none;
+    font-size: clamp(2.2rem, 12vw, 3.8rem);
+  }
+
+  .heroSummary,
+  .plannerGrid,
+  .neighbourhoodStrip {
+    grid-template-columns: 1fr;
+  }
+
+  .panelTopline {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .panelHint {
+    max-width: none;
+    text-align: left;
+  }
+
+  .browserPanel,
+  .plannerPanel,
+  .mapPanel {
+    padding: 18px;
+    border-radius: 24px;
+  }
+
+  .plannedCard,
+  .slotEmpty {
+    min-height: 164px;
+  }
+}
