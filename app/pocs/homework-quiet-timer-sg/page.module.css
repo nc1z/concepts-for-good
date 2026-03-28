@@ -1,0 +1,439 @@
+.page {
+  min-height: 100dvh;
+  background:
+    radial-gradient(circle at top left, rgba(255, 244, 227, 0.92), transparent 26%),
+    radial-gradient(circle at top right, rgba(222, 234, 255, 0.74), transparent 28%),
+    linear-gradient(180deg, #fbf7ef 0%, #eef4fb 100%);
+  color: #233141;
+  font-family: var(--font-homework-quiet-body), sans-serif;
+}
+
+.shell {
+  width: min(1200px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 24px 0 56px;
+}
+
+.backLink {
+  display: inline-flex;
+  margin-bottom: 18px;
+  color: #5f6f82;
+  font-size: 0.92rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.hero {
+  margin-bottom: 26px;
+}
+
+.eyebrow,
+.boardLabel,
+.noteLabel {
+  margin: 0 0 10px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #738195;
+}
+
+.heroCopy h1,
+.waveBoard h2,
+.poolContent h3 {
+  font-family: var(--font-homework-quiet-heading), serif;
+}
+
+.heroCopy h1 {
+  max-width: 13ch;
+  margin: 0;
+  font-size: clamp(2.5rem, 5vw, 4.8rem);
+  line-height: 0.96;
+  letter-spacing: -0.05em;
+}
+
+.lede {
+  max-width: 58ch;
+  margin: 18px 0 0;
+  font-size: 1.04rem;
+  line-height: 1.7;
+  color: #4f6074;
+}
+
+.subjectSwitch {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 24px;
+}
+
+.subjectButton {
+  padding: 18px;
+  border: 1px solid rgba(135, 149, 168, 0.2);
+  border-radius: 26px;
+  background: rgba(255, 255, 255, 0.72);
+  text-align: left;
+  color: #304051;
+  transition:
+    transform 0.22s ease,
+    border-color 0.22s ease,
+    box-shadow 0.22s ease;
+}
+
+.subjectButton strong,
+.subjectButton span {
+  display: block;
+}
+
+.subjectButton strong {
+  margin-bottom: 7px;
+  font-size: 1.02rem;
+}
+
+.subjectButton span {
+  line-height: 1.5;
+  color: #607284;
+}
+
+.subjectButton:hover {
+  transform: translateY(-2px);
+}
+
+.subjectButtonActive {
+  border-color: var(--subject-accent);
+  box-shadow:
+    inset 0 0 0 1px var(--subject-accent),
+    0 18px 34px var(--subject-glow);
+}
+
+.heroActionRow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 18px;
+  flex-wrap: wrap;
+}
+
+.primaryButton,
+.secondaryButton,
+.ghostButton {
+  border-radius: 999px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.primaryButton {
+  padding: 14px 24px;
+  border: 0;
+  background: #2f4663;
+  color: #f6fbff;
+  box-shadow: 0 18px 34px rgba(47, 70, 99, 0.22);
+}
+
+.heroMeta {
+  color: #627388;
+  font-size: 0.92rem;
+}
+
+.stage {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(290px, 0.65fr);
+  gap: 22px;
+  align-items: start;
+}
+
+.waveBoard {
+  border-radius: 40px;
+  padding: 28px;
+  background: var(--board-surface);
+  border: 1px solid rgba(128, 144, 165, 0.18);
+}
+
+.boardTopline {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.waveBoard h2 {
+  margin: 0;
+  max-width: 17ch;
+  font-size: clamp(2rem, 4vw, 3.1rem);
+  line-height: 0.98;
+  letter-spacing: -0.04em;
+}
+
+.boardTimer {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 96px;
+  min-height: 44px;
+  padding: 0 16px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.74);
+  color: #405263;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.pool {
+  position: relative;
+  min-height: 460px;
+  overflow: hidden;
+  border-radius: 34px;
+  background:
+    radial-gradient(circle at top, rgba(255, 255, 255, 0.7), transparent 56%),
+    linear-gradient(180deg, rgba(236, 245, 255, 0.92) 0%, rgba(222, 232, 245, 0.82) 100%);
+  border: 1px solid rgba(111, 128, 152, 0.16);
+}
+
+.waveField {
+  position: absolute;
+  inset: auto 0 0;
+  overflow: hidden;
+}
+
+.waveBand {
+  position: absolute;
+  inset: auto -12% -2px -12%;
+  width: 124%;
+  height: 220px;
+}
+
+.waveBandBack {
+  bottom: 16px;
+  opacity: 0.72;
+}
+
+.waveFront {
+  fill: color-mix(in srgb, var(--board-accent) 56%, #b8d2ff);
+}
+
+.waveBack {
+  fill: color-mix(in srgb, var(--board-accent) 34%, #d6e6ff);
+}
+
+.poolContent {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  height: 100%;
+  min-height: 460px;
+  flex-direction: column;
+  justify-content: center;
+  padding: 38px;
+}
+
+.contentKicker {
+  margin: 0 0 12px;
+  color: #5d6f82;
+  font-size: 0.86rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.poolContent h3 {
+  max-width: 14ch;
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 3.3rem);
+  line-height: 1;
+  letter-spacing: -0.05em;
+}
+
+.contentPrompt {
+  max-width: 34ch;
+  margin: 18px 0 0;
+  font-size: 1.06rem;
+  line-height: 1.7;
+  color: #475b71;
+}
+
+.boardFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin-top: 18px;
+  flex-wrap: wrap;
+}
+
+.focusTrack {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.trackDot {
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(120, 136, 157, 0.18);
+}
+
+.trackDotFilled {
+  background: var(--board-accent);
+  border-color: transparent;
+  box-shadow: 0 10px 24px var(--board-glow);
+}
+
+.boardActions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.secondaryButton,
+.ghostButton {
+  padding: 12px 18px;
+}
+
+.secondaryButton {
+  border: 0;
+  background: rgba(255, 255, 255, 0.72);
+  color: #314557;
+}
+
+.ghostButton {
+  border: 1px solid rgba(122, 139, 160, 0.18);
+  background: transparent;
+  color: #5c6c80;
+}
+
+.sideNotes {
+  display: grid;
+  gap: 18px;
+}
+
+.notePanel,
+.settledPanel {
+  border-radius: 30px;
+  padding: 22px;
+  border: 1px solid rgba(128, 144, 165, 0.16);
+  background: rgba(255, 255, 255, 0.76);
+  box-shadow: 0 18px 40px rgba(104, 122, 148, 0.1);
+}
+
+.noteList {
+  display: grid;
+  gap: 10px;
+}
+
+.noteStrip {
+  padding: 14px 16px;
+  border-radius: 18px;
+  background: rgba(242, 247, 255, 0.82);
+  color: #526579;
+}
+
+.noteStrip strong,
+.noteStrip span {
+  display: block;
+}
+
+.noteStrip strong {
+  margin-bottom: 6px;
+  font-size: 0.94rem;
+  color: #2f4154;
+}
+
+.noteStrip span {
+  line-height: 1.55;
+}
+
+.noteStripActive {
+  background: color-mix(in srgb, var(--board-glow) 20%, #f7fbff);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--board-accent) 38%, transparent);
+}
+
+.stoneRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.stone {
+  width: 58px;
+  height: 34px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #f0f3f7 0%, #d9e0ea 100%);
+  box-shadow: inset 0 -3px 0 rgba(82, 100, 121, 0.06);
+}
+
+.stoneFilled {
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--board-accent) 40%, #fdfdfd),
+    color-mix(in srgb, var(--board-accent) 80%, #d8e4ff)
+  );
+}
+
+.settledCopy {
+  margin: 14px 0 0;
+  line-height: 1.6;
+  color: #586a7d;
+}
+
+@media (max-width: 980px) {
+  .subjectSwitch,
+  .stage {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .shell {
+    width: min(100% - 20px, 1200px);
+    padding-bottom: 40px;
+  }
+
+  .heroCopy h1,
+  .waveBoard h2,
+  .poolContent h3 {
+    max-width: none;
+  }
+
+  .waveBoard,
+  .notePanel,
+  .settledPanel {
+    border-radius: 26px;
+    padding: 18px;
+  }
+
+  .pool,
+  .poolContent {
+    min-height: 380px;
+  }
+
+  .poolContent {
+    padding: 28px 22px;
+  }
+
+  .boardTopline {
+    flex-direction: column;
+  }
+
+  .boardActions {
+    width: 100%;
+  }
+
+  .secondaryButton,
+  .ghostButton,
+  .primaryButton {
+    width: 100%;
+    text-align: center;
+  }
+
+  .heroActionRow {
+    align-items: stretch;
+  }
+
+  .stone {
+    width: 48px;
+  }
+}
