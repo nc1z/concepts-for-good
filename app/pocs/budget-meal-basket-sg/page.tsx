@@ -146,10 +146,11 @@ function round(value: number) {
 }
 
 function getScale(values: FormValues) {
-  const peopleScale = values.people <= 1 ? 0.84 : values.people <= 2 ? 1 : values.people <= 4 ? 1.42 : 1.8;
-  const pantryScale = values.pantry === "full" ? 0.86 : values.pantry === "medium" ? 0.95 : 1;
+  const peopleScale =
+    values.people <= 1 ? 0.84 : values.people <= 2 ? 1 : values.people <= 4 ? 1.42 : 1.8;
+  const pantryScale =
+    values.pantry === "full" ? 0.86 : values.pantry === "medium" ? 0.95 : 1;
   const timeScale = values.time === "tight" ? 1.06 : values.time === "batch" ? 0.94 : 1;
-
   return round(peopleScale * pantryScale * timeScale);
 }
 
@@ -166,14 +167,7 @@ function buildPlan(values: FormValues) {
   }));
   const total = round(basket.reduce((sum, item) => sum + item.price, 0));
   const difference = round(values.budget - total);
-
-  return {
-    scenario,
-    basket,
-    days,
-    total,
-    difference,
-  };
+  return { scenario, basket, days, total, difference };
 }
 
 function buildSummary(values: FormValues, total: number) {
@@ -181,21 +175,19 @@ function buildSummary(values: FormValues, total: number) {
 }
 
 export default function BudgetMealBasketPage() {
-  const { control, handleSubmit, register, reset } = useForm<FormValues>({
+  const { control, register } = useForm<FormValues>({
     defaultValues: defaultFormValues,
   });
   const watched = useWatch({ control, defaultValue: defaultFormValues });
-  const watchedValues = useMemo<FormValues>(
+  const values = useMemo<FormValues>(
     () => ({ ...defaultFormValues, ...watched }),
     [watched],
   );
-  const [applied, setApplied] = useState<FormValues>(defaultFormValues);
   const [savedPlans, setSavedPlans] = useState<SavedPlan[]>([]);
-  const [copyLabel, setCopyLabel] = useState("Copy summary");
+  const [copyLabel, setCopyLabel] = useState("Copy this plan");
 
   useEffect(() => {
     const raw = window.localStorage.getItem(STORAGE_KEY);
-
     if (raw) {
       try {
         setSavedPlans(JSON.parse(raw) as SavedPlan[]);
@@ -209,34 +201,25 @@ export default function BudgetMealBasketPage() {
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(savedPlans));
   }, [savedPlans]);
 
-  const previewPlan = useMemo(() => buildPlan(watchedValues), [watchedValues]);
-  const appliedPlan = useMemo(() => buildPlan(applied), [applied]);
-  const summary = buildSummary(applied, appliedPlan.total);
+  const plan = useMemo(() => buildPlan(values), [values]);
+  const summary = buildSummary(values, plan.total);
 
   async function copySummary() {
     await navigator.clipboard.writeText(summary);
     setCopyLabel("Copied");
-    window.setTimeout(() => setCopyLabel("Copy summary"), 1600);
+    window.setTimeout(() => setCopyLabel("Copy this plan"), 1600);
   }
 
   function savePlan() {
     setSavedPlans((current) => [
       {
         id: crypto.randomUUID(),
-        label: `${scenarioMap[applied.scenario].title} · ${applied.people} people`,
+        label: `${scenarioMap[values.scenario].title} · ${values.people} people`,
         summary,
         timestamp: "Saved just now",
       },
       ...current,
     ]);
-  }
-
-  function resetPlanner() {
-    reset(defaultFormValues);
-    setApplied(defaultFormValues);
-    setSavedPlans([]);
-    setCopyLabel("Copy summary");
-    window.localStorage.removeItem(STORAGE_KEY);
   }
 
   return (
@@ -245,9 +228,6 @@ export default function BudgetMealBasketPage() {
         <Link href="/" className={styles.backLink}>
           Back to gallery
         </Link>
-        <button type="button" className={styles.resetLink} onClick={resetPlanner}>
-          Reset planner
-        </button>
       </header>
 
       <section className={styles.hero}>
@@ -256,15 +236,14 @@ export default function BudgetMealBasketPage() {
           <h1>Shape a cheaper week before you even shop.</h1>
         </div>
         <p className={styles.lede}>
-          A guided planner for household size, pantry strength, and time pressure,
-          with a live weekly basket and day-by-day cost curve.
+          Plan a week of meals for your household and see what it will cost before you shop.
         </p>
       </section>
 
       <section className={styles.layout}>
-        <form className={styles.planner} onSubmit={handleSubmit((values) => setApplied(values))}>
+        <div className={styles.planner}>
           <div className={styles.band}>
-            <p>Scenario</p>
+            <p>Choose your approach</p>
             <div className={styles.scenarioRow}>
               {(
                 [
@@ -284,56 +263,75 @@ export default function BudgetMealBasketPage() {
           <div className={styles.sliderBand}>
             <label className={styles.sliderRow}>
               <span>Weekly budget</span>
-            <strong>{money(watchedValues.budget)}</strong>
-              <input type="range" min="36" max="160" step="2" {...register("budget", { valueAsNumber: true })} />
+              <strong>{money(values.budget)}</strong>
+              <input
+                type="range"
+                min="36"
+                max="160"
+                step="2"
+                {...register("budget", { valueAsNumber: true })}
+              />
             </label>
 
             <label className={styles.sliderRow}>
               <span>People to feed</span>
-            <strong>{watchedValues.people}</strong>
-              <input type="range" min="1" max="6" step="1" {...register("people", { valueAsNumber: true })} />
+              <strong>{values.people}</strong>
+              <input
+                type="range"
+                min="1"
+                max="6"
+                step="1"
+                {...register("people", { valueAsNumber: true })}
+              />
             </label>
           </div>
 
           <div className={styles.bandGrid}>
             <fieldset className={styles.optionGroup}>
               <legend>Pantry starting point</legend>
-              <label><input type="radio" value="low" {...register("pantry")} /> Low</label>
-              <label><input type="radio" value="medium" {...register("pantry")} /> Medium</label>
-              <label><input type="radio" value="full" {...register("pantry")} /> Full</label>
+              <label>
+                <input type="radio" value="low" {...register("pantry")} /> Low
+              </label>
+              <label>
+                <input type="radio" value="medium" {...register("pantry")} /> Medium
+              </label>
+              <label>
+                <input type="radio" value="full" {...register("pantry")} /> Full
+              </label>
             </fieldset>
 
             <fieldset className={styles.optionGroup}>
               <legend>Kitchen time</legend>
-              <label><input type="radio" value="tight" {...register("time")} /> Tight</label>
-              <label><input type="radio" value="steady" {...register("time")} /> Steady</label>
-              <label><input type="radio" value="batch" {...register("time")} /> Batch</label>
+              <label>
+                <input type="radio" value="tight" {...register("time")} /> Tight
+              </label>
+              <label>
+                <input type="radio" value="steady" {...register("time")} /> Steady
+              </label>
+              <label>
+                <input type="radio" value="batch" {...register("time")} /> Batch
+              </label>
             </fieldset>
           </div>
 
-          <div className={styles.previewStrip}>
-            <span>{scenarioMap[watchedValues.scenario].summary}</span>
-            <strong>{money(previewPlan.total)} estimated basket</strong>
+          <div className={styles.tipStrip}>
+            <span>{scenarioMap[values.scenario].tip}</span>
           </div>
-
-          <button type="submit" className={styles.primaryAction}>
-            Generate weekly basket
-          </button>
-        </form>
+        </div>
 
         <section className={styles.output}>
           <div className={styles.outputHeader}>
             <div>
-              <p>Current plan</p>
-              <h2>{appliedPlan.scenario.title}</h2>
+              <p>Your week</p>
+              <h2>{plan.scenario.title}</h2>
             </div>
-            <strong className={styles.total}>{money(appliedPlan.total)}</strong>
+            <strong className={styles.total}>{money(plan.total)}</strong>
           </div>
 
           <p className={styles.outputSummary}>{summary}</p>
 
           <div className={styles.receipt}>
-            {appliedPlan.basket.map((item) => (
+            {plan.basket.map((item) => (
               <div key={item.name} className={styles.receiptRow}>
                 <span>
                   {item.name} <small>{item.amount}</small>
@@ -345,7 +343,7 @@ export default function BudgetMealBasketPage() {
 
           <div className={styles.chartBlock}>
             <ResponsiveContainer width="100%" height={260}>
-              <BarChart data={appliedPlan.days}>
+              <BarChart data={plan.days}>
                 <CartesianGrid strokeDasharray="3 3" stroke="rgba(41,44,34,0.12)" />
                 <XAxis dataKey="day" stroke="#5f6455" />
                 <YAxis stroke="#5f6455" />
@@ -356,7 +354,7 @@ export default function BudgetMealBasketPage() {
           </div>
 
           <div className={styles.dayList}>
-            {appliedPlan.days.map((day) => (
+            {plan.days.map((day) => (
               <motion.div key={day.day} layout className={styles.dayRow}>
                 <strong>{day.day}</strong>
                 <div>
@@ -373,14 +371,14 @@ export default function BudgetMealBasketPage() {
               {copyLabel}
             </button>
             <button type="button" className={styles.secondaryAction} onClick={savePlan}>
-              Save plan
+              Save this plan
             </button>
           </div>
 
           <div className={styles.balanceLine}>
-            {appliedPlan.difference >= 0
-              ? `${money(appliedPlan.difference)} left in budget.`
-              : `${money(Math.abs(appliedPlan.difference))} over budget.`}
+            {plan.difference >= 0
+              ? `${money(plan.difference)} left in budget.`
+              : `${money(Math.abs(plan.difference))} over budget.`}
           </div>
         </section>
       </section>
@@ -388,19 +386,21 @@ export default function BudgetMealBasketPage() {
       <section className={styles.savedStrip}>
         <div>
           <p>Saved plans</p>
-          <h2>Keep a few options on hand</h2>
+          <h2>Your options</h2>
         </div>
         <div className={styles.savedRail}>
           {savedPlans.length ? (
-            savedPlans.map((plan) => (
-              <div key={plan.id} className={styles.savedItem}>
-                <strong>{plan.label}</strong>
-                <span>{plan.summary}</span>
-                <small>{plan.timestamp}</small>
+            savedPlans.map((savedPlan) => (
+              <div key={savedPlan.id} className={styles.savedItem}>
+                <strong>{savedPlan.label}</strong>
+                <span>{savedPlan.summary}</span>
+                <small>{savedPlan.timestamp}</small>
               </div>
             ))
           ) : (
-            <div className={styles.savedEmpty}>No saved plans yet.</div>
+            <div className={styles.savedEmpty}>
+              Save a basket here to compare a few options before you shop.
+            </div>
           )}
         </div>
       </section>

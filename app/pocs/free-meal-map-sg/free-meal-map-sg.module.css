@@ -10,7 +10,7 @@
 .topline,
 .hero,
 .controls,
-.layout,
+.mapStage,
 .drawer {
   width: min(1180px, 100%);
   margin: 0 auto;
@@ -23,8 +23,7 @@
   padding-bottom: 20px;
 }
 
-.backLink,
-.resetLink {
+.backLink {
   border: 0;
   background: transparent;
   color: rgba(47, 42, 32, 0.72);
@@ -40,8 +39,6 @@
 }
 
 .kicker,
-.mapHeader p,
-.listRail p,
 .drawerLead p {
   margin: 0 0 10px;
   color: #8b6236;
@@ -52,7 +49,6 @@
 }
 
 .hero h1,
-.mapHeader h2,
 .drawerLead h2,
 .notesCol h3,
 .checklistCol h3 {
@@ -79,18 +75,16 @@
   padding-bottom: 22px;
 }
 
-.personaRow,
 .filterRow {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
 }
 
-.personaButton,
 .filterButton {
   display: grid;
   gap: 4px;
-  padding: 14px 16px;
+  padding: 10px 14px;
   border: 1px solid rgba(139, 98, 54, 0.18);
   background: rgba(255, 252, 246, 0.9);
   color: #2f2a20;
@@ -98,14 +92,7 @@
   text-align: left;
 }
 
-.personaButton span {
-  color: rgba(47, 42, 32, 0.66);
-  line-height: 1.55;
-}
-
-.personaButtonActive,
 .filterButtonActive,
-.placeRowActive,
 .hotspotActive {
   border-color: rgba(139, 98, 54, 0.48);
   background: rgba(233, 212, 183, 0.55);
@@ -123,43 +110,15 @@
   background: rgba(255, 252, 246, 0.9);
 }
 
-.layout {
-  display: grid;
-  grid-template-columns: minmax(0, 1.45fr) minmax(260px, 0.75fr);
-  gap: 18px;
-}
-
-.mapStage,
-.listRail,
-.drawer {
+.mapStage {
   background: rgba(255, 251, 245, 0.84);
   border: 1px solid rgba(139, 98, 54, 0.16);
-}
-
-.mapStage {
-  padding: 22px;
-}
-
-.mapHeader {
-  display: flex;
-  justify-content: space-between;
-  gap: 18px;
-  align-items: flex-end;
-}
-
-.mapHeader span,
-.placeRow span,
-.drawerMeta span,
-.storyCol p,
-.detailList,
-.notesFeed p {
-  color: rgba(47, 42, 32, 0.72);
+  margin-bottom: 0;
 }
 
 .mapCanvas {
   position: relative;
-  min-height: 460px;
-  margin-top: 20px;
+  min-height: 520px;
   overflow: hidden;
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.82), rgba(245, 235, 219, 0.82)),
@@ -191,27 +150,15 @@
   font-weight: 700;
 }
 
-.listRail {
-  display: grid;
-  align-content: flex-start;
-  gap: 16px;
-  padding: 22px;
+@keyframes alertPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(200, 80, 40, 0.4); }
+  50% { box-shadow: 0 0 0 6px rgba(200, 80, 40, 0); }
 }
 
-.placeList {
-  display: grid;
-  gap: 10px;
-}
-
-.placeRow {
-  display: grid;
-  gap: 4px;
-  padding: 14px;
-  border: 1px solid rgba(139, 98, 54, 0.16);
-  background: transparent;
-  color: #2f2a20;
-  cursor: pointer;
-  text-align: left;
+.hotspotAlert {
+  border-color: rgba(200, 80, 40, 0.5);
+  background: rgba(255, 240, 235, 0.95);
+  animation: alertPulse 2s ease-in-out infinite;
 }
 
 .drawer {
@@ -219,6 +166,8 @@
   gap: 18px;
   margin-top: 18px;
   padding: 24px;
+  background: rgba(255, 251, 245, 0.84);
+  border: 1px solid rgba(139, 98, 54, 0.16);
 }
 
 .drawerLead {
@@ -233,6 +182,13 @@
   flex-wrap: wrap;
   gap: 18px;
   font-size: 0.95rem;
+}
+
+.drawerMeta span,
+.storyCol p,
+.detailList,
+.notesFeed p {
+  color: rgba(47, 42, 32, 0.72);
 }
 
 .saveButton,
@@ -283,15 +239,18 @@
   resize: vertical;
 }
 
+.emptyState {
+  color: rgba(47, 42, 32, 0.54) !important;
+  font-style: italic;
+}
+
 @media (max-width: 980px) {
   .hero,
-  .layout,
   .drawerGrid {
     grid-template-columns: 1fr;
   }
 
   .drawerLead,
-  .mapHeader,
   .topline {
     flex-direction: column;
     align-items: flex-start;

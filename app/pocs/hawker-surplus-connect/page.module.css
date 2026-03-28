@@ -10,7 +10,6 @@
 .topline,
 .hero,
 .signalTape,
-.personaStrip,
 .layout {
   width: min(1220px, 100%);
   margin: 0 auto;
@@ -130,34 +129,6 @@
   border-left-color: #89b8ff;
 }
 
-.personaStrip {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
-  padding: 24px 0 30px;
-}
-
-.personaButton {
-  display: grid;
-  gap: 6px;
-  padding: 18px;
-  border: 1px solid rgba(125, 168, 225, 0.16);
-  background: transparent;
-  color: rgba(238, 243, 251, 0.92);
-  text-align: left;
-  cursor: pointer;
-}
-
-.personaButton span {
-  color: rgba(214, 226, 244, 0.74);
-  line-height: 1.55;
-}
-
-.personaButtonActive {
-  border-color: rgba(137, 184, 255, 0.56);
-  background: rgba(137, 184, 255, 0.08);
-}
-
 .layout {
   display: grid;
   grid-template-columns: minmax(0, 1.55fr) minmax(300px, 0.9fr);
@@ -176,17 +147,6 @@
   justify-content: space-between;
   gap: 18px;
   align-items: flex-end;
-}
-
-.actionButton,
-.resetButton {
-  min-height: 46px;
-  padding: 0 16px;
-  border: 0;
-  background: #f3f7ff;
-  color: #08101d;
-  font-weight: 700;
-  cursor: pointer;
 }
 
 .runList {
@@ -211,6 +171,31 @@
 .runTime span {
   font-size: 1.3rem;
   font-weight: 700;
+}
+
+.countdown {
+  font-size: 0.85rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.06em;
+  color: #89b8ff !important;
+}
+
+@keyframes urgentPulse {
+  0%, 100% { border-left-color: #ff935e; }
+  50% { border-left-color: rgba(255, 147, 94, 0.3); }
+}
+
+.runRowUrgent {
+  border-top-color: rgba(255, 147, 94, 0.3);
+  animation: urgentPulse 1.8s ease-in-out infinite;
+}
+
+.runRowUrgent .countdown {
+  color: #ff935e !important;
+}
+
+.runRowReady .countdown {
+  color: #7fdd8a !important;
 }
 
 .runTime small,
@@ -308,7 +293,6 @@
 
 @media (max-width: 980px) {
   .heroStats,
-  .personaStrip,
   .layout,
   .runRow {
     grid-template-columns: 1fr;

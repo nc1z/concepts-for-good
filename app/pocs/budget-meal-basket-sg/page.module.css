@@ -21,8 +21,7 @@
   padding-bottom: 18px;
 }
 
-.backLink,
-.resetLink {
+.backLink {
   border: 0;
   background: transparent;
   color: rgba(31, 36, 27, 0.7);
@@ -118,7 +117,6 @@
 
 .scenarioOption span,
 .secondaryAction,
-.primaryAction,
 .savedItem,
 .savedEmpty {
   display: inline-flex;
@@ -176,7 +174,15 @@
   align-items: center;
 }
 
-.previewStrip,
+.tipStrip {
+  padding: 14px 0;
+  border-top: 1px solid rgba(31, 36, 27, 0.1);
+  border-bottom: 1px solid rgba(31, 36, 27, 0.1);
+  color: rgba(31, 36, 27, 0.72);
+  line-height: 1.7;
+  font-style: italic;
+}
+
 .balanceLine {
   display: flex;
   justify-content: space-between;
@@ -186,16 +192,9 @@
   border-bottom: 1px solid rgba(31, 36, 27, 0.1);
 }
 
-.primaryAction,
 .secondaryAction {
   justify-content: center;
   cursor: pointer;
-}
-
-.primaryAction {
-  border: 0;
-  background: #1f241b;
-  color: #f5f5ef;
 }
 
 .outputHeader {
@@ -282,7 +281,6 @@
 
   .topline,
   .outputHeader,
-  .previewStrip,
   .balanceLine {
     flex-direction: column;
     align-items: flex-start;

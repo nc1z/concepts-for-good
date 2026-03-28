@@ -6,13 +6,11 @@ import { useEffect, useMemo, useState } from "react";
 
 import {
   initialWatchlist,
-  personas,
   seededAlerts,
   seededListings,
   volunteers,
   zoneOptions,
   type AlertItem,
-  type Persona,
   type Watchlist,
 } from "./data";
 import styles from "./page.module.css";
@@ -20,7 +18,6 @@ import styles from "./page.module.css";
 const STORAGE_KEY = "cfg-hawker-surplus-connect-v2";
 
 type DemoState = {
-  activePersona: Persona;
   watchlist: Watchlist;
   assignments: Record<string, string>;
   claimedIds: string[];
@@ -28,7 +25,6 @@ type DemoState = {
 };
 
 const defaultState: DemoState = {
-  activePersona: "coordinator",
   watchlist: initialWatchlist,
   assignments: {
     "listing-2": "v3",
@@ -42,13 +38,52 @@ function formatZones(zones: string[]) {
   return zones.length ? zones.join(", ") : "All zones";
 }
 
+function parseReadyByMs(readyBy: string): number {
+  const now = new Date();
+  const parts = readyBy.match(/(\d+):(\d+)\s*(am|pm)/i);
+  if (!parts) return 0;
+  let hours = parseInt(parts[1], 10);
+  const minutes = parseInt(parts[2], 10);
+  const period = parts[3].toLowerCase();
+  if (period === "pm" && hours !== 12) hours += 12;
+  if (period === "am" && hours === 12) hours = 0;
+  return new Date(
+    now.getFullYear(),
+    now.getMonth(),
+    now.getDate(),
+    hours,
+    minutes,
+    0,
+    0,
+  ).getTime();
+}
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getCountdownLabel(readyBy: string, _tick: number): string {
+  const diff = parseReadyByMs(readyBy) - Date.now();
+  if (diff <= 0) return "Closing";
+  const totalSecs = Math.floor(diff / 1000);
+  const mins = Math.floor(totalSecs / 60);
+  const secs = totalSecs % 60;
+  if (mins >= 60) return `${Math.floor(mins / 60)}h ${mins % 60}m`;
+  return `${mins}m ${String(secs).padStart(2, "0")}s`;
+}
+
+function getUrgencyClass(readyBy: string, priority: string, styles: Record<string, string>): string {
+  const diff = parseReadyByMs(readyBy) - Date.now();
+  const mins = diff / 60000;
+  if (diff <= 0 || priority === "urgent" || mins < 20) return styles.runRowUrgent;
+  if (priority === "ready" || mins < 45) return styles.runRowReady;
+  return "";
+}
+
 export default function HawkerSurplusConnectPage() {
   const [state, setState] = useState<DemoState>(defaultState);
   const [hydrated, setHydrated] = useState(false);
+  const [tick, setTick] = useState(0);
 
   useEffect(() => {
     const raw = window.localStorage.getItem(STORAGE_KEY);
-
     if (raw) {
       try {
         setState(JSON.parse(raw) as DemoState);
@@ -56,24 +91,24 @@ export default function HawkerSurplusConnectPage() {
         window.localStorage.removeItem(STORAGE_KEY);
       }
     }
-
     setHydrated(true);
   }, []);
 
   useEffect(() => {
-    if (!hydrated) {
-      return;
-    }
-
+    if (!hydrated) return;
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
   }, [hydrated, state]);
+
+  useEffect(() => {
+    const id = setInterval(() => setTick((n) => n + 1), 1000);
+    return () => clearInterval(id);
+  }, []);
 
   const filteredListings = useMemo(() => {
     return seededListings.filter((listing) => {
       const zonesMatch =
         state.watchlist.areas.length === 0 ||
         state.watchlist.areas.includes(listing.area);
-
       return zonesMatch && listing.portions >= state.watchlist.minimumPortions;
     });
   }, [state.watchlist]);
@@ -87,9 +122,7 @@ export default function HawkerSurplusConnectPage() {
     ...volunteer,
     runs: Object.entries(state.assignments)
       .filter(([, volunteerId]) => volunteerId === volunteer.id)
-      .map(([listingId]) =>
-        seededListings.find((listing) => listing.id === listingId),
-      )
+      .map(([listingId]) => seededListings.find((listing) => listing.id === listingId))
       .filter(Boolean),
   }));
 
@@ -98,54 +131,18 @@ export default function HawkerSurplusConnectPage() {
       const areas = current.watchlist.areas.includes(zone)
         ? current.watchlist.areas.filter((item) => item !== zone)
         : [...current.watchlist.areas, zone];
-
-      return {
-        ...current,
-        watchlist: {
-          ...current.watchlist,
-          areas,
-        },
-      };
+      return { ...current, watchlist: { ...current.watchlist, areas } };
     });
-  }
-
-  function setPersona(persona: Persona) {
-    setState((current) => ({
-      ...current,
-      activePersona: persona,
-      alerts: [
-        {
-          id: `persona-${Date.now()}`,
-          headline:
-            persona === "coordinator"
-              ? "Coordinator board loaded"
-              : "Volunteer board loaded",
-          detail:
-            persona === "coordinator"
-              ? "Assignment controls and watch zones are active."
-              : "Nearby runs and claim flow are active.",
-          time: "just now",
-          severity: "watching",
-        },
-        ...current.alerts.slice(0, 5),
-      ],
-    }));
   }
 
   function assignRun(listingId: string, volunteerId: string) {
     const listing = seededListings.find((item) => item.id === listingId);
     const volunteer = volunteers.find((item) => item.id === volunteerId);
-
-    if (!listing || !volunteer) {
-      return;
-    }
+    if (!listing || !volunteer) return;
 
     setState((current) => ({
       ...current,
-      assignments: {
-        ...current.assignments,
-        [listingId]: volunteerId,
-      },
+      assignments: { ...current.assignments, [listingId]: volunteerId },
       claimedIds: current.claimedIds.includes(listingId)
         ? current.claimedIds
         : [...current.claimedIds, listingId],
@@ -153,7 +150,7 @@ export default function HawkerSurplusConnectPage() {
         {
           id: `assign-${Date.now()}`,
           headline: `${volunteer.name} assigned to ${listing.area}`,
-          detail: `${listing.name} is now part of the active dispatch lane.`,
+          detail: `${listing.name} is now part of tonight's active runs.`,
           time: "just now",
           severity: "ready",
         },
@@ -164,11 +161,9 @@ export default function HawkerSurplusConnectPage() {
 
   function releaseRun(listingId: string) {
     const listing = seededListings.find((item) => item.id === listingId);
-
     setState((current) => {
       const nextAssignments = { ...current.assignments };
       delete nextAssignments[listingId];
-
       return {
         ...current,
         assignments: nextAssignments,
@@ -189,35 +184,6 @@ export default function HawkerSurplusConnectPage() {
     });
   }
 
-  function simulateWave() {
-    const nextListing =
-      filteredListings.find((listing) => !state.claimedIds.includes(listing.id)) ??
-      filteredListings[0];
-
-    if (!nextListing) {
-      return;
-    }
-
-    setState((current) => ({
-      ...current,
-      alerts: [
-        {
-          id: `sim-${Date.now()}`,
-          headline: `${nextListing.area} needs pickup attention`,
-          detail: `${nextListing.portions} portions from ${nextListing.name} are now inside the active window.`,
-          time: "just now",
-          severity: nextListing.priority === "urgent" ? "urgent" : "ready",
-        },
-        ...current.alerts.slice(0, 5),
-      ],
-    }));
-  }
-
-  function resetDemo() {
-    setState(defaultState);
-    window.localStorage.removeItem(STORAGE_KEY);
-  }
-
   return (
     <main className={styles.page}>
       <header className={styles.topline}>
@@ -232,8 +198,7 @@ export default function HawkerSurplusConnectPage() {
           <p className={styles.kicker}>Hawker Surplus Connect</p>
           <h1>Dispatch small rescue runs before the lights go out.</h1>
           <p className={styles.lede}>
-            A browser-only operations board for watch zones, live pickup windows,
-            and volunteer assignment across Singapore neighbourhoods.
+            Coordinate tonight&apos;s food rescue runs from hawker centres across your area.
           </p>
         </div>
 
@@ -248,7 +213,7 @@ export default function HawkerSurplusConnectPage() {
           </div>
           <div>
             <strong>{formatZones(state.watchlist.areas)}</strong>
-            <span>watch zones</span>
+            <span>areas covered</span>
           </div>
         </div>
       </section>
@@ -272,32 +237,13 @@ export default function HawkerSurplusConnectPage() {
         </AnimatePresence>
       </section>
 
-      <section className={styles.personaStrip}>
-        {personas.map((persona) => (
-          <button
-            key={persona.id}
-            type="button"
-            className={`${styles.personaButton} ${
-              state.activePersona === persona.id ? styles.personaButtonActive : ""
-            }`}
-            onClick={() => setPersona(persona.id)}
-          >
-            <strong>{persona.label}</strong>
-            <span>{persona.description}</span>
-          </button>
-        ))}
-      </section>
-
       <section className={styles.layout}>
         <div className={styles.lane}>
           <div className={styles.sectionHeading}>
             <div>
-              <p>Dispatch lane</p>
-              <h2>Tonight&apos;s pickup windows</h2>
+              <p>Tonight&apos;s runs</p>
+              <h2>Active pickup windows</h2>
             </div>
-            <button type="button" className={styles.actionButton} onClick={simulateWave}>
-              Simulate alert
-            </button>
           </div>
 
           <div className={styles.runList}>
@@ -309,11 +255,14 @@ export default function HawkerSurplusConnectPage() {
                 <motion.article
                   key={listing.id}
                   layout
-                  className={styles.runRow}
+                  className={`${styles.runRow} ${getUrgencyClass(listing.readyBy, listing.priority, styles)}`}
                 >
                   <div className={styles.runTime}>
                     <span>{listing.readyBy}</span>
                     <small>{listing.area}</small>
+                    <span className={styles.countdown}>
+                      {getCountdownLabel(listing.readyBy, tick)}
+                    </span>
                   </div>
 
                   <div className={styles.runCopy}>
@@ -364,8 +313,8 @@ export default function HawkerSurplusConnectPage() {
 
         <aside className={styles.sidebar}>
           <section className={styles.sideSection}>
-            <p>Watch settings</p>
-            <h2>Where should the board listen?</h2>
+            <p>Areas you cover</p>
+            <h2>Watch zones</h2>
             <div className={styles.zoneCloud}>
               {zoneOptions.map((zone) => (
                 <button
@@ -403,8 +352,8 @@ export default function HawkerSurplusConnectPage() {
           </section>
 
           <section className={styles.sideSection}>
-            <p>Volunteer roster</p>
-            <h2>Available tonight</h2>
+            <p>Available tonight</p>
+            <h2>Runners</h2>
             <div className={styles.roster}>
               {assignmentsByVolunteer.map((volunteer) => (
                 <div key={volunteer.id} className={styles.rosterRow}>
@@ -420,14 +369,6 @@ export default function HawkerSurplusConnectPage() {
                 </div>
               ))}
             </div>
-          </section>
-
-          <section className={styles.sideSection}>
-            <p>Demo controls</p>
-            <h2>Reset or rerun the night</h2>
-            <button type="button" className={styles.resetButton} onClick={resetDemo}>
-              Reset dispatch state
-            </button>
           </section>
         </aside>
       </section>
