@@ -28,29 +28,42 @@ export default function Home() {
           SG Concepts for Good
         </div>
         <div className="hero__copy">
-          <h1>Simple digital ideas that support everyday life in Singapore.</h1>
+          <h1>Early digital concepts for public good in Singapore.</h1>
           <p className="hero__lede">
-            Explore early concepts for public good in Singapore.
+            Three interactive prototypes are live below, each with its own look,
+            flow, and idea.
           </p>
-          <p className="hero__note">
-            * These concepts are agentically generated.
-          </p>
+          <p className="hero__note">* These concepts are agentically generated.</p>
         </div>
       </section>
 
       <section className="gallery">
-        <div className="card-grid">
+        <div className="gallery-grid">
           {pocCards.map((card) => (
-            <article key={card.slug} className="poc-card">
-              <div className="poc-card__meta">{card.category}</div>
-              <div className="poc-card__body">
-                <h3>{card.title}</h3>
+            <article
+              key={card.slug}
+              className={`gallery-item gallery-item--${card.theme}`}
+            >
+              <div className="gallery-item__topline">
+                <span>{card.category}</span>
+                <span className="gallery-item__status">Live demo</span>
+              </div>
+
+              <div className="gallery-item__body">
+                <h2>{card.title}</h2>
                 <p>{card.summary}</p>
               </div>
-              <div className="poc-card__footer">
+
+              <div className="gallery-item__preview">
+                {card.preview.map((label) => (
+                  <span key={label}>{label}</span>
+                ))}
+              </div>
+
+              <div className="gallery-item__footer">
                 <p>{card.impact}</p>
-                <Link href={`/pocs/${card.slug}`} className="poc-card__link">
-                  Learn more
+                <Link href={`/pocs/${card.slug}`} className="gallery-item__link">
+                  Open demo
                 </Link>
               </div>
             </article>
