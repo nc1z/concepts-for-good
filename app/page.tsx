@@ -7,6 +7,7 @@ import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { pocCards } from "@/lib/pocs";
 
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+type SortOrder = "random" | "desc" | "asc";
 
 function formatCardTimestamp(value: string) {
   const date = new Date(value);
@@ -45,10 +46,10 @@ function HomeContent() {
   const searchParams = useSearchParams();
   const urlQuery = searchParams.get("q") ?? "";
   const urlSortParam = searchParams.get("sort");
-  const urlSortOrder = urlSortParam === "asc" ? "asc" : "desc";
+  const urlSortOrder: SortOrder = urlSortParam === "asc" ? "asc" : urlSortParam === "desc" ? "desc" : "random";
   const [query, setQuery] = useState(urlQuery);
-  const [sortOrder, setSortOrder] = useState<"desc" | "asc">(urlSortOrder);
-  const [randomSeed, setRandomSeed] = useState(0);
+  const [sortOrder, setSortOrder] = useState<SortOrder>(urlSortOrder);
+  const [randomSeed, setRandomSeed] = useState(() => Date.now());
   const [visibleCount, setVisibleCount] = useState(4);
   const [showBackToTop, setShowBackToTop] = useState(false);
   const [attrOpen, setAttrOpen] = useState(false);
@@ -62,13 +63,16 @@ function HomeContent() {
 
   useEffect(() => {
     setSortOrder(urlSortOrder);
+    if (urlSortOrder === "random") {
+      setRandomSeed(Date.now());
+    }
   }, [urlSortOrder]);
 
   useEffect(() => {
     const nextQuery = query.trim();
     const currentQuery = searchParams.get("q") ?? "";
     const currentSortParam = searchParams.get("sort");
-    const nextSortParam = randomSeed === 0 ? sortOrder : null;
+    const nextSortParam = sortOrder === "random" ? null : sortOrder;
 
     if (nextQuery === currentQuery && nextSortParam === currentSortParam) return;
 
@@ -135,7 +139,7 @@ function HomeContent() {
       return matchesQuery;
     });
 
-    if (randomSeed !== 0) {
+    if (sortOrder === "random") {
       return [...cards].sort(
         (left, right) =>
           hashWithSeed(left.slug, randomSeed) - hashWithSeed(right.slug, randomSeed),
@@ -206,7 +210,6 @@ function HomeContent() {
   const hasActiveFilters = normalizedQuery.length > 0;
 
   function handleTagClick(tag: string) {
-    setRandomSeed(0);
     setQuery(tag);
     searchInputRef.current?.focus();
     searchInputRef.current?.select();
@@ -218,20 +221,20 @@ function HomeContent() {
       return;
     }
 
-    setRandomSeed(0);
     setQuery(filter);
     searchInputRef.current?.focus();
     searchInputRef.current?.select();
   }
 
   function clearFilters() {
-    setRandomSeed(0);
     setQuery("");
   }
 
-  function handleSortChange(nextSortOrder: "desc" | "asc") {
-    setRandomSeed(0);
+  function handleSortChange(nextSortOrder: SortOrder) {
     setSortOrder(nextSortOrder);
+    if (nextSortOrder === "random") {
+      setRandomSeed(Date.now());
+    }
   }
 
   function handleRandomize() {
@@ -380,8 +383,9 @@ function HomeContent() {
                     id="gallery-sort"
                     aria-label="Sort ideas"
                     value={sortOrder}
-                    onChange={(event) => handleSortChange(event.target.value as "desc" | "asc")}
+                    onChange={(event) => handleSortChange(event.target.value as SortOrder)}
                   >
+                    <option value="random">- by default</option>
                     <option value="desc">Newest first</option>
                     <option value="asc">Oldest first</option>
                   </select>

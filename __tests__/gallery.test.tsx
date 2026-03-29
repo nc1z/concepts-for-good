@@ -49,4 +49,11 @@ describe("Gallery page", () => {
     render(<Home />);
     expect(screen.getByRole("searchbox")).toBeInTheDocument();
   });
+
+  it("defaults sort to the randomized mode", () => {
+    render(<Home />);
+    expect(screen.getByRole("combobox", { name: /sort ideas/i })).toHaveValue("random");
+    const defaultOption = screen.getByRole("option", { name: /by default/i }) as HTMLOptionElement;
+    expect(defaultOption.selected).toBe(true);
+  });
 });
