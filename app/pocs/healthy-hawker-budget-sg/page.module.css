@@ -1,0 +1,380 @@
+.page {
+  min-height: 100dvh;
+  background:
+    radial-gradient(circle at 16% 18%, rgba(204, 90, 45, 0.16), transparent 24%),
+    radial-gradient(circle at 82% 12%, rgba(47, 125, 89, 0.16), transparent 22%),
+    linear-gradient(180deg, #fbf2e5 0%, #f3eadf 46%, #efe4d6 100%);
+  color: #4a2f21;
+  font-family: var(--font-hawker-budget-body), sans-serif;
+}
+
+.shell {
+  width: min(1240px, calc(100% - 28px));
+  margin: 0 auto;
+  padding: 24px 0 56px;
+}
+
+.backLink {
+  display: inline-flex;
+  margin-bottom: 18px;
+  color: #7b3f2f;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.hero,
+.stage {
+  display: grid;
+  gap: 24px;
+}
+
+.hero {
+  grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+  align-items: start;
+  margin-bottom: 26px;
+}
+
+.heroCopy h1,
+.summaryBoard h2,
+.boardTopline h2,
+.dishCard strong,
+.trayDish strong,
+.footerNote strong,
+.totalsRow strong,
+.mealTab strong {
+  font-family: var(--font-hawker-budget-display), serif;
+}
+
+.eyebrow,
+.summaryLabel,
+.boardLabel,
+.slotHeader p,
+.mealTab span,
+.totalsRow span,
+.summaryNote,
+.boardHint,
+.dishBadge {
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.eyebrow,
+.summaryLabel,
+.boardLabel {
+  margin: 0 0 10px;
+  color: #8d5338;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.heroCopy h1 {
+  max-width: 10ch;
+  margin: 0;
+  font-size: clamp(3.2rem, 6vw, 5.4rem);
+  line-height: 0.9;
+  letter-spacing: -0.05em;
+}
+
+.lede {
+  max-width: 44ch;
+  margin: 16px 0 0;
+  color: #6f5242;
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+.mealTabs {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.mealTab,
+.dishCard,
+.summaryBoard,
+.menuBoard,
+.trayBoard,
+.traySlot,
+.footerNote {
+  border: 1px solid rgba(87, 58, 43, 0.12);
+  box-shadow: 0 24px 48px rgba(82, 53, 40, 0.08);
+}
+
+.mealTab {
+  padding: 14px 14px 12px;
+  border-radius: 24px;
+  background: rgba(255, 251, 245, 0.8);
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.mealTab strong {
+  display: block;
+  font-size: 1.35rem;
+  line-height: 1;
+}
+
+.mealTab span,
+.summaryNote,
+.boardHint,
+.slotHeader span,
+.dishCard em,
+.dishMeta span,
+.trayDish em,
+.trayMeta span,
+.footerNote span,
+.slotEmpty {
+  color: #7c6355;
+  font-size: 0.78rem;
+  font-style: normal;
+}
+
+.mealTabActive {
+  border-color: color-mix(in srgb, var(--slot-accent) 46%, #764734);
+  background: linear-gradient(180deg, rgba(255,255,255,0.9), color-mix(in srgb, var(--slot-accent) 12%, white));
+}
+
+.summaryBoard,
+.menuBoard,
+.trayBoard {
+  border-radius: 34px;
+  background: rgba(255, 252, 247, 0.78);
+}
+
+.summaryBoard {
+  padding: 22px;
+}
+
+.summaryHeader,
+.boardTopline,
+.slotHeader,
+.totalsRow {
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
+}
+
+.summaryHeader,
+.boardTopline {
+  align-items: flex-start;
+}
+
+.summaryBoard h2,
+.boardTopline h2 {
+  margin: 0;
+  font-size: clamp(2rem, 3vw, 3rem);
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+}
+
+.railWrap {
+  height: 176px;
+  margin: 18px 0;
+  padding: 12px;
+  border-radius: 24px;
+  background: linear-gradient(180deg, rgba(244, 231, 216, 0.66), rgba(255,255,255,0.76));
+}
+
+.totalsRow {
+  flex-wrap: wrap;
+}
+
+.totalsRow div {
+  min-width: 120px;
+}
+
+.totalsRow strong {
+  display: block;
+  margin-top: 4px;
+  font-size: 1.7rem;
+  line-height: 1;
+}
+
+.stage {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.94fr);
+}
+
+.menuBoard,
+.trayBoard {
+  padding: 22px;
+}
+
+.menuGrid,
+.trayGrid,
+.footerStrip {
+  display: grid;
+  gap: 14px;
+}
+
+.menuGrid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 18px;
+}
+
+.dishCard {
+  padding: 18px;
+  border-radius: 28px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.86), rgba(255,255,255,0.7)),
+    var(--dish-paper);
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.dishBadge {
+  display: inline-flex;
+  min-height: 28px;
+  padding: 0 10px;
+  align-items: center;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.68);
+  color: color-mix(in srgb, var(--dish-accent) 68%, #5a3426);
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.dishCard strong,
+.trayDish strong {
+  display: block;
+  margin-top: 12px;
+  font-size: 1.8rem;
+  line-height: 0.92;
+}
+
+.dishCard p,
+.trayDish p {
+  margin: 12px 0 0;
+  color: #684f40;
+  line-height: 1.55;
+}
+
+.dishMeta,
+.dishNotes,
+.trayMeta {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.dishNotes span,
+.trayMeta span,
+.dishMeta span,
+.clearButton,
+.footerNote span {
+  display: inline-flex;
+  min-height: 30px;
+  padding: 0 11px;
+  align-items: center;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.74);
+}
+
+.trayGrid {
+  margin-top: 18px;
+}
+
+.traySlot {
+  padding: 16px;
+  border-radius: 28px;
+  background: rgba(255,255,255,0.68);
+  cursor: pointer;
+}
+
+.traySlotActive {
+  border-color: color-mix(in srgb, var(--slot-accent) 48%, #744734);
+  box-shadow: 0 18px 36px rgba(82, 53, 40, 0.12);
+}
+
+.slotHeader p,
+.slotHeader span {
+  margin: 0;
+}
+
+.clearButton {
+  border: none;
+  color: #704636;
+  cursor: pointer;
+}
+
+.trayDish {
+  margin-top: 14px;
+  padding: 16px;
+  border-radius: 24px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.88), rgba(255,255,255,0.74)),
+    var(--dish-paper);
+}
+
+.slotEmpty {
+  margin-top: 14px;
+  padding: 16px;
+  border-radius: 24px;
+  background: linear-gradient(180deg, rgba(245, 235, 222, 0.7), rgba(255,255,255,0.62));
+  line-height: 1.55;
+}
+
+.footerStrip {
+  margin-top: 18px;
+}
+
+.footerNote {
+  padding: 16px 18px;
+  border-radius: 22px;
+  background: color-mix(in srgb, var(--slot-accent) 10%, white);
+}
+
+.footerNote strong {
+  display: block;
+  font-size: 1.4rem;
+  line-height: 1;
+}
+
+.footerNote span {
+  margin-top: 10px;
+  padding: 0;
+  min-height: 0;
+  background: transparent;
+  line-height: 1.5;
+}
+
+@media (max-width: 1120px) {
+  .hero,
+  .stage {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 760px) {
+  .shell {
+    width: min(100% - 20px, 1240px);
+    padding-bottom: 40px;
+  }
+
+  .heroCopy h1 {
+    max-width: none;
+    font-size: clamp(2.4rem, 12vw, 4.5rem);
+  }
+
+  .mealTabs,
+  .menuGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .summaryHeader,
+  .boardTopline,
+  .slotHeader,
+  .totalsRow {
+    flex-direction: column;
+  }
+
+  .summaryBoard,
+  .menuBoard,
+  .trayBoard {
+    padding: 18px;
+    border-radius: 26px;
+  }
+}

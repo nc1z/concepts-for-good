@@ -11216,7 +11216,8 @@
         "avoid": "generic nutrition table; form with dropdowns; anything without the meal-building interaction",
         "experience_goal": "user plans an affordable and reasonably healthy day of hawker meals without a spreadsheet"
       },
-      "implemented": false
+      "implemented": true,
+      "built": true
     },
     {
       "id": "GOOD_SG-076",
