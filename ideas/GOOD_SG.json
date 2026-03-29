@@ -3666,14 +3666,14 @@
       "folder": "mobile",
       "build_stack": "Next.js website",
       "category": "mental health",
-      "summary": "A light daily check-in with mood patterns and support suggestions.",
-      "target_user": "adults managing stress",
+      "summary": "Do a two-minute stress check and see which part of the day is weighing on you most.",
+      "target_user": "adults in Singapore juggling work, study, or caregiving stress",
       "why_fast": "The interesting challenge is a multi-axis ring chart where each axis animates independently as each stress-check question is answered.",
       "stage": "poc",
       "poc": [
-        "quick entry flow",
-        "history list with filters",
-        "reminders or streaks"
+        "stress card swipe",
+        "pattern snapshot",
+        "next-step suggestion"
       ],
       "prototype_goal": "Simulate the core value of Stress Check Card in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
@@ -3689,21 +3689,21 @@
         "resident"
       ],
       "core_entities": [
-        "watchlists",
-        "alerts",
-        "entries",
-        "history"
+        "check_ins",
+        "stress_dimensions",
+        "patterns",
+        "tips"
       ],
       "primary_user_flow": [
-        "quick_entry",
-        "history_feed",
-        "detail_drawer",
-        "streaks_or_summary"
+        "question_swipe",
+        "stress_shape",
+        "pattern_compare",
+        "next_step_card"
       ],
       "demo_seed_data": [
-        "3 to 8 sample watchlists records tailored to Singapore context",
-        "2 to 3 personas with prefilled preferences, saved items, or history",
-        "at least 1 edge case record to demonstrate empty states, stale data, or exceptions"
+        "3 to 8 sample check-in records tailored to Singapore routines",
+        "2 to 3 personas with prefilled stress patterns and saved tips",
+        "at least 1 edge case record to demonstrate skipped days or conflicting signals"
       ],
       "success_signal": "A new user can switch into a persona, complete the main workflow in under 2 minutes, and understand the concept without any manual setup.",
       "non_goals": [
@@ -3717,15 +3717,16 @@
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
       ],
       "ui": {
-        "direction": "editorial",
-        "interaction_model": "mood questionnaire with ring visualisation — a short 5-question check-in; each answered question updates a multi-axis ring chart showing stress dimensions; a personalised short tip appears at the end",
+        "direction": "folded pocket journal",
+        "interaction_model": "stacked stress cards — one prompt appears at a time as a thumb-sized card stack; each swipe answer folds a colored wedge into a circular stress bloom that stays visible on the right; the final state compares today against the user's recent pattern before showing one small next step",
         "suggested_libraries": [
           "framer-motion",
-          "recharts"
+          "d3-shape",
+          "react-swipeable"
         ],
-        "distinctive_feature": "multi-axis ring chart that fills as each question is answered; axes animate independently",
-        "avoid": "plain questionnaire with score at end; no visual during the check-in; generic tip list",
-        "experience_goal": "user gains insight into which dimensions of their stress need attention today"
+        "distinctive_feature": "the stress bloom is built wedge by wedge as cards are answered, so the user literally watches today's pressure pattern take shape before any advice appears",
+        "avoid": "plain questionnaire with a numeric score; medical intake styling; generic wellness streak tracker; full dashboard before the first answer",
+        "experience_goal": "user quickly sees which kind of strain is highest today and gets one manageable next step"
       },
       "implemented": false
     },
@@ -6158,14 +6159,14 @@
       "folder": "mobile",
       "build_stack": "Next.js website",
       "category": "mental health",
-      "summary": "Send short grounding or breathing prompts during stressful days.",
-      "target_user": "workers, students, and caregivers",
+      "summary": "Take a guided one-minute reset between shifts, classes, or caregiving tasks.",
+      "target_user": "workers, students, and caregivers who need a short reset in the middle of the day",
       "why_fast": "The interesting challenge is a high-quality framer-motion breathing circle that shifts the background colour through the entire session cycle.",
       "stage": "poc",
       "poc": [
-        "watchlist setup",
-        "push or email alerts",
-        "settings for thresholds and frequency"
+        "session picker",
+        "breathing cycle",
+        "post-session grounding card"
       ],
       "prototype_goal": "Simulate the core value of Breathing Break in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
@@ -6183,19 +6184,20 @@
         "resident"
       ],
       "core_entities": [
-        "watchlists",
-        "alerts"
+        "sessions",
+        "prompts",
+        "history"
       ],
       "primary_user_flow": [
-        "watchlist_form",
-        "alerts_feed",
-        "preferences",
-        "simulation_controls"
+        "pace_pick",
+        "breathing_orb",
+        "grounding_prompt",
+        "save_preference"
       ],
       "demo_seed_data": [
-        "3 to 8 sample watchlists records tailored to Singapore context",
-        "2 to 3 personas with prefilled preferences, saved items, or history",
-        "at least 1 edge case record to demonstrate empty states, stale data, or exceptions"
+        "3 to 8 sample reset session presets tailored to Singapore routines",
+        "2 to 3 personas with prefilled preferred pacing and saved prompts",
+        "at least 1 edge case record to demonstrate an interrupted session or a silent-mode preference"
       ],
       "success_signal": "A new user can switch into a persona, complete the main workflow in under 2 minutes, and understand the concept without any manual setup.",
       "non_goals": [
@@ -6209,14 +6211,16 @@
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
       ],
       "ui": {
-        "direction": "playful utility",
-        "interaction_model": "animated breathing guide — a large animated circle that expands and contracts as a breathing pacer; a session selector at the top; a calm ambient background that shifts color through the session",
+        "direction": "ambient lantern",
+        "interaction_model": "breathing lantern ritual — a soft lantern-like orb expands for inhale, holds with a warm glow, and contracts for exhale; the user can tap quick presets such as train ride, between patients, or before bed, then finish on a single grounding sentence card",
         "suggested_libraries": [
-          "framer-motion"
+          "framer-motion",
+          "lottie-react",
+          "howler"
         ],
-        "distinctive_feature": "the breathing circle is a high-quality framer-motion animation; background color shifts through the breathing cycle",
-        "avoid": "text instructions only; timer without animation; anything that feels like a productivity tool",
-        "experience_goal": "user feels genuinely calmer after completing one breathing cycle"
+        "distinctive_feature": "the orb subtly changes texture and sound through each breath phase, making a one-minute reset feel like a complete guided ritual instead of a plain timer",
+        "avoid": "text instructions only; stopwatch styling; productivity dashboard chrome; generic meditation marketplace visuals",
+        "experience_goal": "user feels calmer and more settled after a single short breathing cycle"
       },
       "implemented": false
     },
@@ -6872,8 +6876,8 @@
       "folder": "web",
       "build_stack": "Next.js website",
       "category": "mental health",
-      "summary": "Help workers build a realistic stress-reduction plan.",
-      "target_user": "Singapore workers and caregivers",
+      "summary": "See where work and care demands are draining you, then set one realistic boundary for this week.",
+      "target_user": "Singapore workers balancing job pressure, family load, or caregiving duties",
       "why_fast": "The interesting challenge is a live radar chart that updates in real time as the user rates each life area, revealing depletion visually.",
       "stage": "poc",
       "poc": [
@@ -6895,21 +6899,21 @@
         "resident"
       ],
       "core_entities": [
-        "places",
-        "tags",
-        "plans",
-        "checklists"
+        "life_areas",
+        "boundary_plans",
+        "scripts",
+        "check_ins"
       ],
       "primary_user_flow": [
-        "guided_form",
-        "generated_result",
-        "saved_items",
-        "scenario_switcher"
+        "load_map",
+        "boundary_picker",
+        "script_preview",
+        "weekly_commit"
       ],
       "demo_seed_data": [
-        "3 to 8 sample places records tailored to Singapore context",
-        "2 to 3 personas with prefilled preferences, saved items, or history",
-        "at least 1 edge case record to demonstrate empty states, stale data, or exceptions"
+        "3 to 8 sample boundary plans tailored to Singapore work and caregiving routines",
+        "2 to 3 personas with prefilled pressure points, preferred scripts, and saved commitments",
+        "at least 1 edge case record to demonstrate conflicting obligations or an over-ambitious plan"
       ],
       "success_signal": "A new user can switch into a persona, complete the main workflow in under 2 minutes, and understand the concept without any manual setup.",
       "non_goals": [
@@ -6923,15 +6927,16 @@
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
       ],
       "ui": {
-        "direction": "editorial",
-        "interaction_model": "boundary-setting wheel — a life-areas wheel where user rates each area; low-rated areas are highlighted with practical boundary suggestions; a save-and-revisit feature for weekly check-ins",
+        "direction": "red-line planner",
+        "interaction_model": "weekly load map — the week is shown as horizontal pressure bands for work, family, commute, and care; the user drags a red boundary line across overloaded segments to claim one protected block, then picks a plain-language script for saying no or asking for help",
         "suggested_libraries": [
+          "@dnd-kit/core",
           "framer-motion",
-          "recharts"
+          "d3-scale"
         ],
-        "distinctive_feature": "life areas wheel rendered as a radar/spider chart that updates in real time as areas are rated",
-        "avoid": "plain questionnaire; static tips list; no visual wheel",
-        "experience_goal": "user sees which life areas are depleted and has actionable suggestions to restore balance"
+        "distinctive_feature": "dragging the boundary line immediately quiets the overloaded bands and reveals a single doable script, so the plan feels concrete rather than motivational",
+        "avoid": "radar chart for its own sake; generic habit tracker; inspirational quote screen; long self-assessment form before the user sees their week",
+        "experience_goal": "user leaves with one believable boundary they can actually use this week"
       },
       "implemented": false
     },
@@ -10276,14 +10281,14 @@
       "folder": "web",
       "build_stack": "Next.js website",
       "category": "mental health",
-      "summary": "Curate low-cost or free support resources by need and urgency.",
-      "target_user": "residents seeking support",
+      "summary": "Find the next support option that fits your situation, urgency, and budget without reading everything.",
+      "target_user": "people in Singapore looking for support for themselves or someone they care about",
       "why_fast": "The interesting challenge is a tree diagram that branches gently by need type so someone in distress is never shown more options than they can process.",
       "stage": "poc",
       "poc": [
-        "searchable listings",
-        "simple filters or tags",
-        "detail pages with call-to-action"
+        "situation picker",
+        "support path",
+        "contact card with next step"
       ],
       "prototype_goal": "Simulate the core value of Mental Health Resources in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
@@ -10297,19 +10302,20 @@
         "resident"
       ],
       "core_entities": [
-        "places",
-        "tags"
+        "resource_paths",
+        "services",
+        "saved_options"
       ],
       "primary_user_flow": [
-        "directory_list",
-        "filters_panel",
-        "detail_view",
-        "submit_update_modal"
+        "need_pick",
+        "branch_path",
+        "resource_compare",
+        "action_card"
       ],
       "demo_seed_data": [
-        "3 to 8 sample places records tailored to Singapore context",
-        "2 to 3 personas with prefilled preferences, saved items, or history",
-        "at least 1 edge case record to demonstrate empty states, stale data, or exceptions"
+        "3 to 8 sample service options tailored to Singapore support pathways",
+        "2 to 3 personas with prefilled urgency, language, and budget needs",
+        "at least 1 edge case record to demonstrate after-hours help or no nearby fit"
       ],
       "success_signal": "A new user can switch into a persona, complete the main workflow in under 2 minutes, and understand the concept without any manual setup.",
       "non_goals": [
@@ -10323,14 +10329,16 @@
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
       ],
       "ui": {
-        "direction": "calm institutional",
-        "interaction_model": "resource tree by situation — a gentle tree diagram branching by need type; each branch leads to curated resources; the interface avoids clinical language",
+        "direction": "guided calm wayfinding",
+        "interaction_model": "branching support path — the first screen asks one plain-language question about what is happening right now; each answer opens a short, guided path with only two or three next choices until the user reaches a small set of concrete support options with cost, language, and timing cues",
         "suggested_libraries": [
-          "framer-motion"
+          "@xyflow/react",
+          "framer-motion",
+          "cmdk"
         ],
-        "distinctive_feature": "tree branches animate open gently; active path stays highlighted; no overwhelming list of all resources at once",
-        "avoid": "alphabetical list; clinical-looking table; anything with a medical-form aesthetic",
-        "experience_goal": "person in distress can navigate to the right resource without being overwhelmed by too many options"
+        "distinctive_feature": "the support path stays visible as a breadcrumb-like route map, so the user can back up without losing context and never faces a giant wall of services",
+        "avoid": "alphabetical resource directory; clinical intake form; dense comparison table; huge list of helplines on the first screen",
+        "experience_goal": "person under stress can reach a realistic next support option without feeling overwhelmed"
       },
       "implemented": false
     },
