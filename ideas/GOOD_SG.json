@@ -6236,8 +6236,8 @@
         "Seniors",
         "Neighbourhood"
       ],
-      "summary": "Make it easier for neighbours to gather for small recurring tea meetups.",
-      "target_user": "seniors, residents, and community volunteers",
+      "summary": "See which downstairs tea meetup feels welcoming enough to join this week.",
+      "target_user": "older residents who want low-pressure neighbour company, plus RC or volunteer hosts",
       "why_fast": "The interesting challenge is making informal social attendance feel light and welcoming rather than formal registration.",
       "stage": "poc",
       "poc": [
@@ -6286,13 +6286,15 @@
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
       ],
       "ui": {
-        "direction": "warm notice board",
-        "interaction_model": "teacup board — each meetup appears as a cup that fills based on likely attendance and hosting warmth cues",
+        "direction": "community salon noticeboard",
+        "interaction_model": "teacup readiness board — each meetup appears as a porcelain cup pinned to a corkboard; turning the cup reveals host notes, biscuit themes, and whether the group feels chatty, quiet, or first-timer friendly before a user taps I'm leaning in",
         "suggested_libraries": [
-          "framer-motion"
+          "framer-motion",
+          "@floating-ui/react",
+          "react-use-measure"
         ],
-        "distinctive_feature": "cups visually fill as neighbours signal interest, avoiding intimidating attendance numbers",
-        "avoid": "event platform clone; loud promotional banners; public popularity metrics",
+        "distinctive_feature": "each cup gradually fills with tea and leaves a ring stain on the board as neighbours signal interest, so attendance feels warm and approximate instead of a hard signup count",
+        "avoid": "event platform clone; loud promotional banners; public popularity metrics; RSVP table with profile avatars",
         "experience_goal": "joining feels casual and neighbourly"
       },
       "implementation_tags": [],
@@ -7458,8 +7460,8 @@
       "folder": "mobile",
       "build_stack": "Next.js website",
       "category": "urban access",
-      "summary": "Spot where to sit and wait near busy clinics and service centres.",
-      "target_user": "seniors, pregnant users, and caregivers",
+      "summary": "Check if a clinic or service centre has a practical place to sit before you head out.",
+      "target_user": "seniors, pregnant residents, and caregivers planning a tiring queue visit",
       "why_fast": "The interesting challenge is drawing a waiting-area layout in SVG and highlighting the easiest seat path from the entrance without relying on a generic list.",
       "stage": "poc",
       "poc": [
@@ -7481,9 +7483,10 @@
         "resident"
       ],
       "core_entities": [
-        "places",
-        "entries",
-        "tags"
+        "waiting_areas",
+        "seats",
+        "access_paths",
+        "mobility_notes"
       ],
       "primary_user_flow": [
         "waiting_area_map",
@@ -7508,13 +7511,15 @@
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
       ],
       "ui": {
-        "direction": "diagram-first",
-        "interaction_model": "waiting-area seating diagram — an SVG layout of seats, counters, rails, and toilets; tapping a seat or waiting bay highlights the easiest approach path from the entrance",
+        "direction": "accessible wayfinding diagram",
+        "interaction_model": "tap-to-route seat map — a zoomable waiting-room diagram with seats, rails, toilets, and counters drawn as a single accessible SVG; tapping any seat previews the shortest low-obstacle path from the entrance and flags nearby support features such as armrests or stroller space",
         "suggested_libraries": [
-          "framer-motion"
+          "framer-motion",
+          "react-zoom-pan-pinch",
+          "svg-path-properties"
         ],
-        "distinctive_feature": "available waiting bays pulse gently while the route line from entrance to selected seat draws itself across the diagram",
-        "avoid": "text-only waiting tips; generic list of locations; anything without a visual seating layout",
+        "distinctive_feature": "the chosen path draws itself as a thick guidance ribbon while unsuitable seats fade back, making the room feel pre-decided before the user leaves home",
+        "avoid": "text-only waiting tips; generic list of locations; anything without a visual seating layout; queue-number dashboard",
         "experience_goal": "user can judge whether there is a practical place to wait before they arrive"
       },
       "implemented": false
@@ -7673,8 +7678,8 @@
       "folder": "web",
       "build_stack": "Next.js website",
       "category": "education equity",
-      "summary": "Compare what a training path feels like week by week before you apply.",
-      "target_user": "youths and career switchers exploring training pathways",
+      "summary": "See how a training path will feel week by week before you commit your time and money.",
+      "target_user": "ITE graduates, poly students, and career switchers comparing hands-on training options",
       "why_fast": "The interesting challenge is showing the rhythm of a training pathway over time so a user can compare weekly reality instead of reading generic descriptions.",
       "stage": "poc",
       "poc": [
@@ -7692,12 +7697,14 @@
       "simulation_mode": "Use seeded demo records, optimistic UI updates, and fake notifications or status changes so the end-to-end workflow is testable by one person.",
       "personas": [
         "resident",
-        "student"
+        "student",
+        "worker"
       ],
       "core_entities": [
-        "plans",
-        "entries",
-        "tags"
+        "training_paths",
+        "weekly_blocks",
+        "allowance_snapshots",
+        "milestone_notes"
       ],
       "primary_user_flow": [
         "path_pick",
@@ -7722,13 +7729,15 @@
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
       ],
       "ui": {
-        "direction": "timeline-first",
-        "interaction_model": "week-strip journey — each training path expands into a sequence of weeks showing classroom time, practice time, travel, and allowance moments",
+        "direction": "commuter-strip editorial",
+        "interaction_model": "week-strip journey — each pathway unfolds like an MRT line of consecutive weeks, with stops for classroom time, workplace practice, allowance moments, and certification milestones; users scrub sideways to compare where two paths diverge in pace or commitment",
         "suggested_libraries": [
-          "framer-motion"
+          "framer-motion",
+          "embla-carousel-react",
+          "@visx/visx"
         ],
-        "distinctive_feature": "switching paths reshapes the visible week strip so differences in rhythm and workload are obvious immediately",
-        "avoid": "table of programmes; long brochure page; generic filters above a card list",
+        "distinctive_feature": "switching pathways re-routes the full strip in place so the user sees exactly which weeks get longer, busier, or better paid without reading paragraphs",
+        "avoid": "table of programmes; long brochure page; generic filters above a card list; course marketplace tiles",
         "experience_goal": "user can imagine the lived shape of the pathway before committing"
       },
       "implemented": false
@@ -8303,9 +8312,9 @@
       "folder": "mobile",
       "build_stack": "Next.js website",
       "category": "inclusion",
-      "summary": "A private wellbeing and admin reminder tool for migrant workers.",
-      "target_user": "migrant workers",
-      "why_fast": "The interesting challenge is large animated mood buttons with expressive reactions and a weekly chart that shows wellbeing trend over time.",
+      "summary": "Check in privately after a long shift, keep small reminders, and see what support to reach for next.",
+      "target_user": "migrant workers in Singapore managing stress, appointments, and paperwork between shifts",
+      "why_fast": "The interesting challenge is making a phone-sized check-in flow feel private, friendly, and fast enough to use at the end of a tiring workday.",
       "stage": "poc",
       "poc": [
         "quick entry flow",
@@ -8321,24 +8330,25 @@
       },
       "simulation_mode": "Use seeded demo records, optimistic UI updates, and fake notifications or status changes so the end-to-end workflow is testable by one person.",
       "personas": [
+        "worker",
         "resident"
       ],
       "core_entities": [
-        "watchlists",
-        "alerts",
-        "entries",
-        "history"
+        "check_ins",
+        "reminders",
+        "support_cards",
+        "weekly_patterns"
       ],
       "primary_user_flow": [
-        "quick_entry",
-        "history_feed",
-        "detail_drawer",
-        "streaks_or_summary"
+        "shift_end_check_in",
+        "mood_history",
+        "quiet_reminder_setup",
+        "support_card_open"
       ],
       "demo_seed_data": [
-        "3 to 8 sample watchlists records tailored to Singapore context",
-        "2 to 3 personas with prefilled preferences, saved items, or history",
-        "at least 1 edge case record to demonstrate empty states, stale data, or exceptions"
+        "3 to 8 sample check-in records tailored to Singapore dormitory and worksite routines",
+        "2 to 3 personas with prefilled reminders for salary day, clinic visits, or MOM paperwork",
+        "at least 1 edge case record to demonstrate missed check-ins, low-mood days, or overdue reminders"
       ],
       "success_signal": "A new user can switch into a persona, complete the main workflow in under 2 minutes, and understand the concept without any manual setup.",
       "non_goals": [
@@ -8352,14 +8362,15 @@
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
       ],
       "ui": {
-        "direction": "warm civic",
-        "interaction_model": "quick wellbeing check-in — a simple daily check-in flow with 3 large mood buttons; a weekly wellbeing chart shows mood over time; a resources panel appears if mood is low; streak for consistent check-ins",
+        "direction": "private pocket companion",
+        "interaction_model": "thumb-zone check-in strip — the first screen offers four large one-thumb mood chips, then slides into a quiet timeline of recent days, practical reminders, and support cards without exposing a dense dashboard or long questionnaire",
         "suggested_libraries": [
           "framer-motion",
-          "recharts"
+          "keen-slider",
+          "@visx/visx"
         ],
-        "distinctive_feature": "large animated mood buttons with expressive reactions; weekly chart shows mood trend",
-        "avoid": "text form; clinical assessment tone; anything that feels like a surveillance tool",
+        "distinctive_feature": "after each check-in, the interface folds the selected mood into a pocket-sized weekly ribbon and immediately surfaces the one next useful action, such as save salary day, call home, or open a clinic prep card",
+        "avoid": "text form; clinical assessment tone; anything that feels like a surveillance tool; productivity dashboard with charts first",
         "experience_goal": "worker checks in daily because the interface is welcoming and the streak gives a reason to return"
       },
       "implemented": false
