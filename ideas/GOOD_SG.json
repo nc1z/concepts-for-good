@@ -11363,13 +11363,14 @@
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
       ],
       "ui": {
-        "direction": "warm civic",
-        "interaction_model": "role-based contact cards — a set of cards organised by care role; each card shows name, contact, and relationship; a quick-dial simulation when a card is tapped",
+        "direction": "family command binder",
+        "interaction_model": "care role binder — horizontally swipeable role tabs for helper, sibling, clinic, and neighbour support; opening a contact reveals a one-screen handoff sheet with today's routine, who usually covers which task, and a large tap-to-call strip pinned to the bottom",
         "suggested_libraries": [
-          "framer-motion"
+          "framer-motion",
+          "embla-carousel-react"
         ],
-        "distinctive_feature": "cards are grouped into visual role clusters; quick-dial animation on tap",
-        "avoid": "plain address book list; generic contacts form; anything without role categorisation",
+        "distinctive_feature": "switching role tabs snaps the binder to a new color-coded section, and each helper card unfolds into a handoff sheet that surfaces medication timing, key phrases, and the next likely call action without making the caregiver dig through notes",
+        "avoid": "plain address book list; generic contacts form; tiny secondary metadata hidden behind accordions; anything that feels like CRM software",
         "experience_goal": "caregiver can find the right helper for any situation at a glance"
       },
       "implemented": false,
@@ -11430,13 +11431,15 @@
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
       ],
       "ui": {
-        "direction": "warm civic",
-        "interaction_model": "session scheduler with timer — a weekly slot picker showing available buddy sessions; booking a session starts a timer view with notes panel; a simple log of past sessions",
+        "direction": "after-school study desk",
+        "interaction_model": "booking-to-desk flow — students first claim a colour-coded session tile from a weekly timetable, then the interface flips into a shared study desk with a visible countdown ribbon, draggable question cards, and a sliding notebook rail for worked examples and next-step notes",
         "suggested_libraries": [
-          "framer-motion"
+          "framer-motion",
+          "react-resizable-panels",
+          "react-day-picker"
         ],
-        "distinctive_feature": "session timer that animates remaining time; a notes area that slides in during the session",
-        "avoid": "form-only signup; generic calendar without the timer and notes flow",
+        "distinctive_feature": "claiming a session tile peels open a study desk scene where each question card can be pulled into the centre workspace, and the countdown ribbon compresses from full-width encouragement copy into a calm final-five-minutes strip as time runs down",
+        "avoid": "form-only signup; generic calendar without the desk transition; LMS-style tabs and tables; blank chat box pretending to be tutoring",
         "experience_goal": "student and buddy feel like they are in a focused shared session"
       },
       "implemented": false
@@ -11565,13 +11568,15 @@
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
       ],
       "ui": {
-        "direction": "warm civic",
-        "interaction_model": "welcome kit builder — a customisable welcome pack builder where user picks from illustrated welcome cards, practical info items, and local tips to include; preview of the assembled kit renders on the right; a print or save button at the bottom",
+        "direction": "print-studio collage",
+        "interaction_model": "folded welcome pack composer — residents drag small paper modules like lift etiquette, nearby kopi spots, town council contacts, and kid-friendly playground tips onto a folded A4 zine preview; each choice instantly changes the front cover, inner panels, and tear-off note card",
         "suggested_libraries": [
-          "framer-motion"
+          "framer-motion",
+          "react-konva",
+          "rough-notation"
         ],
-        "distinctive_feature": "kit items animate into the preview as they are added; the assembled kit feels like a physical pack",
-        "avoid": "form for entering neighbour details; generic resource list; anything without the kit-building visual",
+        "distinctive_feature": "the folded preview behaves like a physical mini-zine: panels flip open as pieces are added, handwritten highlights circle key estate tips, and a detachable welcome note updates live so the pack already feels ready to print and slide under the door",
+        "avoid": "form for entering neighbour details; generic resource list; sterile PDF generator layout; anything without the tactile pack-building visual",
         "experience_goal": "resident creates a warm, personal welcome pack for their new neighbour in minutes"
       },
       "implemented": false
@@ -11633,13 +11638,14 @@
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
       ],
       "ui": {
-        "direction": "warm civic",
-        "interaction_model": "relay timeline — errands appear as handoff tokens moving across a day from one neighbour to the next based on where each person is already going",
+        "direction": "estate baton board",
+        "interaction_model": "relay route board — errands move across a vertical estate journey showing lift lobby, bus stop, hawker centre, and block return legs; each neighbour claims one leg of the route, and the baton view expands to show where the item changes hands and what proof-of-delivery note travels with it",
         "suggested_libraries": [
-          "framer-motion"
+          "framer-motion",
+          "d3-sankey"
         ],
-        "distinctive_feature": "handoff tokens animate along the relay line when a neighbour takes responsibility for the next leg",
-        "avoid": "plain to-do list; request form with no movement between people; generic kanban board",
+        "distinctive_feature": "each errand becomes a glowing baton that threads through a sankey-style route; when someone takes a leg, the path thickens around their actual detour and the handoff card snaps open with collected item notes, timing buffer, and the next person's landmark",
+        "avoid": "plain to-do list; request form with no movement between people; generic kanban board; map pins without the relay sequence being visible",
         "experience_goal": "user sees community help as a shared flow rather than one person doing everything alone"
       },
       "implemented": false
