@@ -11372,7 +11372,8 @@
         "avoid": "plain address book list; generic contacts form; anything without role categorisation",
         "experience_goal": "caregiver can find the right helper for any situation at a glance"
       },
-      "implemented": false
+      "implemented": false,
+      "built": true
     },
     {
       "id": "GOOD_SG-030",
