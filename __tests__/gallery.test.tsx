@@ -53,7 +53,7 @@ describe("Gallery page", () => {
   it("defaults sort to the randomized mode", () => {
     render(<Home />);
     expect(screen.getByRole("combobox", { name: /sort ideas/i })).toHaveValue("random");
-    const defaultOption = screen.getByRole("option", { name: /by default/i }) as HTMLOptionElement;
+    const defaultOption = screen.getByRole("option", { name: /^\(none\)$/ }) as HTMLOptionElement;
     expect(defaultOption.selected).toBe(true);
   });
 });
