@@ -5522,8 +5522,8 @@
       "folder": "web",
       "build_stack": "Next.js website",
       "category": "support",
-      "summary": "Present helplines and service paths clearly by need.",
-      "target_user": "people under stress and caregivers",
+      "summary": "Find the right Singapore helpline fast when something feels urgent, confusing, or overwhelming.",
+      "target_user": "someone in Singapore trying to get help for themselves or another person during a stressful moment",
       "why_fast": "The interesting challenge is reducing the entire UI to a single phone number and call button within two interactions for someone in distress.",
       "stage": "poc",
       "poc": [
@@ -5544,19 +5544,21 @@
         "caregiver"
       ],
       "core_entities": [
-        "places",
-        "tags"
+        "support_scenarios",
+        "hotlines",
+        "call_scripts",
+        "fallback_channels"
       ],
       "primary_user_flow": [
-        "directory_list",
-        "filters_panel",
-        "detail_view",
-        "submit_update_modal"
+        "situation_triage",
+        "best_match_card",
+        "what_to_say_prompt",
+        "backup_options"
       ],
       "demo_seed_data": [
-        "3 to 8 sample places records tailored to Singapore context",
-        "2 to 3 personas with prefilled preferences, saved items, or history",
-        "at least 1 edge case record to demonstrate empty states, stale data, or exceptions"
+        "6 to 8 Singapore hotline cards across crisis, family, eldercare, scam, and financial stress scenarios",
+        "2 to 3 stressful situations such as late-night family conflict, caregiver burnout, or scam panic with prefilled urgency context",
+        "at least 1 edge case showing a hotline outside operating hours with a fallback channel"
       ],
       "success_signal": "A new user can switch into a persona, complete the main workflow in under 2 minutes, and understand the concept without any manual setup.",
       "non_goals": [
@@ -5570,14 +5572,16 @@
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
       ],
       "ui": {
-        "direction": "minimalist",
-        "interaction_model": "situation-to-hotline matcher — a clean interface asking what is happening right now as the first screen; the user selects a situation category and immediately sees the most relevant hotline with a large call-to-action",
+        "direction": "urgent single-path",
+        "interaction_model": "two-tap hotline triage — the first screen offers a few large situation chips such as unsafe at home, worried about an elder, scam panic, or emotional crisis; after selection the interface collapses into one primary hotline card with a giant call button, a one-line why-this-number explanation, and a short what-to-say prompt",
         "suggested_libraries": [
-          "framer-motion"
+          "@radix-ui/react-toggle-group",
+          "framer-motion",
+          "react-aria-components"
         ],
-        "distinctive_feature": "the entire UI reduces to a single phone number and call button after situation selection",
-        "avoid": "long list of all hotlines; category tree navigation; anything that delays reaching the number",
-        "experience_goal": "someone in distress finds the right number in under 10 seconds"
+        "distinctive_feature": "after the user picks a situation, the whole screen compresses into a single hotline card with a live script prompt and a small strip of only-the-next-best fallback options underneath",
+        "avoid": "long hotline directory; nested category tree; generic search results page; anything that requires scrolling before the number appears",
+        "experience_goal": "someone in distress reaches the most useful number within seconds and feels less frozen about what to say first"
       },
       "implemented": false
     },
@@ -9405,8 +9409,8 @@
       "folder": "web",
       "build_stack": "Next.js website",
       "category": "caregiving",
-      "summary": "Prepare medicines, transport, and home essentials before leaving the hospital.",
-      "target_user": "family caregivers",
+      "summary": "Leave the ward with medicines, transport, and home setup sorted before you head back.",
+      "target_user": "a family caregiver collecting an older relative or parent from a Singapore hospital",
       "why_fast": "The interesting challenge is presenting discharge preparation as a single-screen packing flow with large, obvious choices rather than a dense checklist.",
       "stage": "poc",
       "poc": [
@@ -9427,20 +9431,21 @@
         "senior"
       ],
       "core_entities": [
-        "checklists",
-        "plans",
-        "entries"
+        "discharge_items",
+        "medication_packets",
+        "transport_plans",
+        "home_setup_tasks"
       ],
       "primary_user_flow": [
-        "pack_tray",
-        "transport_choice",
-        "home_setup",
-        "completion_state"
+        "bag_builder",
+        "ride_home_check",
+        "first_night_plan",
+        "handover_summary"
       ],
       "demo_seed_data": [
-        "3 to 8 sample checklists records tailored to Singapore context",
-        "2 to 3 personas with prefilled preferences, saved items, or history",
-        "at least 1 edge case record to demonstrate empty states, stale data, or exceptions"
+        "5 to 7 discharge packs for situations such as hip surgery, pneumonia recovery, and stroke follow-up",
+        "2 caregiver personas with different transport options, lift access, and home support constraints",
+        "at least 1 edge case showing delayed medicine collection or a ride that cannot accommodate a wheelchair"
       ],
       "success_signal": "A new user can switch into a persona, complete the main workflow in under 2 minutes, and understand the concept without any manual setup.",
       "non_goals": [
@@ -9454,14 +9459,16 @@
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
       ],
       "ui": {
-        "direction": "tactile kiosk",
-        "interaction_model": "one-screen packing wizard — one preparation step per screen with oversized item choices and a large continue button",
+        "direction": "bedside handoff board",
+        "interaction_model": "horizontal discharge tray — the caregiver moves through medicine, paperwork, ride home, and first-night-at-home lanes as large tray cards; each lane has only a few confirmable actions, and the final screen turns them into one handoff summary strip for the trip home",
         "suggested_libraries": [
-          "framer-motion"
+          "@dnd-kit/core",
+          "framer-motion",
+          "react-hook-form"
         ],
-        "distinctive_feature": "a large illustrated hospital bag fills up item by item as the caregiver confirms what is ready",
-        "avoid": "small checkbox lists; multi-column discharge form; anything requiring scanning a long page",
-        "experience_goal": "caregiver feels guided through the handoff home without missing a critical item"
+        "distinctive_feature": "a hospital bag silhouette fills with medicine packs, discharge papers, and home-care items while a first-night strip at the bottom updates live with anything still missing before leaving the ward",
+        "avoid": "dense medical checklist; small checkbox grid; multi-column dashboard; anything that hides the first-night home plan until the end",
+        "experience_goal": "caregiver feels guided through the handoff home and can spot missing pieces before leaving the hospital"
       },
       "implemented": false
     },
@@ -9607,8 +9614,8 @@
       "folder": "mobile",
       "build_stack": "Next.js website",
       "category": "support",
-      "summary": "Store emergency contact rules and safe check-in notes privately.",
-      "target_user": "people needing added safety support",
+      "summary": "Set up a quiet circle of people who know how to check on you and what to do if you go silent.",
+      "target_user": "someone in Singapore who wants a simple private safety check-in plan with trusted people",
       "why_fast": "The interesting challenge is a radial support network diagram that grows visually as new contacts are added around the user at the centre.",
       "stage": "poc",
       "poc": [
@@ -9628,21 +9635,21 @@
         "resident"
       ],
       "core_entities": [
-        "watchlists",
-        "alerts",
-        "entries",
-        "history"
+        "trusted_contacts",
+        "check_in_rules",
+        "alert_steps",
+        "safe_words"
       ],
       "primary_user_flow": [
-        "quick_entry",
-        "history_feed",
-        "detail_drawer",
-        "streaks_or_summary"
+        "contact_circle_builder",
+        "check_in_schedule",
+        "missed_checkin_simulation",
+        "reassurance_view"
       ],
       "demo_seed_data": [
-        "3 to 8 sample watchlists records tailored to Singapore context",
-        "2 to 3 personas with prefilled preferences, saved items, or history",
-        "at least 1 edge case record to demonstrate empty states, stale data, or exceptions"
+        "4 to 6 trusted contact profiles with roles such as sister, neighbour, colleague, and domestic violence advocate",
+        "2 to 3 safety plans with different check-in rhythms, safe words, and escalation steps",
+        "at least 1 edge case showing a missed check-in where the first contact is unavailable and the next step activates"
       ],
       "success_signal": "A new user can switch into a persona, complete the main workflow in under 2 minutes, and understand the concept without any manual setup.",
       "non_goals": [
@@ -9656,14 +9663,16 @@
         "Treat notifications, queues, and matching as simulations unless a real API is trivial."
       ],
       "ui": {
-        "direction": "warm civic",
-        "interaction_model": "personal support network map — a circular diagram showing the user at centre with trusted contacts arranged by relationship tier; tapping a contact shows their role and contact details",
+        "direction": "soft orbit planner",
+        "interaction_model": "orbit-based safety circle builder — the user sits at the center while contacts are placed into primary, backup, and last-resort rings; tapping a contact opens a compact panel for check-in timing, safe word, and what that person should do if a check-in is missed",
         "suggested_libraries": [
-          "framer-motion"
+          "@xyflow/react",
+          "framer-motion",
+          "react-hook-form"
         ],
-        "distinctive_feature": "radial contact diagram that animates when a new contact is added; the network visually grows",
-        "avoid": "address book list; generic contact form; anything that looks like a CRM",
-        "experience_goal": "user feels supported seeing their network visualised as a circle of people around them"
+        "distinctive_feature": "missed check-in simulation lights the rings in sequence so the user can see exactly who gets notified first, what message they receive, and when the backup person steps in",
+        "avoid": "plain address book list; CRM-style contact table; generic reminder app; anything without the orbit view and escalation rehearsal",
+        "experience_goal": "user leaves with a private safety plan that feels concrete, human, and easy to explain to trusted contacts"
       },
       "implementation_tags": [
         "graph-nodes"
