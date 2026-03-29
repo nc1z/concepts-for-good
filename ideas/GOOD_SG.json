@@ -415,7 +415,8 @@
         "avoid": "small text; multiple items visible at once; search-first interface; anything requiring precise tapping",
         "experience_goal": "a 70-year-old with no smartphone experience can follow along without help"
       },
-      "implemented": true
+      "implemented": true,
+      "built": true
     },
     {
       "id": "GOOD_SG-008",
