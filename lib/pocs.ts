@@ -11,6 +11,18 @@ export type PocCard = {
 
 export const pocCards: PocCard[] = [
   {
+    slug: "trusted-helper-list-sg",
+    title: "Trusted Helper List",
+    category: "Caregiving",
+    createdAt: "2026-03-29T16:32:51+08:00",
+    summary:
+      "Keep the right family helper one tap away, with routines, handoff notes, and quick contact actions inside a phone-style view.",
+    impact:
+      "A caregiver phone shell that groups trusted helpers by role so the next call or handoff never turns into a search.",
+    theme: "civic",
+    tags: ["Caregiving", "Family", "Contacts", "Handoffs"],
+  },
+  {
     slug: "healthy-hawker-budget-sg",
     title: "Healthy Hawker Budget",
     category: "Wellness",

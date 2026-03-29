@@ -1,0 +1,384 @@
+.page {
+  min-height: 100vh;
+  padding: 2rem 1.25rem 4rem;
+  background:
+    radial-gradient(circle at top, rgba(255, 180, 148, 0.28), transparent 24rem),
+    linear-gradient(180deg, #fff8f2 0%, #f5efe8 45%, #efe6dc 100%);
+  color: #1c2130;
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  color: #42506a;
+  text-decoration: none;
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+}
+
+.hero {
+  max-width: 42rem;
+  margin: 0 auto 2rem;
+  text-align: center;
+}
+
+.eyebrow {
+  margin: 0 0 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.72rem;
+  color: #9a6a4e;
+}
+
+.title {
+  margin: 0;
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  line-height: 1.02;
+}
+
+.lede {
+  max-width: 34rem;
+  margin: 1rem auto 0;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #4d5567;
+}
+
+.stage {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.phone {
+  width: min(100%, 24rem);
+  padding: 0.75rem;
+  border-radius: 2.6rem;
+  background: linear-gradient(180deg, #23283a 0%, #0c1120 100%);
+  box-shadow:
+    0 22px 80px rgba(24, 17, 24, 0.24),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.14);
+  position: relative;
+}
+
+.notch {
+  position: absolute;
+  top: 1rem;
+  left: 50%;
+  width: 8rem;
+  height: 1.4rem;
+  margin-left: -4rem;
+  border-radius: 999px;
+  background: #090d18;
+  z-index: 2;
+}
+
+.screen {
+  min-height: 44rem;
+  border-radius: 2rem;
+  padding: 1.1rem 1rem 1rem;
+  background:
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.12), transparent 16rem),
+    linear-gradient(180deg, #13203a 0%, #0c1220 100%);
+  color: #f6f3ec;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.statusBar {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  color: rgba(246, 243, 236, 0.74);
+  padding: 0 0.3rem;
+}
+
+.topCard {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.15rem;
+  border-radius: 1.4rem;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.12), rgba(255, 138, 91, 0.2));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.topLabel,
+.sheetLabel,
+.noteTime {
+  margin: 0;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(246, 243, 236, 0.62);
+}
+
+.topTitle {
+  margin: 0.35rem 0 0;
+  font-size: 1.35rem;
+  line-height: 1.15;
+}
+
+.topMeta {
+  margin: 0.45rem 0 0;
+  font-size: 0.9rem;
+  color: rgba(246, 243, 236, 0.72);
+}
+
+.tapButton {
+  border: 0;
+  border-radius: 999px;
+  padding: 0.7rem 1rem;
+  background: rgba(255, 255, 255, 0.9);
+  color: #111826;
+  font: inherit;
+  font-weight: 600;
+}
+
+.roleChooser {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.sectionPrompt {
+  margin: 0;
+  font-size: 0.92rem;
+  color: rgba(246, 243, 236, 0.82);
+}
+
+.roleRow {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.6rem;
+}
+
+.roleChip {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1.1rem;
+  padding: 0.85rem 0.9rem;
+  color: #f6f3ec;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font: inherit;
+}
+
+.roleChipActive {
+  transform: translateY(-1px);
+}
+
+.tabRow {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.45rem;
+}
+
+.tabButton {
+  border: 0;
+  border-radius: 999px;
+  padding: 0.6rem 0.75rem;
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(246, 243, 236, 0.72);
+  font: inherit;
+}
+
+.tabButtonActive {
+  background: rgba(255, 255, 255, 0.14);
+  color: #fff;
+}
+
+.contentArea {
+  flex: 1;
+  min-height: 13rem;
+}
+
+.helperStack,
+.notesList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.helperCard,
+.noteCard {
+  border-radius: 1.35rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(8, 14, 28, 0.72);
+}
+
+.helperCard {
+  display: flex;
+  gap: 0.85rem;
+  padding: 0.9rem;
+  text-align: left;
+  color: inherit;
+  font: inherit;
+}
+
+.helperCardActive {
+  background: rgba(18, 26, 45, 0.96);
+}
+
+.helperAvatar {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.helperBody {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 0;
+}
+
+.helperTopLine {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  align-items: baseline;
+}
+
+.helperTopLine strong {
+  font-size: 1rem;
+}
+
+.helperTopLine em {
+  font-size: 0.74rem;
+  color: rgba(246, 243, 236, 0.58);
+  font-style: normal;
+}
+
+.helperMeta {
+  color: rgba(246, 243, 236, 0.7);
+  font-size: 0.84rem;
+}
+
+.helperTask,
+.sheetTask,
+.noteCard p {
+  margin: 0;
+  color: rgba(246, 243, 236, 0.88);
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+.helperSheet {
+  margin-top: auto;
+  padding: 1rem;
+  border-radius: 1.55rem;
+  background: linear-gradient(180deg, rgba(248, 244, 236, 0.98), rgba(255, 238, 227, 0.95));
+  color: #18202c;
+}
+
+.sheetHeader {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.sheetHeader h3 {
+  margin: 0.25rem 0 0;
+  font-size: 1.2rem;
+}
+
+.sheetBadge {
+  background: rgba(24, 32, 44, 0.08);
+  border-radius: 999px;
+  padding: 0.45rem 0.7rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.sheetLabel,
+.noteTime {
+  color: #7d6c61;
+}
+
+.sheetTask {
+  margin-top: 0.9rem;
+  color: #364050;
+}
+
+.actionRow {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.55rem;
+  margin-top: 1rem;
+}
+
+.actionButton,
+.actionButtonPrimary {
+  border: 0;
+  border-radius: 1rem;
+  padding: 0.8rem 0.65rem;
+  font: inherit;
+  font-weight: 600;
+}
+
+.actionButton {
+  background: #ece2d6;
+  color: #283241;
+}
+
+.actionButtonPrimary {
+  background: #1f2d44;
+  color: #fffaf1;
+}
+
+.dialBanner {
+  margin-top: 0.85rem;
+  border-radius: 0.95rem;
+  padding: 0.85rem 0.95rem;
+  background: #ffe2cf;
+  color: #743d16;
+  font-weight: 600;
+}
+
+.noteCard {
+  padding: 0.95rem;
+}
+
+.noteCard h3 {
+  margin: 0.35rem 0 0.35rem;
+  font-size: 0.98rem;
+}
+
+.bottomNav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0.9rem 0.6rem 0.25rem;
+  color: rgba(246, 243, 236, 0.54);
+  font-size: 0.82rem;
+}
+
+.navActive {
+  color: #fff;
+}
+
+@media (max-width: 640px) {
+  .page {
+    padding: 1rem 0.75rem 2.5rem;
+  }
+
+  .title {
+    font-size: clamp(2rem, 9vw, 3rem);
+  }
+
+  .phone {
+    width: 100%;
+  }
+}
