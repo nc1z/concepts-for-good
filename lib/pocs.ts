@@ -14,7 +14,7 @@ export const pocCards: PocCard[] = [
     slug: "healthy-hawker-budget-sg",
     title: "Healthy Hawker Budget",
     category: "Wellness",
-    createdAt: "2026-03-29T18:40:00+08:00",
+    createdAt: "2026-03-29T13:00:00+08:00",
     summary:
       "Build a day of hawker meals that feels familiar, lighter, and still manageable on a weekday budget.",
     impact:

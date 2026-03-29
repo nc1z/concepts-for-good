@@ -127,6 +127,12 @@ This is the most important concurrency step. Push the branch and open a draft PR
 
 ### 8) Implement
 
+- Before writing any file, get the current Singapore time for `createdAt`:
+  ```
+  date -u +"%Y-%m-%dT%H:%M:%S+08:00" -d "$(date -u) + 8 hours" 2>/dev/null || \
+  python3 -c "from datetime import datetime, timezone, timedelta; print(datetime.now(timezone(timedelta(hours=8))).strftime('%Y-%m-%dT%H:%M:%S+08:00'))"
+  ```
+  Use the returned value as `createdAt` in `lib/pocs.ts`. **Never hardcode or guess a time.**
 - Create the POC in `app/pocs/<slug>/` following repo conventions (Next.js page, CSS module, data file).
 - Register the new card in `lib/pocs.ts` (add entry to `pocCards` array with correct metadata).
 - The `ui.distinctive_feature` must be implemented — it is what makes the concept feel real.
