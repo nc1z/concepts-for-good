@@ -49,13 +49,17 @@ function HomeContent() {
   const urlSortOrder: SortOrder = urlSortParam === "asc" ? "asc" : urlSortParam === "desc" ? "desc" : "random";
   const [query, setQuery] = useState(urlQuery);
   const [sortOrder, setSortOrder] = useState<SortOrder>(urlSortOrder);
-  const [randomSeed, setRandomSeed] = useState(() => Date.now());
+  const [randomSeed, setRandomSeed] = useState(1);
   const [visibleCount, setVisibleCount] = useState(4);
   const [showBackToTop, setShowBackToTop] = useState(false);
   const [attrOpen, setAttrOpen] = useState(false);
   const sentinelRef = useRef<HTMLDivElement | null>(null);
   const searchInputRef = useRef<HTMLInputElement | null>(null);
   const attrRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    setRandomSeed(Date.now());
+  }, []);
 
   useEffect(() => {
     setQuery(urlQuery);
@@ -385,7 +389,7 @@ function HomeContent() {
                     value={sortOrder}
                     onChange={(event) => handleSortChange(event.target.value as SortOrder)}
                   >
-                    <option value="random">- by default</option>
+                    <option value="random">(none)</option>
                     <option value="desc">Newest first</option>
                     <option value="asc">Oldest first</option>
                   </select>
