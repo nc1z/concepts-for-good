@@ -5,7 +5,91 @@
   "idea_count": 160,
   "design_contract": {
     "mandate": "Every idea must be built with a deliberately chosen visual direction and interaction model, and copy written for the target user — not for developers. Reading the ui field and rules/CONTENT_RULES.md is mandatory before writing a single line of code.",
+    "design_diversity_mandate": {
+      "priority": "HIGHEST — this overrides any default layout instinct",
+      "rule": "Before picking an idea or writing any code, read rules/DESIGN_DIVERSITY.md completely. Complete the Design Diversity Audit: look at the last 5 built POCs, identify their dominant structural patterns, and choose an app_type from app_type_pool that has NOT appeared in any of those 5 builds. The chosen app_type must be structurally visible in the finished UI.",
+      "why": "The last several POCs have been too visually similar — all styled web pages with creative data presentation but the same underlying rhythm. This mandate exists to force genuine experiential variety.",
+      "enforcement": "If the chosen app_type conflicts with the idea's ui.interaction_model, the app_type wins. Adapt the interaction model to fit the app_type, not the other way around."
+    },
+    "app_type_pool": [
+      {
+        "type": "game",
+        "description": "Browser game with score, lives, win/lose states, stages — full viewport play area, no traditional page structure",
+        "key_libraries": ["framer-motion", "canvas"]
+      },
+      {
+        "type": "mobile-shell",
+        "description": "UI rendered inside a visible phone/device frame — bottom nav bar, thumb-zone-aware layout, native app feel",
+        "key_libraries": ["framer-motion"]
+      },
+      {
+        "type": "interactive-map",
+        "description": "Spatial canvas fills the viewport — zones, pins, overlays are the primary interface, no content below the fold",
+        "key_libraries": ["leaflet", "react-map-gl", "SVG"]
+      },
+      {
+        "type": "gamified-learning",
+        "description": "2D drag/match/sort/reveal educational experience with XP, streaks, badges, and celebration moments",
+        "key_libraries": ["framer-motion", "canvas"]
+      },
+      {
+        "type": "animation-heavy",
+        "description": "Three.js, WebGL, or canvas animation is the primary surface — the moving thing IS the content",
+        "key_libraries": ["three.js", "react-three-fiber", "@react-spring/three"]
+      },
+      {
+        "type": "social-feed",
+        "description": "Looks like Reddit/Twitter/Instagram — scrollable feed with votes/reactions in a social product shell",
+        "key_libraries": ["framer-motion"]
+      },
+      {
+        "type": "parallax-story",
+        "description": "Scroll-driven storytelling — sections animate in as the user scrolls, the page tells a story",
+        "key_libraries": ["framer-motion", "gsap"]
+      },
+      {
+        "type": "terminal-console",
+        "description": "Monospace font, CLI aesthetic, typed output, command-style inputs — dark background, text IS the UI",
+        "key_libraries": ["xterm.js"]
+      },
+      {
+        "type": "chat-conversation",
+        "description": "Conversational UI — message bubbles, assistant voice, back-and-forth thread, no forms",
+        "key_libraries": ["framer-motion"]
+      },
+      {
+        "type": "kiosk-immersive",
+        "description": "Full-screen, single-focus, oversized targets — one thing per screen, huge typography, no dense chrome",
+        "key_libraries": ["framer-motion"]
+      },
+      {
+        "type": "data-art",
+        "description": "Data visualisation as art — generative, ambient, or aesthetic; the visual IS the data",
+        "key_libraries": ["d3", "three.js", "canvas", "react-spring"]
+      },
+      {
+        "type": "radial-explorer",
+        "description": "Central node with branching radial navigation — content organised as a graph, not a list",
+        "key_libraries": ["d3-force", "framer-motion", "SVG"]
+      },
+      {
+        "type": "splitscreen-compare",
+        "description": "Two or more panels that react to each other — drag divider, mirror state, the comparison IS the interface",
+        "key_libraries": ["framer-motion"]
+      },
+      {
+        "type": "editorial-longform",
+        "description": "Magazine layout with full-bleed images, pull quotes, reading rhythm — scrolling article structure",
+        "key_libraries": ["framer-motion"]
+      },
+      {
+        "type": "ambient-display",
+        "description": "The UI breathes — glanceable, time-driven animation, live feel, minimal direct interaction",
+        "key_libraries": ["framer-motion", "recharts"]
+      }
+    ],
     "anti_patterns": [
+      "CRITICAL: Do not build a new POC with the same app_type as any of the last 5 built POCs — check app_type_pool and rules/DESIGN_DIVERSITY.md",
       "Do not build a card grid unless ui.interaction_model explicitly says card grid",
       "Do not repeat the same visual direction as any other POC already in the repo",
       "Do not use generic dashboard chrome with sidebar + header + card body",
@@ -17,8 +101,11 @@
       "Do not write copy for a developer audience — write for the target user"
     ],
     "required_before_build": [
+      "FIRST: Read rules/DESIGN_DIVERSITY.md and complete the Design Diversity Audit",
+      "FIRST: Identify the last 5 built POCs and their dominant structural patterns",
+      "FIRST: Choose an app_type from app_type_pool that has NOT appeared in those 5 builds",
       "Read the idea's ui.direction and understand what it means visually",
-      "Read ui.interaction_model and plan the layout around it, not a default Next.js template",
+      "Read ui.interaction_model and plan the layout around it — but override it if it conflicts with your chosen app_type",
       "Read ui.suggested_libraries and install them before writing UI code",
       "Read ui.distinctive_feature — this is the one thing that must feel crafted",
       "Read ui.avoid — never do these things for this concept",
