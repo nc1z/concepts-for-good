@@ -102,7 +102,6 @@ export default function HomeworkQuietTimerPage() {
       setSessionState((current) => {
         const subject = getSubject(current.subjectId);
         const steps = buildWaveSteps(subject);
-        const step = steps[current.activeStep] ?? steps[0];
 
         if (current.secondsLeft > 1) {
           return { ...current, secondsLeft: current.secondsLeft - 1 };
