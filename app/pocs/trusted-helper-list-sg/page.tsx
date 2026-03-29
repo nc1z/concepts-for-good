@@ -13,8 +13,6 @@ const sora = Sora({
   weight: ["400", "500", "600", "700"],
 });
 
-const STORAGE_KEY = "cfg-trusted-helper-list-sg-v1";
-
 type TabId = "today" | "helpers" | "notes";
 type RoleId = "medication" | "transport" | "meals" | "home";
 
@@ -189,42 +187,12 @@ const defaultState: AppState = {
   notes: seedNotes,
 };
 
-function loadState(): AppState {
-  if (typeof window === "undefined") return defaultState;
-
-  try {
-    const raw = window.localStorage.getItem(STORAGE_KEY);
-    if (!raw) return defaultState;
-
-    const parsed = JSON.parse(raw) as AppState;
-    return {
-      selectedRole: parsed.selectedRole ?? defaultState.selectedRole,
-      selectedHelperId: parsed.selectedHelperId ?? defaultState.selectedHelperId,
-      selectedTab: parsed.selectedTab ?? defaultState.selectedTab,
-      notes: parsed.notes?.length ? parsed.notes : defaultState.notes,
-    };
-  } catch {
-    return defaultState;
-  }
-}
-
 export default function TrustedHelperListPage() {
   const [appState, setAppState] = useState<AppState>(defaultState);
-  const [hydrated, setHydrated] = useState(false);
   const [dialState, setDialState] = useState<{
     helperId: string;
     mode: "call" | "message" | "handoff";
   } | null>(null);
-
-  useEffect(() => {
-    setAppState(loadState());
-    setHydrated(true);
-  }, []);
-
-  useEffect(() => {
-    if (!hydrated) return;
-    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
-  }, [appState, hydrated]);
 
   useEffect(() => {
     if (!dialState) return;
@@ -284,7 +252,10 @@ export default function TrustedHelperListPage() {
   const currentRole = roleMeta[appState.selectedRole];
 
   return (
-    <main className={`${styles.page} ${sora.variable}`} style={{ fontFamily: "var(--font-trusted-helper-list), sans-serif" }}>
+    <main
+      className={`${styles.page} ${sora.variable}`}
+      style={{ fontFamily: "var(--font-trusted-helper-list), sans-serif" }}
+    >
       <Link href="/" className={styles.backLink}>
         ← Back to gallery
       </Link>
@@ -325,9 +296,7 @@ export default function TrustedHelperListPage() {
             <section className={styles.roleChooser}>
               <p className={styles.sectionPrompt}>{currentRole.prompt}</p>
               <div className={styles.roleRow}>
-                {(
-                  Object.keys(roleMeta) as RoleId[]
-                ).map((role) => {
+                {(Object.keys(roleMeta) as RoleId[]).map((role) => {
                   const helperCount = seedHelpers.filter((helper) => helper.role === role).length;
                   const meta = roleMeta[role];
                   const active = appState.selectedRole === role;
