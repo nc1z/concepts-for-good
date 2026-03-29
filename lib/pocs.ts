@@ -11,6 +11,18 @@ export type PocCard = {
 
 export const pocCards: PocCard[] = [
   {
+    slug: "legal-aid-prep-sg",
+    title: "Legal Aid Prep",
+    category: "Support",
+    createdAt: "2026-03-29T20:27:58+08:00",
+    summary:
+      "Answer a few questions to see which legal help routes may fit and what papers to bring before you call.",
+    impact:
+      "A calm intake conversation that turns scattered legal worries into a clearer first step and paper list.",
+    theme: "editorial",
+    tags: ["Legal aid", "Support", "Documents", "Singapore"],
+  },
+  {
     slug: "trusted-helper-list-sg",
     title: "Trusted Helper List",
     category: "Caregiving",

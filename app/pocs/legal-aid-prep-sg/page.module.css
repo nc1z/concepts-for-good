@@ -1,0 +1,375 @@
+.page {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top, rgba(211, 204, 188, 0.18), transparent 30%),
+    linear-gradient(180deg, #151718 0%, #101214 100%);
+  color: #f3efe5;
+}
+
+.shell {
+  width: min(1180px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 28px 0 48px;
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 18px;
+  color: rgba(243, 239, 229, 0.82);
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
+.backLink:hover {
+  color: #fff7ea;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(320px, 0.92fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.threadCard,
+.folderCard {
+  border: 1px solid rgba(246, 238, 222, 0.12);
+  background: rgba(22, 25, 27, 0.84);
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(18px);
+}
+
+.threadCard {
+  border-radius: 32px;
+  padding: 24px;
+  min-height: calc(100vh - 124px);
+  display: flex;
+  flex-direction: column;
+}
+
+.folderCard {
+  border-radius: 28px;
+  padding: 24px;
+  position: sticky;
+  top: 20px;
+  overflow: hidden;
+}
+
+.topRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 8px 12px;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: rgba(220, 214, 200, 0.1);
+  color: rgba(250, 244, 232, 0.78);
+}
+
+.clock {
+  font-size: 0.9rem;
+  color: rgba(250, 244, 232, 0.66);
+}
+
+.messages {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-bottom: 18px;
+}
+
+.assistantBubble,
+.userBubble {
+  max-width: 82%;
+  border-radius: 24px;
+  padding: 18px 18px 16px;
+}
+
+.assistantBubble {
+  background: linear-gradient(180deg, #f5efe3 0%, #e6ddd0 100%);
+  color: #1f1d1b;
+  border-bottom-left-radius: 10px;
+}
+
+.userBubble {
+  align-self: flex-end;
+  background: linear-gradient(180deg, #394246 0%, #2c3438 100%);
+  color: #f8f4eb;
+  border-bottom-right-radius: 10px;
+}
+
+.heroTitle {
+  margin: 4px 0 10px;
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  line-height: 0.95;
+  color: #151311;
+}
+
+.heroText,
+.bubbleText,
+.helper,
+.smallText {
+  margin: 0;
+}
+
+.heroText,
+.bubbleText {
+  font-size: 1.04rem;
+  line-height: 1.55;
+}
+
+.helper {
+  margin-top: 10px;
+  font-size: 0.92rem;
+  line-height: 1.45;
+  color: rgba(31, 29, 27, 0.7);
+}
+
+.smallText {
+  font-size: 0.86rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(31, 29, 27, 0.58);
+}
+
+.responseArea {
+  margin-top: auto;
+  padding-top: 18px;
+  border-top: 1px solid rgba(243, 239, 229, 0.1);
+}
+
+.responsePrompt {
+  margin: 0 0 12px;
+  font-size: 0.95rem;
+  color: rgba(243, 239, 229, 0.8);
+}
+
+.options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.optionButton {
+  border: 1px solid rgba(246, 238, 222, 0.16);
+  border-radius: 999px;
+  background: rgba(243, 239, 229, 0.08);
+  color: #fff8ec;
+  padding: 12px 16px;
+  font: inherit;
+  cursor: pointer;
+  transition: transform 140ms ease, background 140ms ease, border-color 140ms ease;
+}
+
+.optionButton:hover {
+  transform: translateY(-1px);
+  background: rgba(243, 239, 229, 0.14);
+  border-color: rgba(246, 238, 222, 0.28);
+}
+
+.folderCard::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, #a39f6f 0%, #dac593 50%, #6f7f61 100%);
+}
+
+.folderHeader {
+  margin-bottom: 18px;
+}
+
+.folderTitle {
+  margin: 6px 0 8px;
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.folderSummary {
+  margin: 0;
+  color: rgba(243, 239, 229, 0.72);
+  line-height: 1.55;
+}
+
+.routeList,
+.paperList,
+.timelineList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.routeCard,
+.sectionCard {
+  border-radius: 20px;
+  border: 1px solid rgba(246, 238, 222, 0.11);
+  background: rgba(242, 237, 225, 0.05);
+  padding: 16px;
+}
+
+.routeTop {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: flex-start;
+  margin-bottom: 6px;
+}
+
+.routeName,
+.sectionTitle {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.routeBadge,
+.mutedBadge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 5px 10px;
+  font-size: 0.77rem;
+  white-space: nowrap;
+}
+
+.routeBadge {
+  background: rgba(168, 188, 131, 0.18);
+  color: #dbeab8;
+}
+
+.mutedBadge {
+  background: rgba(209, 184, 129, 0.16);
+  color: #efdca9;
+}
+
+.routeCopy,
+.sectionText,
+.paperItem,
+.timelineItem {
+  color: rgba(243, 239, 229, 0.78);
+  line-height: 1.5;
+}
+
+.routeCopy,
+.sectionText {
+  margin: 0;
+}
+
+.routeNext {
+  margin-top: 10px;
+  color: #fff0c6;
+}
+
+.folderSections {
+  display: grid;
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.sectionTitleRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.paperItem,
+.timelineItem {
+  position: relative;
+  padding-left: 18px;
+}
+
+.paperItem::before,
+.timelineItem::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: #d7be87;
+}
+
+.footerActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.copyButton {
+  border: none;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #f2e4bd 0%, #c8b174 100%);
+  color: #1d1914;
+  padding: 12px 16px;
+  font: inherit;
+  cursor: pointer;
+}
+
+.copyNote {
+  display: inline-flex;
+  align-items: center;
+  color: rgba(243, 239, 229, 0.72);
+  font-size: 0.92rem;
+}
+
+.pendingCard {
+  border-radius: 20px;
+  border: 1px dashed rgba(246, 238, 222, 0.18);
+  padding: 16px;
+  color: rgba(243, 239, 229, 0.7);
+  line-height: 1.5;
+}
+
+@media (max-width: 980px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .threadCard {
+    min-height: auto;
+  }
+
+  .folderCard {
+    position: static;
+  }
+}
+
+@media (max-width: 720px) {
+  .shell {
+    width: min(100% - 20px, 100%);
+    padding-top: 20px;
+  }
+
+  .threadCard,
+  .folderCard {
+    padding: 18px;
+    border-radius: 24px;
+  }
+
+  .assistantBubble,
+  .userBubble {
+    max-width: 92%;
+  }
+
+  .topRow {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}

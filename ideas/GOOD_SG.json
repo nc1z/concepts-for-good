@@ -1831,7 +1831,8 @@
         "avoid": "static FAQ; list of legal schemes; form without real-time eligibility feedback",
         "experience_goal": "person facing a legal issue knows whether they qualify for aid and what to bring, before making the call"
       },
-      "implemented": false
+      "implemented": true,
+      "built": true
     },
     {
       "id": "GOOD_SG-157",
