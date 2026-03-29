@@ -186,7 +186,15 @@ export default function LegalAidPrepPage() {
                         {message.title}
                       </h1>
                     ) : null}
-                    <p className={message.title ? styles.heroText : styles.bubbleText}>{message.body}</p>
+                    <p
+                      className={
+                        message.speaker === "assistant" && message.title
+                          ? styles.heroText
+                          : styles.bubbleText
+                      }
+                    >
+                      {message.body}
+                    </p>
                     {message.speaker === "assistant" && message.helper ? (
                       <p className={styles.helper}>{message.helper}</p>
                     ) : null}
