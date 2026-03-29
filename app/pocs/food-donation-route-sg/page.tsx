@@ -1,540 +1,609 @@
 "use client";
 
 import Link from "next/link";
-import { Space_Grotesk } from "next/font/google";
-import { motion, Reorder, useDragControls, useMotionValue } from "framer-motion";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { Bricolage_Grotesque } from "next/font/google";
+import { AnimatePresence, Reorder, motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 
-import { defaultState, type AppState, type Stop } from "./data";
+import {
+  announcerSeed,
+  defaultOrder,
+  missionConfig,
+  stopLookup,
+  type Stop,
+} from "./data";
 import styles from "./page.module.css";
 
-const spaceGrotesk = Space_Grotesk({
+const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-space",
+  variable: "--font-food-donation-route",
+  weight: ["400", "500", "600", "700", "800"],
 });
 
-const STORAGE_KEY = "cfg-food-donation-route-sg-v1";
+const STORAGE_KEY = "cfg-food-donation-route-sg-v2";
 
-// ─── SVG path helpers ──────────────────────────────────────────────────────
+type Phase = "briefing" | "running" | "won" | "lost";
 
-type Point = { x: number; y: number };
-
-function buildPath(points: Point[]): string {
-  if (points.length < 2) return "";
-  let d = `M ${points[0].x} ${points[0].y}`;
-  for (let i = 1; i < points.length; i++) {
-    const prev = points[i - 1];
-    const cur = points[i];
-    const cy = (prev.y + cur.y) / 2;
-    d += ` C ${prev.x} ${cy}, ${cur.x} ${cy}, ${cur.x} ${cur.y}`;
-  }
-  return d;
-}
-
-// ─── Stop card (uses Reorder.Item) ────────────────────────────────────────
-
-function StopCard({
-  stop,
-  sequenceNumber,
-  isActive,
-  isDone,
-  nodeRef,
-  onToggleActive,
-  onToggleDone,
-}: {
+type RoutePreviewStep = {
   stop: Stop;
-  sequenceNumber: number;
-  isActive: boolean;
-  isDone: boolean;
-  nodeRef: React.RefObject<HTMLDivElement | null>;
-  onToggleActive: () => void;
-  onToggleDone: () => void;
-}) {
-  const isDropoff = stop.type === "Dropoff";
-  const y = useMotionValue(0);
-  const dragControls = useDragControls();
+  arrivalMin: number;
+  marginMin: number;
+  projectedPoints: number;
+  rescuedMeals: number;
+  willMiss: boolean;
+};
 
-  const cardClass = [
-    styles.stopCard,
-    !isActive && styles.stopCardInactive,
-    isDone && styles.stopCardDone,
-    isDropoff && styles.stopCardDropoff,
-  ]
-    .filter(Boolean)
-    .join(" ");
+function buildRoutePreview(routeOrder: string[], benchedIds: string[]) {
+  const activeStops = routeOrder
+    .filter((id) => !benchedIds.includes(id))
+    .map((id) => stopLookup[id])
+    .filter(Boolean);
 
-  const nodeClass = [
-    styles.stopNode,
-    isDropoff && styles.stopNodeDropoff,
-    !isActive && styles.stopNodeInactive,
-    isDone && !isDropoff && styles.stopNodeDone,
-    isDone && isDropoff && styles.stopNodeDoneDropoff,
-  ]
-    .filter(Boolean)
-    .join(" ");
+  let travelClock = 0;
+  let projectedScore = 0;
+  let projectedStrikes = 0;
+  let projectedMeals = 0;
 
-  return (
-    <Reorder.Item
-      value={stop}
-      id={stop.id}
-      style={{ y }}
-      as="li"
-      className={styles.stopItem}
-      dragControls={dragControls}
-    >
-      {/* Drag handle */}
-      <div
-        className={styles.dragHandle}
-        onPointerDown={(e) => dragControls.start(e)}
-      >
-        <svg
-          width="12"
-          height="20"
-          viewBox="0 0 12 20"
-          fill="currentColor"
-          aria-hidden="true"
-        >
-          <circle cx="3" cy="4" r="1.5" />
-          <circle cx="9" cy="4" r="1.5" />
-          <circle cx="3" cy="10" r="1.5" />
-          <circle cx="9" cy="10" r="1.5" />
-          <circle cx="3" cy="16" r="1.5" />
-          <circle cx="9" cy="16" r="1.5" />
-        </svg>
-      </div>
+  const steps = activeStops.map((stop) => {
+    travelClock += stop.travelFromPreviousMin;
+    const marginMin = stop.closingInMin - travelClock;
+    const willMiss = marginMin < 0;
 
-      {/* Node dot — used for SVG path measurement */}
-      <div className={styles.stopConnector}>
-        <div ref={nodeRef} className={nodeClass} />
-      </div>
+    let projectedPoints = 0;
+    let rescuedMeals = 0;
 
-      {/* Card body */}
-      <div className={cardClass}>
-        <div className={styles.stopCardTop}>
-          <div className={styles.stopMeta}>
-            <span className={styles.stopNumber}>
-              {String(sequenceNumber).padStart(2, "0")}
-            </span>
-            <span
-              className={`${styles.stopTypeBadge} ${isDropoff ? styles.badgeDropoff : styles.badgePickup}`}
-            >
-              {stop.type}
-            </span>
-          </div>
-
-          <div className={styles.stopActions}>
-            <button
-              type="button"
-              title={isDone ? "Mark as pending" : "Mark as done"}
-              className={`${styles.actionBtn} ${isDone ? styles.actionBtnActive : ""}`}
-              onClick={onToggleDone}
-              aria-pressed={isDone}
-            >
-              <svg
-                width="12"
-                height="12"
-                viewBox="0 0 12 12"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-              >
-                <polyline points="2,6 5,9 10,3" />
-              </svg>
-            </button>
-
-            <button
-              type="button"
-              title={isActive ? "Skip this stop" : "Include this stop"}
-              className={`${styles.actionBtn} ${!isActive ? styles.actionBtnToggleOff : ""}`}
-              onClick={onToggleActive}
-              aria-pressed={isActive}
-            >
-              <svg
-                width="12"
-                height="12"
-                viewBox="0 0 12 12"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                aria-hidden="true"
-              >
-                {isActive ? (
-                  <path d="M6 1v10M1 6h10" />
-                ) : (
-                  <path d="M2 2l8 8M10 2l-8 8" />
-                )}
-              </svg>
-            </button>
-          </div>
-        </div>
-
-        <h3 className={`${styles.stopName} ${isDone ? styles.stopNameDone : ""}`}>
-          {stop.name}
-        </h3>
-
-        <div className={styles.stopDetails}>
-          <span className={styles.stopDetail}>
-            <strong>{stop.area}</strong>
-          </span>
-          <span className={styles.stopDetail}>{stop.portionsLabel}</span>
-          <span className={styles.stopDetail}>{stop.window}</span>
-        </div>
-
-        {isDone && (
-          <motion.div
-            initial={{ opacity: 0, y: 4 }}
-            animate={{ opacity: 1, y: 0 }}
-            className={styles.stopDoneLabel}
-          >
-            <svg
-              width="10"
-              height="10"
-              viewBox="0 0 10 10"
-              fill="currentColor"
-              aria-hidden="true"
-            >
-              <circle cx="5" cy="5" r="5" />
-            </svg>
-            Done
-          </motion.div>
-        )}
-      </div>
-    </Reorder.Item>
-  );
-}
-
-// ─── SVG connector overlay ─────────────────────────────────────────────────
-
-function RoutePathSvg({
-  nodeRefs,
-  stops,
-  activeIds,
-  containerRef,
-}: {
-  nodeRefs: React.MutableRefObject<Record<string, React.RefObject<HTMLDivElement | null>>>;
-  stops: Stop[];
-  activeIds: string[];
-  containerRef: React.RefObject<HTMLDivElement | null>;
-}) {
-  const [paths, setPaths] = useState<
-    { d: string; id: string; isDropoff: boolean; isActive: boolean }[]
-  >([]);
-  const [dashOffset, setDashOffset] = useState(0);
-  const rafRef = useRef<number | null>(null);
-
-  const recalculate = useCallback(() => {
-    const container = containerRef.current;
-    if (!container) return;
-    const containerRect = container.getBoundingClientRect();
-
-    const activeStops = stops.filter((s) => activeIds.includes(s.id));
-    const newPaths: typeof paths = [];
-
-    for (let i = 0; i < activeStops.length - 1; i++) {
-      const from = activeStops[i];
-      const to = activeStops[i + 1];
-      const fromRef = nodeRefs.current[from.id]?.current;
-      const toRef = nodeRefs.current[to.id]?.current;
-      if (!fromRef || !toRef) continue;
-
-      const fromRect = fromRef.getBoundingClientRect();
-      const toRect = toRef.getBoundingClientRect();
-
-      const fx = fromRect.left + fromRect.width / 2 - containerRect.left;
-      const fy = fromRect.top + fromRect.height / 2 - containerRect.top;
-      const tx = toRect.left + toRect.width / 2 - containerRect.left;
-      const ty = toRect.top + toRect.height / 2 - containerRect.top;
-
-      const d = buildPath([
-        { x: fx, y: fy },
-        { x: tx, y: ty },
-      ]);
-
-      const isDropoff = to.type === "Dropoff";
-      const isActive = activeIds.includes(from.id) && activeIds.includes(to.id);
-      newPaths.push({ d, id: `${from.id}-${to.id}`, isDropoff, isActive });
+    if (stop.kind === "pickup") {
+      if (willMiss) {
+        projectedPoints = -18;
+        projectedStrikes += 1;
+      } else {
+        rescuedMeals = stop.meals;
+        projectedMeals += stop.meals;
+        projectedPoints = stop.meals * 2 + Math.max(6, marginMin);
+      }
+    } else if (willMiss || projectedMeals === 0) {
+      projectedPoints = -12;
+      projectedStrikes += 1;
+    } else {
+      projectedPoints = Math.min(46, Math.round(projectedMeals * 0.38));
     }
 
-    setPaths(newPaths);
-  }, [stops, activeIds, containerRef, nodeRefs]);
+    projectedScore += projectedPoints;
 
-  // Recalculate on every animation frame while mounted so reorders animate
+    return {
+      stop,
+      arrivalMin: travelClock,
+      marginMin,
+      projectedPoints,
+      rescuedMeals,
+      willMiss,
+    };
+  });
+
+  return {
+    steps,
+    projectedScore,
+    projectedStrikes,
+    projectedMeals,
+  };
+}
+
+function formatEta(minutes: number) {
+  const totalMinutes = 40 + minutes;
+  const hour = 7 + Math.floor(totalMinutes / 60);
+  const minute = totalMinutes % 60;
+  const hour12 = hour > 12 ? hour - 12 : hour;
+  return `${hour12}:${String(minute).padStart(2, "0")} pm`;
+}
+
+function scoreLabel(points: number) {
+  return points > 0 ? `+${points}` : String(points);
+}
+
+function marginLabel(step: RoutePreviewStep) {
+  if (step.willMiss) return `${Math.abs(step.marginMin)} min late`;
+  return `${step.marginMin} min spare`;
+}
+
+function kindLabel(stop: Stop) {
+  return stop.kind === "pickup" ? "Pickup" : "Drop-off";
+}
+
+function RoutePathOverlay({
+  routeOrder,
+  benchedIds,
+  nodeRefs,
+  containerRef,
+}: {
+  routeOrder: string[];
+  benchedIds: string[];
+  nodeRefs: React.MutableRefObject<Record<string, HTMLDivElement | null>>;
+  containerRef: React.RefObject<HTMLDivElement | null>;
+}) {
+  const [paths, setPaths] = useState<string[]>([]);
+  const [dashOffset, setDashOffset] = useState(0);
+
   useEffect(() => {
-    let frame = 0;
-    const loop = () => {
-      recalculate();
-      frame++;
-      // After initial burst, slow down to every 4 frames
-      rafRef.current = requestAnimationFrame(frame < 20 ? loop : slowLoop);
+    const recalculate = () => {
+      const container = containerRef.current;
+      if (!container) return;
+
+      const rect = container.getBoundingClientRect();
+      const activeIds = routeOrder.filter((id) => !benchedIds.includes(id));
+      const nextPaths: string[] = [];
+
+      for (let index = 0; index < activeIds.length - 1; index += 1) {
+        const fromNode = nodeRefs.current[activeIds[index]];
+        const toNode = nodeRefs.current[activeIds[index + 1]];
+
+        if (!fromNode || !toNode) continue;
+
+        const fromRect = fromNode.getBoundingClientRect();
+        const toRect = toNode.getBoundingClientRect();
+
+        const fromX = fromRect.left + fromRect.width / 2 - rect.left;
+        const fromY = fromRect.top + fromRect.height / 2 - rect.top;
+        const toX = toRect.left + toRect.width / 2 - rect.left;
+        const toY = toRect.top + toRect.height / 2 - rect.top;
+        const midY = (fromY + toY) / 2;
+
+        nextPaths.push(
+          `M ${fromX} ${fromY} C ${fromX} ${midY}, ${toX} ${midY}, ${toX} ${toY}`,
+        );
+      }
+
+      setPaths(nextPaths);
     };
-    const slowLoop = () => {
-      recalculate();
-      rafRef.current = requestAnimationFrame(slowLoop);
-    };
-    rafRef.current = requestAnimationFrame(loop);
+
+    recalculate();
+    const frameOne = window.requestAnimationFrame(recalculate);
+    const frameTwo = window.requestAnimationFrame(recalculate);
+    window.addEventListener("resize", recalculate);
+
     return () => {
-      if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
+      window.cancelAnimationFrame(frameOne);
+      window.cancelAnimationFrame(frameTwo);
+      window.removeEventListener("resize", recalculate);
     };
-  }, [recalculate]);
+  }, [routeOrder, benchedIds, nodeRefs, containerRef]);
 
-  // Animate dashoffset for flowing effect
   useEffect(() => {
-    const intervalId = setInterval(() => {
-      setDashOffset((v) => (v - 1) % 22);
+    const timer = window.setInterval(() => {
+      setDashOffset((value) => value - 1);
     }, 40);
-    return () => clearInterval(intervalId);
+
+    return () => window.clearInterval(timer);
   }, []);
 
-  if (paths.length === 0) return null;
-
   return (
-    <svg className={styles.svgCanvas} aria-hidden="true">
-      {paths.map(({ d, id, isDropoff }) => (
+    <svg className={styles.pathCanvas} aria-hidden="true">
+      {paths.map((path, index) => (
         <path
-          key={id}
-          d={d}
-          className={`${styles.routePath} ${isDropoff ? styles.routePathDropoff : ""}`}
-          strokeDashoffset={dashOffset}
+          key={`${path}-${index}`}
+          d={path}
+          className={styles.routePath}
+          style={{ strokeDashoffset: dashOffset }}
         />
       ))}
     </svg>
   );
 }
 
-// ─── Main page ─────────────────────────────────────────────────────────────
+export default function FoodDonationRoutePage() {
+  const [routeOrder, setRouteOrder] = useState(defaultOrder);
+  const [benchedIds, setBenchedIds] = useState<string[]>([]);
+  const [phase, setPhase] = useState<Phase>("briefing");
+  const [currentStepIndex, setCurrentStepIndex] = useState(0);
+  const [rescuedMeals, setRescuedMeals] = useState(0);
+  const [score, setScore] = useState(0);
+  const [strikes, setStrikes] = useState(0);
+  const [bestScore, setBestScore] = useState(248);
+  const [announcerNotes, setAnnouncerNotes] = useState(announcerSeed);
 
-export default function FoodDonationRouteSGPage() {
-  const [appState, setAppState] = useState<AppState>(defaultState);
-  const [hydrated, setHydrated] = useState(false);
-
-  // One ref per stop, keyed by stop id
-  const nodeRefsMap = useRef<Record<string, React.RefObject<HTMLDivElement | null>>>({});
+  const nodeRefs = useRef<Record<string, HTMLDivElement | null>>({});
   const containerRef = useRef<HTMLDivElement | null>(null);
+  const hydrated = useRef(false);
 
-  // Ensure a ref exists for every stop id
-  const ensureRef = useCallback(
-    (id: string): React.RefObject<HTMLDivElement | null> => {
-      if (!nodeRefsMap.current[id]) {
-        nodeRefsMap.current[id] = { current: null };
-      }
-      return nodeRefsMap.current[id];
-    },
-    [],
-  );
-
-  // Hydrate from localStorage
   useEffect(() => {
-    const raw = window.localStorage.getItem(STORAGE_KEY);
-    if (raw) {
-      try {
-        setAppState(JSON.parse(raw) as AppState);
-      } catch {
-        window.localStorage.removeItem(STORAGE_KEY);
+    try {
+      const raw = window.localStorage.getItem(STORAGE_KEY);
+      if (raw) {
+        const parsed = JSON.parse(raw) as { bestScore?: number };
+        if (typeof parsed.bestScore === "number") {
+          setBestScore(parsed.bestScore);
+        }
       }
+    } catch {
+      window.localStorage.removeItem(STORAGE_KEY);
     }
-    setHydrated(true);
+
+    hydrated.current = true;
   }, []);
 
-  // Persist on change
   useEffect(() => {
-    if (!hydrated) return;
-    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
-  }, [hydrated, appState]);
+    if (!hydrated.current) return;
+    window.localStorage.setItem(STORAGE_KEY, JSON.stringify({ bestScore }));
+  }, [bestScore]);
 
-  // Derived
-  const activeStops = appState.stops.filter((s) =>
-    appState.activeIds.includes(s.id),
-  );
-  const pickups = activeStops.filter((s) => s.type === "Pickup");
-  const totalPortions = pickups.reduce((acc, s) => {
-    const match = s.portionsLabel.match(/(\d+)/);
-    return acc + (match ? parseInt(match[1], 10) : 0);
-  }, 0);
-  const doneCount = appState.doneIds.length;
+  const preview = buildRoutePreview(routeOrder, benchedIds);
+  const activeSteps = preview.steps;
+  const currentStep = activeSteps[currentStepIndex] ?? null;
+  const stageCount = activeSteps.length;
+  const canBench = phase === "briefing";
+  const hasRoute = stageCount > 0;
 
-  function handleReorder(newStops: Stop[]) {
-    setAppState((prev) => ({ ...prev, stops: newStops }));
+  function resetRound() {
+    setPhase("briefing");
+    setCurrentStepIndex(0);
+    setRescuedMeals(0);
+    setScore(0);
+    setStrikes(0);
+    setBenchedIds([]);
+    setRouteOrder(defaultOrder);
+    setAnnouncerNotes(announcerSeed);
   }
 
-  function toggleActive(id: string) {
-    setAppState((prev) => ({
-      ...prev,
-      activeIds: prev.activeIds.includes(id)
-        ? prev.activeIds.filter((x) => x !== id)
-        : [...prev.activeIds, id],
-    }));
+  function startRound() {
+    if (!hasRoute) return;
+    setPhase("running");
+    setCurrentStepIndex(0);
+    setRescuedMeals(0);
+    setScore(0);
+    setStrikes(0);
+    setAnnouncerNotes([
+      "Engines on. Drive the route in order and keep the closing windows alive.",
+      `Mission target: rescue ${missionConfig.targetMeals} meals before the last pantry handoff.`,
+    ]);
   }
 
-  function toggleDone(id: string) {
-    setAppState((prev) => ({
-      ...prev,
-      doneIds: prev.doneIds.includes(id)
-        ? prev.doneIds.filter((x) => x !== id)
-        : [...prev.doneIds, id],
-    }));
+  function finishRound(nextScore: number, nextMeals: number, nextStrikes: number) {
+    if (nextScore > bestScore) {
+      setBestScore(nextScore);
+    }
+
+    const won =
+      nextStrikes < missionConfig.maxStrikes &&
+      nextMeals >= missionConfig.targetMeals &&
+      nextScore >= missionConfig.targetScore;
+
+    setPhase(won ? "won" : "lost");
+    setAnnouncerNotes((current) => [
+      won
+        ? `Round clear. ${nextMeals} meals rescued and both pantry drops landed on time.`
+        : "Round over. Too many meals were left behind before the shutters came down.",
+      ...current,
+    ]);
   }
+
+  function resolveCurrentStep(skipCurrent = false) {
+    if (!currentStep) return;
+
+    let nextScore = score;
+    let nextMeals = rescuedMeals;
+    let nextStrikes = strikes;
+
+    if (skipCurrent) {
+      nextScore -= 12;
+      nextStrikes += 1;
+      setAnnouncerNotes((current) => [
+        `Skipped ${currentStep.stop.name}. The detour cost time and one strike.`,
+        ...current,
+      ]);
+    } else if (currentStep.stop.kind === "pickup") {
+      if (currentStep.willMiss) {
+        nextScore += currentStep.projectedPoints;
+        nextStrikes += 1;
+        setAnnouncerNotes((current) => [
+          `${currentStep.stop.name} was late. ${Math.abs(currentStep.marginMin)} minutes too slow for pickup.`,
+          ...current,
+        ]);
+      } else {
+        nextMeals += currentStep.stop.meals;
+        nextScore += currentStep.projectedPoints;
+        setAnnouncerNotes((current) => [
+          `${currentStep.stop.name} loaded ${currentStep.stop.meals} meals with ${currentStep.marginMin} minutes to spare.`,
+          ...current,
+        ]);
+      }
+    } else if (currentStep.willMiss || nextMeals === 0) {
+      nextScore -= 12;
+      nextStrikes += 1;
+      setAnnouncerNotes((current) => [
+        `${currentStep.stop.name} could not take the handoff in time.`,
+        ...current,
+      ]);
+    } else {
+      const dropBonus = Math.min(46, Math.round(nextMeals * 0.38));
+      nextScore += dropBonus;
+      setAnnouncerNotes((current) => [
+        `${currentStep.stop.name} banked the rescue run. ${dropBonus} score added to the board.`,
+        ...current,
+      ]);
+    }
+
+    setRescuedMeals(nextMeals);
+    setScore(nextScore);
+    setStrikes(nextStrikes);
+
+    const isLastStep = currentStepIndex >= activeSteps.length - 1;
+    if (nextStrikes >= missionConfig.maxStrikes || isLastStep) {
+      finishRound(nextScore, nextMeals, nextStrikes);
+      return;
+    }
+
+    setCurrentStepIndex((value) => value + 1);
+  }
+
+  function toggleBench(stopId: string) {
+    if (!canBench) return;
+
+    setBenchedIds((current) =>
+      current.includes(stopId) ? current.filter((id) => id !== stopId) : [...current, stopId],
+    );
+  }
+
+  const orderedStops = routeOrder.map((id) => stopLookup[id]).filter(Boolean);
+  const stageLabel =
+    phase === "briefing"
+      ? "Plan the route"
+      : currentStep
+        ? `Stage ${currentStepIndex + 1} of ${stageCount}`
+        : "Round complete";
+
+  const nextActionLabel =
+    phase === "briefing"
+      ? "Start rescue round"
+      : phase === "running"
+        ? currentStep
+          ? currentStep.stop.kind === "pickup"
+            ? `Drive to ${currentStep.stop.area}`
+            : `Deliver to ${currentStep.stop.area}`
+          : "Route needs at least one stop"
+        : "Run it again";
 
   return (
     <main
-      className={`${styles.page} ${spaceGrotesk.variable}`}
-      style={{ fontFamily: "var(--font-space), var(--font-sans), sans-serif" }}
+      className={`${styles.page} ${bricolage.variable}`}
+      style={{ fontFamily: "var(--font-food-donation-route), sans-serif" }}
     >
-      {/* Nav */}
-      <header className={styles.topbar}>
-        <Link href="/" className={styles.backLink}>
-          <svg
-            width="14"
-            height="14"
-            viewBox="0 0 14 14"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            aria-hidden="true"
-          >
-            <path d="M9 2L4 7l5 5" />
-          </svg>
-          Back to gallery
-        </Link>
-        <span className={styles.topbarMeta}>Food rescue — Sat night run</span>
-      </header>
+      <Link href="/" className={styles.backLink}>
+        ← Back to gallery
+      </Link>
 
-      {/* Hero */}
-      <section className={styles.hero}>
-        <p className={styles.heroEyebrow}>
-          <span className={styles.heroDot} aria-hidden="true" />
-          Food Donation Route
-        </p>
-        <h1 className={styles.heroHeadline}>
-          Plan your pickup stops for tonight and see your route take shape before you leave.
-        </h1>
-        <p className={styles.heroLede}>
-          Add or skip stops, drag to change the order, and mark each one done as you go.
-        </p>
-      </section>
-
-      {/* Stats bar */}
-      <div className={styles.statsBar}>
-        <div className={styles.stat}>
-          <span className={styles.statValue}>{activeStops.length}</span>
-          <span className={styles.statLabel}>Active stops</span>
-        </div>
-        <div className={styles.stat}>
-          <span className={styles.statValue}>{pickups.length}</span>
-          <span className={styles.statLabel}>Pickups</span>
-        </div>
-        <div className={styles.stat}>
-          <span className={styles.statValue}>{totalPortions}</span>
-          <span className={styles.statLabel}>Portions tonight</span>
-        </div>
-        <div className={styles.stat}>
-          <span className={styles.statValue}>{doneCount}/{appState.stops.length}</span>
-          <span className={styles.statLabel}>Completed</span>
-        </div>
-      </div>
-
-      {/* Main layout */}
-      <div className={styles.main}>
-        {/* Route diagram */}
-        <div className={styles.routeDiagram}>
-          <div className={styles.routeDiagramInner} ref={containerRef}>
-            {/* SVG path overlay */}
-            <RoutePathSvg
-              nodeRefs={nodeRefsMap}
-              stops={appState.stops}
-              activeIds={appState.activeIds}
-              containerRef={containerRef}
-            />
-
-            {/* Reorderable stop list */}
-            <Reorder.Group
-              axis="y"
-              values={appState.stops}
-              onReorder={handleReorder}
-              as="ol"
-              className={styles.stopList}
-            >
-              {appState.stops.map((stop, index) => {
-                const ref = ensureRef(stop.id);
-                return (
-                  <StopCard
-                    key={stop.id}
-                    stop={stop}
-                    sequenceNumber={index + 1}
-                    isActive={appState.activeIds.includes(stop.id)}
-                    isDone={appState.doneIds.includes(stop.id)}
-                    nodeRef={ref}
-                    onToggleActive={() => toggleActive(stop.id)}
-                    onToggleDone={() => toggleDone(stop.id)}
-                  />
-                );
-              })}
-            </Reorder.Group>
+      <section className={styles.arena}>
+        <header className={styles.hud}>
+          <div className={styles.hudBlock}>
+            <span className={styles.hudLabel}>Mission clock</span>
+            <strong>{missionConfig.startClock}</strong>
           </div>
-        </div>
+          <div className={styles.hudBlock}>
+            <span className={styles.hudLabel}>Score</span>
+            <strong>{score}</strong>
+          </div>
+          <div className={styles.hudBlock}>
+            <span className={styles.hudLabel}>Meals saved</span>
+            <strong>{rescuedMeals}</strong>
+          </div>
+          <div className={styles.hudBlock}>
+            <span className={styles.hudLabel}>Strikes</span>
+            <strong>
+              {strikes}/{missionConfig.maxStrikes}
+            </strong>
+          </div>
+          <div className={styles.hudBlock}>
+            <span className={styles.hudLabel}>Best run</span>
+            <strong>{bestScore}</strong>
+          </div>
+        </header>
 
-        {/* Sidebar — collection summary */}
-        <aside className={styles.sidebar}>
-          <section className={styles.sideSection}>
-            <p className={styles.sideSectionLabel}>Tonight&apos;s collection</p>
-            <h2 className={styles.sideSectionTitle}>What you&apos;re picking up</h2>
-            <ul className={styles.collectionList}>
-              {appState.stops
-                .filter((s) => s.type === "Pickup" && appState.activeIds.includes(s.id))
-                .map((s) => (
-                  <li
-                    key={s.id}
-                    className={`${styles.collectionItem} ${appState.doneIds.includes(s.id) ? styles.done : ""}`}
+        <div className={styles.boardShell}>
+          <section className={styles.playfield}>
+            <div className={styles.gridGlow} />
+            <div className={styles.boardStats}>
+              <span className={styles.stagePill}>{stageLabel}</span>
+              <span className={styles.stagePill}>Projected score {preview.projectedScore}</span>
+              <span className={styles.stagePill}>Projected meals {preview.projectedMeals}</span>
+            </div>
+
+            <div className={styles.routeTrack} ref={containerRef}>
+              <RoutePathOverlay
+                routeOrder={routeOrder}
+                benchedIds={benchedIds}
+                nodeRefs={nodeRefs}
+                containerRef={containerRef}
+              />
+
+              <Reorder.Group
+                axis="y"
+                values={routeOrder}
+                onReorder={canBench ? setRouteOrder : () => undefined}
+                className={styles.routeList}
+              >
+                {orderedStops.map((stop) => {
+                  const previewStep = preview.steps.find((step) => step.stop.id === stop.id) ?? null;
+                  const benched = benchedIds.includes(stop.id);
+                  const current = currentStep?.stop.id === stop.id && phase === "running";
+                  const resolved = phase !== "briefing" && preview.steps
+                    .slice(0, currentStepIndex)
+                    .some((step) => step.stop.id === stop.id);
+
+                  return (
+                    <Reorder.Item
+                      key={stop.id}
+                      value={stop.id}
+                      drag={canBench ? "y" : false}
+                      className={styles.routeItem}
+                    >
+                      <article
+                        className={[
+                          styles.stopToken,
+                          benched ? styles.stopTokenBenched : "",
+                          current ? styles.stopTokenCurrent : "",
+                          resolved ? styles.stopTokenResolved : "",
+                          stop.kind === "dropoff" ? styles.stopTokenDropoff : "",
+                        ]
+                          .filter(Boolean)
+                          .join(" ")}
+                        style={{ marginLeft: `${stop.laneShift}px` }}
+                      >
+                        <div className={styles.nodeColumn}>
+                          <div
+                            ref={(node) => {
+                              nodeRefs.current[stop.id] = node;
+                            }}
+                            className={styles.nodeDot}
+                          />
+                        </div>
+
+                        <div className={styles.stopBody}>
+                          <div className={styles.stopHeader}>
+                            <span className={styles.kindBadge}>{kindLabel(stop)}</span>
+                            <span className={styles.areaBadge}>{stop.area}</span>
+                          </div>
+                          <h2 className={styles.stopName}>{stop.name}</h2>
+                          <p className={styles.stopNote}>{stop.note}</p>
+
+                          <div className={styles.stopMetaRow}>
+                            <span>{stop.windowLabel}</span>
+                            <span>{stop.travelFromPreviousMin} min drive</span>
+                            <span>
+                              {stop.kind === "pickup" ? `${stop.meals} meals` : "Bank the run"}
+                            </span>
+                          </div>
+
+                          {previewStep ? (
+                            <div className={styles.stopForecastRow}>
+                              <span>{formatEta(previewStep.arrivalMin)}</span>
+                              <span className={previewStep.willMiss ? styles.penaltyText : styles.rewardText}>
+                                {marginLabel(previewStep)}
+                              </span>
+                              <span className={previewStep.projectedPoints > 0 ? styles.rewardText : styles.penaltyText}>
+                                {scoreLabel(previewStep.projectedPoints)}
+                              </span>
+                            </div>
+                          ) : (
+                            <div className={styles.stopForecastRow}>
+                              <span>Benched from this run</span>
+                              <span className={styles.penaltyText}>No route slot</span>
+                            </div>
+                          )}
+
+                          {phase === "briefing" ? (
+                            <button
+                              type="button"
+                              className={styles.benchButton}
+                              onClick={() => toggleBench(stop.id)}
+                            >
+                              {benched ? "Put back on route" : "Bench this stop"}
+                            </button>
+                          ) : null}
+                        </div>
+                      </article>
+                    </Reorder.Item>
+                  );
+                })}
+              </Reorder.Group>
+            </div>
+
+            <div className={styles.heroPanel}>
+              <p className={styles.heroEyebrow}>Route rescue game</p>
+              <h1 className={styles.heroTitle}>Save the most meals before the shutters come down.</h1>
+              <p className={styles.heroLede}>
+                Reorder the run, watch the dotted route redraw, and lock in the route that keeps more dinners alive tonight.
+              </p>
+
+              <div className={styles.heroActions}>
+                {phase === "briefing" ? (
+                  <button
+                    type="button"
+                    className={styles.primaryAction}
+                    onClick={startRound}
+                    disabled={!hasRoute}
                   >
-                    <span className={styles.collectionItemName}>{s.name}</span>
-                    <span className={styles.collectionItemPortions}>
-                      {s.portionsLabel}
-                    </span>
-                  </li>
-                ))}
-            </ul>
-            {totalPortions > 0 && (
-              <div className={styles.totalRow}>
-                <span className={styles.totalLabel}>Total portions</span>
-                <span className={styles.totalValue}>{totalPortions}</span>
+                    {nextActionLabel}
+                  </button>
+                ) : phase === "running" ? (
+                  <>
+                    <button type="button" className={styles.primaryAction} onClick={() => resolveCurrentStep(false)}>
+                      {nextActionLabel}
+                    </button>
+                    <button type="button" className={styles.secondaryAction} onClick={() => resolveCurrentStep(true)}>
+                      Skip this stop
+                    </button>
+                  </>
+                ) : (
+                  <button type="button" className={styles.primaryAction} onClick={resetRound}>
+                    {nextActionLabel}
+                  </button>
+                )}
               </div>
-            )}
+            </div>
           </section>
 
-          <hr className={styles.divider} />
+          <aside className={styles.sidePanel}>
+            <section className={styles.sideCard}>
+              <p className={styles.sideLabel}>Mission board</p>
+              <h2 className={styles.sideTitle}>Tonight&apos;s target</h2>
+              <div className={styles.targetGrid}>
+                <div>
+                  <span>Meals</span>
+                  <strong>{missionConfig.targetMeals}</strong>
+                </div>
+                <div>
+                  <span>Score</span>
+                  <strong>{missionConfig.targetScore}</strong>
+                </div>
+                <div>
+                  <span>Active stops</span>
+                  <strong>{stageCount}</strong>
+                </div>
+                <div>
+                  <span>Live phase</span>
+                  <strong>{phase}</strong>
+                </div>
+              </div>
+            </section>
 
-          <section className={styles.sideSection}>
-            <p className={styles.sideSectionLabel}>Drop-off points</p>
-            <h2 className={styles.sideSectionTitle}>Where it goes</h2>
-            <ul className={styles.collectionList}>
-              {appState.stops
-                .filter((s) => s.type === "Dropoff" && appState.activeIds.includes(s.id))
-                .map((s) => (
-                  <li
-                    key={s.id}
-                    className={`${styles.collectionItem} ${appState.doneIds.includes(s.id) ? styles.done : ""}`}
-                  >
-                    <span className={styles.collectionItemName}>{s.name}</span>
-                    <span className={styles.collectionItemPortions}>{s.window}</span>
+            <section className={styles.sideCard}>
+              <p className={styles.sideLabel}>Route radar</p>
+              <h2 className={styles.sideTitle}>What happens if you lock it now</h2>
+              <ul className={styles.radarList}>
+                {activeSteps.map((step, index) => (
+                  <li key={step.stop.id} className={styles.radarItem}>
+                    <span className={styles.radarIndex}>{String(index + 1).padStart(2, "0")}</span>
+                    <div>
+                      <strong>{step.stop.name}</strong>
+                      <p>
+                        {formatEta(step.arrivalMin)} · {marginLabel(step)} · {scoreLabel(step.projectedPoints)}
+                      </p>
+                    </div>
                   </li>
                 ))}
-            </ul>
-          </section>
+              </ul>
+            </section>
 
-          <hr className={styles.divider} />
-
-          <p className={styles.routeHint}>
-            Drag stops up or down to change the order. The route updates as you move them.
-            Tap the tick to mark a stop done, or the cross to skip it tonight.
-          </p>
-        </aside>
-      </div>
+            <section className={styles.sideCard}>
+              <p className={styles.sideLabel}>Dispatch radio</p>
+              <h2 className={styles.sideTitle}>Latest call-outs</h2>
+              <div className={styles.radioStack}>
+                <AnimatePresence initial={false}>
+                  {announcerNotes.slice(0, 5).map((note, index) => (
+                    <motion.article
+                      key={`${note}-${index}`}
+                      initial={{ opacity: 0, y: 12 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -8 }}
+                      className={styles.radioNote}
+                    >
+                      {note}
+                    </motion.article>
+                  ))}
+                </AnimatePresence>
+              </div>
+            </section>
+          </aside>
+        </div>
+      </section>
     </main>
   );
 }

@@ -11,6 +11,18 @@ export type PocCard = {
 
 export const pocCards: PocCard[] = [
   {
+    slug: "food-donation-route-sg",
+    title: "Food Donation Route",
+    category: "Food security",
+    createdAt: "2026-03-30T00:29:37+08:00",
+    summary:
+      "Reorder tonight's rescue run like a live route game so more meals get picked up before the shutters come down.",
+    impact:
+      "A score-led rescue board that helps volunteer drivers see which stop order saves the most dinners.",
+    theme: "ops",
+    tags: ["Food", "Volunteering", "Route planning", "Community"],
+  },
+  {
     slug: "trusted-helper-list-sg",
     title: "Trusted Helper List",
     category: "Caregiving",
@@ -123,18 +135,6 @@ export const pocCards: PocCard[] = [
     impact: "A calm split board that makes shared household costs visible and conflict-free.",
     theme: "editorial",
     tags: ["Housing", "Cost of living", "Budgeting", "Shared expenses"],
-  },
-  {
-    slug: "food-donation-route-sg",
-    title: "Food Donation Route",
-    category: "Food security",
-    createdAt: "2026-03-28T13:52:00+08:00",
-    summary:
-      "Plan your pickup and dropoff route for tonight's food rescue run, stop by stop.",
-    impact:
-      "A visual route planner with reorderable stops for volunteer drivers.",
-    theme: "ops",
-    tags: ["Food", "Volunteering", "Community", "Route planning"],
   },
   {
     slug: "medication-reminder-sg",

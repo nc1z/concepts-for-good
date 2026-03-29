@@ -1,80 +1,108 @@
-export type StopType = "Pickup" | "Dropoff";
+export type StopKind = "pickup" | "dropoff";
 
 export type Stop = {
   id: string;
-  order: number;
   name: string;
   area: string;
-  type: StopType;
-  portionsLabel: string;
-  window: string;
+  kind: StopKind;
+  meals: number;
+  closingInMin: number;
+  travelFromPreviousMin: number;
+  laneShift: number;
+  windowLabel: string;
+  note: string;
+};
+
+export const missionConfig = {
+  targetMeals: 118,
+  targetScore: 260,
+  maxStrikes: 3,
+  startClock: "7:40 pm",
 };
 
 export const seedStops: Stop[] = [
   {
-    id: "stop-1",
-    order: 1,
-    name: "Nasi Padang Stall",
-    area: "Geylang Bahru",
-    type: "Pickup",
-    portionsLabel: "35 portions",
-    window: "8:30 pm",
-  },
-  {
-    id: "stop-2",
-    order: 2,
-    name: "Bread & Pastry Corner",
+    id: "toa-payoh-bakery",
+    name: "Toa Payoh Bakery Lane",
     area: "Toa Payoh",
-    type: "Pickup",
-    portionsLabel: "28 portions",
-    window: "8:45 pm",
+    kind: "pickup",
+    meals: 24,
+    closingInMin: 22,
+    travelFromPreviousMin: 8,
+    laneShift: -18,
+    windowLabel: "Shutters in 22 min",
+    note: "Soft buns and loaves packed near the back roller door.",
   },
   {
-    id: "stop-3",
-    order: 3,
-    name: "Bedok Wet Market Vendor",
+    id: "bukit-merah-rice",
+    name: "Bukit Merah Rice Pots",
+    area: "Bukit Merah",
+    kind: "pickup",
+    meals: 36,
+    closingInMin: 38,
+    travelFromPreviousMin: 11,
+    laneShift: 34,
+    windowLabel: "Closing in 38 min",
+    note: "Tray count changes fast once the supper queue thins out.",
+  },
+  {
+    id: "geylang-fruit",
+    name: "Geylang Fruit Rescue",
+    area: "Geylang",
+    kind: "pickup",
+    meals: 18,
+    closingInMin: 31,
+    travelFromPreviousMin: 7,
+    laneShift: -42,
+    windowLabel: "Crates held for 31 min",
+    note: "Take the bruised fruit first and leave the sealed cartons.",
+  },
+  {
+    id: "bedok-soup",
+    name: "Bedok Soup Queue",
     area: "Bedok",
-    type: "Pickup",
-    portionsLabel: "42 portions",
-    window: "9:00 pm",
+    kind: "pickup",
+    meals: 44,
+    closingInMin: 54,
+    travelFromPreviousMin: 14,
+    laneShift: 46,
+    windowLabel: "Kitchen wraps in 54 min",
+    note: "Pick up the insulated tubs from the side alley loading spot.",
   },
   {
-    id: "stop-4",
-    order: 4,
-    name: "Willing Hearts Kitchen",
-    area: "Defu Lane",
-    type: "Dropoff",
-    portionsLabel: "All collected",
-    window: "9:45 pm",
+    id: "marine-parade-drop",
+    name: "Marine Parade Lift Lobby",
+    area: "Marine Parade",
+    kind: "dropoff",
+    meals: 0,
+    closingInMin: 70,
+    travelFromPreviousMin: 9,
+    laneShift: -10,
+    windowLabel: "Residents waiting by 8:50 pm",
+    note: "Stack the family packs nearest the community fridge first.",
   },
   {
-    id: "stop-5",
-    order: 5,
-    name: "St Andrew's Community Club",
+    id: "tampines-hub-drop",
+    name: "Tampines Pantry Hub",
     area: "Tampines",
-    type: "Dropoff",
-    portionsLabel: "Half load",
-    window: "10:00 pm",
-  },
-  {
-    id: "stop-6",
-    order: 6,
-    name: "Tampines North CC",
-    area: "Tampines",
-    type: "Dropoff",
-    portionsLabel: "Remainder",
-    window: "10:15 pm",
+    kind: "dropoff",
+    meals: 0,
+    closingInMin: 86,
+    travelFromPreviousMin: 13,
+    laneShift: 18,
+    windowLabel: "Last handoff at 9:06 pm",
+    note: "Hand the remaining warm packs to the youth pantry desk.",
   },
 ];
 
-export type AppState = {
-  stops: Stop[];
-  activeIds: string[];
-  doneIds: string[];
-};
+export const stopLookup = Object.fromEntries(seedStops.map((stop) => [stop.id, stop])) as Record<
+  string,
+  Stop
+>;
 
-export const defaultState: AppState = {
-  stops: seedStops,
-  activeIds: ["stop-1", "stop-2", "stop-3", "stop-4", "stop-5", "stop-6"],
-  doneIds: ["stop-1"],
-};
+export const defaultOrder = seedStops.map((stop) => stop.id);
+
+export const announcerSeed = [
+  "Route radar is live. Drag the stops into the best rescue order before you roll out.",
+  "Pickups earn meals and score. Miss too many closing windows and the round is over.",
+];
