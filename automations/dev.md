@@ -39,6 +39,8 @@ Never hardcode or invent a timestamp.
 **Copy quality:** Read `rules/CONTENT_RULES.md` before writing any user-facing copy. No sector jargon — if it sounds like a form or case file, rewrite it in plain English. All apostrophes in JSX must be `&apos;`. Run the content quality checklist before pushing.
 
 Follow the workflow in $dev-round exactly.
+
+Use a git worktree so you can work independently, commit and push your own branch, and ensure every pre-push check is run and passing before any push.
 ```
 
 ---
