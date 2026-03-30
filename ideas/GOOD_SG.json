@@ -240,7 +240,8 @@
       "implementation_tags": [
         "drag-reorder"
       ],
-      "implemented": true
+      "implemented": true,
+      "built": true
     },
     {
       "id": "GOOD_SG-005",
