@@ -34,6 +34,8 @@ Never hardcode or invent a timestamp.
 
 **UI design:** Run the `$frontend-design` skill before writing any UI code. Read the idea's `ui` field — `ui.direction` and `ui.interaction_model` are starting points. Install all `ui.suggested_libraries` before coding.
 
+**UI anti-patterns (hard rules from `rules/ANTIPATTERNS_CODEX.md` — read it fully):** Do not build another cards-and-pills page. Do not apply the same `border + border-radius + box-shadow + background` formula to more than 2 element types. Do not use `border-radius: 999px` on more than one element type. Max 2 levels of visible bordered container nesting. At least one element must break the grid (overlap, bleed, asymmetry). Before pushing, run the self-check in Section 6 of that file — if any answer fails, redesign before opening the PR.
+
 **Copy quality:** Read `rules/CONTENT_RULES.md` before writing any user-facing copy. No sector jargon — if it sounds like a form or case file, rewrite it in plain English. All apostrophes in JSX must be `&apos;`. Run the content quality checklist before pushing.
 
 Follow the workflow in $dev-round exactly.

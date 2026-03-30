@@ -1,380 +1,509 @@
 .page {
+  --bg: #f6ecd9;
+  --ink: #22170f;
+  --paper: #fff8ec;
+  --paper-deep: #f0dfc4;
+  --accent-red: #8c3a20;
+  --accent-green: #2f7d59;
+  --accent-amber: #d28a2d;
   min-height: 100dvh;
+  position: relative;
+  overflow: hidden;
   background:
-    radial-gradient(circle at 16% 18%, rgba(204, 90, 45, 0.16), transparent 24%),
-    radial-gradient(circle at 82% 12%, rgba(47, 125, 89, 0.16), transparent 22%),
-    linear-gradient(180deg, #fbf2e5 0%, #f3eadf 46%, #efe4d6 100%);
-  color: #4a2f21;
+    radial-gradient(circle at 14% 18%, rgba(210, 138, 45, 0.24), transparent 18%),
+    radial-gradient(circle at 82% 10%, rgba(47, 125, 89, 0.18), transparent 18%),
+    linear-gradient(180deg, #f8eed9 0%, #f3e6cd 52%, #ecdbc0 100%);
+  color: var(--ink);
   font-family: var(--font-hawker-budget-body), sans-serif;
 }
 
+.noise {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.16;
+  background-image:
+    linear-gradient(rgba(34, 23, 15, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(34, 23, 15, 0.03) 1px, transparent 1px);
+  background-size: 9px 9px, 9px 9px;
+  mix-blend-mode: multiply;
+}
+
 .shell {
-  width: min(1240px, calc(100% - 28px));
+  width: min(1220px, calc(100% - 32px));
   margin: 0 auto;
   padding: 24px 0 56px;
+  position: relative;
+  z-index: 1;
 }
 
 .backLink {
-  display: inline-flex;
-  margin-bottom: 18px;
-  color: #7b3f2f;
-  font-weight: 700;
+  display: inline-block;
+  color: rgba(34, 23, 15, 0.8);
   text-decoration: none;
-}
-
-.hero,
-.stage {
-  display: grid;
-  gap: 24px;
-}
-
-.hero {
-  grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
-  align-items: start;
-  margin-bottom: 26px;
-}
-
-.heroCopy h1,
-.summaryBoard h2,
-.boardTopline h2,
-.dishCard strong,
-.trayDish strong,
-.footerNote strong,
-.totalsRow strong,
-.mealTab strong {
-  font-family: var(--font-hawker-budget-display), serif;
-}
-
-.eyebrow,
-.summaryLabel,
-.boardLabel,
-.slotHeader p,
-.mealTab span,
-.totalsRow span,
-.summaryNote,
-.boardHint,
-.dishBadge {
-  letter-spacing: 0.12em;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
-.eyebrow,
-.summaryLabel,
-.boardLabel {
-  margin: 0 0 10px;
-  color: #8d5338;
-  font-size: 0.78rem;
-  font-weight: 700;
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.68fr);
+  gap: 24px;
+  align-items: start;
+  padding-top: 28px;
+}
+
+.heroCopy {
+  max-width: 760px;
+}
+
+.kicker,
+.sectionHead p,
+.receiptHead p,
+.slipTopline p,
+.receiptRowHead p,
+.meterLabelRow span,
+.cardStats dt,
+.receiptRowHead span {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.76rem;
+  font-weight: 800;
+}
+
+.kicker,
+.sectionHead p,
+.receiptHead p,
+.slipTopline p,
+.receiptRowHead p {
+  color: rgba(34, 23, 15, 0.58);
+}
+
+.heroCopy h1,
+.sectionHead h2,
+.receiptHead h2,
+.bigTotalRow strong,
+.dishCard strong,
+.receiptDish strong {
+  font-family: var(--font-hawker-budget-display), serif;
 }
 
 .heroCopy h1 {
-  max-width: 10ch;
-  margin: 0;
-  font-size: clamp(3.2rem, 6vw, 5.4rem);
-  line-height: 0.9;
+  max-width: 11ch;
+  margin: 8px 0 0;
+  font-size: clamp(3.2rem, 6vw, 6.2rem);
+  line-height: 0.92;
   letter-spacing: -0.05em;
 }
 
 .lede {
-  max-width: 44ch;
-  margin: 16px 0 0;
-  color: #6f5242;
-  font-size: 1.05rem;
-  line-height: 1.6;
+  max-width: 38ch;
+  margin: 20px 0 0;
+  font-size: 1.15rem;
+  line-height: 1.5;
+  color: rgba(34, 23, 15, 0.82);
 }
 
-.mealTabs {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 12px;
-  margin-top: 24px;
-}
-
-.mealTab,
-.dishCard,
-.summaryBoard,
-.menuBoard,
-.trayBoard,
-.traySlot,
-.footerNote {
-  border: 1px solid rgba(87, 58, 43, 0.12);
-  box-shadow: 0 24px 48px rgba(82, 53, 40, 0.08);
-}
-
-.mealTab {
-  padding: 14px 14px 12px;
-  border-radius: 24px;
-  background: rgba(255, 251, 245, 0.8);
+.startButton,
+.mealButton,
+.clearButton {
+  appearance: none;
+  border: 0;
+  font: inherit;
   color: inherit;
-  text-align: left;
   cursor: pointer;
 }
 
-.mealTab strong {
+.startButton {
+  margin-top: 22px;
+  padding: 14px 20px;
+  background: var(--ink);
+  color: #fff7ea;
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  clip-path: polygon(0 0, 96% 0, 100% 48%, 97% 100%, 4% 100%, 0 52%);
+  transition: transform 160ms ease, background 160ms ease;
+}
+
+.startButton:hover,
+.startButton:focus-visible {
+  transform: translateY(-2px);
+  background: var(--accent-red);
+}
+
+.mealRail {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 26px;
+}
+
+.mealButton {
+  min-height: 112px;
+  padding: 16px 14px;
+  background: rgba(255, 248, 236, 0.86);
+  box-shadow: 0 12px 24px rgba(66, 38, 22, 0.08);
+  text-align: left;
+  transform: rotate(-1deg);
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+
+.mealButton:nth-child(even) {
+  transform: rotate(1.2deg);
+}
+
+.mealButton:hover,
+.mealButton:focus-visible,
+.mealButtonActive {
+  transform: translateY(-3px) rotate(0deg);
+  box-shadow: 0 18px 30px rgba(66, 38, 22, 0.14);
+  background: color-mix(in srgb, var(--slot-accent) 10%, #fff8ec);
+}
+
+.mealButton span,
+.receiptRowHead span,
+.cardStats dt,
+.cardFooter span,
+.receiptMeta span,
+.emptyLine,
+.slipNote {
+  color: rgba(34, 23, 15, 0.68);
+}
+
+.mealButton span {
   display: block;
-  font-size: 1.35rem;
-  line-height: 1;
 }
 
-.mealTab span,
-.summaryNote,
-.boardHint,
-.slotHeader span,
-.dishCard em,
-.dishMeta span,
-.trayDish em,
-.trayMeta span,
-.footerNote span,
-.slotEmpty {
-  color: #7c6355;
-  font-size: 0.78rem;
-  font-style: normal;
+.mealButton strong {
+  display: block;
+  margin-top: 12px;
+  font-size: 1.2rem;
+  line-height: 1.1;
+  font-weight: 800;
 }
 
-.mealTabActive {
-  border-color: color-mix(in srgb, var(--slot-accent) 46%, #764734);
-  background: linear-gradient(180deg, rgba(255,255,255,0.9), color-mix(in srgb, var(--slot-accent) 12%, white));
+.budgetSlip {
+  margin-top: 34px;
+  padding: 22px 22px 24px;
+  background:
+    linear-gradient(180deg, rgba(255, 250, 241, 0.98), rgba(245, 231, 209, 0.94));
+  box-shadow: 0 22px 40px rgba(66, 38, 22, 0.14);
+  transform: translateY(26px) rotate(3deg);
+  position: relative;
 }
 
-.summaryBoard,
-.menuBoard,
-.trayBoard {
-  border-radius: 34px;
-  background: rgba(255, 252, 247, 0.78);
+.budgetSlip::before {
+  content: "";
+  position: absolute;
+  top: -12px;
+  right: 20px;
+  width: 96px;
+  height: 26px;
+  background: rgba(140, 58, 32, 0.14);
+  transform: rotate(-8deg);
 }
 
-.summaryBoard {
-  padding: 22px;
-}
-
-.summaryHeader,
-.boardTopline,
-.slotHeader,
-.totalsRow {
+.slipTopline,
+.bigTotalRow,
+.meterLabelRow,
+.receiptRowHead,
+.cardStats {
   display: flex;
-  gap: 16px;
   justify-content: space-between;
+  gap: 16px;
 }
 
-.summaryHeader,
-.boardTopline {
-  align-items: flex-start;
+.slipTopline {
+  align-items: baseline;
 }
 
-.summaryBoard h2,
-.boardTopline h2 {
-  margin: 0;
-  font-size: clamp(2rem, 3vw, 3rem);
-  line-height: 0.95;
+.slipTopline strong {
+  font-size: 1rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.bigTotalRow {
+  margin-top: 18px;
+}
+
+.bigTotalRow span {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(34, 23, 15, 0.58);
+}
+
+.bigTotalRow strong {
+  display: block;
+  margin-top: 8px;
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 0.96;
+}
+
+.meterGroup {
+  margin-top: 18px;
+}
+
+.meterTrack {
+  position: relative;
+  margin-top: 8px;
+  height: 24px;
+  background: rgba(34, 23, 15, 0.08);
+  overflow: hidden;
+}
+
+.energyTrack {
+  height: 14px;
+}
+
+.meterFill {
+  display: flex;
+  height: 100%;
+  min-width: 0;
+}
+
+.meterSegment,
+.energyFill {
+  display: block;
+  height: 100%;
+}
+
+.energyFill {
+  background: linear-gradient(90deg, #d9a645 0%, #c56f2d 44%, #8c3a20 100%);
+}
+
+.targetMark {
+  position: absolute;
+  top: -4px;
+  width: 2px;
+  height: 32px;
+  background: rgba(34, 23, 15, 0.9);
+}
+
+.slipNote {
+  margin: 18px 0 0;
+  font-size: 1rem;
+  line-height: 1.45;
+}
+
+.contentGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 0.42fr);
+  gap: 28px;
+  margin-top: 64px;
+  align-items: start;
+}
+
+.sectionHead h2,
+.receiptHead h2 {
+  max-width: 14ch;
+  margin: 8px 0 0;
+  font-size: clamp(2.1rem, 4vw, 3.6rem);
+  line-height: 0.96;
   letter-spacing: -0.04em;
 }
 
-.railWrap {
-  height: 176px;
-  margin: 18px 0;
-  padding: 12px;
-  border-radius: 24px;
-  background: linear-gradient(180deg, rgba(244, 231, 216, 0.66), rgba(255,255,255,0.76));
-}
-
-.totalsRow {
-  flex-wrap: wrap;
-}
-
-.totalsRow div {
-  min-width: 120px;
-}
-
-.totalsRow strong {
-  display: block;
-  margin-top: 4px;
-  font-size: 1.7rem;
-  line-height: 1;
-}
-
-.stage {
-  grid-template-columns: minmax(0, 1fr) minmax(0, 0.94fr);
-}
-
-.menuBoard,
-.trayBoard {
-  padding: 22px;
-}
-
-.menuGrid,
-.trayGrid,
-.footerStrip {
+.menuWall {
   display: grid;
-  gap: 14px;
-}
-
-.menuGrid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  margin-top: 18px;
+  gap: 18px;
+  margin-top: 22px;
 }
 
 .dishCard {
   padding: 18px;
-  border-radius: 28px;
   background:
-    linear-gradient(180deg, rgba(255,255,255,0.86), rgba(255,255,255,0.7)),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(255, 248, 236, 0.78)),
     var(--dish-paper);
-  color: inherit;
+  box-shadow: 0 16px 30px rgba(66, 38, 22, 0.1);
   text-align: left;
-  cursor: pointer;
+  position: relative;
+  transition: transform 180ms ease, box-shadow 180ms ease;
 }
 
-.dishBadge {
-  display: inline-flex;
-  min-height: 28px;
-  padding: 0 10px;
-  align-items: center;
-  border-radius: 999px;
-  background: rgba(255,255,255,0.68);
-  color: color-mix(in srgb, var(--dish-accent) 68%, #5a3426);
-  font-size: 0.72rem;
-  font-weight: 700;
+.dishCard:nth-child(4n + 1) {
+  margin-top: 22px;
+}
+
+.dishCard:nth-child(4n + 3) {
+  margin-top: -18px;
+}
+
+.dishCard:hover,
+.dishCard:focus-visible {
+  transform: translateY(-4px) rotate(0deg);
+  box-shadow: 0 22px 34px rgba(66, 38, 22, 0.16);
+}
+
+.cardTape {
+  display: inline-block;
+  padding: 7px 10px;
+  background: rgba(255, 246, 214, 0.9);
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .dishCard strong,
-.trayDish strong {
+.receiptDish strong {
   display: block;
-  margin-top: 12px;
-  font-size: 1.8rem;
-  line-height: 0.92;
+  margin-top: 14px;
+  font-size: 2rem;
+  line-height: 0.96;
+}
+
+.dishCard em,
+.receiptDish em {
+  display: block;
+  margin-top: 6px;
+  font-size: 0.96rem;
+  font-style: normal;
+  color: rgba(34, 23, 15, 0.62);
 }
 
 .dishCard p,
-.trayDish p {
-  margin: 12px 0 0;
-  color: #684f40;
-  line-height: 1.55;
-}
-
-.dishMeta,
-.dishNotes,
-.trayMeta {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-  margin-top: 12px;
-}
-
-.dishNotes span,
-.trayMeta span,
-.dishMeta span,
-.clearButton,
-.footerNote span {
-  display: inline-flex;
-  min-height: 30px;
-  padding: 0 11px;
-  align-items: center;
-  border-radius: 999px;
-  background: rgba(255,255,255,0.74);
-}
-
-.trayGrid {
-  margin-top: 18px;
-}
-
-.traySlot {
-  padding: 16px;
-  border-radius: 28px;
-  background: rgba(255,255,255,0.68);
-  cursor: pointer;
-}
-
-.traySlotActive {
-  border-color: color-mix(in srgb, var(--slot-accent) 48%, #744734);
-  box-shadow: 0 18px 36px rgba(82, 53, 40, 0.12);
-}
-
-.slotHeader p,
-.slotHeader span {
-  margin: 0;
-}
-
-.clearButton {
-  border: none;
-  color: #704636;
-  cursor: pointer;
-}
-
-.trayDish {
-  margin-top: 14px;
-  padding: 16px;
-  border-radius: 24px;
-  background:
-    linear-gradient(180deg, rgba(255,255,255,0.88), rgba(255,255,255,0.74)),
-    var(--dish-paper);
-}
-
-.slotEmpty {
-  margin-top: 14px;
-  padding: 16px;
-  border-radius: 24px;
-  background: linear-gradient(180deg, rgba(245, 235, 222, 0.7), rgba(255,255,255,0.62));
-  line-height: 1.55;
-}
-
-.footerStrip {
-  margin-top: 18px;
-}
-
-.footerNote {
-  padding: 16px 18px;
-  border-radius: 22px;
-  background: color-mix(in srgb, var(--slot-accent) 10%, white);
-}
-
-.footerNote strong {
-  display: block;
-  font-size: 1.4rem;
-  line-height: 1;
-}
-
-.footerNote span {
-  margin-top: 10px;
-  padding: 0;
-  min-height: 0;
-  background: transparent;
+.receiptDish p,
+.emptyLine {
+  margin: 14px 0 0;
+  font-size: 1rem;
   line-height: 1.5;
 }
 
-@media (max-width: 1120px) {
+.cardStats {
+  margin-top: 16px;
+}
+
+.cardStats div {
+  flex: 1;
+  padding-top: 12px;
+  border-top: 1px solid rgba(34, 23, 15, 0.14);
+}
+
+.cardStats dd {
+  margin: 6px 0 0;
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+.cardFooter {
+  margin-top: 16px;
+  display: grid;
+  gap: 10px;
+}
+
+.cardFooter span,
+.receiptMeta span {
+  display: inline-block;
+}
+
+.receiptRail {
+  position: sticky;
+  top: 18px;
+}
+
+.receiptHead {
+  transform: translateX(-16px);
+}
+
+.receiptBody {
+  margin-top: 18px;
+  padding: 20px 18px 26px;
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      rgba(255, 251, 243, 0.98),
+      rgba(255, 251, 243, 0.98) 27px,
+      rgba(34, 23, 15, 0.05) 27px,
+      rgba(34, 23, 15, 0.05) 28px
+    );
+  box-shadow: 0 20px 34px rgba(66, 38, 22, 0.12);
+  clip-path: polygon(0 0, 100% 0, 100% 98%, 96% 100%, 90% 98%, 84% 100%, 78% 98%, 72% 100%, 66% 98%, 60% 100%, 54% 98%, 48% 100%, 42% 98%, 36% 100%, 30% 98%, 24% 100%, 18% 98%, 12% 100%, 6% 98%, 0 100%);
+}
+
+.receiptRow + .receiptRow {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px dashed rgba(34, 23, 15, 0.22);
+}
+
+.clearButton {
+  background: transparent;
+  padding: 0;
+  font-size: 0.84rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.receiptDish {
+  margin-top: 12px;
+}
+
+.receiptMeta {
+  display: flex;
+  gap: 14px;
+  margin-top: 12px;
+  font-weight: 700;
+}
+
+@media (max-width: 1080px) {
   .hero,
-  .stage {
+  .contentGrid {
     grid-template-columns: 1fr;
+  }
+
+  .budgetSlip {
+    max-width: 520px;
+    transform: translateY(0) rotate(2deg);
+  }
+
+  .receiptRail {
+    position: static;
   }
 }
 
 @media (max-width: 760px) {
   .shell {
-    width: min(100% - 20px, 1240px);
+    width: min(100% - 20px, 1220px);
     padding-bottom: 40px;
   }
 
   .heroCopy h1 {
     max-width: none;
-    font-size: clamp(2.4rem, 12vw, 4.5rem);
+    font-size: clamp(2.6rem, 12vw, 4.4rem);
   }
 
-  .mealTabs,
-  .menuGrid {
+  .mealRail,
+  .menuWall {
     grid-template-columns: 1fr;
   }
 
-  .summaryHeader,
-  .boardTopline,
-  .slotHeader,
-  .totalsRow {
+  .bigTotalRow,
+  .meterLabelRow,
+  .cardStats,
+  .receiptRowHead {
     flex-direction: column;
   }
 
-  .summaryBoard,
-  .menuBoard,
-  .trayBoard {
+  .receiptHead {
+    transform: none;
+  }
+
+  .dishCard:nth-child(4n + 1),
+  .dishCard:nth-child(4n + 3) {
+    margin-top: 0;
+  }
+
+  .budgetSlip {
+    margin-top: 12px;
     padding: 18px;
-    border-radius: 26px;
   }
 }

@@ -1,9 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { Cormorant_Garamond, Source_Sans_3 } from "next/font/google";
+import { Alegreya_Sans, Prata } from "next/font/google";
 import { AnimatePresence, motion } from "framer-motion";
-import { Bar, BarChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { useEffect, useMemo, useState } from "react";
 
 import {
@@ -18,17 +17,21 @@ import {
 } from "./data";
 import styles from "./page.module.css";
 
-const cormorant = Cormorant_Garamond({
+const prata = Prata({
   subsets: ["latin"],
   variable: "--font-hawker-budget-display",
-  weight: ["500", "600", "700"],
+  weight: ["400"],
 });
 
-const sourceSans = Source_Sans_3({
+const alegreya = Alegreya_Sans({
   subsets: ["latin"],
   variable: "--font-hawker-budget-body",
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "700", "800"],
 });
+
+const DAILY_BUDGET = 15;
+const MAX_BAR_SPEND = 18;
+const MAX_BAR_CALORIES = 1800;
 
 function loadState() {
   if (typeof window === "undefined") return defaultState;
@@ -61,6 +64,34 @@ function nextEmptyMeal(current: Partial<Record<MealSlotId, string>>) {
   return mealSlots.find((slot) => current[slot.id] === undefined)?.id ?? null;
 }
 
+function getBudgetStatus(totalSpend: number) {
+  if (totalSpend === 0) {
+    return {
+      label: "Open day",
+      note: "Pick a first meal and the spend line starts moving.",
+    };
+  }
+
+  if (totalSpend <= DAILY_BUDGET) {
+    return {
+      label: "Within budget",
+      note: "You still have room for one fuller meal or a steadier snack.",
+    };
+  }
+
+  if (totalSpend <= MAX_BAR_SPEND) {
+    return {
+      label: "Watch dinner",
+      note: "The day still works, but the last meal needs a lighter touch.",
+    };
+  }
+
+  return {
+    label: "Over target",
+    note: "Swap one heavier pick and the total drops fast.",
+  };
+}
+
 export default function HealthyHawkerBudgetPage() {
   const [hydrated, setHydrated] = useState(false);
   const [plannerState, setPlannerState] = useState<PlannerState>(defaultState);
@@ -89,19 +120,10 @@ export default function HealthyHawkerBudgetPage() {
   const totalSpend = selectedMeals.reduce((sum, item) => sum + (item.dish?.price ?? 0), 0);
   const totalCalories = selectedMeals.reduce((sum, item) => sum + (item.dish?.calories ?? 0), 0);
   const selectedCount = selectedMeals.filter((item) => item.dish).length;
-
-  const railData = [
-    mealSlots.reduce((row, slot) => {
-      row.metric = "Spend";
-      row[slot.id] = getDish(plannerState.selectedByMeal[slot.id])?.price ?? 0;
-      return row;
-    }, {} as Record<string, number | string>),
-    mealSlots.reduce((row, slot) => {
-      row.metric = "Calories";
-      row[slot.id] = getDish(plannerState.selectedByMeal[slot.id])?.calories ?? 0;
-      return row;
-    }, {} as Record<string, number | string>),
-  ];
+  const spendStatus = getBudgetStatus(totalSpend);
+  const spendPercent = Math.min((totalSpend / MAX_BAR_SPEND) * 100, 100);
+  const caloriePercent = Math.min((totalCalories / MAX_BAR_CALORIES) * 100, 100);
+  const nextMealId = nextEmptyMeal(plannerState.selectedByMeal);
 
   function assignDish(dishId: string) {
     setPlannerState((current) => {
@@ -130,71 +152,63 @@ export default function HealthyHawkerBudgetPage() {
     });
   }
 
+  function jumpToMeal(mealId: MealSlotId) {
+    setPlannerState((current) => ({ ...current, activeMeal: mealId }));
+    window.requestAnimationFrame(() => {
+      document.getElementById("hawker-menu")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  }
+
   return (
-    <main className={`${styles.page} ${cormorant.variable} ${sourceSans.variable}`}>
+    <main className={`${styles.page} ${prata.variable} ${alegreya.variable}`}>
+      <div className={styles.noise} aria-hidden="true" />
       <div className={styles.shell}>
         <Link href="/" className={styles.backLink}>
-          ← Back to gallery
+          Back to gallery
         </Link>
 
         <section className={styles.hero}>
           <div className={styles.heroCopy}>
-            <p className={styles.eyebrow}>Healthy Hawker Budget</p>
-            <h1>Build a healthier hawker day without overspending.</h1>
+            <p className={styles.kicker}>Healthy Hawker Budget</p>
+            <h1>Plan a full hawker day that stays affordable and still feels like a proper day of meals.</h1>
             <p className={styles.lede}>
-              Choose the meal you are filling, then tap one familiar dish to place it on today&apos;s tray.
+              Pick the meal you&apos;re eating next, then drop one familiar dish onto today&apos;s running spend line.
             </p>
+            <button
+              type="button"
+              className={styles.startButton}
+              onClick={() => jumpToMeal(nextMealId ?? plannerState.activeMeal)}
+            >
+              {selectedCount === 0 ? "Pick the first meal" : `Continue with ${getMealSlot(nextMealId ?? plannerState.activeMeal).label.toLowerCase()}`}
+            </button>
 
-            <div className={styles.mealTabs} aria-label="Choose the meal you are filling">
-              {mealSlots.map((slot) => (
-                <button
-                  key={slot.id}
-                  type="button"
-                  className={`${styles.mealTab} ${slot.id === plannerState.activeMeal ? styles.mealTabActive : ""}`}
-                  onClick={() => setPlannerState((current) => ({ ...current, activeMeal: slot.id }))}
-                  style={{ ["--slot-accent" as string]: slot.accent }}
-                >
-                  <strong>{slot.label}</strong>
-                  <span>{slot.timeLabel}</span>
-                </button>
-              ))}
+            <div className={styles.mealRail} aria-label="Choose a meal to fill">
+              {mealSlots.map((slot) => {
+                const dish = getDish(plannerState.selectedByMeal[slot.id]);
+
+                return (
+                  <button
+                    key={slot.id}
+                    type="button"
+                    className={`${styles.mealButton} ${slot.id === plannerState.activeMeal ? styles.mealButtonActive : ""}`}
+                    onClick={() => jumpToMeal(slot.id)}
+                    style={{ ["--slot-accent" as string]: slot.accent }}
+                  >
+                    <span>{slot.label}</span>
+                    <strong>{dish ? dish.name : slot.timeLabel}</strong>
+                  </button>
+                );
+              })}
             </div>
           </div>
 
-          <section className={styles.summaryBoard}>
-            <div className={styles.summaryHeader}>
-              <div>
-                <p className={styles.summaryLabel}>Today&apos;s running rail</p>
-                <h2>{selectedCount === 0 ? "Start with one dish" : `${selectedCount} meal${selectedCount === 1 ? "" : "s"} now on the tray`}</h2>
-              </div>
-              <span className={styles.summaryNote}>
-                {totalSpend <= 16 ? "Comfortable for a weekday hawker spend." : "Lunch and dinner now carry most of the spend."}
-              </span>
+          <section className={styles.budgetSlip} aria-label="Today&apos;s running total">
+            <div className={styles.slipTopline}>
+              <p>Today&apos;s tray</p>
+              <strong>{spendStatus.label}</strong>
             </div>
 
-            <div className={styles.railWrap}>
-              <ResponsiveContainer width="100%" height={176}>
-                <BarChart data={railData} layout="vertical" margin={{ left: 0, right: 8, top: 12, bottom: 0 }}>
-                  <XAxis type="number" hide />
-                  <YAxis dataKey="metric" type="category" axisLine={false} tickLine={false} width={76} />
-                  <Tooltip
-                    cursor={false}
-                    contentStyle={{ borderRadius: 18, border: "1px solid rgba(75, 50, 33, 0.12)", boxShadow: "0 14px 28px rgba(75, 50, 33, 0.12)" }}
-                    formatter={(value, key, item) => {
-                      const numericValue = Number(value);
-                      const label = mealSlots.find((slot) => slot.id === key)?.label ?? String(key);
-                      const measure = item.payload.metric === "Spend" ? formatCurrency(numericValue) : formatCalories(numericValue);
-                      return [measure, label];
-                    }}
-                  />
-                  {mealSlots.map((slot) => (
-                    <Bar key={slot.id} dataKey={slot.id} stackId="totals" fill={slot.accent} radius={slot.id === "dinner" ? [16, 16, 16, 16] : [0, 0, 0, 0]} animationDuration={420} />
-                  ))}
-                </BarChart>
-              </ResponsiveContainer>
-            </div>
-
-            <div className={styles.totalsRow}>
+            <div className={styles.bigTotalRow}>
               <div>
                 <span>Spend</span>
                 <strong>{formatCurrency(totalSpend)}</strong>
@@ -203,45 +217,86 @@ export default function HealthyHawkerBudgetPage() {
                 <span>Calories</span>
                 <strong>{formatCalories(totalCalories)}</strong>
               </div>
-              <div>
-                <span>Best next move</span>
-                <strong>{activeSlot.label}</strong>
+            </div>
+
+            <div className={styles.meterGroup}>
+              <div className={styles.meterLabelRow}>
+                <span>Spend line</span>
+                <span>{formatCurrency(DAILY_BUDGET)} target</span>
+              </div>
+              <div className={styles.meterTrack}>
+                <motion.div
+                  className={styles.meterFill}
+                  animate={{ width: `${spendPercent}%` }}
+                  transition={{ duration: 0.35, ease: "easeOut" }}
+                >
+                  {selectedMeals.map(({ slot, dish }) =>
+                    dish ? (
+                      <motion.span
+                        key={slot.id}
+                        className={styles.meterSegment}
+                        layout
+                        style={{ background: slot.accent, width: `${(dish.price / Math.max(totalSpend, 1)) * 100}%` }}
+                      />
+                    ) : null,
+                  )}
+                </motion.div>
+                <span className={styles.targetMark} style={{ left: `${(DAILY_BUDGET / MAX_BAR_SPEND) * 100}%` }} />
               </div>
             </div>
+
+            <div className={styles.meterGroup}>
+              <div className={styles.meterLabelRow}>
+                <span>Energy line</span>
+                <span>{MAX_BAR_CALORIES} kcal guide</span>
+              </div>
+              <div className={`${styles.meterTrack} ${styles.energyTrack}`}>
+                <motion.div
+                  className={`${styles.meterFill} ${styles.energyFill}`}
+                  animate={{ width: `${caloriePercent}%` }}
+                  transition={{ duration: 0.35, ease: "easeOut", delay: 0.05 }}
+                />
+              </div>
+            </div>
+
+            <p className={styles.slipNote}>{spendStatus.note}</p>
           </section>
         </section>
 
-        <section className={styles.stage}>
-          <section className={styles.menuBoard}>
-            <div className={styles.boardTopline}>
-              <div>
-                <p className={styles.boardLabel}>Choose a dish for {activeSlot.label.toLowerCase()}</p>
-                <h2>{activeSlot.prompt}</h2>
-              </div>
-              <span className={styles.boardHint}>Tap once to place it on the tray.</span>
+        <section className={styles.contentGrid}>
+          <section className={styles.menuStage} id="hawker-menu">
+            <div className={styles.sectionHead}>
+              <p>{activeSlot.label}</p>
+              <h2>{activeSlot.prompt}</h2>
             </div>
 
-            <div className={styles.menuGrid}>
-              {activeDishes.map((dish) => (
+            <div className={styles.menuWall}>
+              {activeDishes.map((dish, index) => (
                 <motion.button
                   key={dish.id}
                   type="button"
                   className={styles.dishCard}
                   onClick={() => assignDish(dish.id)}
-                  initial={{ opacity: 0, y: 18, rotate: -1 }}
-                  animate={{ opacity: 1, y: 0, rotate: 0 }}
-                  transition={{ duration: 0.25, ease: "easeOut" }}
+                  initial={{ opacity: 0, y: 28, rotate: index % 2 === 0 ? -2 : 2 }}
+                  animate={{ opacity: 1, y: 0, rotate: index % 2 === 0 ? -1.5 : 1.5 }}
+                  transition={{ duration: 0.28, ease: "easeOut" }}
                   style={{ ["--dish-accent" as string]: dish.accent, ["--dish-paper" as string]: dish.paper }}
                 >
-                  <span className={styles.dishBadge}>{dish.badge}</span>
+                  <span className={styles.cardTape}>{dish.badge}</span>
                   <strong>{dish.name}</strong>
                   <em>{dish.stall}</em>
                   <p>{dish.summary}</p>
-                  <div className={styles.dishMeta}>
-                    <span>{formatCurrency(dish.price)}</span>
-                    <span>{formatCalories(dish.calories)}</span>
-                  </div>
-                  <div className={styles.dishNotes}>
+                  <dl className={styles.cardStats}>
+                    <div>
+                      <dt>Price</dt>
+                      <dd>{formatCurrency(dish.price)}</dd>
+                    </div>
+                    <div>
+                      <dt>Calories</dt>
+                      <dd>{formatCalories(dish.calories)}</dd>
+                    </div>
+                  </dl>
+                  <div className={styles.cardFooter}>
                     <span>{dish.healthNote}</span>
                     <span>{dish.swapTip}</span>
                   </div>
@@ -250,26 +305,24 @@ export default function HealthyHawkerBudgetPage() {
             </div>
           </section>
 
-          <section className={styles.trayBoard}>
-            <div className={styles.boardTopline}>
-              <div>
-                <p className={styles.boardLabel}>Today&apos;s tray</p>
-                <h2>Four meal moments, one running spend.</h2>
-              </div>
-              <span className={styles.boardHint}>Filled slots can be swapped anytime.</span>
+          <aside className={styles.receiptRail}>
+            <div className={styles.receiptHead}>
+              <p>Your day</p>
+              <h2>{selectedCount === 0 ? "Nothing picked yet" : `${selectedCount} meal${selectedCount === 1 ? "" : "s"} on the plan`}</h2>
             </div>
 
-            <div className={styles.trayGrid}>
+            <div className={styles.receiptBody}>
               <AnimatePresence initial={false}>
                 {selectedMeals.map(({ slot, dish }) => (
                   <motion.section
                     key={slot.id}
-                    className={`${styles.traySlot} ${slot.id === plannerState.activeMeal ? styles.traySlotActive : ""}`}
-                    onClick={() => setPlannerState((current) => ({ ...current, activeMeal: slot.id }))}
-                    style={{ ["--slot-accent" as string]: slot.accent }}
+                    className={styles.receiptRow}
                     layout
+                    initial={{ opacity: 0, y: 18 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -12 }}
                   >
-                    <div className={styles.slotHeader}>
+                    <div className={styles.receiptRowHead}>
                       <div>
                         <p>{slot.label}</p>
                         <span>{slot.timeLabel}</span>
@@ -278,10 +331,7 @@ export default function HealthyHawkerBudgetPage() {
                         <button
                           type="button"
                           className={styles.clearButton}
-                          onClick={(event) => {
-                            event.stopPropagation();
-                            clearMeal(slot.id);
-                          }}
+                          onClick={() => clearMeal(slot.id)}
                         >
                           Clear
                         </button>
@@ -291,47 +341,27 @@ export default function HealthyHawkerBudgetPage() {
                     {dish ? (
                       <motion.div
                         key={dish.id}
-                        className={styles.trayDish}
-                        initial={{ opacity: 0, y: 24, scale: 0.96 }}
-                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, y: -18, scale: 0.96 }}
-                        transition={{ duration: 0.28, ease: "easeOut" }}
-                        style={{ ["--dish-accent" as string]: dish.accent, ["--dish-paper" as string]: dish.paper }}
+                        className={styles.receiptDish}
+                        initial={{ opacity: 0, y: 16 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
                       >
                         <strong>{dish.name}</strong>
                         <em>{dish.stall}</em>
-                        <div className={styles.trayMeta}>
+                        <div className={styles.receiptMeta}>
                           <span>{formatCurrency(dish.price)}</span>
                           <span>{formatCalories(dish.calories)}</span>
                         </div>
                         <p>{dish.healthNote}</p>
                       </motion.div>
                     ) : (
-                      <div className={styles.slotEmpty}>
-                        Add one dish here so your {slot.label.toLowerCase()} has a clear plan.
-                      </div>
+                      <p className={styles.emptyLine}>Pick one dish for {slot.label.toLowerCase()} to keep the day balanced.</p>
                     )}
                   </motion.section>
                 ))}
               </AnimatePresence>
             </div>
-
-            <div className={styles.footerStrip}>
-              {selectedMeals.some((item) => item.dish) ? (
-                selectedMeals.filter((item) => item.dish).map(({ slot, dish }) => (
-                  <div key={slot.id} className={styles.footerNote} style={{ ["--slot-accent" as string]: slot.accent }}>
-                    <strong>{slot.label}</strong>
-                    <span>{dish?.swapTip}</span>
-                  </div>
-                ))
-              ) : (
-                <div className={styles.footerNote} style={{ ["--slot-accent" as string]: activeSlot.accent }}>
-                  <strong>Start here</strong>
-                  <span>Pick one dish for {activeSlot.label.toLowerCase()} and the running rail will begin to split by meal.</span>
-                </div>
-              )}
-            </div>
-          </section>
+          </aside>
         </section>
       </div>
     </main>
