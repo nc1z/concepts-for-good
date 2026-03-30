@@ -1466,7 +1466,8 @@
         "public-api",
         "trend-view"
       ],
-      "implemented": false
+      "implemented": false,
+      "built": true
     },
     {
       "id": "GOOD_SG-086",
