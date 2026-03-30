@@ -165,14 +165,14 @@ export const pocCards: PocCard[] = [
     slug: "food-donation-route-sg",
     title: "Food Donation Route",
     category: "Food security",
-    createdAt: "2026-03-28T13:52:00+08:00",
+    createdAt: "2026-03-30T14:36:15+08:00",
     summary:
       "Plan your pickup and dropoff route for tonight's food rescue run, stop by stop.",
     impact:
       "A visual route planner with reorderable stops for volunteer drivers.",
     theme: "ops",
     tags: ["Food", "Volunteering", "Community", "Route planning"],
-    model: "openai/gpt-5.4",
+    model: "claude-sonnet-4-6",
   },
   {
     slug: "medication-reminder-sg",

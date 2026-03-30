@@ -1,17 +1,25 @@
 "use client";
 
 import Link from "next/link";
-import { Space_Grotesk } from "next/font/google";
+import { Fraunces, Syne_Mono } from "next/font/google";
 import { motion, Reorder, useDragControls, useMotionValue } from "framer-motion";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import { defaultState, type AppState, type Stop } from "./data";
 import styles from "./page.module.css";
 
-const spaceGrotesk = Space_Grotesk({
+const fraunces = Fraunces({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-space",
+  weight: ["300", "400", "700", "900"],
+  variable: "--font-fraunces",
+  display: "swap",
+});
+
+const syneMono = Syne_Mono({
+  subsets: ["latin"],
+  weight: ["400"],
+  variable: "--font-syne-mono",
+  display: "swap",
 });
 
 const STORAGE_KEY = "cfg-food-donation-route-sg-v1";
@@ -381,8 +389,7 @@ export default function FoodDonationRouteSGPage() {
 
   return (
     <main
-      className={`${styles.page} ${spaceGrotesk.variable}`}
-      style={{ fontFamily: "var(--font-space), var(--font-sans), sans-serif" }}
+      className={`${styles.page} ${fraunces.variable} ${syneMono.variable}`}
     >
       {/* Nav */}
       <header className={styles.topbar}>
