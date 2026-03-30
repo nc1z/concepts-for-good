@@ -110,7 +110,7 @@ Use this value in `lib/pocs.ts`. Never hardcode.
 
 **Build:**
 - Create POC in `app/pocs/<slug>/` (Next.js page, CSS module, data file).
-- Register card in `lib/pocs.ts` (`pocCards` array).
+- Register card in `lib/pocs.ts` (`pocCards` array). Include the `model` field set to your model name (e.g. `"GPT 5.4"`, `"Sonnet 4.6"`, `"Opus 4.6"`).
 - Implement `ui.distinctive_feature` — it makes the concept feel real.
 
 **Copy rules (from `rules/CONTENT_RULES.md`):**

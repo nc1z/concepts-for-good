@@ -431,19 +431,22 @@ function HomeContent() {
 
               <div className="gallery-item__footer">
                 <p>{card.impact}</p>
-                <Link
-                  href={`/pocs/${card.slug}`}
-                  className="gallery-item__link"
-                  aria-label={`Open ${card.title} demo`}
-                >
-                  <span>View</span>
-                  <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path
-                      fill="currentColor"
-                      d="M7.5 12.75h7.19l-2.97 2.97 1.06 1.06 4.78-4.78-4.78-4.78-1.06 1.06 2.97 2.97H7.5v1.5Z"
-                    />
-                  </svg>
-                </Link>
+                <div className="gallery-item__footer-row">
+                  <Link
+                    href={`/pocs/${card.slug}`}
+                    className="gallery-item__link"
+                    aria-label={`Open ${card.title} demo`}
+                  >
+                    <span>View</span>
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <path
+                        fill="currentColor"
+                        d="M7.5 12.75h7.19l-2.97 2.97 1.06 1.06 4.78-4.78-4.78-4.78-1.06 1.06 2.97 2.97H7.5v1.5Z"
+                      />
+                    </svg>
+                  </Link>
+                  <span className="gallery-item__model">{card.model}</span>
+                </div>
               </div>
             </article>
           ))}

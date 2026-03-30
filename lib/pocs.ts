@@ -7,6 +7,7 @@ export type PocCard = {
   impact: string;
   theme: "ops" | "civic" | "editorial";
   tags: string[];
+  model: string;
 };
 
 export const pocCards: PocCard[] = [
@@ -21,6 +22,7 @@ export const pocCards: PocCard[] = [
       "A calm intake conversation that turns scattered legal worries into a clearer first step and paper list.",
     theme: "editorial",
     tags: ["Legal aid", "Support", "Documents", "Singapore"],
+    model: "GPT 5.4",
   },
   {
     slug: "trusted-helper-list-sg",
@@ -33,6 +35,7 @@ export const pocCards: PocCard[] = [
       "A caregiver phone shell that groups trusted helpers by role so the next call or handoff never turns into a search.",
     theme: "civic",
     tags: ["Caregiving", "Family", "Contacts", "Handoffs"],
+    model: "GPT 5.4",
   },
   {
     slug: "healthy-hawker-budget-sg",
@@ -45,6 +48,7 @@ export const pocCards: PocCard[] = [
       "An editorial hawker spread that turns everyday dish choices into a visible daily spend plan.",
     theme: "editorial",
     tags: ["Wellness", "Food", "Budget", "Hawker"],
+    model: "GPT 5.4",
   },
   {
     slug: "low-cost-exercise-sg",
@@ -57,6 +61,7 @@ export const pocCards: PocCard[] = [
       "A playful movement deck for residents who want a no-cost routine without joining a class.",
     theme: "civic",
     tags: ["Wellness", "Exercise", "Budget", "Daily routine"],
+    model: "GPT 5.4",
   },
   {
     slug: "rest-day-planner-sg",
@@ -69,6 +74,7 @@ export const pocCards: PocCard[] = [
       "A playful Sunday board that turns useful low-cost stops into a route you can actually follow.",
     theme: "civic",
     tags: ["Inclusion", "Community", "Budget", "Wellbeing"],
+    model: "GPT 5.4",
   },
   {
     slug: "community-cooking-circle-sg",
@@ -81,6 +87,7 @@ export const pocCards: PocCard[] = [
       "A kitchen-flow board that shows where a small cooking session still needs hands before neighbours sit down together.",
     theme: "civic",
     tags: ["Community", "Food", "Seniors", "Neighbourhood"],
+    model: "GPT 5.4",
   },
   {
     slug: "rain-window-planner-sg",
@@ -93,6 +100,7 @@ export const pocCards: PocCard[] = [
       "An ambient forecast board that tells caregivers and wheelchair users whether to leave now or wait for a clearer window.",
     theme: "editorial",
     tags: ["Mobility", "Weather", "Caregiving", "data.gov.sg"],
+    model: "Sonnet 4.6",
   },
   {
     slug: "traffic-camera-check-sg",
@@ -103,6 +111,7 @@ export const pocCards: PocCard[] = [
     impact: "A route storyboard of live traffic cameras that lets volunteer drivers assess road conditions before leaving.",
     theme: "ops",
     tags: ["Mobility", "Transport", "Volunteering", "data.gov.sg"],
+    model: "Sonnet 4.6",
   },
   {
     slug: "carpark-chance-sg",
@@ -115,6 +124,7 @@ export const pocCards: PocCard[] = [
       "A pulsing availability board for caregivers and drivers who need a parking plan before they leave.",
     theme: "ops",
     tags: ["Mobility", "Caregiving", "Parking", "Transport"],
+    model: "GPT 5.4",
   },
   {
     slug: "block-potluck-planner-sg",
@@ -125,6 +135,7 @@ export const pocCards: PocCard[] = [
     impact: "A festive table planner that makes communal gatherings easy to coordinate without duplicates.",
     theme: "civic",
     tags: ["Community", "Food", "Social", "Neighbourhood"],
+    model: "Sonnet 4.6",
   },
   {
     slug: "rent-split-planner-sg",
@@ -135,6 +146,7 @@ export const pocCards: PocCard[] = [
     impact: "A calm split board that makes shared household costs visible and conflict-free.",
     theme: "editorial",
     tags: ["Housing", "Cost of living", "Budgeting", "Shared expenses"],
+    model: "Sonnet 4.6",
   },
   {
     slug: "food-donation-route-sg",
@@ -147,6 +159,7 @@ export const pocCards: PocCard[] = [
       "A visual route planner with reorderable stops for volunteer drivers.",
     theme: "ops",
     tags: ["Food", "Volunteering", "Community", "Route planning"],
+    model: "GPT 5.4",
   },
   {
     slug: "medication-reminder-sg",
@@ -159,6 +172,7 @@ export const pocCards: PocCard[] = [
       "A clock-face medication guide for seniors and caregivers to follow through the day.",
     theme: "editorial",
     tags: ["Caregiving", "Health", "Seniors", "Daily routine"],
+    model: "Sonnet 4.6",
   },
   {
     slug: "senior-check-in-sg",
@@ -171,6 +185,7 @@ export const pocCards: PocCard[] = [
       "A warm daily check-in flow for volunteers and families supporting seniors living alone.",
     theme: "civic",
     tags: ["Caregiving", "Community", "Volunteering", "Seniors"],
+    model: "Sonnet 4.6",
   },
   {
     slug: "digital-help-for-seniors",
@@ -183,6 +198,7 @@ export const pocCards: PocCard[] = [
       "A large-step phone guide for older adults doing everyday digital tasks.",
     theme: "civic",
     tags: ["Seniors", "Digital inclusion", "Community", "Phone help"],
+    model: "GPT 5.4",
   },
   {
     slug: "elder-visit-planner-sg",
@@ -195,6 +211,7 @@ export const pocCards: PocCard[] = [
       "A weekly calendar planner that makes open visit days easy to spot and fill.",
     theme: "civic",
     tags: ["Caregiving", "Volunteering", "Community", "Seniors"],
+    model: "GPT 5.4",
   },
   {
     slug: "accessible-mall-route-sg",
@@ -207,6 +224,7 @@ export const pocCards: PocCard[] = [
       "An animated floor-plan route guide for wheelchair users, families, and caregivers.",
     theme: "editorial",
     tags: ["Accessibility", "Mobility", "Caregiving", "Wayfinding"],
+    model: "GPT 5.4",
   },
   {
     slug: "mrt-lift-note-sg",
@@ -219,6 +237,7 @@ export const pocCards: PocCard[] = [
       "A schematic rail map that helps mobility-impaired commuters spot lift issues at a glance.",
     theme: "ops",
     tags: ["Accessibility", "Mobility", "Transport", "Caregiving"],
+    model: "GPT 5.4",
   },
   {
     slug: "quiet-places-sg",
@@ -231,6 +250,7 @@ export const pocCards: PocCard[] = [
       "An ambient quietness explorer for neurodivergent residents and caregivers planning an outing.",
     theme: "editorial",
     tags: ["Accessibility", "Mental health", "Caregiving", "Sensory-friendly"],
+    model: "GPT 5.4",
   },
   {
     slug: "accessible-toilet-notes-sg",
@@ -243,6 +263,7 @@ export const pocCards: PocCard[] = [
       "A map-led finder for caregivers, seniors, and disabled users who need the right facilities fast.",
     theme: "civic",
     tags: ["Accessibility", "Caregiving", "Mobility", "Facilities"],
+    model: "GPT 5.4",
   },
   {
     slug: "volunteer-match-sg",
@@ -255,6 +276,7 @@ export const pocCards: PocCard[] = [
       "A split-screen matcher that connects busy adults and students to roles they can actually do.",
     theme: "editorial",
     tags: ["Volunteering", "Community", "Skills", "Civic"],
+    model: "GPT 5.4",
   },
   {
     slug: "skills-for-good-sg",
@@ -267,6 +289,7 @@ export const pocCards: PocCard[] = [
       "A tag-cloud skills marketplace for nonprofits and volunteers looking for the right help this week.",
     theme: "civic",
     tags: ["Volunteering", "Community", "Skills", "Nonprofits"],
+    model: "GPT 5.4",
   },
   {
     slug: "volunteer-hours-sg",
@@ -279,6 +302,7 @@ export const pocCards: PocCard[] = [
       "A live-updating hours log for volunteers and students who want a clear record of their time.",
     theme: "ops",
     tags: ["Volunteering", "Community", "Students", "Tracking"],
+    model: "GPT 5.4",
   },
 ];
 
