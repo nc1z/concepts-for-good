@@ -12,6 +12,19 @@ export type PocCard = {
 
 export const pocCards: PocCard[] = [
   {
+    slug: "homework-quiet-timer-sg",
+    title: "Homework Quiet Timer",
+    category: "Education equity",
+    createdAt: "2026-03-30T13:57:44+08:00",
+    summary:
+      "Create short, calm homework sessions for children in noisy homes.",
+    impact:
+      "A breathing wave companion that helps children focus in short bursts with gentle visual cues instead of pressure.",
+    theme: "civic",
+    tags: ["School", "Children", "Focus support", "Singapore"],
+    model: "nvidia/moonshotai/kimi-k2.5",
+  },
+  {
     slug: "legal-aid-prep-sg",
     title: "Legal Aid Prep",
     category: "Support",
