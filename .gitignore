@@ -5,6 +5,7 @@ coverage
 dist
 .npm-cache
 .DS_Store
+.claude/
 *.tsbuildinfo
 .env
 .env.*
