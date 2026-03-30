@@ -223,7 +223,7 @@ export default function LegalAidPrepPage() {
               ) : (
                 <>
                   <p className={styles.responsePrompt}>
-                    You're ready to make the first call — you know what to expect.
+                    You&apos;re ready to make the first call — you know what to expect.
                   </p>
                   <div className={styles.options}>
                     <button type="button" className={styles.copyButton} onClick={handleCopy}>
@@ -246,7 +246,7 @@ export default function LegalAidPrepPage() {
                 What to try first
               </h2>
               <p className={styles.folderSummary}>
-                This updates as you answer — so you'll know who to call and what to bring before you leave home.
+                This updates as you answer — so you&apos;ll know who to call and what to bring before you leave home.
               </p>
             </header>
 
@@ -311,7 +311,7 @@ export default function LegalAidPrepPage() {
                       )
                     ) : (
                       <div className={styles.pendingCard}>
-                        Tell me how much paperwork you already have and I'll narrow this down for you.
+                        Tell me how much paperwork you already have and I&apos;ll narrow this down for you.
                       </div>
                     )}
                   </section>
