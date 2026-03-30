@@ -2,7 +2,7 @@
   "dataset": "GOOD_SG",
   "region": "singapore",
   "lens": "public good and social impact in Singapore",
-  "idea_count": 163,
+  "idea_count": 166,
   "design_contract": {
     "mandate": "Every idea must be built with a deliberately chosen visual direction and interaction model, and copy written for the target user \u2014 not for developers. Reading the ui field and rules/CONTENT_RULES.md is mandatory before writing a single line of code.",
     "design_diversity_mandate": {
@@ -11922,6 +11922,238 @@
         "distinctive_feature": "the comfort ring physically pulls distant clusters closer or farther away so the page feels like tuning social intensity rather than filtering a directory",
         "avoid": "event marketplace grid; dating-app swipe pattern; giant community forum; generic map full of pins",
         "experience_goal": "meeting people feels gentler because the user starts from the social energy they can handle today"
+      },
+      "implementation_tags": [],
+      "implemented": false
+    },
+    {
+      "id": "GOOD_SG-170",
+      "title": "Rental Listing Check",
+      "platform": "website",
+      "folder": "web",
+      "build_stack": "Next.js website",
+      "category": "digital safety",
+      "tags": [
+        "Rental housing",
+        "Scam prevention",
+        "Room seekers",
+        "Deposit safety"
+      ],
+      "summary": "Check a room listing, agent message, or deposit request for warning signs before you pay or travel for a viewing.",
+      "target_user": "room renters, fresh graduates, and migrant tenants comparing listings in Singapore",
+      "why_fast": "The interesting challenge is a tear-sheet evidence board where listing photos, chat snippets, and deposit asks are pinned side by side so the user can stamp warning signs onto them and see risk build visually.",
+      "stage": "poc",
+      "poc": [
+        "listing review board",
+        "warning stamp set",
+        "safe-next-step card"
+      ],
+      "prototype_goal": "Simulate the core value of Rental Listing Check in-browser with believable local data and zero backend dependencies.",
+      "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
+      "storage_strategy": {
+        "primary": "localStorage",
+        "secondary": "IndexedDB only if the POC needs larger offline caches, many records, or image/file blobs",
+        "server_database": "not allowed for the initial POC"
+      },
+      "simulation_mode": "Use seeded demo records, optimistic UI updates, and fake notifications or status changes so the end-to-end workflow is testable by one person.",
+      "personas": [
+        "resident",
+        "worker"
+      ],
+      "core_entities": [
+        "listings",
+        "chat_snippets",
+        "risk_flags",
+        "next_steps"
+      ],
+      "primary_user_flow": [
+        "listing_pick",
+        "evidence_pinboard",
+        "risk_stamp",
+        "next_step_view"
+      ],
+      "demo_seed_data": [
+        "3 to 8 sample listings records tailored to Singapore context",
+        "2 to 3 personas with prefilled preferences, saved items, or history",
+        "at least 1 edge case record to demonstrate empty states, stale data, or exceptions"
+      ],
+      "success_signal": "A new user can switch into a persona, complete the main workflow in under 2 minutes, and understand the concept without any manual setup.",
+      "non_goals": [
+        "real identity verification or account systems",
+        "production-grade multi-user synchronization",
+        "complex backend integrations before concept validation"
+      ],
+      "build_notes": [
+        "Prefer deterministic mock data over external APIs.",
+        "Keep state resettable so demos can be rerun quickly.",
+        "Treat notifications, queues, and matching as simulations unless a real API is trivial."
+      ],
+      "ui": {
+        "direction": "classifieds tear-sheet board",
+        "interaction_model": "warning-stamp audit — the screen starts as a printed-room-listing board with photos, rental terms, and chat bubbles torn into strips; the user drags scam-warning stamps like 'deposit before viewing' or 'copied photos' onto each strip, and the board folds into a clear hold/pay/walk-away recommendation",
+        "suggested_libraries": [
+          "@dnd-kit/core",
+          "rough-notation",
+          "framer-motion"
+        ],
+        "distinctive_feature": "as red flags stack up, the listing sheet physically buckles and reveals a bold deposit-risk edge so the decision feels tangible before money is sent",
+        "avoid": "property portal clone; endless list of pins; law-enforcement warning page; generic chat-app mockup",
+        "experience_goal": "a renter feels calmer because suspicious details become visible before pressure tactics take over"
+      },
+      "implementation_tags": [],
+      "implemented": false
+    },
+    {
+      "id": "GOOD_SG-171",
+      "title": "Referral Route Preview",
+      "platform": "website",
+      "folder": "web",
+      "build_stack": "Next.js website",
+      "category": "health systems",
+      "tags": [
+        "Referral care",
+        "Specialist visits",
+        "Care planning",
+        "Hospital navigation"
+      ],
+      "summary": "See the usual steps after a clinic referral so your family can plan time off, transport, and what to bring before the first specialist visit.",
+      "target_user": "caregivers and older patients in Singapore waiting for specialist or hospital referrals",
+      "why_fast": "The interesting challenge is a transfer-board journey where consults, scans, blood tests, and pharmacy stops snap into a single route so the user can understand the likely sequence at a glance.",
+      "stage": "poc",
+      "poc": [
+        "referral type selection",
+        "visit route preview",
+        "prep checklist handoff"
+      ],
+      "prototype_goal": "Simulate the core value of Referral Route Preview in-browser with believable local data and zero backend dependencies.",
+      "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
+      "storage_strategy": {
+        "primary": "localStorage",
+        "secondary": "IndexedDB only if the POC needs larger offline caches, many records, or image/file blobs",
+        "server_database": "not allowed for the initial POC"
+      },
+      "simulation_mode": "Use seeded demo records, optimistic UI updates, and fake notifications or status changes so the end-to-end workflow is testable by one person.",
+      "personas": [
+        "senior",
+        "caregiver"
+      ],
+      "core_entities": [
+        "referrals",
+        "appointments",
+        "prep_items",
+        "travel_buffers"
+      ],
+      "primary_user_flow": [
+        "referral_pick",
+        "route_preview",
+        "prep_expand",
+        "save_plan"
+      ],
+      "demo_seed_data": [
+        "3 to 8 sample referrals records tailored to Singapore context",
+        "2 to 3 personas with prefilled preferences, saved items, or history",
+        "at least 1 edge case record to demonstrate empty states, stale data, or exceptions"
+      ],
+      "success_signal": "A new user can switch into a persona, complete the main workflow in under 2 minutes, and understand the concept without any manual setup.",
+      "non_goals": [
+        "real identity verification or account systems",
+        "production-grade multi-user synchronization",
+        "complex backend integrations before concept validation"
+      ],
+      "build_notes": [
+        "Prefer deterministic mock data over external APIs.",
+        "Keep state resettable so demos can be rerun quickly.",
+        "Treat notifications, queues, and matching as simulations unless a real API is trivial."
+      ],
+      "ui": {
+        "direction": "hospital transfer board",
+        "interaction_model": "care-route board — referral steps appear as station tiles on a horizontal transfer line; tapping a tile opens the likely prep items, waiting gaps, and who should come along, while alternate pathways such as scan-before-consult or consult-before-test can be compared side by side",
+        "suggested_libraries": [
+          "@xyflow/react",
+          "visx",
+          "framer-motion"
+        ],
+        "distinctive_feature": "each added step drops a colored transfer strip under the route showing paperwork, fasting, or escort needs, so a caregiver sees the real day shape rather than isolated appointments",
+        "avoid": "hospital portal clone; plain timeline with dots; empty explainer article; insurance dashboard",
+        "experience_goal": "the next hospital visit feels less intimidating because the family can picture the flow before the letter arrives"
+      },
+      "implementation_tags": [],
+      "implemented": false
+    },
+    {
+      "id": "GOOD_SG-172",
+      "title": "Corridor Clear Day",
+      "platform": "website",
+      "folder": "mobile",
+      "build_stack": "Next.js website",
+      "category": "safety",
+      "tags": [
+        "HDB corridors",
+        "Fire safety",
+        "Shared spaces",
+        "Household prep"
+      ],
+      "summary": "Walk through common HDB corridor hazards and see what should move before festive visits, deliveries, or an emergency.",
+      "target_user": "HDB residents, seniors, and caregivers responsible for keeping shared corridors safe",
+      "why_fast": "The interesting challenge is a scrollable corridor strip where shoe racks, trolleys, bikes, and potted plants can be shifted in or out to show how quickly an escape path narrows.",
+      "stage": "poc",
+      "poc": [
+        "corridor setup",
+        "hazard move test",
+        "clear-path reminder"
+      ],
+      "prototype_goal": "Simulate the core value of Corridor Clear Day in-browser with believable local data and zero backend dependencies.",
+      "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
+      "storage_strategy": {
+        "primary": "localStorage",
+        "secondary": "IndexedDB only if the POC needs larger offline caches, many records, or image/file blobs",
+        "server_database": "not allowed for the initial POC"
+      },
+      "simulation_mode": "Use seeded demo records, optimistic UI updates, and fake notifications or status changes so the end-to-end workflow is testable by one person.",
+      "personas": [
+        "resident",
+        "senior",
+        "caregiver"
+      ],
+      "core_entities": [
+        "corridor_segments",
+        "objects",
+        "clearance_rules",
+        "household_modes"
+      ],
+      "primary_user_flow": [
+        "flat_type_pick",
+        "corridor_walkthrough",
+        "hazard_shift",
+        "clear_path_save"
+      ],
+      "demo_seed_data": [
+        "3 to 8 sample corridor_segments records tailored to Singapore context",
+        "2 to 3 personas with prefilled preferences, saved items, or history",
+        "at least 1 edge case record to demonstrate empty states, stale data, or exceptions"
+      ],
+      "success_signal": "A new user can switch into a persona, complete the main workflow in under 2 minutes, and understand the concept without any manual setup.",
+      "non_goals": [
+        "real identity verification or account systems",
+        "production-grade multi-user synchronization",
+        "complex backend integrations before concept validation"
+      ],
+      "build_notes": [
+        "Prefer deterministic mock data over external APIs.",
+        "Keep state resettable so demos can be rerun quickly.",
+        "Treat notifications, queues, and matching as simulations unless a real API is trivial."
+      ],
+      "ui": {
+        "direction": "HDB corridor inspection strip",
+        "interaction_model": "clearance walkthrough — a side-on corridor panorama scrolls like a film strip; the user drags common items such as shoe racks, bicycles, and festive plants into or out of the shared path, and the visible escape band widens or shrinks in real time",
+        "suggested_libraries": [
+          "@dnd-kit/core",
+          "react-zoom-pan-pinch",
+          "framer-motion"
+        ],
+        "distinctive_feature": "a bright safety band runs the length of the corridor and kinks around every obstacle, making a blocked route feel immediately embarrassing and fixable",
+        "avoid": "fire-safety poster page; checklist-only compliance form; 3D game-like flat tour; generic smart-home dashboard",
+        "experience_goal": "the household feels nudged to clear small hazards now instead of only thinking about escape after a scare"
       },
       "implementation_tags": [],
       "implemented": false
