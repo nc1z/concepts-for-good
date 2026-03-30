@@ -58,7 +58,7 @@ If none unaddressed, continue.
 
 ### 3. Find the next idea
 
-Read `ideas/GOOD_SG.json`. Pick the **first** entry where `"built"` is absent/not `true` AND the ID is not claimed. Note `id`, `title`, `folder`, `category`, and the full `ui` field. If none exists, report "Nothing to do." and stop.
+Read `ideas/GOOD_SG.json`. Pick the **first** entry where **both** `"built"` and `"implemented"` are absent/not `true` AND the ID is not claimed. An idea with either flag set to `true` is already built — skip it. Note `id`, `title`, `folder`, `category`, and the full `ui` field. If none exists, report "Nothing to do." and stop.
 
 ### 4. Sync and branch
 
