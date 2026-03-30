@@ -104,11 +104,11 @@ export default function LegalAidPrepPage() {
     {
       id: "intro",
       speaker: "assistant",
-      label: "Case intake",
-      title: "See which legal help route may fit before you make the call.",
+      label: "Getting started",
+      title: "Find out where to get legal help before you make the call.",
       body:
-        "Answer a few plain questions and keep your papers in one place before you speak to a clinic or agency.",
-      helper: "Start with the issue you want to sort out first.",
+        "Answer a few simple questions and get your documents in one place before you speak to a clinic or agency.",
+      helper: "Start with the issue you need help with.",
     },
     ...answeredSteps.flatMap((step) => [
       {
@@ -223,7 +223,7 @@ export default function LegalAidPrepPage() {
               ) : (
                 <>
                   <p className={styles.responsePrompt}>
-                    You have enough to make the first call with a clearer picture.
+                    You're ready to make the first call — you know what to expect.
                   </p>
                   <div className={styles.options}>
                     <button type="button" className={styles.copyButton} onClick={handleCopy}>
@@ -246,14 +246,13 @@ export default function LegalAidPrepPage() {
                 What to try first
               </h2>
               <p className={styles.folderSummary}>
-                The shortlist updates as you answer, so you can see where to call and what papers to
-                gather before you leave home.
+                This updates as you answer — so you'll know who to call and what to bring before you leave home.
               </p>
             </header>
 
             {answeredSteps.length === 0 ? (
               <div className={styles.pendingCard}>
-                Answer the first question and your best first call route will settle here with the papers to bring.
+                Answer the first question and your best option will appear here, along with what to bring.
               </div>
             ) : (
               <>
@@ -307,13 +306,12 @@ export default function LegalAidPrepPage() {
                         </ul>
                       ) : (
                         <p className={styles.sectionText}>
-                          Your first set looks ready. Keep the letters together so you can refer to dates and
-                          names quickly.
+                          You look ready. Keep everything together so you can refer back to dates and names quickly.
                         </p>
                       )
                     ) : (
                       <div className={styles.pendingCard}>
-                        Tell me how much paperwork you already have, and I will narrow this list for you.
+                        Tell me how much paperwork you already have and I'll narrow this down for you.
                       </div>
                     )}
                   </section>
@@ -327,18 +325,17 @@ export default function LegalAidPrepPage() {
                     </div>
                     <ul className={styles.timelineList}>
                       <li className={styles.timelineItem}>
-                        Keep your issue in one short timeline: what happened, when it started, and what deadline
-                        is coming.
+                        Write down what happened, when it started, and any upcoming deadlines — this helps you explain your case clearly.
                       </li>
                       <li className={styles.timelineItem}>
                         {answers.papers
                           ? paperGuides[answers.papers]
-                          : "I will help you sort the papers after the next answer."}
+                          : "Answer the next question and I'll help you sort out the documents."}
                       </li>
                       <li className={styles.timelineItem}>
                         {topRoute
                           ? topRoute.nextStep
-                          : "Answer the first question so the shortlist can settle on the strongest route."}
+                          : "Answer the first question to see your best option."}
                       </li>
                     </ul>
                   </section>

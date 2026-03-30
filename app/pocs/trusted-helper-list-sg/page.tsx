@@ -53,13 +53,13 @@ const roleMeta: Record<
     prompt: "Who can handle the next medicine check?",
     accent: "#ff8a5b",
     summary: "7pm tablets and refill notes",
-    urgency: "Next handoff in 28 min",
+    urgency: "Next change in 28 min",
   },
   transport: {
     label: "Transport",
     prompt: "Who is closest to the clinic run?",
     accent: "#4d88ff",
-    summary: "Pickup and escort coverage",
+    summary: "Pickup and company to the clinic",
     urgency: "Hospital trip tomorrow 8:40am",
   },
   meals: {
@@ -71,7 +71,7 @@ const roleMeta: Record<
   },
   home: {
     label: "Home",
-    prompt: "Who can step in for the flat today?",
+    prompt: "Who can help at home today?",
     accent: "#9a6cff",
     summary: "Laundry, keys, and lock-up",
     urgency: "Laundry collection before 5pm",
@@ -148,13 +148,13 @@ const seedHelpers: Helper[] = [
     id: "jon",
     name: "Jon",
     role: "transport",
-    relationship: "Grab fallback",
+    relationship: "Backup driver",
     phone: "+65 8891 2240",
     shift: "On-call backup",
     nextTask: "Stand by if Adrian gets delayed by school traffic.",
     note: "Needs the clinic level and patient wheel-chair note in the message.",
     initials: "JN",
-    availability: "Reply before 15 minutes",
+    availability: "Usually replies within 15 min",
     accent: "#4d88ff",
   },
 ];
@@ -237,7 +237,7 @@ export default function TrustedHelperListPage() {
     const role = roleMeta[selectedHelper.role];
     const nextNote: HandoffNote = {
       id: `${selectedHelper.id}-${appState.notes.length + 1}`,
-      title: `${role.label} handoff shared`,
+      title: `${role.label} note sent`,
       detail: `Sent ${selectedHelper.name} the latest note: ${selectedHelper.nextTask}`,
       time: "Just now",
     };
@@ -261,10 +261,10 @@ export default function TrustedHelperListPage() {
       </Link>
 
       <section className={styles.hero}>
-        <p className={styles.eyebrow}>Care shifts</p>
-        <h1 className={styles.title}>Find the right helper before the next handoff.</h1>
+        <p className={styles.eyebrow}>Family caregiving</p>
+        <h1 className={styles.title}>Find the right helper before someone needs to step in.</h1>
         <p className={styles.lede}>
-          Keep family support contacts, routines, and notes ready for the moment someone needs to step in.
+          Keep your helpers, their routines, and key notes in one place — ready whenever someone needs to take over.
         </p>
       </section>
 
@@ -419,7 +419,7 @@ export default function TrustedHelperListPage() {
                       Message
                     </button>
                     <button type="button" className={styles.actionButtonPrimary} onClick={() => runAction("handoff")}>
-                      Share handoff
+                      Send note
                     </button>
                   </div>
 
@@ -433,7 +433,7 @@ export default function TrustedHelperListPage() {
                       >
                         {dialState.mode === "call" && `Calling ${selectedHelper.name}...`}
                         {dialState.mode === "message" && `Opening message for ${selectedHelper.name}...`}
-                        {dialState.mode === "handoff" && `Handoff note sent to ${selectedHelper.name}.`}
+                        {dialState.mode === "handoff" && `Note sent to ${selectedHelper.name}.`}
                       </motion.div>
                     ) : null}
                   </AnimatePresence>
