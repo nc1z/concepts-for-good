@@ -1,188 +1,353 @@
 .page {
   min-height: 100dvh;
+  overflow: hidden;
   background:
-    radial-gradient(circle at 16% 14%, rgba(255, 122, 89, 0.2), transparent 24%),
-    radial-gradient(circle at 86% 12%, rgba(123, 140, 255, 0.22), transparent 22%),
-    linear-gradient(180deg, #fff8ee 0%, #f8f4ff 100%);
-  color: #2f2433;
+    radial-gradient(circle at 18% 18%, rgba(255, 159, 90, 0.34), transparent 24%),
+    radial-gradient(circle at 82% 14%, rgba(126, 146, 255, 0.3), transparent 20%),
+    linear-gradient(180deg, #f7f1e5 0%, #eadfce 52%, #ddd1c4 100%);
+  color: #1e1a17;
   font-family: var(--font-low-cost-exercise-body), sans-serif;
 }
 
 .shell {
-  width: min(1220px, calc(100% - 28px));
+  position: relative;
+  width: min(1300px, calc(100% - 32px));
   margin: 0 auto;
-  padding: 24px 0 56px;
+  padding: 22px 0 48px;
+}
+
+.atmosphere {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.glowOne,
+.glowTwo,
+.gridLines {
+  position: absolute;
+  display: block;
+}
+
+.glowOne {
+  top: 220px;
+  right: -80px;
+  width: 360px;
+  height: 360px;
+  border-radius: 50%;
+  background: rgba(255, 210, 127, 0.18);
+  filter: blur(18px);
+}
+
+.glowTwo {
+  left: -90px;
+  bottom: 180px;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: rgba(97, 120, 255, 0.12);
+  filter: blur(12px);
+}
+
+.gridLines {
+  inset: 120px 0 auto auto;
+  width: min(48vw, 620px);
+  height: 75vh;
+  background-image:
+    linear-gradient(rgba(30, 26, 23, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(30, 26, 23, 0.08) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.6), transparent 80%);
 }
 
 .backLink {
+  position: relative;
+  z-index: 2;
   display: inline-flex;
-  margin-bottom: 18px;
-  color: #6d4d74;
-  font-weight: 700;
+  align-items: center;
+  gap: 8px;
+  color: rgba(30, 26, 23, 0.82);
   text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.76rem;
+  font-weight: 700;
 }
 
-.hero,
-.stage {
-  display: grid;
-  gap: 20px;
+.backLink::before {
+  content: "";
+  width: 18px;
+  height: 1px;
+  background: currentColor;
 }
 
 .hero {
-  grid-template-columns: minmax(0, 1.08fr) minmax(280px, 0.92fr);
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(260px, 0.9fr);
+  gap: 32px;
   align-items: end;
-  margin-bottom: 24px;
+  padding: 28px 0 0;
 }
 
-.heroCopy h1,
-.heroPanel,
-.activeCard h2,
-.progressHeader h2,
-.railText strong,
-.timerCenter strong {
-  font-family: var(--font-low-cost-exercise-display), sans-serif;
+.heroBand {
+  display: grid;
+  gap: 18px;
 }
 
 .eyebrow,
-.cardKicker {
-  margin: 0 0 10px;
-  color: #82598a;
+.progressLabel,
+.cardKicker,
+.kindBadge,
+.heroStats dt {
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
   font-size: 0.78rem;
   font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
 }
 
-.heroCopy h1 {
-  max-width: 11ch;
+.heroHeadline {
+  max-width: 680px;
+}
+
+.heroHeadline h1,
+.cardHeader h2,
+.finishCard h2,
+.cueWord {
+  font-family: var(--font-low-cost-exercise-display), sans-serif;
+}
+
+.heroHeadline h1 {
   margin: 0;
-  font-size: clamp(2.8rem, 6vw, 5rem);
-  line-height: 0.92;
-  letter-spacing: -0.05em;
+  font-size: clamp(2.9rem, 5.8vw, 5.4rem);
+  line-height: 0.94;
+  letter-spacing: 0.01em;
+  text-wrap: balance;
 }
 
 .lede,
 .cardSummary,
-.cardFacts dd,
+.cardNotes span,
+.progressIntro span,
 .footerNote p {
-  color: #5f5165;
-  line-height: 1.62;
+  font-size: 1.02rem;
+  line-height: 1.6;
+  color: rgba(30, 26, 23, 0.76);
 }
 
 .lede {
-  max-width: 42ch;
-  margin: 16px 0 0;
-  font-size: 1.04rem;
+  max-width: 37ch;
+  margin: 18px 0 0;
 }
 
-.heroActions {
+.heroActions,
+.cardActions,
+.finishActions,
+.finishMetrics {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
   align-items: center;
-  margin-top: 22px;
 }
 
-.heroMeta {
-  color: #755f7c;
-  font-size: 0.95rem;
-  font-weight: 700;
-}
-
-.heroPanel,
-.activeCard,
-.progressPanel,
-.highlightPill,
-.railButton,
-.footerNote {
-  border: 1px solid rgba(83, 61, 92, 0.12);
-  box-shadow: 0 24px 48px rgba(93, 70, 102, 0.1);
-}
-
-.heroPanel {
+.heroStats {
   display: grid;
-  gap: 12px;
-  padding: 20px;
-  border-radius: 34px;
-  background:
-    linear-gradient(180deg, rgba(255, 253, 249, 0.9), rgba(244, 239, 255, 0.92));
+  gap: 18px;
+  margin: 0;
+  padding: 0 0 22px;
 }
 
-.highlightPill {
-  padding: 14px 16px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.76);
-  color: #5d5062;
-  font-size: 0.95rem;
-  font-weight: 700;
+.heroStats div {
+  padding-top: 14px;
+  border-top: 1px solid rgba(30, 26, 23, 0.18);
+}
+
+.heroStats dt,
+.heroStats dd {
+  margin: 0;
+}
+
+.heroStats dd {
+  margin-top: 8px;
+  font-family: var(--font-low-cost-exercise-accent), serif;
+  font-size: 1.45rem;
+  line-height: 1.2;
 }
 
 .stage {
-  grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr);
+  gap: 28px;
   align-items: start;
+  margin-top: 26px;
+}
+
+.progressStrip {
+  position: relative;
+  display: grid;
+  gap: 24px;
+  padding-top: 84px;
+}
+
+.progressStrip::before {
+  content: "";
+  position: absolute;
+  top: 126px;
+  left: 23px;
+  bottom: 18px;
+  width: 1px;
+  background:
+    linear-gradient(180deg, rgba(30, 26, 23, 0.56), rgba(30, 26, 23, 0.08));
+}
+
+.progressIntro {
+  display: grid;
+  gap: 6px;
+}
+
+.progressIntro strong {
+  font-family: var(--font-low-cost-exercise-accent), serif;
+  font-size: 1.55rem;
+  line-height: 1.1;
+}
+
+.progressRail {
+  display: grid;
+  gap: 14px;
+}
+
+.railStop {
+  display: grid;
+  grid-template-columns: 46px minmax(0, 1fr);
+  gap: 14px;
+  align-items: center;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.railStop:hover .railMeta strong,
+.railStop:hover .railMeta em {
+  color: rgba(30, 26, 23, 1);
+}
+
+.railIndex {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  background: #1e1a17;
+  color: #f7f1e5;
+  font-family: var(--font-low-cost-exercise-display), sans-serif;
+  font-size: 1.3rem;
+  line-height: 1;
+}
+
+.railStopDone .railIndex,
+.railStopCurrent .railIndex {
+  background: color-mix(in srgb, var(--rail-accent) 78%, #1e1a17);
+}
+
+.railMeta strong,
+.railMeta em {
+  display: block;
+  transition: color 0.18s ease;
+}
+
+.railMeta strong {
+  font-family: var(--font-low-cost-exercise-accent), serif;
+  font-size: 1.06rem;
+  font-style: normal;
+  color: rgba(30, 26, 23, 0.86);
+}
+
+.railMeta em {
+  margin-top: 2px;
+  font-size: 0.92rem;
+  font-style: normal;
+  color: rgba(30, 26, 23, 0.58);
 }
 
 .deckShell {
   position: relative;
-  min-height: 680px;
+  padding: 54px 0 0 30px;
 }
 
-.cardStack {
+.deckShadow {
   position: absolute;
-  inset: 20px 24px auto;
-  pointer-events: none;
-}
-
-.stackCardOne,
-.stackCardTwo {
-  position: absolute;
-  inset: 0;
-  display: block;
-  border-radius: 38px;
-  background: rgba(255, 255, 255, 0.54);
-}
-
-.stackCardOne {
-  transform: rotate(-2.4deg) translateY(20px);
-}
-
-.stackCardTwo {
-  transform: rotate(2.4deg) translateY(36px);
+  top: 12px;
+  right: 12px;
+  width: 100%;
+  height: calc(100% - 28px);
+  border: 2px solid rgba(30, 26, 23, 0.16);
+  transform: rotate(-2.8deg);
 }
 
 .activeCard {
   position: relative;
-  z-index: 1;
   display: grid;
-  grid-template-columns: minmax(260px, 0.44fr) minmax(0, 0.56fr);
-  gap: 24px;
-  min-height: 640px;
-  padding: 28px;
-  border-radius: 38px;
+  grid-template-columns: minmax(250px, 0.35fr) minmax(0, 0.65fr);
+  gap: 26px;
+  min-height: 700px;
+  padding: 32px;
+  border: 1px solid rgba(30, 26, 23, 0.18);
+  border-radius: 24px;
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.82)),
+    linear-gradient(180deg, rgba(255, 250, 242, 0.9), rgba(255, 248, 237, 0.82)),
     var(--card-surface);
+  box-shadow: 0 26px 70px rgba(63, 47, 28, 0.18);
 }
 
 .cardTimer,
 .finishCard {
-  display: grid;
-  place-items: center;
-  border-radius: 30px;
-  background:
-    linear-gradient(180deg, color-mix(in srgb, var(--card-accent) 14%, white), rgba(255, 255, 255, 0.86));
+  position: relative;
+  align-self: stretch;
 }
 
 .cardTimer {
-  position: relative;
-  min-height: 100%;
-  overflow: hidden;
+  display: grid;
+  place-items: center;
+}
+
+.timerOrbitLabel {
+  position: absolute;
+  top: 24px;
+  left: -44px;
+  display: grid;
+  gap: 4px;
+  width: 150px;
+  padding: 12px;
+  background: #1e1a17;
+  color: #f7f1e5;
+  transform: rotate(-7deg);
+}
+
+.timerOrbitLabel span {
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.timerOrbitLabel strong {
+  font-family: var(--font-low-cost-exercise-accent), serif;
+  font-size: 1.1rem;
+  line-height: 1.15;
 }
 
 .timerRing {
-  width: min(100%, 280px);
+  width: min(100%, 320px);
   height: auto;
   transform: rotate(-90deg);
+  overflow: visible;
 }
 
 .timerTrack,
@@ -192,12 +357,12 @@
 }
 
 .timerTrack {
-  stroke: rgba(88, 66, 97, 0.12);
+  stroke: rgba(30, 26, 23, 0.1);
 }
 
 .timerProgress {
-  stroke: color-mix(in srgb, var(--card-accent) 78%, #432d4e);
-  stroke-linecap: round;
+  stroke: color-mix(in srgb, var(--card-accent) 72%, #1e1a17);
+  stroke-linecap: square;
   transition: stroke-dashoffset 0.7s linear;
 }
 
@@ -207,38 +372,27 @@
   display: grid;
   place-items: center;
   align-content: center;
-  gap: 6px;
+  gap: 10px;
+  width: 238px;
+  height: 238px;
+  margin: auto;
+  border-radius: 50%;
+  background: rgba(247, 241, 229, 0.92);
   text-align: center;
 }
 
 .timerLabel,
-.timerCost,
-.cardFacts dt,
-.kindBadge,
-.progressHint,
-.railText em {
-  color: #735f7b;
-  font-size: 0.84rem;
-}
-
-.timerCenter strong {
-  font-size: clamp(2.9rem, 7vw, 4.6rem);
-  line-height: 0.88;
-}
-
-.timerCost {
-  display: inline-flex;
-  min-height: 34px;
-  padding: 0 14px;
-  align-items: center;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.72);
+.timerCount {
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.74rem;
   font-weight: 700;
 }
 
-.cardBody,
-.finishCard {
-  align-self: stretch;
+.timerCenter strong {
+  font-family: var(--font-low-cost-exercise-display), sans-serif;
+  font-size: clamp(3rem, 7vw, 4.8rem);
+  line-height: 0.9;
 }
 
 .cardBody {
@@ -254,59 +408,72 @@
   align-items: flex-start;
 }
 
+.cueWord {
+  margin: 8px 0 0;
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  line-height: 0.9;
+  color: color-mix(in srgb, var(--card-accent) 72%, #1e1a17);
+}
+
 .cardHeader h2,
-.progressHeader h2 {
-  margin: 0;
-  font-size: clamp(2rem, 3vw, 3rem);
-  line-height: 0.95;
-  letter-spacing: -0.04em;
+.finishCard h2 {
+  margin: 8px 0 0;
+  font-size: clamp(2.6rem, 4vw, 4.2rem);
+  line-height: 0.92;
+  letter-spacing: 0.02em;
 }
 
 .kindBadge {
-  display: inline-flex;
-  min-height: 38px;
-  padding: 0 14px;
-  align-items: center;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.76);
-  font-weight: 700;
-  white-space: nowrap;
+  padding-top: 8px;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
 }
 
 .cardSummary {
+  max-width: 42ch;
   margin: 0;
-  font-size: 1.02rem;
 }
 
-.cardFacts {
+.cueList {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cueList li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(30, 26, 23, 0.14);
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.cueList li::before {
+  content: "";
+  width: 16px;
+  height: 16px;
+  background: color-mix(in srgb, var(--card-accent) 78%, #1e1a17);
+  clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+}
+
+.cardNotes {
   display: grid;
   gap: 14px;
+}
+
+.cardNotes p {
   margin: 0;
 }
 
-.cardFacts div {
-  padding: 14px 16px;
-  border-radius: 24px;
-  background: rgba(255, 255, 255, 0.72);
-}
-
-.cardFacts dt,
-.cardFacts dd {
-  margin: 0;
-}
-
-.cardFacts dt {
-  margin-bottom: 6px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-}
-
-.cardActions,
-.finishActions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
+.cardNotes strong {
+  display: block;
+  margin-bottom: 3px;
+  font-family: var(--font-low-cost-exercise-accent), serif;
+  font-size: 1.05rem;
 }
 
 .primaryButton,
@@ -314,133 +481,71 @@
 .ghostButton {
   min-height: 52px;
   padding: 0 18px;
-  border-radius: 999px;
-  border: none;
+  border: 1px solid #1e1a17;
+  border-radius: 10px;
+  background: transparent;
+  color: #1e1a17;
   font: inherit;
   font-weight: 700;
   cursor: pointer;
-  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  transition:
+    transform 0.18s ease,
+    background-color 0.18s ease,
+    color 0.18s ease,
+    opacity 0.18s ease;
 }
 
 .primaryButton:hover,
 .secondaryButton:hover,
-.ghostButton:hover,
-.railButton:hover {
+.ghostButton:hover {
   transform: translateY(-1px);
 }
 
 .primaryButton {
-  background: #2f2433;
-  color: #fff8f1;
+  background: #1e1a17;
+  color: #f7f1e5;
 }
 
 .secondaryButton {
-  background: rgba(255, 255, 255, 0.8);
-  color: #403248;
+  background: rgba(247, 241, 229, 0.44);
 }
 
 .ghostButton {
-  background: transparent;
-  color: #5d4d64;
+  border-color: rgba(30, 26, 23, 0.3);
+}
+
+.ghostButton:disabled {
+  opacity: 0.38;
+  cursor: not-allowed;
+  transform: none;
 }
 
 .finishCard {
+  display: grid;
   align-content: center;
   gap: 18px;
-  padding: 36px;
-  text-align: left;
 }
 
-.finishCard h2 {
-  margin: 0;
-  font-size: clamp(2.4rem, 4vw, 3.4rem);
-  line-height: 0.95;
-}
-
-.progressPanel {
-  display: grid;
-  gap: 18px;
-  padding: 22px;
-  border-radius: 34px;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.86), rgba(247, 241, 255, 0.92));
-}
-
-.progressHeader {
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  align-items: flex-end;
-}
-
-.progressRail {
-  display: grid;
-  gap: 12px;
-}
-
-.railButton {
-  display: grid;
-  grid-template-columns: 52px minmax(0, 1fr);
-  gap: 14px;
-  align-items: center;
-  padding: 14px;
-  border-radius: 24px;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.88), color-mix(in srgb, var(--rail-accent) 12%, white));
-  color: inherit;
-  text-align: left;
-  cursor: pointer;
-}
-
-.railButtonCurrent {
-  border-color: color-mix(in srgb, var(--rail-accent) 42%, #4b3b54);
-}
-
-.railButtonDone .railIndex {
-  background: color-mix(in srgb, var(--rail-accent) 48%, white);
-  color: #2f2433;
-}
-
-.railIndex {
-  display: grid;
-  place-items: center;
-  width: 52px;
-  height: 52px;
-  border-radius: 18px;
-  background: rgba(74, 56, 82, 0.1);
-  font-weight: 800;
-}
-
-.railText strong,
-.railText em {
-  display: block;
-}
-
-.railText strong {
-  margin-bottom: 4px;
-  font-size: 1.1rem;
-  line-height: 1;
-}
-
-.railText em {
-  font-style: normal;
-  line-height: 1.45;
+.finishMetrics span {
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(30, 26, 23, 0.16);
+  font-family: var(--font-low-cost-exercise-accent), serif;
+  font-size: 1.15rem;
 }
 
 .footerNote {
-  padding: 18px;
-  border-radius: 26px;
-  background: rgba(255, 255, 255, 0.72);
-}
-
-.footerNote strong,
-.footerNote p {
-  display: block;
+  display: flex;
+  gap: 14px;
+  align-items: baseline;
+  margin-top: 26px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(30, 26, 23, 0.18);
 }
 
 .footerNote strong {
-  margin-bottom: 8px;
-  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.78rem;
 }
 
 .footerNote p {
@@ -454,8 +559,25 @@
     grid-template-columns: 1fr;
   }
 
+  .heroStats {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .progressStrip {
+    padding-top: 0;
+  }
+
+  .progressStrip::before {
+    display: none;
+  }
+
+  .progressRail {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
   .deckShell {
-    min-height: auto;
+    padding-left: 0;
   }
 
   .activeCard {
@@ -463,52 +585,64 @@
   }
 
   .cardTimer {
-    min-height: 280px;
+    min-height: 340px;
+  }
+
+  .timerOrbitLabel {
+    left: 18px;
   }
 }
 
-@media (max-width: 720px) {
+@media (max-width: 760px) {
   .shell {
-    width: min(100% - 20px, 1220px);
-    padding-bottom: 40px;
+    width: min(100% - 20px, 1300px);
+    padding-bottom: 34px;
   }
 
-  .heroCopy h1 {
-    max-width: none;
-    font-size: clamp(2.3rem, 12vw, 4rem);
+  .heroHeadline h1 {
+    font-size: clamp(2.4rem, 12vw, 3.8rem);
+  }
+
+  .heroStats,
+  .progressRail {
+    grid-template-columns: 1fr;
   }
 
   .heroActions,
   .cardActions,
-  .finishActions {
+  .finishActions,
+  .finishMetrics,
+  .footerNote {
     flex-direction: column;
     align-items: stretch;
   }
 
-  .progressHeader,
+  .deckShadow {
+    right: -4px;
+    width: calc(100% - 8px);
+  }
+
+  .activeCard {
+    padding: 22px;
+    border-radius: 18px;
+  }
+
+  .timerOrbitLabel {
+    top: 8px;
+    left: 10px;
+    width: 138px;
+  }
+
+  .timerCenter {
+    width: 210px;
+    height: 210px;
+  }
+
   .cardHeader {
     flex-direction: column;
-    align-items: flex-start;
   }
 
-  .progressHint {
-    max-width: none;
-  }
-
-  .activeCard,
-  .progressPanel,
-  .heroPanel {
-    padding: 18px;
-    border-radius: 26px;
-  }
-
-  .railButton {
-    grid-template-columns: 42px minmax(0, 1fr);
-  }
-
-  .railIndex {
-    width: 42px;
-    height: 42px;
-    border-radius: 14px;
+  .kindBadge {
+    writing-mode: initial;
   }
 }

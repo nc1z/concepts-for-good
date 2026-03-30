@@ -1,9 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { DM_Sans, Fredoka } from "next/font/google";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import { Alegreya, Bebas_Neue, DM_Sans } from "next/font/google";
 
 import {
   defaultState,
@@ -13,16 +13,22 @@ import {
 } from "./data";
 import styles from "./page.module.css";
 
-const fredoka = Fredoka({
+const bebas = Bebas_Neue({
   subsets: ["latin"],
   variable: "--font-low-cost-exercise-display",
-  weight: ["500", "600", "700"],
+  weight: "400",
 });
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
   variable: "--font-low-cost-exercise-body",
   weight: ["400", "500", "700"],
+});
+
+const alegreya = Alegreya({
+  subsets: ["latin"],
+  variable: "--font-low-cost-exercise-accent",
+  weight: ["500", "700"],
 });
 
 const TIMER_RADIUS = 88;
@@ -42,6 +48,18 @@ function formatMinutes(cardsCount: number) {
   );
 
   return `${Math.ceil(totalSeconds / 60)} minutes · ${cardsCount} guided cards`;
+}
+
+function formatSetLength() {
+  const totalSeconds = exerciseCards.reduce(
+    (sum, card) => sum + card.durationSeconds,
+    0,
+  );
+
+  const minutes = Math.floor(totalSeconds / 60);
+  const seconds = totalSeconds % 60;
+
+  return seconds === 0 ? `${minutes} min` : `${minutes} min ${seconds}s`;
 }
 
 function clampIndex(value: number) {
@@ -136,6 +154,7 @@ export default function LowCostExercisePage() {
   const progress =
     1 - sessionState.secondsLeft / Math.max(activeCard.durationSeconds, 1);
   const dashOffset = TIMER_CIRCUMFERENCE * (1 - progress);
+  const completedCount = sessionState.completedIds.length;
 
   function jumpToCard(nextIndex: number) {
     const safeIndex = clampIndex(nextIndex);
@@ -186,19 +205,29 @@ export default function LowCostExercisePage() {
   }
 
   return (
-    <main className={`${styles.page} ${fredoka.variable} ${dmSans.variable}`}>
+    <main
+      className={`${styles.page} ${bebas.variable} ${dmSans.variable} ${alegreya.variable}`}
+    >
       <div className={styles.shell}>
+        <div className={styles.atmosphere} aria-hidden="true">
+          <span className={styles.glowOne} />
+          <span className={styles.glowTwo} />
+          <span className={styles.gridLines} />
+        </div>
+
         <Link href="/" className={styles.backLink}>
-          ← Back to gallery
+          Back to gallery
         </Link>
 
         <section className={styles.hero}>
-          <div className={styles.heroCopy}>
-            <p className={styles.eyebrow}>Low-Cost Exercise</p>
-            <h1>Follow a short routine you can do at home, in the void deck, or at the fitness corner.</h1>
-            <p className={styles.lede}>
-              Start with one guided card and move until the timer ring closes.
-            </p>
+          <div className={styles.heroBand}>
+            <p className={styles.eyebrow}>Low-cost exercise for Singapore residents</p>
+            <div className={styles.heroHeadline}>
+              <h1>Follow a free routine you can do at home, in the void deck, or by the fitness corner.</h1>
+              <p className={styles.lede}>
+                Start the first move and keep going until the ring closes. Each card shows what to do next without sending you to a class or a gym.
+              </p>
+            </div>
             <div className={styles.heroActions}>
               <button
                 type="button"
@@ -212,24 +241,72 @@ export default function LowCostExercisePage() {
                 }
               >
                 {sessionState.finished
-                  ? "Start again"
+                  ? "Run the set again"
                   : sessionState.isRunning
-                    ? "Keep moving"
+                    ? "Keep the timer going"
                     : "Start the first move"}
               </button>
-              <span className={styles.heroMeta}>
-                {formatMinutes(exerciseCards.length)}
-              </span>
+              <button
+                type="button"
+                className={styles.secondaryButton}
+                onClick={restartSet}
+              >
+                Restart from the top
+              </button>
             </div>
           </div>
+
+          <dl className={styles.heroStats}>
+            <div>
+              <dt>Total set</dt>
+              <dd>{formatSetLength()}</dd>
+            </div>
+            <div>
+              <dt>Best spots</dt>
+              <dd>HDB corridor, void deck, fitness corner</dd>
+            </div>
+            <div>
+              <dt>Cost</dt>
+              <dd>Free or already around you</dd>
+            </div>
+          </dl>
         </section>
 
         <section className={styles.stage}>
-          <div className={styles.deckShell}>
-            <div className={styles.cardStack} aria-hidden="true">
-              <span className={styles.stackCardOne} />
-              <span className={styles.stackCardTwo} />
+          <aside className={styles.progressStrip} aria-label="Routine progress">
+            <div className={styles.progressIntro}>
+              <p className={styles.progressLabel}>Routine track</p>
+              <strong>{sessionState.finished ? "Set complete" : `${completedCount} of ${exerciseCards.length} done`}</strong>
+              <span>Swipe sideways or use the controls below the card.</span>
             </div>
+
+            <div className={styles.progressRail}>
+              {exerciseCards.map((card, index) => {
+                const completed = sessionState.completedIds.includes(card.id);
+                const current = index === sessionState.activeIndex && !sessionState.finished;
+
+                return (
+                  <button
+                    key={card.id}
+                    type="button"
+                    className={`${styles.railStop} ${completed ? styles.railStopDone : ""} ${current ? styles.railStopCurrent : ""}`}
+                    onClick={() => jumpToCard(index)}
+                    style={{ ["--rail-accent" as string]: card.accent }}
+                    aria-current={current ? "step" : undefined}
+                  >
+                    <span className={styles.railIndex}>{completed ? "✓" : `0${index + 1}`.slice(-2)}</span>
+                    <span className={styles.railMeta}>
+                      <strong>{card.cueWord}</strong>
+                      <em>{card.kicker}</em>
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          </aside>
+
+          <div className={styles.deckShell}>
+            <div className={styles.deckShadow} aria-hidden="true" />
 
             <AnimatePresence custom={direction} mode="wait">
               <motion.article
@@ -260,11 +337,16 @@ export default function LowCostExercisePage() {
               >
                 {sessionState.finished ? (
                   <div className={styles.finishCard}>
-                    <p className={styles.cardKicker}>You finished the set</p>
-                    <h2>You got a full low-cost routine done.</h2>
+                    <p className={styles.cardKicker}>Full set done</p>
+                    <h2>You finished a no-cost routine you can repeat on a normal weekday.</h2>
                     <p className={styles.cardSummary}>
-                      Keep this rhythm for busy weekdays when you want movement without paying for a class.
+                      Save this for mornings before work, evenings downstairs, or the days when you only have a small patch of space.
                     </p>
+                    <div className={styles.finishMetrics}>
+                      <span>{formatMinutes(exerciseCards.length)}</span>
+                      <span>{exerciseCards.filter((card) => card.kind === "move").length} movement cards</span>
+                      <span>0 paid classes</span>
+                    </div>
                     <div className={styles.finishActions}>
                       <button
                         type="button"
@@ -285,6 +367,10 @@ export default function LowCostExercisePage() {
                 ) : (
                   <>
                     <div className={styles.cardTimer}>
+                      <div className={styles.timerOrbitLabel}>
+                        <span>{activeCard.costLabel}</span>
+                        <strong>{activeCard.rhythm}</strong>
+                      </div>
                       <svg viewBox="0 0 220 220" className={styles.timerRing} aria-hidden="true">
                         <circle
                           cx="110"
@@ -304,7 +390,9 @@ export default function LowCostExercisePage() {
                       <div className={styles.timerCenter}>
                         <span className={styles.timerLabel}>Time left</span>
                         <strong>{formatSeconds(sessionState.secondsLeft)}</strong>
-                        <span className={styles.timerCost}>{activeCard.costLabel}</span>
+                        <span className={styles.timerCount}>
+                          Card {sessionState.activeIndex + 1} of {exerciseCards.length}
+                        </span>
                       </div>
                     </div>
 
@@ -312,6 +400,7 @@ export default function LowCostExercisePage() {
                       <div className={styles.cardHeader}>
                         <div>
                           <p className={styles.cardKicker}>{activeCard.kicker}</p>
+                          <p className={styles.cueWord}>{activeCard.cueWord}</p>
                           <h2>{activeCard.title}</h2>
                         </div>
                         <span className={styles.kindBadge}>
@@ -321,22 +410,36 @@ export default function LowCostExercisePage() {
 
                       <p className={styles.cardSummary}>{activeCard.summary}</p>
 
-                      <dl className={styles.cardFacts}>
-                        <div>
-                          <dt>Why it helps</dt>
-                          <dd>{activeCard.focus}</dd>
-                        </div>
-                        <div>
-                          <dt>Where to do it</dt>
-                          <dd>{activeCard.place}</dd>
-                        </div>
-                        <div>
-                          <dt>What you need</dt>
-                          <dd>{activeCard.equipment}</dd>
-                        </div>
-                      </dl>
+                      <ul className={styles.cueList}>
+                        {activeCard.cues.map((cue) => (
+                          <li key={cue}>{cue}</li>
+                        ))}
+                      </ul>
+
+                      <div className={styles.cardNotes}>
+                        <p>
+                          <strong>Why it helps</strong>
+                          <span>{activeCard.focus}</span>
+                        </p>
+                        <p>
+                          <strong>Where to do it</strong>
+                          <span>{activeCard.place}</span>
+                        </p>
+                        <p>
+                          <strong>What you need</strong>
+                          <span>{activeCard.equipment}</span>
+                        </p>
+                      </div>
 
                       <div className={styles.cardActions}>
+                        <button
+                          type="button"
+                          className={styles.ghostButton}
+                          onClick={() => jumpToCard(sessionState.activeIndex - 1)}
+                          disabled={sessionState.activeIndex === 0}
+                        >
+                          Previous card
+                        </button>
                         <button
                           type="button"
                           className={styles.primaryButton}
@@ -369,7 +472,7 @@ export default function LowCostExercisePage() {
                             }))
                           }
                         >
-                          Restart this card
+                          Replay this card
                         </button>
                       </div>
                     </div>
@@ -378,48 +481,13 @@ export default function LowCostExercisePage() {
               </motion.article>
             </AnimatePresence>
           </div>
+        </section>
 
-          <aside className={styles.progressPanel}>
-            <div className={styles.progressHeader}>
-              <div>
-                <p className={styles.eyebrow}>Your set</p>
-                <h2>Move through the routine</h2>
-              </div>
-              <span className={styles.progressHint}>Swipe sideways or tap a stop below.</span>
-            </div>
-
-            <div className={styles.progressRail}>
-              {exerciseCards.map((card, index) => {
-                const completed = sessionState.completedIds.includes(card.id);
-                const current = index === sessionState.activeIndex && !sessionState.finished;
-
-                return (
-                  <button
-                    key={card.id}
-                    type="button"
-                    className={`${styles.railButton} ${completed ? styles.railButtonDone : ""} ${current ? styles.railButtonCurrent : ""}`}
-                    onClick={() => jumpToCard(index)}
-                    style={{ ["--rail-accent" as string]: card.accent }}
-                  >
-                    <span className={styles.railIndex}>
-                      {completed ? "✓" : index + 1}
-                    </span>
-                    <span className={styles.railText}>
-                      <strong>{card.kicker}</strong>
-                      <em>{card.title}</em>
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
-
-            <div className={styles.footerNote}>
-              <strong>Works in small spaces</strong>
-              <p>
-                Every card works without a paid class, and most of them fit into a hallway, void deck corner, or bench stop.
-              </p>
-            </div>
-          </aside>
+        <section className={styles.footerNote}>
+          <strong>Small-space friendly</strong>
+          <p>
+            Most of this set fits in a hallway, living room, void deck corner, or beside a bench.
+          </p>
         </section>
       </div>
     </main>
