@@ -7,19 +7,19 @@ const poc = getPocBySlug("legal-aid-prep-sg");
 export const metadata: Metadata = {
   title: poc?.title ?? "Legal Aid Prep",
   description:
-    poc?.summary ?? "Answer a few questions to see which legal help routes may fit and what papers to bring.",
+    poc?.summary ?? "Find out where you can get help and what documents to bring.",
   keywords: poc?.tags ?? ["Legal aid", "Support", "Singapore"],
   openGraph: {
     title: poc?.title ?? "Legal Aid Prep",
     description:
-      poc?.summary ?? "Answer a few questions to see which legal help routes may fit and what papers to bring.",
+      poc?.summary ?? "Find out where you can get help and what documents to bring.",
     type: "website",
   },
   twitter: {
     card: "summary",
     title: poc?.title ?? "Legal Aid Prep",
     description:
-      poc?.summary ?? "Answer a few questions to see which legal help routes may fit and what papers to bring.",
+      poc?.summary ?? "Find out where you can get help and what documents to bring.",
   },
 };
 

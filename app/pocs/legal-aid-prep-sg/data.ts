@@ -25,7 +25,7 @@ export const intakeSteps: IntakeStep[] = [
   {
     id: "issue",
     prompt: "What do you need help with first?",
-    helper: "Pick the closest match so I can point you to the right support route.",
+    helper: "Pick the closest match and I'll point you to the right place.",
     options: [
       { id: "housing", label: "Housing or rent trouble", shortLabel: "Housing" },
       { id: "family", label: "Family, divorce, or care matters", shortLabel: "Family" },
@@ -78,7 +78,7 @@ export const helpRoutes: HelpRoute[] = [
   {
     id: "lab",
     name: "Legal Aid Bureau",
-    summary: "A likely fit when income is lower and the matter needs formal legal help.",
+    summary: "A good option if your household income is lower and you need formal legal help.",
     fit: ["lower", "citizen", "pr", "housing", "family", "debt"],
     caution: ["other"],
     papers: [
@@ -86,38 +86,38 @@ export const helpRoutes: HelpRoute[] = [
       "Letters from court, landlord, bank, or employer",
       "Recent income proof for everyone in the household",
     ],
-    nextStep: "Call to check financial eligibility and ask for the first appointment slot.",
+    nextStep: "Call them to check if you qualify and book your first appointment.",
   },
   {
     id: "clc",
     name: "Community legal clinic",
-    summary: "A good first stop if you need quick guidance before deciding the next move.",
+    summary: "A good first step if you want quick advice before deciding what to do next.",
     fit: ["steady", "middle", "housing", "family", "debt", "work"],
     papers: [
       "A short timeline of what happened",
       "Any letters, notices, or screenshots tied to the issue",
       "Questions you want answered at the session",
     ],
-    nextStep: "Book a clinic slot and bring a one-page summary of the problem.",
+    nextStep: "Book a slot and bring a short written summary of what happened.",
   },
   {
     id: "tripartite",
     name: "Workplace dispute help",
-    summary: "Strongest fit when the issue is salary, dismissal, or contract trouble at work.",
+    summary: "The right place if your issue is about pay, dismissal, or problems at work.",
     fit: ["work", "urgent", "steady"],
     papers: [
       "Employment contract or offer letter",
       "Payslips, rosters, or leave records",
       "Messages or emails linked to the dispute",
     ],
-    nextStep: "Prepare your timeline and ask about mediation or claim filing steps.",
+    nextStep: "Write down your timeline and ask about mediation or how to file a claim.",
   },
 ];
 
 export const paperGuides: Record<string, string> = {
-  ready: "You are close. Keep the papers in one folder so you do not have to retell the story from memory.",
-  partial: "Bring what you have first. The missing papers list below shows what to chase next.",
-  none: "Start with ID and any message, photo, or letter tied to the issue. That is enough for a first call.",
+  ready: "You're nearly there. Keep everything in one folder so you don't have to retell the story from scratch.",
+  partial: "Bring what you have. The list below shows what else to gather before your appointment.",
+  none: "Start with your ID and anything related to the issue — a message, photo, or letter is enough for a first call.",
 };
 
 export const routeOrder = ["lab", "clc", "tripartite"] as const;
