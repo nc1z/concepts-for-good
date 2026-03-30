@@ -2,7 +2,7 @@
   "dataset": "GOOD_SG",
   "region": "singapore",
   "lens": "public good and social impact in Singapore",
-  "idea_count": 160,
+  "idea_count": 163,
   "design_contract": {
     "mandate": "Every idea must be built with a deliberately chosen visual direction and interaction model, and copy written for the target user — not for developers. Reading the ui field and rules/CONTENT_RULES.md is mandatory before writing a single line of code.",
     "design_diversity_mandate": {
@@ -11648,6 +11648,237 @@
         "avoid": "plain to-do list; request form with no movement between people; generic kanban board; map pins without the relay sequence being visible",
         "experience_goal": "user sees community help as a shared flow rather than one person doing everything alone"
       },
+      "implemented": false
+    },
+    {
+      "id": "GOOD_SG-167",
+      "title": "Hawker Quiet Window",
+      "platform": "website",
+      "folder": "web",
+      "build_stack": "Next.js website",
+      "category": "local food",
+      "tags": [
+        "Hawker centres",
+        "stall operations",
+        "family business",
+        "shift planning"
+      ],
+      "summary": "See which parts of a stall day are likely to stay quiet so you can prep, rest, or send someone on an errand without guessing.",
+      "target_user": "hawker stall owners and family helpers planning a long market day",
+      "why_fast": "The interesting challenge is a shift ribbon where breakfast, lunch, lull, and dinner windows stretch or compress as weather and footfall assumptions change, so the user can slot prep and break tasks into the quiet pockets.",
+      "stage": "poc",
+      "poc": [
+        "shift ribbon board",
+        "quiet-window task chips",
+        "scenario comparison"
+      ],
+      "prototype_goal": "Simulate the core value of Hawker Quiet Window in-browser with believable local data and zero backend dependencies.",
+      "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
+      "storage_strategy": {
+        "primary": "localStorage",
+        "secondary": "IndexedDB only if the POC needs larger offline caches, many records, or image/file blobs",
+        "server_database": "not allowed for the initial POC"
+      },
+      "simulation_mode": "Use seeded demo records, optimistic UI updates, and fake notifications or status changes so the end-to-end workflow is testable by one person.",
+      "personas": [
+        "resident",
+        "worker"
+      ],
+      "core_entities": [
+        "stalls",
+        "shift_windows",
+        "tasks",
+        "scenarios"
+      ],
+      "primary_user_flow": [
+        "stall_pick",
+        "shift_ribbon",
+        "task_slotting",
+        "scenario_compare"
+      ],
+      "demo_seed_data": [
+        "3 to 8 sample stalls records tailored to Singapore context",
+        "2 to 3 personas with prefilled preferences, saved items, or history",
+        "at least 1 edge case record to demonstrate empty states, stale data, or exceptions"
+      ],
+      "success_signal": "A new user can switch into a persona, complete the main workflow in under 2 minutes, and understand the concept without any manual setup.",
+      "non_goals": [
+        "real identity verification or account systems",
+        "production-grade multi-user synchronization",
+        "complex backend integrations before concept validation"
+      ],
+      "build_notes": [
+        "Prefer deterministic mock data over external APIs.",
+        "Keep state resettable so demos can be rerun quickly.",
+        "Treat notifications, queues, and matching as simulations unless a real API is trivial."
+      ],
+      "ui": {
+        "direction": "kitchen pass board",
+        "interaction_model": "shift ribbon planner — the day runs left to right as a heat-striped service ribbon; quiet windows widen into draggable pockets where prep, runner, and break chips can be dropped; switching rain or school-holiday scenarios reshapes the ribbon immediately",
+        "suggested_libraries": [
+          "@dnd-kit/core",
+          "visx",
+          "framer-motion"
+        ],
+        "distinctive_feature": "each dropped task leaves a clipped paper ticket on the ribbon so a hawker can see at a glance whether prep and rest still fit before the next rush",
+        "avoid": "POS dashboard; generic business analytics charts; calendar grid for shifts; form-only staffing planner",
+        "experience_goal": "a stall day feels manageable because the user can spot believable breathing room instead of reacting minute to minute"
+      },
+      "implementation_tags": [],
+      "implemented": false
+    },
+    {
+      "id": "GOOD_SG-168",
+      "title": "Interview Story Deck",
+      "platform": "website",
+      "folder": "mobile",
+      "build_stack": "Next.js website",
+      "category": "education equity",
+      "tags": [
+        "First job",
+        "Interview prep",
+        "Youth transitions",
+        "Confidence building"
+      ],
+      "summary": "Turn school projects, NS, part-time work, and volunteering into short interview stories you can practise out loud before a first job interview.",
+      "target_user": "ITE, polytechnic, and fresh university graduates preparing for first-job interviews",
+      "why_fast": "The interesting challenge is a story rail where small experience cards are arranged into a confident answer arc and rehearsed against a visible 90-second pace line.",
+      "stage": "poc",
+      "poc": [
+        "prompt picker",
+        "story rail sort",
+        "timed rehearsal"
+      ],
+      "prototype_goal": "Simulate the core value of Interview Story Deck in-browser with believable local data and zero backend dependencies.",
+      "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
+      "storage_strategy": {
+        "primary": "localStorage",
+        "secondary": "IndexedDB only if the POC needs larger offline caches, many records, or image/file blobs",
+        "server_database": "not allowed for the initial POC"
+      },
+      "simulation_mode": "Use seeded demo records, optimistic UI updates, and fake notifications or status changes so the end-to-end workflow is testable by one person.",
+      "personas": [
+        "student",
+        "resident",
+        "worker"
+      ],
+      "core_entities": [
+        "prompts",
+        "story_cards",
+        "rehearsals",
+        "notes"
+      ],
+      "primary_user_flow": [
+        "prompt_pick",
+        "story_sort",
+        "timed_rehearsal",
+        "saved_version"
+      ],
+      "demo_seed_data": [
+        "3 to 8 sample prompts records tailored to Singapore context",
+        "2 to 3 personas with prefilled preferences, saved items, or history",
+        "at least 1 edge case record to demonstrate empty states, stale data, or exceptions"
+      ],
+      "success_signal": "A new user can switch into a persona, complete the main workflow in under 2 minutes, and understand the concept without any manual setup.",
+      "non_goals": [
+        "real identity verification or account systems",
+        "production-grade multi-user synchronization",
+        "complex backend integrations before concept validation"
+      ],
+      "build_notes": [
+        "Prefer deterministic mock data over external APIs.",
+        "Keep state resettable so demos can be rerun quickly.",
+        "Treat notifications, queues, and matching as simulations unless a real API is trivial."
+      ],
+      "ui": {
+        "direction": "cue-card studio",
+        "interaction_model": "answer rail rehearsal — interview prompts sit on flip cards; the user drags personal experience cards onto a three-part rail for opening, proof, and takeaway; tapping rehearse plays the rail back as large spoken cue cards with a visible 90-second pace line",
+        "suggested_libraries": [
+          "@dnd-kit/core",
+          "framer-motion",
+          "react-aria-components"
+        ],
+        "distinctive_feature": "the pace line turns amber when an answer feels too vague or too long, and the rail highlights exactly which story card should be tightened",
+        "avoid": "AI-written cover-letter generator; resume template editor; corporate HR dashboard; long text form with no rehearsal mode",
+        "experience_goal": "first-job prep feels concrete because the user can hear and reshape their own examples instead of staring at a blank answer box"
+      },
+      "implementation_tags": [],
+      "implemented": false
+    },
+    {
+      "id": "GOOD_SG-169",
+      "title": "Hobby First Step",
+      "platform": "website",
+      "folder": "web",
+      "build_stack": "Next.js website",
+      "category": "social connection",
+      "tags": [
+        "Belonging",
+        "Low-pressure meetups",
+        "Hobbies",
+        "Social anxiety"
+      ],
+      "summary": "Find a low-pressure first meetup idea near home when you want company but do not want a big club commitment.",
+      "target_user": "adults in Singapore who want to meet people through hobbies but feel rusty or socially anxious",
+      "why_fast": "The interesting challenge is a comfort-radius explorer where tiny, low-stakes meetup formats appear first and larger group options only surface when the user is ready.",
+      "stage": "poc",
+      "poc": [
+        "comfort picker",
+        "meetup constellation",
+        "first-step card"
+      ],
+      "prototype_goal": "Simulate the core value of Hobby First Step in-browser with believable local data and zero backend dependencies.",
+      "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
+      "storage_strategy": {
+        "primary": "localStorage",
+        "secondary": "IndexedDB only if the POC needs larger offline caches, many records, or image/file blobs",
+        "server_database": "not allowed for the initial POC"
+      },
+      "simulation_mode": "Use seeded demo records, optimistic UI updates, and fake notifications or status changes so the end-to-end workflow is testable by one person.",
+      "personas": [
+        "resident"
+      ],
+      "core_entities": [
+        "hobbies",
+        "meetups",
+        "comfort_levels",
+        "venues"
+      ],
+      "primary_user_flow": [
+        "comfort_pick",
+        "constellation_browse",
+        "micro_plan_view",
+        "save_try_list"
+      ],
+      "demo_seed_data": [
+        "3 to 8 sample meetups records tailored to Singapore context",
+        "2 to 3 personas with prefilled preferences, saved items, or history",
+        "at least 1 edge case record to demonstrate empty states, stale data, or exceptions"
+      ],
+      "success_signal": "A new user can switch into a persona, complete the main workflow in under 2 minutes, and understand the concept without any manual setup.",
+      "non_goals": [
+        "real identity verification or account systems",
+        "production-grade multi-user synchronization",
+        "complex backend integrations before concept validation"
+      ],
+      "build_notes": [
+        "Prefer deterministic mock data over external APIs.",
+        "Keep state resettable so demos can be rerun quickly.",
+        "Treat notifications, queues, and matching as simulations unless a real API is trivial."
+      ],
+      "ui": {
+        "direction": "night-market constellation",
+        "interaction_model": "comfort-ring explorer — hobby formats appear as glowing clusters around a movable comfort ring; dragging the ring outward reveals bigger group formats, while tapping a cluster opens a tiny first-step plan such as a 30-minute sketch meetup or board-game table for two",
+        "suggested_libraries": [
+          "d3-force",
+          "@use-gesture/react",
+          "framer-motion"
+        ],
+        "distinctive_feature": "the comfort ring physically pulls distant clusters closer or farther away so the page feels like tuning social intensity rather than filtering a directory",
+        "avoid": "event marketplace grid; dating-app swipe pattern; giant community forum; generic map full of pins",
+        "experience_goal": "meeting people feels gentler because the user starts from the social energy they can handle today"
+      },
+      "implementation_tags": [],
       "implemented": false
     }
   ],
