@@ -244,7 +244,74 @@ The empty state is a moment of guidance. It is the one moment when the user is m
 
 ---
 
-## G. The Label Test
+## G. The Sector Jargon Rule
+
+Every POC is about a real-world domain — caregiving, legal aid, food rescue, health, housing. Each domain has its own professional vocabulary. **That vocabulary is for practitioners, not for users.** The target user is almost never a trained professional speaking in that field's terminology. They are a resident, a family member, an elder, a volunteer.
+
+Before writing any copy, ask: **"Is this a word the target user would use when talking to a friend?"** If not, replace it.
+
+### Sector jargon patterns found in this repo — and their plain replacements
+
+These words and phrases have all appeared in POC copy and caused confusion or felt alienating to real users:
+
+| Jargon (do not use) | Plain alternative |
+|---|---|
+| "Legal help route" | "where to get help", "who to contact", "your options" |
+| "Support route" | "type of help", "where to go", "the right place" |
+| "Eligibility route" | "who qualifies", "whether you qualify" |
+| "Case intake" | "Getting started", "Let's start", "Your situation" |
+| "Handoff" (caregiving) | "step in", "take over", "send a note", "pass on" |
+| "Care shifts" | "Family caregiving", "Caring for someone", "Helping at home" |
+| "Escort coverage" | "company to the clinic", "going with them" |
+| "Scheme eligibility" | "whether this applies to you", "if you qualify" |
+| "Refer" / "referral" | "send them to", "point them to", "connect with" |
+| "Intake form" | "a few questions", "tell us about your situation" |
+| "Discharge" | "leaving the hospital", "going home" |
+| "Client" | "the person you're helping", "your family member", "them" |
+| "Beneficiary" | use the actual person — "resident", "elder", "family member" |
+| "Caregiver" (as a label) | fine in context, but never as a persona switch button |
+| "Dispatch" | "tonight's runs", "who is going where" |
+| "Rostering" | "who is available", "the schedule" |
+
+### The "say it aloud" test
+
+Read every sentence of copy aloud as if you are saying it to a resident who has never heard of the app before. If it sounds like something a social worker writes in a case file, or a lawyer writes in a letter, or a hospital admin puts on a form — rewrite it in the words that person would use when describing the problem to a friend.
+
+**Bad (sounds like a professional document):**
+> "See which legal help route may fit before you make the call."
+
+**Good (sounds like a friend explaining it):**
+> "Find out where to get legal help before you make the call."
+
+**Bad:**
+> "Find the right helper before the next handoff."
+
+**Good:**
+> "Find the right helper before someone needs to step in."
+
+**Bad:**
+> "Pick the closest match so I can point you to the right support route."
+
+**Good:**
+> "Pick the closest match and I'll point you to the right place."
+
+### Jargon can appear in headings too
+
+Eyebrow text, chip labels, section headers, and badge text are all user-facing. They must pass the same test.
+
+**Bad eyebrow:** "Care shifts" — sounds like a scheduling category for care workers.
+**Good eyebrow:** "Family caregiving"
+
+**Bad section label:** "Case folder" — sounds like a file in a legal practice management system.
+**Good:** "Your documents" or "What to bring"
+
+**Bad badge:** "Mostly ready" referring to document readiness — acceptable but on the edge.
+**Bad badge:** "Gather next" — vague; sounds like a system status, not a user action.
+**Good:** "Still missing a few things" or just list what's missing.
+
+---
+
+## H. The Label Test
 
 Every label, heading, and button must pass this test:
 
@@ -344,8 +411,10 @@ Run this checklist on every user-facing page before pushing. If any item fails, 
 - [ ] Have all "Reset" buttons been removed from user-facing UI?
 - [ ] Has the persona switcher been removed from the main user flow and replaced with an appropriate onboarding or profile pattern?
 - [ ] Is every piece of copy written for the target user named in the idea entry, not for a developer reading the code?
+- [ ] Does any copy use sector or domain jargon the target user would not naturally say? (Read each sentence aloud. If it sounds like a professional form, legal document, or internal system — rewrite it. See Section G.)
+- [ ] Are all apostrophes in JSX escaped as `&apos;`? (Unescaped `'` characters in JSX cause build failures.)
 
-**All 12 items must be checked before a PR can be considered complete for any user-facing page.**
+**All 14 items must be checked before a PR can be considered complete for any user-facing page.**
 
 ---
 
@@ -367,3 +436,15 @@ These are representative bad-to-good rewrites for patterns that commonly fail th
 | Dispatch button | "Simulate alert" | Remove entirely |
 | Sidebar section | "Demo controls / Reset or rerun the night / [Reset state]" | Remove entirely |
 | System alert | "Coordinator board loaded. Assignment controls are active." | Remove and let the interface speak for itself |
+| Page eyebrow | "Care shifts" | "Family caregiving" |
+| Hero headline | "Find the right helper before the next handoff." | "Find the right helper before someone needs to step in." |
+| Intake label | "Case intake" | "Getting started" |
+| Hero headline | "See which legal help route may fit before you make the call." | "Find out where to get legal help before you make the call." |
+| Helper text | "Pick the closest match so I can point you to the right support route." | "Pick the closest match and I'll point you to the right place." |
+| Route summary | "Strongest fit when the issue is salary, dismissal, or contract trouble at work." | "The right place if your issue is about pay, dismissal, or problems at work." |
+| Route summary | "A likely fit when income is lower and the matter needs formal legal help." | "A good option if your household income is lower and you need formal legal help." |
+| Action button | "Share handoff" | "Send note" |
+| Seed data field | "Grab fallback" (as a relationship label) | "Backup driver" |
+| Availability text | "Reply before 15 minutes" | "Usually replies within 15 min" |
+| Coverage summary | "Pickup and escort coverage" | "Pickup and company to the clinic" |
+| Pending state | "Answer the first question and your best first call route will settle here with the papers to bring." | "Answer the first question and your best option will appear here, along with what to bring." |

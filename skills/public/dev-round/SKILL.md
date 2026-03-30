@@ -188,7 +188,9 @@ This is the most important concurrency step. Push the branch and open a draft PR
 
 - The `ui.distinctive_feature` must be implemented — it is what makes the concept feel real.
 - Every button, label, heading, and empty state must pass `rules/CONTENT_RULES.md`. Never use banned words (`POC`, `demo`, `prototype`, `simulation`, `seed data`, `placeholder`, `mock`, `fake`, `component`, `scaffold`) in the UI.
-- Before pushing, run the content quality checklist in `rules/CONTENT_RULES.md` (Section J). All items must pass.
+- **Sector jargon is banned from user-facing copy.** Read `rules/CONTENT_RULES.md` Section G before writing any copy. Domain-specific terms from legal, caregiving, social services, healthcare, or government contexts — "handoff", "intake", "support route", "eligibility scheme", "escort", "dispatch" — are professional vocabulary, not user language. Apply the "say it aloud" test: if it sounds like a form, a case file, or an internal system, rewrite it in plain conversational English.
+- **Apostrophes in JSX must be escaped.** Write `&apos;` not `'` in JSX strings. Unescaped apostrophes cause build failures at the lint stage.
+- Before pushing, run the content quality checklist in `rules/CONTENT_RULES.md` (Section J). All 14 items must pass.
 
 ### 9) Commit with bot co-author
 
