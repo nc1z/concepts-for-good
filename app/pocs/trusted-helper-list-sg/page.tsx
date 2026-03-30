@@ -1,19 +1,19 @@
 "use client";
 
 import Link from "next/link";
-import { Sora } from "next/font/google";
-import { AnimatePresence, motion } from "framer-motion";
-import { useEffect, useMemo, useState } from "react";
+import { DM_Sans } from "next/font/google";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState, useCallback, useEffect } from "react";
+import useEmblaCarousel from "embla-carousel-react";
 
 import styles from "./page.module.css";
 
-const sora = Sora({
+const dmSans = DM_Sans({
   subsets: ["latin"],
-  variable: "--font-trusted-helper-list",
+  variable: "--font-trusted-helper",
   weight: ["400", "500", "600", "700"],
 });
 
-type TabId = "today" | "helpers" | "notes";
 type RoleId = "medication" | "transport" | "meals" | "home";
 
 type Helper = {
@@ -22,75 +22,64 @@ type Helper = {
   role: RoleId;
   relationship: string;
   phone: string;
-  shift: string;
-  nextTask: string;
+  routine: string;
+  keyPhrase: string;
   note: string;
   initials: string;
-  availability: string;
+  nextTask: string;
   accent: string;
 };
 
 type HandoffNote = {
   id: string;
-  title: string;
-  detail: string;
+  text: string;
   time: string;
-};
-
-type AppState = {
-  selectedRole: RoleId;
-  selectedHelperId: string;
-  selectedTab: TabId;
-  notes: HandoffNote[];
+  role: RoleId;
 };
 
 const roleMeta: Record<
   RoleId,
-  { label: string; prompt: string; accent: string; summary: string; urgency: string }
+  { label: string; prompt: string; accent: string; bg: string }
 > = {
   medication: {
     label: "Medication",
-    prompt: "Who can handle the next medicine check?",
-    accent: "#ff8a5b",
-    summary: "7pm tablets and refill notes",
-    urgency: "Next change in 28 min",
+    prompt: "Who handles the medicine routine?",
+    accent: "#e85d3f",
+    bg: "#fef3f0",
   },
   transport: {
     label: "Transport",
-    prompt: "Who is closest to the clinic run?",
-    accent: "#4d88ff",
-    summary: "Pickup and company to the clinic",
-    urgency: "Hospital trip tomorrow 8:40am",
+    prompt: "Who drives to appointments?",
+    accent: "#3b6edb",
+    bg: "#f0f5fe",
   },
   meals: {
     label: "Meals",
-    prompt: "Who can cover dinner and shopping?",
-    accent: "#3cb38b",
-    summary: "Dinner prep and groceries",
-    urgency: "Soup prep starts at 6:15pm",
+    prompt: "Who cooks and brings food?",
+    accent: "#2d9d5a",
+    bg: "#f0fef5",
   },
   home: {
     label: "Home",
-    prompt: "Who can help at home today?",
-    accent: "#9a6cff",
-    summary: "Laundry, keys, and lock-up",
-    urgency: "Laundry collection before 5pm",
+    prompt: "Who helps around the house?",
+    accent: "#7c4dff",
+    bg: "#f5f0fe",
   },
 };
 
-const seedHelpers: Helper[] = [
+const helpers: Helper[] = [
   {
     id: "mei-lin",
     name: "Mei Lin",
     role: "medication",
-    relationship: "Evening caregiver",
+    relationship: "Evening helper",
     phone: "+65 9123 8841",
-    shift: "6:30pm to 10:00pm",
-    nextTask: "Bring 7pm tablets and check the refill tray.",
-    note: "Keeps the dosage chart in the blue folder by the dining table.",
+    routine: "6:30pm to 10pm daily",
+    keyPhrase: "Keeps dosage chart in blue folder",
+    note: "Always bring the refill tray when she visits.",
     initials: "ML",
-    availability: "Already nearby in Bedok",
-    accent: "#ff8a5b",
+    nextTask: "Evening tablets at 7pm",
+    accent: "#e85d3f",
   },
   {
     id: "adrian",
@@ -98,38 +87,38 @@ const seedHelpers: Helper[] = [
     role: "transport",
     relationship: "Neighbour driver",
     phone: "+65 9338 1024",
-    shift: "Weekday mornings",
-    nextTask: "Take Uncle Harun to the clinic and wait for the pharmacy queue.",
-    note: "Prefers to leave 15 minutes early for the sheltered drop-off lane.",
+    routine: "Weekday mornings",
+    keyPhrase: "Leaves 15 min early for sheltered lane",
+    note: "Prefers pickup at side gate, not main entrance.",
     initials: "AD",
-    availability: "Free before 9:30am",
-    accent: "#4d88ff",
+    nextTask: "Clinic run tomorrow 8:40am",
+    accent: "#3b6edb",
   },
   {
     id: "nora",
     name: "Nora",
     role: "meals",
-    relationship: "Auntie from Block 217",
+    relationship: "Auntie Block 217",
     phone: "+65 9780 4472",
-    shift: "Dinner rotation on Mon, Wed, Fri",
-    nextTask: "Drop porridge and soft fruit after maghrib prayers.",
-    note: "Message before 5pm if the soup should be less salty.",
+    routine: "Mon, Wed, Fri dinners",
+    keyPhrase: "Message before 5pm if less salt",
+    note: "Brings porridge after maghrib on cooking days.",
     initials: "NO",
-    availability: "Cooking tonight",
-    accent: "#3cb38b",
+    nextTask: "Dinner tonight after prayers",
+    accent: "#2d9d5a",
   },
   {
     id: "fazil",
     name: "Fazil",
     role: "home",
-    relationship: "Cousin with spare keys",
+    relationship: "Cousin with keys",
     phone: "+65 9641 5530",
-    shift: "Flexible after work",
-    nextTask: "Collect laundry and lock up after the physio visit.",
-    note: "Knows where the gate remote and spare charger are kept.",
+    routine: "Flexible after work",
+    keyPhrase: "Knows where gate remote is kept",
+    note: "Can cover laundry and lock-up after physio.",
     initials: "FZ",
-    availability: "Can cover after 7:45pm",
-    accent: "#9a6cff",
+    nextTask: "Collect laundry before 5pm",
+    accent: "#7c4dff",
   },
   {
     id: "siti",
@@ -137,12 +126,12 @@ const seedHelpers: Helper[] = [
     role: "medication",
     relationship: "Day helper",
     phone: "+65 9001 3388",
-    shift: "8:00am to 2:00pm",
-    nextTask: "Update the glucose log and note appetite before lunch.",
-    note: "Usually sends a photo of the chart after the morning round.",
-    initials: "SI",
-    availability: "Hands over at 2pm",
-    accent: "#ff8a5b",
+    routine: "8am to 2pm",
+    keyPhrase: "Sends photo of morning chart",
+    note: "Updates glucose log before lunch daily.",
+    initials: "ST",
+    nextTask: "Morning check at 9am",
+    accent: "#e85d3f",
   },
   {
     id: "jon",
@@ -150,304 +139,259 @@ const seedHelpers: Helper[] = [
     role: "transport",
     relationship: "Backup driver",
     phone: "+65 8891 2240",
-    shift: "On-call backup",
-    nextTask: "Stand by if Adrian gets delayed by school traffic.",
-    note: "Needs the clinic level and patient wheel-chair note in the message.",
+    routine: "On-call",
+    keyPhrase: "Needs clinic level in the message",
+    note: "Stands by if Adrian held up by traffic.",
     initials: "JN",
-    availability: "Usually replies within 15 min",
-    accent: "#4d88ff",
+    nextTask: "Standby for clinic tomorrow",
+    accent: "#3b6edb",
   },
 ];
 
-const seedNotes: HandoffNote[] = [
-  {
-    id: "n1",
-    title: "Night medicine tray",
-    detail: "Refill is already labelled for Monday to Wednesday. Blue tray stays on the right shelf.",
-    time: "4:40pm",
-  },
-  {
-    id: "n2",
-    title: "Clinic pickup",
-    detail: "Bring the pink referral letter and park at the sheltered side entrance near Lobby B.",
-    time: "2:15pm",
-  },
-  {
-    id: "n3",
-    title: "Dinner preference",
-    detail: "Keep rice soft tonight and leave tea in the small flask on the counter.",
-    time: "11:05am",
-  },
+const initialNotes: HandoffNote[] = [
+  { id: "n1", text: "Night medicine tray ready — blue folder on dining table", time: "4:40pm", role: "medication" },
+  { id: "n2", text: "Bring pink referral letter for clinic — park at sheltered side", time: "2:15pm", role: "transport" },
+  { id: "n3", text: "Keep rice soft tonight — tea flask on counter", time: "11:05am", role: "meals" },
 ];
-
-const defaultState: AppState = {
-  selectedRole: "medication",
-  selectedHelperId: "mei-lin",
-  selectedTab: "today",
-  notes: seedNotes,
-};
 
 export default function TrustedHelperListPage() {
-  const [appState, setAppState] = useState<AppState>(defaultState);
-  const [dialState, setDialState] = useState<{
-    helperId: string;
-    mode: "call" | "message" | "handoff";
-  } | null>(null);
+  const [selectedRole, setSelectedRole] = useState<RoleId>("medication");
+  const [selectedHelper, setSelectedHelper] = useState<Helper | null>(null);
+  const [showSheet, setShowSheet] = useState(false);
+  const [handoffNotes, setHandoffNotes] = useState<HandoffNote[]>(initialNotes);
+  const [flashMessage, setFlashMessage] = useState<string | null>(null);
 
-  useEffect(() => {
-    if (!dialState) return;
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false, align: "start" });
 
-    const timeout = window.setTimeout(() => setDialState(null), 1400);
-    return () => window.clearTimeout(timeout);
-  }, [dialState]);
+  const roleHelpers = helpers.filter((h) => h.role === selectedRole);
 
-  const roleHelpers = useMemo(
-    () => seedHelpers.filter((helper) => helper.role === appState.selectedRole),
-    [appState.selectedRole],
+  const onRoleSelect = useCallback(
+    (role: RoleId) => {
+      setSelectedRole(role);
+      setSelectedHelper(null);
+      setShowSheet(false);
+      const index = ["medication", "transport", "meals", "home"].indexOf(role);
+      emblaApi?.scrollTo(index);
+    },
+    [emblaApi]
   );
 
-  const selectedHelper =
-    seedHelpers.find((helper) => helper.id === appState.selectedHelperId) ?? roleHelpers[0] ?? seedHelpers[0];
-
   useEffect(() => {
-    if (!selectedHelper || roleHelpers.some((helper) => helper.id === selectedHelper.id)) return;
-
-    setAppState((current) => ({
-      ...current,
-      selectedHelperId: roleHelpers[0]?.id ?? current.selectedHelperId,
-    }));
-  }, [roleHelpers, selectedHelper]);
-
-  function chooseRole(role: RoleId) {
-    const firstHelper = seedHelpers.find((helper) => helper.role === role);
-    setAppState((current) => ({
-      ...current,
-      selectedRole: role,
-      selectedHelperId: firstHelper?.id ?? current.selectedHelperId,
-    }));
-  }
-
-  function runAction(mode: "call" | "message" | "handoff") {
-    if (!selectedHelper) return;
-
-    setDialState({ helperId: selectedHelper.id, mode });
-
-    if (mode !== "handoff") return;
-
-    const role = roleMeta[selectedHelper.role];
-    const nextNote: HandoffNote = {
-      id: `${selectedHelper.id}-${appState.notes.length + 1}`,
-      title: `${role.label} note sent`,
-      detail: `Sent ${selectedHelper.name} the latest note: ${selectedHelper.nextTask}`,
-      time: "Just now",
+    if (!emblaApi) return;
+    const onSelect = () => {
+      const index = emblaApi.selectedScrollSnap();
+      const roles: RoleId[] = ["medication", "transport", "meals", "home"];
+      setSelectedRole(roles[index]);
+      setSelectedHelper(null);
+      setShowSheet(false);
     };
+    emblaApi.on("select", onSelect);
+    return () => {
+      emblaApi.off("select", onSelect);
+    };
+  }, [emblaApi]);
 
-    setAppState((current) => ({
-      ...current,
-      notes: [nextNote, ...current.notes].slice(0, 5),
-      selectedTab: "notes",
-    }));
-  }
+  const openSheet = (helper: Helper) => {
+    setSelectedHelper(helper);
+    setShowSheet(true);
+  };
 
-  const currentRole = roleMeta[appState.selectedRole];
+  const closeSheet = () => {
+    setShowSheet(false);
+    setTimeout(() => setSelectedHelper(null), 300);
+  };
+
+  const sendHandoff = () => {
+    if (!selectedHelper) return;
+    const newNote: HandoffNote = {
+      id: `n${Date.now()}`,
+      text: `Handed off to ${selectedHelper.name} — ${selectedHelper.nextTask}`,
+      time: "Just now",
+      role: selectedHelper.role,
+    };
+    setHandoffNotes([newNote, ...handoffNotes].slice(0, 5));
+    setFlashMessage(`Handoff sent to ${selectedHelper.name}`);
+    setTimeout(() => setFlashMessage(null), 2000);
+    closeSheet();
+  };
+
+  const simulateCall = () => {
+    if (!selectedHelper) return;
+    setFlashMessage(`Calling ${selectedHelper.name}...`);
+    setTimeout(() => setFlashMessage(null), 2000);
+  };
+
+  const simulateMessage = () => {
+    if (!selectedHelper) return;
+    setFlashMessage(`Opening message for ${selectedHelper.name}...`);
+    setTimeout(() => setFlashMessage(null), 2000);
+  };
 
   return (
-    <main
-      className={`${styles.page} ${sora.variable}`}
-      style={{ fontFamily: "var(--font-trusted-helper-list), sans-serif" }}
-    >
+    <main className={`${styles.page} ${dmSans.variable}`}>
       <Link href="/" className={styles.backLink}>
-        ← Back to gallery
+        <span className={styles.backArrow}>←</span>
+        <span>Back to gallery</span>
       </Link>
 
-      <section className={styles.hero}>
-        <p className={styles.eyebrow}>Family caregiving</p>
-        <h1 className={styles.title}>Find the right helper before someone needs to step in.</h1>
-        <p className={styles.lede}>
-          Keep your helpers, their routines, and key notes in one place — ready whenever someone needs to take over.
-        </p>
-      </section>
+      <div className={styles.kiosk}>
+        <header className={styles.header}>
+          <p className={styles.eyebrow}>Family caregiving</p>
+          <h1 className={styles.title}>Find the right helper before someone needs to step in.</h1>
+          <p className={styles.lede}>Tap a role, then tap the person you need.</p>
+        </header>
 
-      <div className={styles.stage}>
-        <div className={styles.phone}>
-          <div className={styles.notch} />
-          <div className={styles.screen}>
-            <header className={styles.statusBar}>
-              <span>9:41</span>
-              <span>Care list</span>
-              <span>5G</span>
-            </header>
-
-            <section className={styles.topCard}>
-              <div>
-                <p className={styles.topLabel}>Tonight&apos;s focus</p>
-                <h2 className={styles.topTitle}>{currentRole.summary}</h2>
-                <p className={styles.topMeta}>{currentRole.urgency}</p>
-              </div>
-              <button
-                type="button"
-                className={styles.tapButton}
-                onClick={() => chooseRole(appState.selectedRole)}
-              >
-                Open
-              </button>
-            </section>
-
-            <section className={styles.roleChooser}>
-              <p className={styles.sectionPrompt}>{currentRole.prompt}</p>
-              <div className={styles.roleRow}>
-                {(Object.keys(roleMeta) as RoleId[]).map((role) => {
-                  const helperCount = seedHelpers.filter((helper) => helper.role === role).length;
-                  const meta = roleMeta[role];
-                  const active = appState.selectedRole === role;
-
-                  return (
-                    <button
-                      key={role}
-                      type="button"
-                      className={`${styles.roleChip} ${active ? styles.roleChipActive : ""}`}
-                      style={{
-                        borderColor: active ? meta.accent : "rgba(255,255,255,0.08)",
-                        background: active ? `${meta.accent}22` : "rgba(8, 16, 30, 0.72)",
-                      }}
-                      onClick={() => chooseRole(role)}
-                    >
-                      <span>{meta.label}</span>
-                      <strong>{helperCount}</strong>
-                    </button>
-                  );
-                })}
-              </div>
-            </section>
-
-            <section className={styles.tabRow}>
-              {([
-                ["today", "Today"],
-                ["helpers", "Helpers"],
-                ["notes", "Notes"],
-              ] as [TabId, string][]).map(([tab, label]) => (
-                <button
-                  key={tab}
-                  type="button"
-                  className={`${styles.tabButton} ${appState.selectedTab === tab ? styles.tabButtonActive : ""}`}
-                  onClick={() => setAppState((current) => ({ ...current, selectedTab: tab }))}
-                >
-                  {label}
-                </button>
-              ))}
-            </section>
-
-            <div className={styles.contentArea}>
-              {appState.selectedTab === "notes" ? (
-                <div className={styles.notesList}>
-                  {appState.notes.map((note) => (
-                    <article key={note.id} className={styles.noteCard}>
-                      <p className={styles.noteTime}>{note.time}</p>
-                      <h3>{note.title}</h3>
-                      <p>{note.detail}</p>
-                    </article>
-                  ))}
-                </div>
-              ) : (
-                <div className={styles.helperStack}>
-                  {roleHelpers.map((helper, index) => {
-                    const active = selectedHelper?.id === helper.id;
-
-                    return (
-                      <motion.button
-                        key={helper.id}
-                        type="button"
-                        className={`${styles.helperCard} ${active ? styles.helperCardActive : ""}`}
-                        initial={{ opacity: 0, y: 14 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: index * 0.06, duration: 0.28, ease: "easeOut" }}
-                        onClick={() =>
-                          setAppState((current) => ({
-                            ...current,
-                            selectedHelperId: helper.id,
-                            selectedTab: "helpers",
-                          }))
-                        }
-                        style={{
-                          borderColor: active ? helper.accent : "rgba(255,255,255,0.08)",
-                          boxShadow: active ? `0 18px 40px ${helper.accent}22` : "none",
-                        }}
-                      >
-                        <span className={styles.helperAvatar} style={{ background: helper.accent }}>
-                          {helper.initials}
-                        </span>
-                        <span className={styles.helperBody}>
-                          <span className={styles.helperTopLine}>
-                            <strong>{helper.name}</strong>
-                            <em>{helper.availability}</em>
-                          </span>
-                          <span className={styles.helperMeta}>{helper.relationship}</span>
-                          <span className={styles.helperTask}>{helper.nextTask}</span>
-                        </span>
-                      </motion.button>
-                    );
-                  })}
-                </div>
-              )}
+        <div className={styles.roleCarousel}>
+          <div className={styles.embla} ref={emblaRef}>
+            <div className={styles.emblaContainer}>
+              {(Object.keys(roleMeta) as RoleId[]).map((role) => {
+                const meta = roleMeta[role];
+                const count = helpers.filter((h) => h.role === role).length;
+                const active = selectedRole === role;
+                return (
+                  <button
+                    key={role}
+                    type="button"
+                    className={`${styles.roleSlide} ${active ? styles.roleSlideActive : ""}`}
+                    onClick={() => onRoleSelect(role)}
+                    style={
+                      {
+                        "--role-accent": meta.accent,
+                        "--role-bg": meta.bg,
+                      } as React.CSSProperties
+                    }
+                  >
+                    <span className={styles.roleLabel}>{meta.label}</span>
+                    <span className={styles.roleCount}>{count}</span>
+                  </button>
+                );
+              })}
             </div>
-
-            <AnimatePresence mode="wait">
-              {selectedHelper ? (
-                <motion.section
-                  key={selectedHelper.id}
-                  className={styles.helperSheet}
-                  initial={{ opacity: 0, y: 24 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 16 }}
-                  transition={{ duration: 0.22, ease: "easeOut" }}
-                >
-                  <div className={styles.sheetHeader}>
-                    <div>
-                      <p className={styles.sheetLabel}>{selectedHelper.relationship}</p>
-                      <h3>{selectedHelper.name}</h3>
-                    </div>
-                    <span className={styles.sheetBadge}>{selectedHelper.shift}</span>
-                  </div>
-
-                  <p className={styles.sheetTask}>{selectedHelper.note}</p>
-
-                  <div className={styles.actionRow}>
-                    <button type="button" className={styles.actionButton} onClick={() => runAction("call")}>
-                      Call
-                    </button>
-                    <button type="button" className={styles.actionButton} onClick={() => runAction("message")}>
-                      Message
-                    </button>
-                    <button type="button" className={styles.actionButtonPrimary} onClick={() => runAction("handoff")}>
-                      Send note
-                    </button>
-                  </div>
-
-                  <AnimatePresence>
-                    {dialState?.helperId === selectedHelper.id ? (
-                      <motion.div
-                        className={styles.dialBanner}
-                        initial={{ opacity: 0, scale: 0.96 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 0.98 }}
-                      >
-                        {dialState.mode === "call" && `Calling ${selectedHelper.name}...`}
-                        {dialState.mode === "message" && `Opening message for ${selectedHelper.name}...`}
-                        {dialState.mode === "handoff" && `Note sent to ${selectedHelper.name}.`}
-                      </motion.div>
-                    ) : null}
-                  </AnimatePresence>
-                </motion.section>
-              ) : null}
-            </AnimatePresence>
-
-            <footer className={styles.bottomNav}>
-              <span className={styles.navActive}>Today</span>
-              <span>Helpers</span>
-              <span>Notes</span>
-            </footer>
           </div>
         </div>
+
+        <div className={styles.promptBar}>
+          <p>{roleMeta[selectedRole].prompt}</p>
+        </div>
+
+        <div className={styles.helperGrid}>
+          {roleHelpers.map((helper, i) => (
+            <motion.button
+              key={helper.id}
+              type="button"
+              className={styles.helperCard}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.08, duration: 0.35 }}
+              onClick={() => openSheet(helper)}
+              style={{ "--card-accent": helper.accent } as React.CSSProperties}
+            >
+              <div className={styles.cardTop}>
+                <span className={styles.initials}>{helper.initials}</span>
+                <span className={styles.relationship}>{helper.relationship}</span>
+              </div>
+              <div className={styles.cardName}>{helper.name}</div>
+              <div className={styles.cardTask}>{helper.nextTask}</div>
+            </motion.button>
+          ))}
+        </div>
+
+        <AnimatePresence>
+          {showSheet && selectedHelper && (
+            <motion.div
+              className={styles.sheetOverlay}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={closeSheet}
+            >
+              <motion.div
+                className={styles.handoffSheet}
+                initial={{ y: "100%" }}
+                animate={{ y: 0 }}
+                exit={{ y: "100%" }}
+                transition={{ type: "spring", damping: 25, stiffness: 200 }}
+                onClick={(e) => e.stopPropagation()}
+                style={{ "--sheet-accent": selectedHelper.accent } as React.CSSProperties}
+              >
+                <div className={styles.sheetHandle} />
+
+                <div className={styles.sheetHeader}>
+                  <div className={styles.sheetIdentity}>
+                    <span className={styles.sheetInitials}>{selectedHelper.initials}</span>
+                    <div>
+                      <h2 className={styles.sheetName}>{selectedHelper.name}</h2>
+                      <p className={styles.sheetRole}>{selectedHelper.relationship}</p>
+                    </div>
+                  </div>
+                  <span className={styles.sheetRoutine}>{selectedHelper.routine}</span>
+                </div>
+
+                <div className={styles.sheetBody}>
+                  <div className={styles.sheetBlock}>
+                    <p className={styles.sheetLabel}>Key thing to remember</p>
+                    <p className={styles.sheetText}>{selectedHelper.keyPhrase}</p>
+                  </div>
+
+                  <div className={styles.sheetBlock}>
+                    <p className={styles.sheetLabel}>Today&apos;s task</p>
+                    <p className={styles.sheetText}>{selectedHelper.nextTask}</p>
+                  </div>
+
+                  <div className={styles.sheetBlock}>
+                    <p className={styles.sheetLabel}>Quick note</p>
+                    <p className={styles.sheetText}>{selectedHelper.note}</p>
+                  </div>
+                </div>
+
+                <div className={styles.sheetActions}>
+                  <button type="button" className={styles.actionBtn} onClick={simulateCall}>
+                    <span>Call</span>
+                  </button>
+                  <button type="button" className={styles.actionBtn} onClick={simulateMessage}>
+                    <span>Message</span>
+                  </button>
+                  <button
+                    type="button"
+                    className={styles.actionBtnPrimary}
+                    onClick={sendHandoff}
+                  >
+                    <span>Send handoff</span>
+                  </button>
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        <div className={styles.notesRail}>
+          <h3 className={styles.notesTitle}>Recent handoffs</h3>
+          <div className={styles.notesList}>
+            {handoffNotes.map((note) => (
+              <div key={note.id} className={styles.noteItem}>
+                <span
+                  className={styles.noteDot}
+                  style={{ background: roleMeta[note.role].accent }}
+                />
+                <span className={styles.noteText}>{note.text}</span>
+                <span className={styles.noteTime}>{note.time}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <AnimatePresence>
+          {flashMessage && (
+            <motion.div
+              className={styles.flashBanner}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+            >
+              {flashMessage}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </main>
   );

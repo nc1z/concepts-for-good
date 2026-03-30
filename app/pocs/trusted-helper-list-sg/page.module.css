@@ -1,384 +1,487 @@
+/* Trusted Helper List — Kiosk-Immersive Design
+ * Full-screen, single-focus, oversized targets
+ * NO cards-and-pills, NO deep nesting, NO repetitive borders
+ */
+
 .page {
   min-height: 100vh;
-  padding: 2rem 1.25rem 4rem;
-  background:
-    radial-gradient(circle at top, rgba(255, 180, 148, 0.28), transparent 24rem),
-    linear-gradient(180deg, #fff8f2 0%, #f5efe8 45%, #efe6dc 100%);
-  color: #1c2130;
+  background: #0a0c12;
+  color: #f7f5f2;
+  font-family: var(--font-trusted-helper), system-ui, sans-serif;
+  padding: 0;
+  overflow-x: hidden;
 }
 
+/* Back link — minimal, tucked in corner */
 .backLink {
-  display: inline-flex;
+  position: fixed;
+  top: 1.5rem;
+  left: 1.5rem;
+  z-index: 100;
+  display: flex;
   align-items: center;
-  color: #42506a;
+  gap: 0.5rem;
+  color: rgba(247, 245, 242, 0.6);
   text-decoration: none;
-  font-size: 0.95rem;
-  margin-bottom: 1.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: color 0.2s ease;
 }
 
-.hero {
-  max-width: 42rem;
-  margin: 0 auto 2rem;
-  text-align: center;
+.backLink:hover {
+  color: #f7f5f2;
+}
+
+.backArrow {
+  font-size: 1.1rem;
+}
+
+/* Kiosk container — full viewport, single focus */
+.kiosk {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 5rem 1.5rem 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Header — left-aligned, oversized type */
+.header {
+  max-width: 680px;
 }
 
 .eyebrow {
   margin: 0 0 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
-  letter-spacing: 0.18em;
-  font-size: 0.72rem;
-  color: #9a6a4e;
+  color: rgba(247, 245, 242, 0.5);
 }
 
 .title {
-  margin: 0;
-  font-size: clamp(2.2rem, 5vw, 4rem);
-  line-height: 1.02;
+  margin: 0 0 1rem;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
 }
 
 .lede {
-  max-width: 34rem;
-  margin: 1rem auto 0;
-  font-size: 1rem;
-  line-height: 1.6;
-  color: #4d5567;
+  margin: 0;
+  font-size: 1.1rem;
+  line-height: 1.5;
+  color: rgba(247, 245, 242, 0.7);
+  max-width: 420px;
 }
 
-.stage {
+/* Role carousel — horizontal swipeable tabs */
+.roleCarousel {
+  margin-top: 0.5rem;
+}
+
+.embla {
+  overflow: hidden;
+}
+
+.emblaContainer {
   display: flex;
-  justify-content: center;
-  margin-top: 2rem;
+  gap: 0.75rem;
 }
 
-.phone {
-  width: min(100%, 24rem);
-  padding: 0.75rem;
-  border-radius: 2.6rem;
-  background: linear-gradient(180deg, #23283a 0%, #0c1120 100%);
-  box-shadow:
-    0 22px 80px rgba(24, 17, 24, 0.24),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.14);
+.roleSlide {
+  flex: 0 0 auto;
+  min-width: 140px;
+  padding: 1.25rem 1.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: none;
+  border-radius: 1rem;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  transition: all 0.25s ease;
+}
+
+.roleSlide:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.roleSlideActive {
+  background: var(--role-bg);
+  box-shadow: 0 0 40px var(--role-bg);
+}
+
+.roleSlideActive .roleLabel {
+  color: var(--role-accent);
+}
+
+.roleSlideActive .roleCount {
+  color: var(--role-accent);
+  opacity: 0.8;
+}
+
+.roleLabel {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #f7f5f2;
+  transition: color 0.25s ease;
+}
+
+.roleCount {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: rgba(247, 245, 242, 0.5);
+  transition: color 0.25s ease;
+}
+
+/* Prompt bar — simple text, no box */
+.promptBar {
+  padding: 0.5rem 0;
+}
+
+.promptBar p {
+  margin: 0;
+  font-size: 1rem;
+  color: rgba(247, 245, 242, 0.6);
+}
+
+/* Helper grid — asymmetric layout, breaking the grid */
+.helperGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1rem;
+}
+
+/* Helper cards — minimal, no borders, color accent only on hover/active */
+.helperCard {
+  padding: 1.25rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: none;
+  border-radius: 1.25rem;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  transition: all 0.25s ease;
+}
+
+.helperCard:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-2px);
+}
+
+.helperCard:active {
+  transform: translateY(0);
+}
+
+.cardTop {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.initials {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background: var(--card-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: white;
+  flex-shrink: 0;
+}
+
+.relationship {
+  font-size: 0.8rem;
+  color: rgba(247, 245, 242, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.cardName {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #f7f5f2;
+}
+
+.cardTask {
+  font-size: 0.9rem;
+  color: rgba(247, 245, 242, 0.6);
+  line-height: 1.4;
+}
+
+/* Handoff sheet — bottom sheet, full width on mobile */
+.sheetOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 200;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.handoffSheet {
+  width: 100%;
+  max-width: 560px;
+  background: #14161f;
+  border-radius: 1.5rem 1.5rem 0 0;
+  padding: 1.5rem;
   position: relative;
 }
 
-.notch {
-  position: absolute;
-  top: 1rem;
-  left: 50%;
-  width: 8rem;
-  height: 1.4rem;
-  margin-left: -4rem;
-  border-radius: 999px;
-  background: #090d18;
-  z-index: 2;
+.sheetHandle {
+  width: 3rem;
+  height: 0.3rem;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 0.15rem;
+  margin: 0 auto 1.5rem;
 }
 
-.screen {
-  min-height: 44rem;
-  border-radius: 2rem;
-  padding: 1.1rem 1rem 1rem;
-  background:
-    radial-gradient(circle at top left, rgba(255, 255, 255, 0.12), transparent 16rem),
-    linear-gradient(180deg, #13203a 0%, #0c1220 100%);
-  color: #f6f3ec;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.statusBar {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.78rem;
-  letter-spacing: 0.08em;
-  color: rgba(246, 243, 236, 0.74);
-  padding: 0 0.3rem;
-}
-
-.topCard {
+.sheetHeader {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  margin-bottom: 1.5rem;
   gap: 1rem;
-  padding: 1.15rem;
-  border-radius: 1.4rem;
-  background: linear-gradient(145deg, rgba(255, 255, 255, 0.12), rgba(255, 138, 91, 0.2));
-  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.topLabel,
-.sheetLabel,
-.noteTime {
-  margin: 0;
-  font-size: 0.75rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: rgba(246, 243, 236, 0.62);
+.sheetIdentity {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
-.topTitle {
-  margin: 0.35rem 0 0;
-  font-size: 1.35rem;
-  line-height: 1.15;
+.sheetInitials {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  background: var(--sheet-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: white;
+  flex-shrink: 0;
 }
 
-.topMeta {
-  margin: 0.45rem 0 0;
-  font-size: 0.9rem;
-  color: rgba(246, 243, 236, 0.72);
-}
-
-.tapButton {
-  border: 0;
-  border-radius: 999px;
-  padding: 0.7rem 1rem;
-  background: rgba(255, 255, 255, 0.9);
-  color: #111826;
-  font: inherit;
+.sheetName {
+  margin: 0 0 0.25rem;
+  font-size: 1.5rem;
   font-weight: 600;
+  color: #f7f5f2;
 }
 
-.roleChooser {
+.sheetRole {
+  margin: 0;
+  font-size: 0.9rem;
+  color: rgba(247, 245, 242, 0.6);
+}
+
+.sheetRoutine {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(247, 245, 242, 0.4);
+  background: rgba(255, 255, 255, 0.08);
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  white-space: nowrap;
+}
+
+.sheetBody {
   display: flex;
   flex-direction: column;
-  gap: 0.7rem;
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
 }
 
-.sectionPrompt {
+.sheetBlock {
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 0.75rem;
+}
+
+.sheetLabel {
+  margin: 0 0 0.5rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(247, 245, 242, 0.4);
+}
+
+.sheetText {
   margin: 0;
-  font-size: 0.92rem;
-  color: rgba(246, 243, 236, 0.82);
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #f7f5f2;
 }
 
-.roleRow {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.6rem;
-}
-
-.roleChip {
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 1.1rem;
-  padding: 0.85rem 0.9rem;
-  color: #f6f3ec;
+/* Sheet actions — large tap targets */
+.sheetActions {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font: inherit;
+  gap: 0.75rem;
 }
 
-.roleChipActive {
-  transform: translateY(-1px);
-}
-
-.tabRow {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0.45rem;
-}
-
-.tabButton {
-  border: 0;
-  border-radius: 999px;
-  padding: 0.6rem 0.75rem;
-  background: rgba(255, 255, 255, 0.06);
-  color: rgba(246, 243, 236, 0.72);
-  font: inherit;
-}
-
-.tabButtonActive {
-  background: rgba(255, 255, 255, 0.14);
-  color: #fff;
-}
-
-.contentArea {
+.actionBtn,
+.actionBtnPrimary {
   flex: 1;
-  min-height: 13rem;
+  padding: 1rem 1.25rem;
+  border: none;
+  border-radius: 0.75rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-.helperStack,
+.actionBtn {
+  background: rgba(255, 255, 255, 0.1);
+  color: #f7f5f2;
+}
+
+.actionBtn:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.actionBtnPrimary {
+  background: var(--sheet-accent);
+  color: white;
+}
+
+.actionBtnPrimary:hover {
+  filter: brightness(1.1);
+}
+
+/* Notes rail — minimal list, no borders */
+.notesRail {
+  margin-top: 1rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.notesTitle {
+  margin: 0 0 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: rgba(247, 245, 242, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
 .notesList {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
 }
 
-.helperCard,
-.noteCard {
-  border-radius: 1.35rem;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(8, 14, 28, 0.72);
-}
-
-.helperCard {
+.noteItem {
   display: flex;
-  gap: 0.85rem;
-  padding: 0.9rem;
-  text-align: left;
-  color: inherit;
-  font: inherit;
-}
-
-.helperCardActive {
-  background: rgba(18, 26, 45, 0.96);
-}
-
-.helperAvatar {
-  width: 3rem;
-  height: 3rem;
-  border-radius: 1rem;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  font-weight: 700;
-  flex-shrink: 0;
-}
-
-.helperBody {
-  display: flex;
-  flex-direction: column;
-  gap: 0.2rem;
-  min-width: 0;
-}
-
-.helperTopLine {
-  display: flex;
-  justify-content: space-between;
-  gap: 0.75rem;
-  align-items: baseline;
-}
-
-.helperTopLine strong {
-  font-size: 1rem;
-}
-
-.helperTopLine em {
-  font-size: 0.74rem;
-  color: rgba(246, 243, 236, 0.58);
-  font-style: normal;
-}
-
-.helperMeta {
-  color: rgba(246, 243, 236, 0.7);
-  font-size: 0.84rem;
-}
-
-.helperTask,
-.sheetTask,
-.noteCard p {
-  margin: 0;
-  color: rgba(246, 243, 236, 0.88);
-  font-size: 0.92rem;
-  line-height: 1.45;
-}
-
-.helperSheet {
-  margin-top: auto;
-  padding: 1rem;
-  border-radius: 1.55rem;
-  background: linear-gradient(180deg, rgba(248, 244, 236, 0.98), rgba(255, 238, 227, 0.95));
-  color: #18202c;
-}
-
-.sheetHeader {
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
   align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.75rem 0;
 }
 
-.sheetHeader h3 {
-  margin: 0.25rem 0 0;
-  font-size: 1.2rem;
+.noteDot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 0.35rem;
 }
 
-.sheetBadge {
-  background: rgba(24, 32, 44, 0.08);
-  border-radius: 999px;
-  padding: 0.45rem 0.7rem;
-  font-size: 0.72rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+.noteText {
+  flex: 1;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: rgba(247, 245, 242, 0.8);
 }
 
-.sheetLabel,
 .noteTime {
-  color: #7d6c61;
+  font-size: 0.8rem;
+  color: rgba(247, 245, 242, 0.4);
+  white-space: nowrap;
 }
 
-.sheetTask {
-  margin-top: 0.9rem;
-  color: #364050;
+/* Flash banner — simple toast */
+.flashBanner {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1a1c28;
+  color: #f7f5f2;
+  padding: 1rem 1.5rem;
+  border-radius: 0.75rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  z-index: 300;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
 }
 
-.actionRow {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0.55rem;
-  margin-top: 1rem;
-}
-
-.actionButton,
-.actionButtonPrimary {
-  border: 0;
-  border-radius: 1rem;
-  padding: 0.8rem 0.65rem;
-  font: inherit;
-  font-weight: 600;
-}
-
-.actionButton {
-  background: #ece2d6;
-  color: #283241;
-}
-
-.actionButtonPrimary {
-  background: #1f2d44;
-  color: #fffaf1;
-}
-
-.dialBanner {
-  margin-top: 0.85rem;
-  border-radius: 0.95rem;
-  padding: 0.85rem 0.95rem;
-  background: #ffe2cf;
-  color: #743d16;
-  font-weight: 600;
-}
-
-.noteCard {
-  padding: 0.95rem;
-}
-
-.noteCard h3 {
-  margin: 0.35rem 0 0.35rem;
-  font-size: 0.98rem;
-}
-
-.bottomNav {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  padding: 0.9rem 0.6rem 0.25rem;
-  color: rgba(246, 243, 236, 0.54);
-  font-size: 0.82rem;
-}
-
-.navActive {
-  color: #fff;
-}
-
+/* Responsive adjustments */
 @media (max-width: 640px) {
-  .page {
-    padding: 1rem 0.75rem 2.5rem;
+  .kiosk {
+    padding: 4rem 1rem 2rem;
+  }
+
+  .backLink {
+    top: 1rem;
+    left: 1rem;
+    font-size: 0.8rem;
   }
 
   .title {
-    font-size: clamp(2rem, 9vw, 3rem);
+    font-size: 1.75rem;
   }
 
-  .phone {
-    width: 100%;
+  .lede {
+    font-size: 1rem;
+  }
+
+  .roleSlide {
+    min-width: 120px;
+    padding: 1rem 1.25rem;
+  }
+
+  .helperGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .helperCard {
+    padding: 1rem;
+  }
+
+  .cardName {
+    font-size: 1.1rem;
+  }
+
+  .handoffSheet {
+    padding: 1.25rem;
+  }
+
+  .sheetInitials {
+    width: 3rem;
+    height: 3rem;
+    font-size: 1rem;
+  }
+
+  .sheetName {
+    font-size: 1.25rem;
+  }
+
+  .actionBtn,
+  .actionBtnPrimary {
+    padding: 0.875rem 1rem;
+    font-size: 0.95rem;
   }
 }

@@ -7,19 +7,19 @@ const poc = getPocBySlug("trusted-helper-list-sg");
 export const metadata: Metadata = {
   title: poc?.title ?? "Trusted Helper List",
   description:
-    poc?.summary ?? "Keep your care helpers and their notes in one place, ready whenever someone needs to step in.",
+    poc?.summary ?? "Keep the right helper one tap away with routines, handoff notes, and quick contact.",
   keywords: poc?.tags ?? ["Caregiving", "Family", "Contacts", "Singapore"],
   openGraph: {
     title: poc?.title ?? "Trusted Helper List",
     description:
-      poc?.summary ?? "Keep your care helpers and their notes in one place, ready whenever someone needs to step in.",
+      poc?.summary ?? "Keep the right helper one tap away with routines, handoff notes, and quick contact.",
     type: "website",
   },
   twitter: {
     card: "summary",
     title: poc?.title ?? "Trusted Helper List",
     description:
-      poc?.summary ?? "Keep your care helpers and their notes in one place, ready whenever someone needs to step in.",
+      poc?.summary ?? "Keep the right helper one tap away with routines, handoff notes, and quick contact.",
   },
 };
 
