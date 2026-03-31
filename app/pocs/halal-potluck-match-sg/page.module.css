@@ -1,0 +1,297 @@
+.page {
+  min-height: 100vh;
+  padding: 2rem clamp(1rem, 2vw, 2rem) 3.5rem;
+  color: #f9f4e7;
+  background:
+    radial-gradient(circle at 12% 12%, rgba(237, 154, 38, 0.28), transparent 44%),
+    radial-gradient(circle at 84% 18%, rgba(57, 118, 126, 0.26), transparent 48%),
+    linear-gradient(170deg, #1b1714 8%, #241f1b 42%, #111214 100%);
+  font-family: var(--font-manrope), sans-serif;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.backLink {
+  color: #f5d085;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.74rem;
+  text-decoration: none;
+}
+
+.firstScreen {
+  margin-top: 1.4rem;
+  max-width: 48rem;
+}
+
+.kicker {
+  margin: 0;
+  font-size: 0.72rem;
+  letter-spacing: 0.17em;
+  text-transform: uppercase;
+  color: #f5d085;
+}
+
+.firstScreen h1 {
+  margin: 0.65rem 0 0;
+  font-family: var(--font-fraunces), serif;
+  font-weight: 700;
+  font-size: clamp(1.9rem, 4vw, 3.6rem);
+  line-height: 1.05;
+  text-wrap: balance;
+}
+
+.lede {
+  margin: 0.9rem 0 0;
+  max-width: 40rem;
+  font-size: clamp(1rem, 1.7vw, 1.2rem);
+  color: #f6e8cc;
+}
+
+.heroButton {
+  display: inline-block;
+  margin-top: 1.2rem;
+  border-radius: 999px;
+  padding: 0.72rem 1.2rem;
+  background: #f5d085;
+  color: #21150f;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.stageWrap {
+  margin-top: 2.1rem;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: minmax(0, 1.4fr) minmax(15rem, 0.7fr);
+  align-items: start;
+}
+
+.selectorRail {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.groupButton {
+  border: 1px solid rgba(245, 208, 133, 0.45);
+  background: rgba(29, 28, 31, 0.64);
+  color: #f8f3e8;
+  border-radius: 14px;
+  padding: 0.62rem 0.8rem;
+  display: grid;
+  gap: 0.1rem;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.groupButton strong {
+  font-size: 0.76rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #f5d085;
+}
+
+.groupButtonActive {
+  border-color: #f5d085;
+  background: rgba(245, 208, 133, 0.18);
+}
+
+.stage {
+  position: relative;
+  min-height: 38rem;
+  overflow: hidden;
+  background: linear-gradient(140deg, rgba(35, 36, 29, 0.75), rgba(20, 24, 27, 0.8));
+}
+
+.tableSurface {
+  position: absolute;
+  left: -14%;
+  top: 39%;
+  width: 128%;
+  height: 31%;
+  border-radius: 42%;
+  transform: rotate(-2.6deg);
+  background:
+    radial-gradient(circle at 40% 42%, rgba(255, 226, 175, 0.22), rgba(127, 84, 42, 0.2) 45%, rgba(79, 48, 29, 0.4)),
+    linear-gradient(150deg, #5d3c2a 5%, #8b5a3f 56%, #4b2f22 96%);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.35);
+}
+
+.tableLabel {
+  position: absolute;
+  left: 49%;
+  top: 50%;
+  margin: 0;
+  transform: translate(-50%, -50%);
+  letter-spacing: 0.1em;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  color: rgba(255, 247, 226, 0.9);
+}
+
+.dishOrbit {
+  position: relative;
+  margin: 0;
+  min-height: inherit;
+  list-style: none;
+  padding: 0;
+}
+
+.dishItem {
+  position: absolute;
+  width: min(17.5rem, 42vw);
+  transform: translate(-50%, -50%);
+}
+
+.dishButton {
+  width: 100%;
+  border: 1px solid rgba(242, 233, 212, 0.2);
+  background: rgba(20, 20, 23, 0.76);
+  color: #fff9ea;
+  border-radius: 22px;
+  box-shadow: 0 14px 28px rgba(5, 6, 9, 0.25);
+  text-align: left;
+  padding: 0.72rem 0.82rem 0.82rem;
+  cursor: pointer;
+}
+
+.dishName {
+  margin: 0;
+  font-family: var(--font-fraunces), serif;
+  font-size: 1.04rem;
+  line-height: 1.2;
+}
+
+.dishMeta {
+  margin: 0.28rem 0 0;
+  font-size: 0.8rem;
+  color: rgba(255, 243, 218, 0.9);
+}
+
+.dishNote {
+  margin: 0.4rem 0 0;
+  font-size: 0.8rem;
+  color: rgba(248, 228, 193, 0.82);
+}
+
+.dishStatus {
+  margin: 0.5rem 0 0;
+  font-size: 0.8rem;
+  letter-spacing: 0.03em;
+}
+
+.compatible {
+  box-shadow: 0 0 0 1px rgba(117, 214, 136, 0.44), 0 18px 28px rgba(31, 70, 35, 0.4);
+}
+
+.notCompatible {
+  box-shadow: 0 0 0 1px rgba(234, 126, 98, 0.58), 0 18px 28px rgba(88, 33, 24, 0.46);
+}
+
+.coveragePanel {
+  margin-top: -4.7rem;
+  border: 1px solid rgba(245, 208, 133, 0.42);
+  border-radius: 20px;
+  padding: 1rem 1rem 1.1rem;
+  background: rgba(24, 24, 20, 0.83);
+}
+
+.panelEyebrow {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.11em;
+  font-size: 0.65rem;
+  color: #f5d085;
+}
+
+.panelScore {
+  margin: 0.54rem 0 0;
+  font-family: var(--font-fraunces), serif;
+  font-size: 1.55rem;
+  line-height: 1.15;
+}
+
+.panelLine {
+  margin: 0.7rem 0 0;
+  color: #f9ead0;
+  font-size: 0.93rem;
+}
+
+.panelHeading {
+  margin: 1rem 0 0;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.7rem;
+  color: #f5d085;
+}
+
+.flagList {
+  margin: 0.55rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.flagList li {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.9rem;
+  font-size: 0.85rem;
+}
+
+.flagList strong {
+  color: #f5d085;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.clearLine {
+  margin: 1rem 0 0;
+  color: #d6f1d4;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 920px) {
+  .stageWrap {
+    grid-template-columns: 1fr;
+  }
+
+  .stage {
+    min-height: 42rem;
+  }
+
+  .dishItem {
+    width: min(15.25rem, 68vw);
+  }
+
+  .coveragePanel {
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .page {
+    padding-inline: 0.8rem;
+  }
+
+  .firstScreen h1 {
+    font-size: clamp(1.7rem, 9vw, 2.5rem);
+  }
+
+  .stage {
+    min-height: 46rem;
+  }
+
+  .dishItem {
+    width: min(14rem, 72vw);
+  }
+}

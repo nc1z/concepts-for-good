@@ -12,6 +12,19 @@ export type PocCard = {
 
 export const pocCards: PocCard[] = [
   {
+    slug: "halal-potluck-match-sg",
+    title: "Halal Potluck Match",
+    category: "Social connection",
+    createdAt: "2026-03-31T15:15:41+08:00",
+    summary:
+      "Plan a neighbourhood potluck spread that respects halal, vegetarian, and allergy needs without awkward guesswork.",
+    impact:
+      "A radial dinner spread view that highlights dish gaps instantly so hosts can rebalance before guests arrive.",
+    theme: "civic",
+    tags: ["Community", "Food", "Inclusion", "Neighbourhood"],
+    model: "openai/gpt-5.4",
+  },
+  {
     slug: "homework-quiet-timer-sg",
     title: "Homework Quiet Timer",
     category: "Education equity",
