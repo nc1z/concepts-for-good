@@ -1809,7 +1809,8 @@
         "experience_goal": "organisers can host more thoughtfully without extra stress"
       },
       "implementation_tags": [],
-      "implemented": false
+      "implemented": false,
+      "built": true
     },
     {
       "id": "GOOD_SG-049",
