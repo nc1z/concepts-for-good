@@ -33,6 +33,8 @@ Read `NORTHSTAR.md` for product direction. Read `ideas/IDEATION.md` first. Then 
 
 2. **Improve existing entries**: find ideas whose `ui` field is thin, whose `suggested_libraries` are generic or outdated, or whose `distinctive_feature` is vague. Update them with sharper, more specific guidance. Prefer ideas that are not yet implemented (`"implemented": false`).
 
+**Title and summary naming:** Every `title` you write — new or improved — must pass the one-friend test: would the target user say these exact words to a friend? Banned patterns: `-Planner`, `-Notes` as a finder, `-Relay`, `-Flow`, `-Pulse`, `-Board`, `-Explorer`, `-Helper`, `-Builder`, `-Pack`; abstract nouns like `Chance` / `Window`; clinical terms (`Respite`, `Textile`, `PM2.5`); two-word cryptic phrases (`Item Life`). Good patterns: verb phrases ("Split the Rent"), "Near You" phrasing, plain noun phrases ("Senior Check-In"), "What to…" questions ("What to Bring to the Clinic"), "For…" beneficiary framing ("Meals for New Parents"). The `summary` must be one plain-English sentence describing what the user does or gets — not the app's architecture. See the full naming rules in the $pm-round skill.
+
 After editing the JSON, create a branch (`pm/enrich-ideas-<date>`), commit the changes, and open a PR with label `agent`. The PR title should be `PM: enrich GOOD_SG.json — <short summary>`. The body should list what was added or changed and why.
 
 **Do not implement any POC code. Do not push to main directly. Do not touch any file outside `ideas/GOOD_SG.json`.**

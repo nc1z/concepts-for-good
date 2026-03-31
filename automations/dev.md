@@ -36,7 +36,9 @@ Never hardcode or invent a timestamp.
 
 **UI anti-patterns (hard rules from `rules/ANTIPATTERNS_CODEX.md` — read it fully):** Do not build another cards-and-pills page. Do not apply the same `border + border-radius + box-shadow + background` formula to more than 2 element types. Do not use `border-radius: 999px` on more than one element type. Max 2 levels of visible bordered container nesting. At least one element must break the grid (overlap, bleed, asymmetry). Before pushing, run the self-check in Section 6 of that file — if any answer fails, redesign before opening the PR.
 
-**Copy quality:** Read `rules/CONTENT_RULES.md` before writing any user-facing copy. No sector jargon — if it sounds like a form or case file, rewrite it in plain English. All apostrophes in JSX must be `&apos;`. Run the content quality checklist before pushing.
+**Copy quality:** Read `rules/CONTENT_RULES.md` before writing any user-facing copy. No sector jargon — if it sounds like a form or case file, rewrite it in plain English. All apostrophes in JSX must be `&apos;`. Run the content quality checklist (all 16 items, Sections J and K) before pushing.
+
+**App title and card copy:** Before registering the card in `lib/pocs.ts`, apply the one-friend test from Section K of `rules/CONTENT_RULES.md` to the `title`. Would the target user say these exact words to a friend? Banned patterns: `-Planner`, `-Notes` as a finder, `-Relay`, `-Flow`, `-Pulse`, `-Board`, `-Explorer`, `-Helper`, `-Builder`, `-Pack`; abstract nouns like `Chance` / `Window`; clinical terms (`Respite`, `Textile`, `PM2.5`). Good patterns: verb phrases ("Split the Rent"), "Near You" phrasing, plain noun phrases ("Senior Check-In"), "What to…" questions. If the idea's title in `GOOD_SG.json` fails this test, rename it in both files before pushing.
 
 Follow the workflow in $dev-round exactly.
 

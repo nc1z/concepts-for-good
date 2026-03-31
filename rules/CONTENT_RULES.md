@@ -413,8 +413,78 @@ Run this checklist on every user-facing page before pushing. If any item fails, 
 - [ ] Is every piece of copy written for the target user named in the idea entry, not for a developer reading the code?
 - [ ] Does any copy use sector or domain jargon the target user would not naturally say? (Read each sentence aloud. If it sounds like a professional form, legal document, or internal system — rewrite it. See Section G.)
 - [ ] Are all apostrophes in JSX escaped as `&apos;`? (Unescaped `'` characters in JSX cause build failures.)
+- [ ] Does the app title pass the one-friend test (Section K)? Would the target user say these exact words to a friend? Does it use any banned pattern (`-Planner`, `-Notes` as a finder, `-Relay`, `-Flow`, `-Pulse`, `-Board`, `-Explorer`, `-Helper`, `-Builder`, `-Pack`, `Chance`/`Window`/`Pulse` as abstract nouns, clinical terms, two-word cryptic combos)?
+- [ ] Does the card summary in `lib/pocs.ts` describe what the user does or gets — not the app's architecture or feature list?
 
-**All 14 items must be checked before a PR can be considered complete for any user-facing page.**
+**All 16 items must be checked before a PR can be considered complete for any user-facing page.**
+
+---
+
+## K. App Title and Card Copy Rules
+
+The `title` in `lib/pocs.ts` and in `GOOD_SG.json` is the first — and often only — thing a visitor reads. It must pass the same plain-language test as all other copy. **If the idea's title field fails these rules, rename it in both `lib/pocs.ts` and `GOOD_SG.json` before pushing.**
+
+### The naming test
+
+Read the title aloud as if you are telling a neighbour on the street what the app is for. Would a resident, caregiver, or volunteer naturally say those words?
+
+**Bad:** No one says "I used the Rain Window Planner" or "I checked Carpark Chance" or "I opened the Accessible Toilet Notes."
+**Good:** They say "I checked when to leave in the rain" or "I found a carpark" or "I looked for accessible toilets near me."
+
+If the title sounds like an internal product name, a startup brand, or a government form — it fails.
+
+### Banned title patterns
+
+These patterns have shipped in this repo and must not recur:
+
+| Pattern | Example | Problem |
+|---|---|---|
+| `-Planner` suffix | Rest Day Planner, Rain Window Planner, Block Potluck Planner | "Planner" is generic filler — says nothing about who or what |
+| `-Notes` when it's a finder | Accessible Toilet Notes | Notes implies writing. If the user finds things, say so. |
+| `-Relay`, `-Flow`, `-Pulse` | Garden Task Relay, Device Donation Flow, HDB Resale Pulse | Ops/product jargon |
+| `-Board` | Errand Swap Board | App-builder speak |
+| `-Explorer` | Cause Explorer | Tech product name language |
+| `-Helper`, `-Builder`, `-Pack` | Market Trip Helper, Care Package Builder, Clinic Visit Pack | AI-slop suffixes — says nothing concrete |
+| `-Taster` | Apprenticeship Taster | Unusual; not Singapore speech |
+| Abstract noun for a real action | Carpark Chance | "Chance" means nothing here |
+| `Multi-` prefix | Multi-Language Help Card | Buries the actual purpose |
+| Technical or scientific terms | PM2.5 Care Guide | Target users don't say "PM2.5" |
+| Clinical / social-work terms | Respite Day Planner, Sibling Care Rotation, Textile Reuse | Professional register the user wouldn't use in speech |
+| Two-word cryptic phrases | Item Life, Bench Rest | No context, no meaning without explanation |
+| `Chance`, `Window`, `Pulse` as standalone nouns | Rain Window Planner, Carpark Chance | Metaphorical filler that obscures the function |
+
+### Good title patterns
+
+These work because they describe the task in words the user would actually say:
+
+| Pattern | Example | Why it works |
+|---|---|---|
+| Verb phrase — what you do | Split the Rent, Visit a Senior, Find a Carpark, Walk Together | Direct, task-shaped, human |
+| "Near You" phrasing | Accessible Toilets Near You, Find a Shaded Bench | Clear, spatial, honest about what it does |
+| Plain noun phrase with specificity | Quiet Places, Senior Check-In, Blood Donation Reminder | Simple; no jargon; clear audience or action |
+| "What to…" question form | What to Do on a Hazy Day, What to Bring to the Clinic | Conversational; answers a real felt need |
+| "For…" with beneficiary | Support for Domestic Workers, Meals for New Parents | Names the person; avoids clinical labels |
+
+### The one-friend test
+
+Before registering any title, ask: **"Would the target user use these exact words when describing this app to a friend?"**
+
+If no — rewrite until they would. This test overrides all other considerations.
+
+### Card summary rules
+
+The `summary` field in `lib/pocs.ts` must:
+- Be one sentence in plain English
+- Describe what the user gets or does — not the app's architecture or feature list
+- Sound like something a real person would say, not a product brief or design document
+- Never use any word from the banned list in Section D
+- Name the action or benefit, not the mechanism
+
+| Bad summary | Good summary |
+|---|---|
+| "A browser-only ambient board for caregiver trip planning." | "Check if it is dry enough to leave now before heading to your appointment." |
+| "A kanban-style task relay for volunteer garden coordination." | "Coordinate watering and chores in a shared garden without anyone missing their turn." |
+| "A respite scheduling tool for caregiver rotation windows." | "Coordinate short breaks so caregivers can rest without everything falling apart." |
 
 ---
 

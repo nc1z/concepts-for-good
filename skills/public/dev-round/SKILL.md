@@ -117,7 +117,13 @@ Use this value in `lib/pocs.ts`. Never hardcode.
 - Banned words in UI: `POC`, `demo`, `prototype`, `simulation`, `seed data`, `placeholder`, `mock`, `fake`, `component`, `scaffold`.
 - No sector jargon: terms like "handoff", "intake", "eligibility scheme", "dispatch" are practitioner language. If it sounds like a form or case file, rewrite in plain English.
 - JSX apostrophes: write `&apos;` not `'` (lint will fail otherwise).
-- Run the content quality checklist (Section J, all 14 items) before pushing.
+- Run the content quality checklist (Section J + Section K, all 16 items) before pushing.
+
+**Title and card copy (from `rules/CONTENT_RULES.md`, Section K — mandatory):**
+- Before registering the card in `lib/pocs.ts`, apply the one-friend test to the `title`: would the target user say these words to a friend? If no, rename it in both `lib/pocs.ts` and `GOOD_SG.json`.
+- Banned title patterns: `-Planner`, `-Notes` (when the app is a finder), `-Relay`, `-Flow`, `-Pulse`, `-Board`, `-Explorer`, `-Helper`, `-Builder`, `-Pack`, `-Taster`; abstract nouns like `Chance` / `Window` / `Pulse`; clinical terms (`Respite`, `Rotation`, `Textile`, `PM2.5`); two-word cryptic combos (`Item Life`, `Bench Rest`).
+- Good patterns: verb phrases ("Split the Rent"), "Near You" phrases, plain noun phrases ("Senior Check-In"), "What to…" questions ("What to Bring to the Clinic"), "For…" beneficiary framing ("Meals for New Parents").
+- The `summary` in `lib/pocs.ts` must describe what the user does or gets — not the app's architecture. One sentence, plain English, no jargon.
 
 ### 9. Commit with bot co-author
 

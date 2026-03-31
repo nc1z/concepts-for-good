@@ -34,7 +34,9 @@ Never hardcode or invent a timestamp.
 
 **UI design:** Run the `$frontend-design` skill before writing any UI code. Read the idea's `ui` field — `ui.direction` and `ui.interaction_model` are starting points. Install all `ui.suggested_libraries` before coding.
 
-**Copy quality:** Read `rules/CONTENT_RULES.md` before writing any user-facing copy. No sector jargon — if it sounds like a form or case file, rewrite it in plain English. All apostrophes in JSX must be `&apos;`. Run the content quality checklist before pushing.
+**Copy quality:** Read `rules/CONTENT_RULES.md` before writing any user-facing copy. No sector jargon — if it sounds like a form or case file, rewrite it in plain English. All apostrophes in JSX must be `&apos;`. Run the content quality checklist (all 16 items, Sections J and K) before pushing.
+
+**App title and card copy:** Before registering the card in `lib/pocs.ts`, apply the one-friend test from Section K of `rules/CONTENT_RULES.md` to the `title`. Would the target user say these exact words to a friend? Banned patterns: `-Planner`, `-Notes` as a finder, `-Relay`, `-Flow`, `-Pulse`, `-Board`, `-Explorer`, `-Helper`, `-Builder`, `-Pack`; abstract nouns like `Chance` / `Window`; clinical terms (`Respite`, `Textile`, `PM2.5`). Good patterns: verb phrases ("Split the Rent"), "Near You" phrasing, plain noun phrases ("Senior Check-In"), "What to…" questions. If the idea's title in `GOOD_SG.json` fails this test, rename it in both files before pushing.
 
 Follow the workflow in $dev-round exactly.
 

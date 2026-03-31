@@ -62,6 +62,7 @@ Use `ideas/IDEATION.md` first to understand category coverage, thin areas, and p
   - `ui.direction` is generic — sharpen it.
   - `ui.avoid` is empty or short — expand it.
   - `summary` or `target_user` is written for a developer audience — rewrite for the actual end user.
+  - `title` fails the one-friend test (see **Naming rules** below) — rename it.
 - Prefer improving entries that are **not yet implemented** (`"implemented": false`), as they will guide future Dev runs.
 
 ### 4) Check for duplicates
@@ -100,9 +101,66 @@ Use `ideas/IDEATION.md` first to understand category coverage, thin areas, and p
 - List existing entry IDs improved and what changed.
 - Remind: "Human: review and merge this PR when the ideas look good. Dev will pick up any entry with `\"implemented\": false` on its next run."
 
+## Naming rules — mandatory for every title and summary
+
+These rules apply to both new ideas and any existing entry being improved.
+
+### The one-friend test
+
+Read the title aloud as if describing the app to a neighbour on the street. Would the target user — a resident, caregiver, or volunteer — naturally say those words?
+
+**Bad:** No one says "I used the Rain Window Planner" or "I opened the Garden Task Relay."
+**Good:** They say "I checked when to leave in the rain" or "I coordinated the garden rota."
+
+If the title sounds like an internal product name, a startup brand, or a government form — it fails. Rewrite it.
+
+### Banned title patterns
+
+| Pattern | Example | Problem |
+|---|---|---|
+| `-Planner` suffix | Rest Day Planner, Block Potluck Planner | Generic filler — says nothing about who or what |
+| `-Notes` when it's a finder | Accessible Toilet Notes | Notes implies writing; if users find things, say so |
+| `-Relay`, `-Flow`, `-Pulse` | Garden Task Relay, Device Donation Flow | Ops/product jargon |
+| `-Board` | Errand Swap Board | App-builder speak |
+| `-Explorer` | Cause Explorer | Tech product name language |
+| `-Helper`, `-Builder`, `-Pack` | Market Trip Helper, Care Package Builder | AI-slop suffixes — says nothing concrete |
+| `-Taster` | Apprenticeship Taster | Unusual; not Singapore speech |
+| Abstract nouns for real actions | Carpark Chance | "Chance" means nothing here |
+| `Chance`, `Window`, `Pulse` as standalone nouns | Rain Window Planner | Metaphorical filler |
+| `Multi-` prefix | Multi-Language Help Card | Buries the actual purpose |
+| Technical / scientific terms | PM2.5 Care Guide | Target users don't say "PM2.5" |
+| Clinical / social-work terms | Respite Day Planner, Sibling Care Rotation, Textile Reuse | Professional register the user wouldn't use |
+| Two-word cryptic phrases | Item Life, Bench Rest | No meaning without context |
+
+### Good title patterns
+
+| Pattern | Example |
+|---|---------|
+| Verb phrase — what you do | Split the Rent, Visit a Senior, Find a Carpark |
+| "Near You" phrasing | Accessible Toilets Near You, Find a Shaded Bench |
+| Plain noun phrase with specificity | Quiet Places, Senior Check-In, Blood Donation Reminder |
+| "What to…" question form | What to Do on a Hazy Day, What to Bring to the Clinic |
+| "For…" with beneficiary | Support for Domestic Workers, Meals for New Parents |
+
+### Summary rules
+
+The `summary` field must:
+- Be one sentence in plain English
+- Describe what the user does or gets — not the app's architecture or feature list
+- Sound like something the target user would say, not a design document
+- Never use sector jargon, clinical terms, or any word from `rules/CONTENT_RULES.md` Section D banned list
+
+**Bad:** "A kanban-style task relay board for volunteer garden coordination."
+**Good:** "Coordinate watering and chores in a shared garden without anyone missing their turn."
+
+---
+
 ## Quality bar for new ideas
 
 Every new idea must pass these checks before committing:
+- [ ] `title` passes the one-friend test — would the target user say these exact words to a friend?
+- [ ] `title` uses none of the banned patterns listed in the naming rules above.
+- [ ] `summary` describes what the user does or gets, in one plain-English sentence.
 - [ ] `ui.direction` is visually distinct from all other not-yet-implemented entries.
 - [ ] `ui.interaction_model` describes a concrete interaction (not "user clicks around").
 - [ ] `ui.suggested_libraries` are real npm packages appropriate for the interaction model.
