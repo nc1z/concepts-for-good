@@ -13,11 +13,11 @@ export type PocCard = {
 export const pocCards: PocCard[] = [
   {
     slug: "homework-quiet-timer-sg",
-    title: "Homework Quiet Timer",
+    title: "Quiet Study Timer",
     category: "Education equity",
     createdAt: "2026-03-30T13:57:44+08:00",
     summary:
-      "Create short, calm homework sessions for children in noisy homes.",
+      "A calm focus timer for children doing homework in noisy homes.",
     impact:
       "A breathing wave companion that helps children focus in short bursts with gentle visual cues instead of pressure.",
     theme: "civic",
@@ -26,7 +26,7 @@ export const pocCards: PocCard[] = [
   },
   {
     slug: "legal-aid-prep-sg",
-    title: "Legal Aid Prep",
+    title: "Prepare for Legal Help",
     category: "Support",
     createdAt: "2026-03-29T20:27:58+08:00",
     summary:
@@ -39,11 +39,11 @@ export const pocCards: PocCard[] = [
   },
   {
     slug: "trusted-helper-list-sg",
-    title: "Trusted Helper List",
+    title: "My Care Helpers",
     category: "Caregiving",
     createdAt: "2026-03-29T16:32:51+08:00",
     summary:
-      "Keep the right family helper one tap away, with routines, handoff notes, and quick contact actions inside a phone-style view.",
+      "Keep the right carer one tap away, with routines, handoff notes, and quick contact actions inside a phone-style view.",
     impact:
       "A caregiver phone shell that groups trusted helpers by role so the next call or handoff never turns into a search.",
     theme: "civic",
@@ -52,7 +52,7 @@ export const pocCards: PocCard[] = [
   },
   {
     slug: "healthy-hawker-budget-sg",
-    title: "Healthy Hawker Budget",
+    title: "Healthier Hawker Meals",
     category: "Wellness",
     createdAt: "2026-03-29T13:00:00+08:00",
     summary:
@@ -65,7 +65,7 @@ export const pocCards: PocCard[] = [
   },
   {
     slug: "low-cost-exercise-sg",
-    title: "Low-Cost Exercise",
+    title: "Exercise for Free",
     category: "Wellness",
     createdAt: "2026-03-29T10:15:00+08:00",
     summary:
@@ -78,7 +78,7 @@ export const pocCards: PocCard[] = [
   },
   {
     slug: "rest-day-planner-sg",
-    title: "Rest Day Planner",
+    title: "Plan Your Rest Day",
     category: "Inclusion",
     createdAt: "2026-03-28T22:45:00+08:00",
     summary:
@@ -104,20 +104,20 @@ export const pocCards: PocCard[] = [
   },
   {
     slug: "rain-window-planner-sg",
-    title: "Rain Window Planner",
+    title: "When to Leave in the Rain",
     category: "Urban access",
     createdAt: "2026-03-28T19:01:00+08:00",
     summary:
       "Check if it is dry enough to leave now, or how long to wait before heading to your appointment.",
     impact:
-      "An ambient forecast board that tells caregivers and wheelchair users whether to leave now or wait for a clearer window.",
+      "An ambient forecast board that tells caregivers and wheelchair users whether to leave now or wait for a drier window.",
     theme: "editorial",
     tags: ["Mobility", "Weather", "Caregiving", "data.gov.sg"],
     model: "anthropic/claude-sonnet-4.6",
   },
   {
     slug: "traffic-camera-check-sg",
-    title: "Traffic Camera Check",
+    title: "Live Road Cameras",
     category: "Urban access",
     createdAt: "2026-03-28T19:01:00+08:00",
     summary: "Check live traffic camera views along your route before heading out for a volunteer run or caregiver trip.",
@@ -128,7 +128,7 @@ export const pocCards: PocCard[] = [
   },
   {
     slug: "carpark-chance-sg",
-    title: "Carpark Chance",
+    title: "Find a Carpark",
     category: "Urban access",
     createdAt: "2026-03-28T18:56:00+08:00",
     summary:
@@ -141,7 +141,7 @@ export const pocCards: PocCard[] = [
   },
   {
     slug: "block-potluck-planner-sg",
-    title: "Block Potluck Planner",
+    title: "Block Potluck",
     category: "Social connection",
     createdAt: "2026-03-28T18:56:00+08:00",
     summary: "Plan a block potluck where everyone can see what's coming and where the gaps are.",
@@ -152,7 +152,7 @@ export const pocCards: PocCard[] = [
   },
   {
     slug: "rent-split-planner-sg",
-    title: "Rent Split Planner",
+    title: "Split the Rent",
     category: "Cost of living",
     createdAt: "2026-03-28T18:56:00+08:00",
     summary: "See exactly what each flatmate owes this month, with bills assigned and split in a glance.",
@@ -163,7 +163,7 @@ export const pocCards: PocCard[] = [
   },
   {
     slug: "food-donation-route-sg",
-    title: "Food Donation Route",
+    title: "Food Rescue Run",
     category: "Food security",
     createdAt: "2026-03-31T03:14:01+08:00",
     summary:
@@ -215,11 +215,11 @@ export const pocCards: PocCard[] = [
   },
   {
     slug: "elder-visit-planner-sg",
-    title: "Elder Visit Planner",
+    title: "Visit a Senior",
     category: "Community care",
     createdAt: "2026-03-28T15:05:00+08:00",
     summary:
-      "A weekly planner for organising volunteer visits for seniors across the neighbourhood.",
+      "A weekly board for organising volunteer visits for seniors across the neighbourhood.",
     impact:
       "A weekly calendar planner that makes open visit days easy to spot and fill.",
     theme: "civic",
@@ -228,7 +228,7 @@ export const pocCards: PocCard[] = [
   },
   {
     slug: "accessible-mall-route-sg",
-    title: "Accessible Mall Route",
+    title: "Wheelchair-Friendly Mall Guide",
     category: "Accessibility",
     createdAt: "2026-03-28T15:11:00+08:00",
     summary:
@@ -241,7 +241,7 @@ export const pocCards: PocCard[] = [
   },
   {
     slug: "mrt-lift-note-sg",
-    title: "MRT Lift Note",
+    title: "MRT Lift Checker",
     category: "Accessibility",
     createdAt: "2026-03-28T16:47:00+08:00",
     summary:
@@ -267,7 +267,7 @@ export const pocCards: PocCard[] = [
   },
   {
     slug: "accessible-toilet-notes-sg",
-    title: "Accessible Toilet Notes",
+    title: "Accessible Toilets Near You",
     category: "Accessibility",
     createdAt: "2026-03-28T17:01:00+08:00",
     summary:
