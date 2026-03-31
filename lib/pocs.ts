@@ -12,6 +12,19 @@ export type PocCard = {
 
 export const pocCards: PocCard[] = [
   {
+    slug: "help-a-neighbour-sg",
+    title: "Help a Neighbour",
+    category: "Community care",
+    createdAt: "2026-04-01T03:11:30+08:00",
+    summary:
+      "Post a small local request and get quick help from nearby neighbours.",
+    impact:
+      "An anonymous neighbourhood board where requests land as pinned notes and switch to matched as soon as someone steps in.",
+    theme: "civic",
+    tags: ["Community", "Neighbours", "Mutual aid", "Care"],
+    model: "openai/gpt-5.4",
+  },
+  {
     slug: "homework-quiet-timer-sg",
     title: "Quiet Study Timer",
     category: "Education equity",

@@ -1299,7 +1299,7 @@
     },
     {
       "id": "GOOD_SG-059",
-      "title": "Neighbour Help Request",
+      "title": "Help a Neighbour",
       "platform": "website",
       "folder": "web",
       "build_stack": "Next.js website",
@@ -1313,7 +1313,7 @@
         "simple filters or tags",
         "detail pages with call-to-action"
       ],
-      "prototype_goal": "Simulate the core value of Neighbour Help Request in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Help a Neighbour in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -1362,7 +1362,8 @@
         "avoid": "generic form; list without the board aesthetic; anything that exposes personal information",
         "experience_goal": "resident feels the warmth of a community where neighbours help each other"
       },
-      "implemented": false
+      "implemented": true,
+      "built": true
     },
     {
       "id": "GOOD_SG-091",

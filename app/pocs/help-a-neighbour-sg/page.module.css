@@ -1,0 +1,291 @@
+.page {
+  --paper: #f3e7d4;
+  --paper-alt: #f8f1e6;
+  --ink: #272218;
+  --accent: #cb5532;
+  --accent-soft: #ffe2c7;
+  --board: #d8b88b;
+  --line: #8d6f47;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 8% 12%, #fdf9f2 0, transparent 34%),
+    radial-gradient(circle at 88% 2%, #f8e7d0 0, transparent 42%),
+    linear-gradient(145deg, #f7eddf 0%, #ebd9bf 100%);
+  color: var(--ink);
+  padding: 2.2rem clamp(1rem, 3vw, 2.8rem) 3rem;
+  font-family: "Alegreya Sans", "Trebuchet MS", sans-serif;
+}
+
+.hero {
+  max-width: 56rem;
+  margin: 0 auto 1.3rem;
+}
+
+.eyebrow {
+  font-family: "Special Elite", "Courier New", monospace;
+  font-size: 0.8rem;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  margin: 0;
+  color: #54442b;
+}
+
+.title {
+  margin: 0.5rem 0 0;
+  font-family: "Fraunces", "Georgia", serif;
+  font-size: clamp(2rem, 4.8vw, 3.8rem);
+  line-height: 0.95;
+  max-width: 11ch;
+}
+
+.lede {
+  margin: 0.8rem 0 1.2rem;
+  font-size: clamp(1rem, 1.8vw, 1.2rem);
+  max-width: 39ch;
+}
+
+.primaryAction {
+  border: 0;
+  background: var(--ink);
+  color: #fff6eb;
+  padding: 0.76rem 1.3rem;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.primaryAction:hover {
+  transform: translateY(-2px);
+  background: #3a3429;
+}
+
+.boardSection {
+  max-width: 74rem;
+  margin: 0 auto;
+  position: relative;
+}
+
+.liveStrip {
+  position: absolute;
+  right: -0.8rem;
+  top: -1.2rem;
+  background: #b94422;
+  color: #fff6eb;
+  font-family: "Special Elite", "Courier New", monospace;
+  padding: 0.42rem 0.7rem;
+  transform: rotate(8deg);
+  z-index: 12;
+}
+
+.boardTop {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.filters {
+  display: inline-flex;
+  gap: 0.35rem;
+}
+
+.filterChip {
+  border: 1px solid #805f34;
+  background: rgba(255, 248, 236, 0.75);
+  padding: 0.32rem 0.7rem;
+  border-radius: 999px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.activeChip {
+  background: #1e1a14;
+  color: #fff;
+  border-color: #1e1a14;
+}
+
+.composer {
+  margin: 0.3rem 0 1rem;
+  padding: 1rem;
+  background: linear-gradient(180deg, #fdf6ec, #f7e5cb);
+  border: 2px dashed #9f7b48;
+  transform: rotate(-0.6deg);
+}
+
+.composerTitle {
+  margin: 0 0 0.2rem;
+  font-family: "Fraunces", "Georgia", serif;
+}
+
+.composerHint {
+  margin: 0 0 0.8rem;
+  color: #524125;
+}
+
+.composerGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.7rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.field input,
+.field select,
+.field textarea {
+  border: 1px solid #7e6242;
+  background: #fff9f0;
+  color: #261f15;
+  padding: 0.55rem 0.6rem;
+  border-radius: 6px;
+  font: inherit;
+}
+
+.field textarea {
+  resize: vertical;
+  min-height: 3.5rem;
+}
+
+.submitButton {
+  margin-top: 0.8rem;
+  border: 0;
+  background: var(--accent);
+  color: #fff;
+  padding: 0.66rem 1rem;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.board {
+  padding: 1.3rem 0.2rem 0.4rem;
+  background:
+    linear-gradient(to right, rgba(107, 78, 42, 0.22) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(107, 78, 42, 0.18) 1px, transparent 1px),
+    linear-gradient(180deg, #e6c79d 0%, #d4af7a 100%);
+  background-size: 28px 28px, 28px 28px, auto;
+  border: 6px solid var(--board);
+  box-shadow: inset 0 0 0 2px #9b7444;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 0.7rem;
+}
+
+.note {
+  position: relative;
+  min-height: 13.2rem;
+  padding: 1.1rem 0.95rem 0.9rem;
+  background: linear-gradient(165deg, var(--paper-alt) 0%, var(--paper) 100%);
+  box-shadow: 0 8px 20px rgba(32, 23, 8, 0.2);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.noteOpen {
+  border-left: 4px solid #c0552c;
+}
+
+.noteMatched {
+  border-left: 4px solid #2f7a43;
+  opacity: 0.9;
+}
+
+.pin {
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 25%, #fff 0, #cd5130 25%, #8c311b 100%);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+  margin: 0 auto 0.28rem;
+}
+
+.noteMeta {
+  margin: 0;
+  font-size: 0.8rem;
+  color: #5c4a30;
+  font-family: "Special Elite", "Courier New", monospace;
+}
+
+.noteTitle {
+  margin: 0.45rem 0 0.35rem;
+  font-family: "Fraunces", "Georgia", serif;
+  line-height: 1.06;
+  font-size: 1.14rem;
+}
+
+.noteDetails {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.3;
+}
+
+.noteWindow {
+  margin: 0.55rem 0 0;
+  font-size: 0.84rem;
+  color: #4e3f29;
+  font-weight: 700;
+}
+
+.notePosted {
+  margin: 0.65rem 0 0;
+  font-size: 0.78rem;
+  color: #5a4830;
+}
+
+.helpButton {
+  margin-top: auto;
+  border: 0;
+  background: #241d13;
+  color: #fff6eb;
+  padding: 0.45rem 0.65rem;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.matchedLabel {
+  margin: auto 0 0;
+  color: #255f35;
+  font-weight: 700;
+}
+
+.matchFlash {
+  position: absolute;
+  inset: auto 0.65rem 0.65rem;
+  background: var(--accent-soft);
+  color: #5e270f;
+  border: 1px dashed #a04a2a;
+  padding: 0.22rem 0.4rem;
+  text-align: center;
+  font-family: "Special Elite", "Courier New", monospace;
+  font-weight: 700;
+}
+
+.emptyState {
+  margin: 0.8rem 0 0;
+  font-weight: 700;
+}
+
+@media (max-width: 760px) {
+  .composerGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .liveStrip {
+    right: -0.2rem;
+    top: -0.95rem;
+    font-size: 0.78rem;
+  }
+
+  .board {
+    grid-template-columns: 1fr;
+  }
+}
