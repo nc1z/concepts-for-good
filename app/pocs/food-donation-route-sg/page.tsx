@@ -1,216 +1,114 @@
 "use client";
 
 import Link from "next/link";
-import { Space_Grotesk } from "next/font/google";
-import { motion, Reorder, useDragControls, useMotionValue } from "framer-motion";
+import { Bebas_Neue, IBM_Plex_Sans, Space_Mono } from "next/font/google";
+import { Reorder, useDragControls, useMotionValue } from "framer-motion";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import { defaultState, type AppState, type Stop } from "./data";
 import styles from "./page.module.css";
 
-const spaceGrotesk = Space_Grotesk({
+const bebas = Bebas_Neue({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-space",
+  weight: "400",
+  variable: "--font-bebas",
+  display: "swap",
 });
 
-const STORAGE_KEY = "cfg-food-donation-route-sg-v1";
+const plex = IBM_Plex_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-plex",
+  display: "swap",
+});
 
-// ─── SVG path helpers ──────────────────────────────────────────────────────
+const mono = Space_Mono({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-mono",
+  display: "swap",
+});
+
+const STORAGE_KEY = "cfg-food-donation-route-sg-v2";
 
 type Point = { x: number; y: number };
 
 function buildPath(points: Point[]): string {
   if (points.length < 2) return "";
-  let d = `M ${points[0].x} ${points[0].y}`;
+
+  let route = `M ${points[0].x} ${points[0].y}`;
+
   for (let i = 1; i < points.length; i++) {
     const prev = points[i - 1];
-    const cur = points[i];
-    const cy = (prev.y + cur.y) / 2;
-    d += ` C ${prev.x} ${cy}, ${cur.x} ${cy}, ${cur.x} ${cur.y}`;
+    const current = points[i];
+    const cy = (prev.y + current.y) / 2;
+    route += ` C ${prev.x} ${cy}, ${current.x} ${cy}, ${current.x} ${current.y}`;
   }
-  return d;
+
+  return route;
 }
 
-// ─── Stop card (uses Reorder.Item) ────────────────────────────────────────
-
-function StopCard({
+function StopRow({
   stop,
-  sequenceNumber,
-  isActive,
-  isDone,
+  index,
+  active,
+  done,
   nodeRef,
   onToggleActive,
   onToggleDone,
 }: {
   stop: Stop;
-  sequenceNumber: number;
-  isActive: boolean;
-  isDone: boolean;
+  index: number;
+  active: boolean;
+  done: boolean;
   nodeRef: React.RefObject<HTMLDivElement | null>;
   onToggleActive: () => void;
   onToggleDone: () => void;
 }) {
-  const isDropoff = stop.type === "Dropoff";
   const y = useMotionValue(0);
   const dragControls = useDragControls();
-
-  const cardClass = [
-    styles.stopCard,
-    !isActive && styles.stopCardInactive,
-    isDone && styles.stopCardDone,
-    isDropoff && styles.stopCardDropoff,
-  ]
-    .filter(Boolean)
-    .join(" ");
-
-  const nodeClass = [
-    styles.stopNode,
-    isDropoff && styles.stopNodeDropoff,
-    !isActive && styles.stopNodeInactive,
-    isDone && !isDropoff && styles.stopNodeDone,
-    isDone && isDropoff && styles.stopNodeDoneDropoff,
-  ]
-    .filter(Boolean)
-    .join(" ");
+  const isDropoff = stop.type === "Dropoff";
 
   return (
-    <Reorder.Item
-      value={stop}
-      id={stop.id}
-      style={{ y }}
-      as="li"
-      className={styles.stopItem}
-      dragControls={dragControls}
-    >
-      {/* Drag handle */}
-      <div
-        className={styles.dragHandle}
-        onPointerDown={(e) => dragControls.start(e)}
-      >
-        <svg
-          width="12"
-          height="20"
-          viewBox="0 0 12 20"
-          fill="currentColor"
-          aria-hidden="true"
-        >
-          <circle cx="3" cy="4" r="1.5" />
-          <circle cx="9" cy="4" r="1.5" />
-          <circle cx="3" cy="10" r="1.5" />
-          <circle cx="9" cy="10" r="1.5" />
-          <circle cx="3" cy="16" r="1.5" />
-          <circle cx="9" cy="16" r="1.5" />
-        </svg>
+    <Reorder.Item value={stop} id={stop.id} style={{ y }} className={styles.stopRow} dragControls={dragControls}>
+      <div className={styles.dragGrip} onPointerDown={(event) => dragControls.start(event)}>
+        <span />
+        <span />
+        <span />
       </div>
 
-      {/* Node dot — used for SVG path measurement */}
-      <div className={styles.stopConnector}>
-        <div ref={nodeRef} className={nodeClass} />
+      <div className={styles.nodeLane}>
+        <div
+          ref={nodeRef}
+          className={`${styles.routeNode} ${isDropoff ? styles.dropoffNode : styles.pickupNode} ${
+            !active ? styles.nodeMuted : ""
+          } ${done ? styles.nodeDone : ""}`}
+        />
       </div>
 
-      {/* Card body */}
-      <div className={cardClass}>
-        <div className={styles.stopCardTop}>
-          <div className={styles.stopMeta}>
-            <span className={styles.stopNumber}>
-              {String(sequenceNumber).padStart(2, "0")}
-            </span>
-            <span
-              className={`${styles.stopTypeBadge} ${isDropoff ? styles.badgeDropoff : styles.badgePickup}`}
-            >
-              {stop.type}
-            </span>
-          </div>
-
-          <div className={styles.stopActions}>
-            <button
-              type="button"
-              title={isDone ? "Mark as pending" : "Mark as done"}
-              className={`${styles.actionBtn} ${isDone ? styles.actionBtnActive : ""}`}
-              onClick={onToggleDone}
-              aria-pressed={isDone}
-            >
-              <svg
-                width="12"
-                height="12"
-                viewBox="0 0 12 12"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-              >
-                <polyline points="2,6 5,9 10,3" />
-              </svg>
-            </button>
-
-            <button
-              type="button"
-              title={isActive ? "Skip this stop" : "Include this stop"}
-              className={`${styles.actionBtn} ${!isActive ? styles.actionBtnToggleOff : ""}`}
-              onClick={onToggleActive}
-              aria-pressed={isActive}
-            >
-              <svg
-                width="12"
-                height="12"
-                viewBox="0 0 12 12"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                aria-hidden="true"
-              >
-                {isActive ? (
-                  <path d="M6 1v10M1 6h10" />
-                ) : (
-                  <path d="M2 2l8 8M10 2l-8 8" />
-                )}
-              </svg>
-            </button>
-          </div>
+      <article className={`${styles.stopBody} ${!active ? styles.stopBodyMuted : ""}`}>
+        <div className={styles.stopTop}>
+          <p className={styles.stopIndex}>{String(index + 1).padStart(2, "0")}</p>
+          <p className={`${styles.stopType} ${isDropoff ? styles.dropoffType : styles.pickupType}`}>{stop.type}</p>
         </div>
-
-        <h3 className={`${styles.stopName} ${isDone ? styles.stopNameDone : ""}`}>
-          {stop.name}
-        </h3>
-
-        <div className={styles.stopDetails}>
-          <span className={styles.stopDetail}>
-            <strong>{stop.area}</strong>
-          </span>
-          <span className={styles.stopDetail}>{stop.portionsLabel}</span>
-          <span className={styles.stopDetail}>{stop.window}</span>
+        <h2 className={styles.stopName}>{stop.name}</h2>
+        <p className={styles.stopMeta}>
+          {stop.area} • {stop.window} • {stop.portionsLabel}
+        </p>
+        <div className={styles.stopActions}>
+          <button type="button" onClick={onToggleActive} className={styles.flatButton} aria-pressed={active}>
+            {active ? "On route" : "Skipped"}
+          </button>
+          <button type="button" onClick={onToggleDone} className={styles.flatButton} aria-pressed={done}>
+            {done ? "Done" : "Pending"}
+          </button>
         </div>
-
-        {isDone && (
-          <motion.div
-            initial={{ opacity: 0, y: 4 }}
-            animate={{ opacity: 1, y: 0 }}
-            className={styles.stopDoneLabel}
-          >
-            <svg
-              width="10"
-              height="10"
-              viewBox="0 0 10 10"
-              fill="currentColor"
-              aria-hidden="true"
-            >
-              <circle cx="5" cy="5" r="5" />
-            </svg>
-            Done
-          </motion.div>
-        )}
-      </div>
+      </article>
     </Reorder.Item>
   );
 }
 
-// ─── SVG connector overlay ─────────────────────────────────────────────────
-
-function RoutePathSvg({
+function RoutePath({
   nodeRefs,
   stops,
   activeIds,
@@ -221,84 +119,76 @@ function RoutePathSvg({
   activeIds: string[];
   containerRef: React.RefObject<HTMLDivElement | null>;
 }) {
-  const [paths, setPaths] = useState<
-    { d: string; id: string; isDropoff: boolean; isActive: boolean }[]
-  >([]);
+  const [paths, setPaths] = useState<{ id: string; path: string; dropoff: boolean }[]>([]);
   const [dashOffset, setDashOffset] = useState(0);
-  const rafRef = useRef<number | null>(null);
 
   const recalculate = useCallback(() => {
     const container = containerRef.current;
     if (!container) return;
-    const containerRect = container.getBoundingClientRect();
 
-    const activeStops = stops.filter((s) => activeIds.includes(s.id));
-    const newPaths: typeof paths = [];
+    const rootRect = container.getBoundingClientRect();
+    const activeStops = stops.filter((stop) => activeIds.includes(stop.id));
+    const nextPaths: { id: string; path: string; dropoff: boolean }[] = [];
 
     for (let i = 0; i < activeStops.length - 1; i++) {
       const from = activeStops[i];
       const to = activeStops[i + 1];
-      const fromRef = nodeRefs.current[from.id]?.current;
-      const toRef = nodeRefs.current[to.id]?.current;
-      if (!fromRef || !toRef) continue;
+      const fromNode = nodeRefs.current[from.id]?.current;
+      const toNode = nodeRefs.current[to.id]?.current;
 
-      const fromRect = fromRef.getBoundingClientRect();
-      const toRect = toRef.getBoundingClientRect();
+      if (!fromNode || !toNode) continue;
 
-      const fx = fromRect.left + fromRect.width / 2 - containerRect.left;
-      const fy = fromRect.top + fromRect.height / 2 - containerRect.top;
-      const tx = toRect.left + toRect.width / 2 - containerRect.left;
-      const ty = toRect.top + toRect.height / 2 - containerRect.top;
+      const fromRect = fromNode.getBoundingClientRect();
+      const toRect = toNode.getBoundingClientRect();
+      const points = [
+        {
+          x: fromRect.left + fromRect.width / 2 - rootRect.left,
+          y: fromRect.top + fromRect.height / 2 - rootRect.top,
+        },
+        {
+          x: toRect.left + toRect.width / 2 - rootRect.left,
+          y: toRect.top + toRect.height / 2 - rootRect.top,
+        },
+      ];
 
-      const d = buildPath([
-        { x: fx, y: fy },
-        { x: tx, y: ty },
-      ]);
-
-      const isDropoff = to.type === "Dropoff";
-      const isActive = activeIds.includes(from.id) && activeIds.includes(to.id);
-      newPaths.push({ d, id: `${from.id}-${to.id}`, isDropoff, isActive });
+      nextPaths.push({
+        id: `${from.id}-${to.id}`,
+        path: buildPath(points),
+        dropoff: to.type === "Dropoff",
+      });
     }
 
-    setPaths(newPaths);
-  }, [stops, activeIds, containerRef, nodeRefs]);
+    setPaths(nextPaths);
+  }, [activeIds, containerRef, nodeRefs, stops]);
 
-  // Recalculate on every animation frame while mounted so reorders animate
   useEffect(() => {
-    let frame = 0;
+    let animationFrame = 0;
     const loop = () => {
       recalculate();
-      frame++;
-      // After initial burst, slow down to every 4 frames
-      rafRef.current = requestAnimationFrame(frame < 20 ? loop : slowLoop);
+      animationFrame = requestAnimationFrame(loop);
     };
-    const slowLoop = () => {
-      recalculate();
-      rafRef.current = requestAnimationFrame(slowLoop);
-    };
-    rafRef.current = requestAnimationFrame(loop);
-    return () => {
-      if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
-    };
+
+    animationFrame = requestAnimationFrame(loop);
+    return () => cancelAnimationFrame(animationFrame);
   }, [recalculate]);
 
-  // Animate dashoffset for flowing effect
   useEffect(() => {
-    const intervalId = setInterval(() => {
-      setDashOffset((v) => (v - 1) % 22);
-    }, 40);
-    return () => clearInterval(intervalId);
+    const interval = window.setInterval(() => {
+      setDashOffset((value) => (value - 1) % 20);
+    }, 45);
+
+    return () => window.clearInterval(interval);
   }, []);
 
-  if (paths.length === 0) return null;
+  if (!paths.length) return null;
 
   return (
-    <svg className={styles.svgCanvas} aria-hidden="true">
-      {paths.map(({ d, id, isDropoff }) => (
+    <svg className={styles.pathLayer} aria-hidden="true">
+      {paths.map((segment) => (
         <path
-          key={id}
-          d={d}
-          className={`${styles.routePath} ${isDropoff ? styles.routePathDropoff : ""}`}
+          key={segment.id}
+          d={segment.path}
+          className={`${styles.routePath} ${segment.dropoff ? styles.routePathDropoff : styles.routePathPickup}`}
           strokeDashoffset={dashOffset}
         />
       ))}
@@ -306,28 +196,19 @@ function RoutePathSvg({
   );
 }
 
-// ─── Main page ─────────────────────────────────────────────────────────────
-
 export default function FoodDonationRouteSGPage() {
   const [appState, setAppState] = useState<AppState>(defaultState);
   const [hydrated, setHydrated] = useState(false);
+  const routeContainerRef = useRef<HTMLDivElement | null>(null);
+  const nodeRefs = useRef<Record<string, React.RefObject<HTMLDivElement | null>>>({});
 
-  // One ref per stop, keyed by stop id
-  const nodeRefsMap = useRef<Record<string, React.RefObject<HTMLDivElement | null>>>({});
-  const containerRef = useRef<HTMLDivElement | null>(null);
+  const ensureNodeRef = useCallback((id: string): React.RefObject<HTMLDivElement | null> => {
+    if (!nodeRefs.current[id]) {
+      nodeRefs.current[id] = { current: null };
+    }
+    return nodeRefs.current[id];
+  }, []);
 
-  // Ensure a ref exists for every stop id
-  const ensureRef = useCallback(
-    (id: string): React.RefObject<HTMLDivElement | null> => {
-      if (!nodeRefsMap.current[id]) {
-        nodeRefsMap.current[id] = { current: null };
-      }
-      return nodeRefsMap.current[id];
-    },
-    [],
-  );
-
-  // Hydrate from localStorage
   useEffect(() => {
     const raw = window.localStorage.getItem(STORAGE_KEY);
     if (raw) {
@@ -340,201 +221,128 @@ export default function FoodDonationRouteSGPage() {
     setHydrated(true);
   }, []);
 
-  // Persist on change
   useEffect(() => {
     if (!hydrated) return;
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
-  }, [hydrated, appState]);
+  }, [appState, hydrated]);
 
-  // Derived
-  const activeStops = appState.stops.filter((s) =>
-    appState.activeIds.includes(s.id),
-  );
-  const pickups = activeStops.filter((s) => s.type === "Pickup");
-  const totalPortions = pickups.reduce((acc, s) => {
-    const match = s.portionsLabel.match(/(\d+)/);
-    return acc + (match ? parseInt(match[1], 10) : 0);
+  const activeStops = appState.stops.filter((stop) => appState.activeIds.includes(stop.id));
+  const pickupStops = activeStops.filter((stop) => stop.type === "Pickup");
+  const dropoffStops = activeStops.filter((stop) => stop.type === "Dropoff");
+  const totalPortions = pickupStops.reduce((total, stop) => {
+    const match = stop.portionsLabel.match(/(\d+)/);
+    return total + (match ? parseInt(match[1], 10) : 0);
   }, 0);
   const doneCount = appState.doneIds.length;
 
-  function handleReorder(newStops: Stop[]) {
-    setAppState((prev) => ({ ...prev, stops: newStops }));
-  }
-
-  function toggleActive(id: string) {
-    setAppState((prev) => ({
-      ...prev,
-      activeIds: prev.activeIds.includes(id)
-        ? prev.activeIds.filter((x) => x !== id)
-        : [...prev.activeIds, id],
-    }));
-  }
-
-  function toggleDone(id: string) {
-    setAppState((prev) => ({
-      ...prev,
-      doneIds: prev.doneIds.includes(id)
-        ? prev.doneIds.filter((x) => x !== id)
-        : [...prev.doneIds, id],
-    }));
-  }
+  const finalWindow = activeStops.at(-1)?.window ?? "No active stop";
 
   return (
-    <main
-      className={`${styles.page} ${spaceGrotesk.variable}`}
-      style={{ fontFamily: "var(--font-space), var(--font-sans), sans-serif" }}
-    >
-      {/* Nav */}
+    <main className={`${styles.page} ${bebas.variable} ${plex.variable} ${mono.variable}`}>
       <header className={styles.topbar}>
         <Link href="/" className={styles.backLink}>
-          <svg
-            width="14"
-            height="14"
-            viewBox="0 0 14 14"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            aria-hidden="true"
-          >
-            <path d="M9 2L4 7l5 5" />
-          </svg>
           Back to gallery
         </Link>
-        <span className={styles.topbarMeta}>Food rescue — Sat night run</span>
+        <p className={styles.topbarMeta}>Saturday run board</p>
       </header>
 
-      {/* Hero */}
-      <section className={styles.hero}>
-        <p className={styles.heroEyebrow}>
-          <span className={styles.heroDot} aria-hidden="true" />
-          Food Donation Route
-        </p>
-        <h1 className={styles.heroHeadline}>
-          Plan your pickup stops for tonight and see your route take shape before you leave.
-        </h1>
-        <p className={styles.heroLede}>
-          Add or skip stops, drag to change the order, and mark each one done as you go.
-        </p>
+      <section className={styles.firstScreen}>
+        <p className={styles.kicker}>Food rescue route</p>
+        <h1>Volunteer drivers can arrange tonight&apos;s pickup and drop-off sequence in one moving route.</h1>
+        <p className={styles.lede}>Start by dragging any stop up or down, then mark each stop as you complete it.</p>
       </section>
 
-      {/* Stats bar */}
-      <div className={styles.statsBar}>
-        <div className={styles.stat}>
-          <span className={styles.statValue}>{activeStops.length}</span>
-          <span className={styles.statLabel}>Active stops</span>
-        </div>
-        <div className={styles.stat}>
-          <span className={styles.statValue}>{pickups.length}</span>
-          <span className={styles.statLabel}>Pickups</span>
-        </div>
-        <div className={styles.stat}>
-          <span className={styles.statValue}>{totalPortions}</span>
-          <span className={styles.statLabel}>Portions tonight</span>
-        </div>
-        <div className={styles.stat}>
-          <span className={styles.statValue}>{doneCount}/{appState.stops.length}</span>
-          <span className={styles.statLabel}>Completed</span>
-        </div>
-      </div>
+      <section className={styles.board}>
+        <p className={styles.gridBreakRibbon}>Dotted route redraws live while you drag</p>
 
-      {/* Main layout */}
-      <div className={styles.main}>
-        {/* Route diagram */}
-        <div className={styles.routeDiagram}>
-          <div className={styles.routeDiagramInner} ref={containerRef}>
-            {/* SVG path overlay */}
-            <RoutePathSvg
-              nodeRefs={nodeRefsMap}
-              stops={appState.stops}
-              activeIds={appState.activeIds}
-              containerRef={containerRef}
-            />
+        <div className={styles.routeColumn} ref={routeContainerRef}>
+          <RoutePath
+            nodeRefs={nodeRefs}
+            stops={appState.stops}
+            activeIds={appState.activeIds}
+            containerRef={routeContainerRef}
+          />
 
-            {/* Reorderable stop list */}
-            <Reorder.Group
-              axis="y"
-              values={appState.stops}
-              onReorder={handleReorder}
-              as="ol"
-              className={styles.stopList}
-            >
-              {appState.stops.map((stop, index) => {
-                const ref = ensureRef(stop.id);
-                return (
-                  <StopCard
-                    key={stop.id}
-                    stop={stop}
-                    sequenceNumber={index + 1}
-                    isActive={appState.activeIds.includes(stop.id)}
-                    isDone={appState.doneIds.includes(stop.id)}
-                    nodeRef={ref}
-                    onToggleActive={() => toggleActive(stop.id)}
-                    onToggleDone={() => toggleDone(stop.id)}
-                  />
-                );
-              })}
-            </Reorder.Group>
+          <Reorder.Group
+            axis="y"
+            values={appState.stops}
+            onReorder={(nextStops) => setAppState((prev) => ({ ...prev, stops: nextStops }))}
+            className={styles.stopList}
+            as="ol"
+          >
+            {appState.stops.map((stop, index) => (
+              <StopRow
+                key={stop.id}
+                stop={stop}
+                index={index}
+                active={appState.activeIds.includes(stop.id)}
+                done={appState.doneIds.includes(stop.id)}
+                nodeRef={ensureNodeRef(stop.id)}
+                onToggleActive={() =>
+                  setAppState((prev) => ({
+                    ...prev,
+                    activeIds: prev.activeIds.includes(stop.id)
+                      ? prev.activeIds.filter((id) => id !== stop.id)
+                      : [...prev.activeIds, stop.id],
+                  }))
+                }
+                onToggleDone={() =>
+                  setAppState((prev) => ({
+                    ...prev,
+                    doneIds: prev.doneIds.includes(stop.id)
+                      ? prev.doneIds.filter((id) => id !== stop.id)
+                      : [...prev.doneIds, stop.id],
+                  }))
+                }
+              />
+            ))}
+          </Reorder.Group>
+        </div>
+
+        <aside className={styles.manifest}>
+          <p className={styles.manifestLabel}>Tonight&apos;s manifest</p>
+          <p className={styles.manifestNumber}>{activeStops.length} active stops</p>
+
+          <div className={styles.metricRow}>
+            <span>Pickup portions</span>
+            <strong>{totalPortions}</strong>
           </div>
-        </div>
+          <div className={styles.metricRow}>
+            <span>Drop-off points</span>
+            <strong>{dropoffStops.length}</strong>
+          </div>
+          <div className={styles.metricRow}>
+            <span>Completed</span>
+            <strong>{doneCount}</strong>
+          </div>
+          <div className={styles.metricRow}>
+            <span>Estimated final stop</span>
+            <strong>{finalWindow}</strong>
+          </div>
 
-        {/* Sidebar — collection summary */}
-        <aside className={styles.sidebar}>
-          <section className={styles.sideSection}>
-            <p className={styles.sideSectionLabel}>Tonight&apos;s collection</p>
-            <h2 className={styles.sideSectionTitle}>What you&apos;re picking up</h2>
-            <ul className={styles.collectionList}>
-              {appState.stops
-                .filter((s) => s.type === "Pickup" && appState.activeIds.includes(s.id))
-                .map((s) => (
-                  <li
-                    key={s.id}
-                    className={`${styles.collectionItem} ${appState.doneIds.includes(s.id) ? styles.done : ""}`}
-                  >
-                    <span className={styles.collectionItemName}>{s.name}</span>
-                    <span className={styles.collectionItemPortions}>
-                      {s.portionsLabel}
-                    </span>
-                  </li>
-                ))}
-            </ul>
-            {totalPortions > 0 && (
-              <div className={styles.totalRow}>
-                <span className={styles.totalLabel}>Total portions</span>
-                <span className={styles.totalValue}>{totalPortions}</span>
-              </div>
-            )}
-          </section>
+          <div className={styles.manifestDivider} />
 
-          <hr className={styles.divider} />
+          <p className={styles.manifestSectionTitle}>Pickup places</p>
+          <ul className={styles.flatList}>
+            {pickupStops.map((stop) => (
+              <li key={stop.id}>
+                <span>{stop.name}</span>
+                <strong>{stop.portionsLabel}</strong>
+              </li>
+            ))}
+          </ul>
 
-          <section className={styles.sideSection}>
-            <p className={styles.sideSectionLabel}>Drop-off points</p>
-            <h2 className={styles.sideSectionTitle}>Where it goes</h2>
-            <ul className={styles.collectionList}>
-              {appState.stops
-                .filter((s) => s.type === "Dropoff" && appState.activeIds.includes(s.id))
-                .map((s) => (
-                  <li
-                    key={s.id}
-                    className={`${styles.collectionItem} ${appState.doneIds.includes(s.id) ? styles.done : ""}`}
-                  >
-                    <span className={styles.collectionItemName}>{s.name}</span>
-                    <span className={styles.collectionItemPortions}>{s.window}</span>
-                  </li>
-                ))}
-            </ul>
-          </section>
-
-          <hr className={styles.divider} />
-
-          <p className={styles.routeHint}>
-            Drag stops up or down to change the order. The route updates as you move them.
-            Tap the tick to mark a stop done, or the cross to skip it tonight.
-          </p>
+          <p className={styles.manifestSectionTitle}>Drop-off places</p>
+          <ul className={styles.flatList}>
+            {dropoffStops.map((stop) => (
+              <li key={stop.id}>
+                <span>{stop.name}</span>
+                <strong>{stop.window}</strong>
+              </li>
+            ))}
+          </ul>
         </aside>
-      </div>
+      </section>
     </main>
   );
 }

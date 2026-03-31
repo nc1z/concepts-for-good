@@ -1,5 +1,5 @@
 npx tsc --noEmit
-npm run lint
-npm test
-npm run build
-npm audit --audit-level=high
+pnpm lint
+pnpm test
+pnpm build
+pnpm audit --audit-level=high

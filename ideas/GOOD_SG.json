@@ -240,7 +240,8 @@
       "implementation_tags": [
         "drag-reorder"
       ],
-      "implemented": true
+      "implemented": true,
+      "built": true
     },
     {
       "id": "GOOD_SG-005",
@@ -315,7 +316,8 @@
         "avoid": "small dense table; small action buttons; anything that feels clinical or data-heavy",
         "experience_goal": "user feels warmth and care; the interface communicates that these are people, not records"
       },
-      "implemented": true
+      "implemented": true,
+      "built": true
     },
     {
       "id": "GOOD_SG-006",
