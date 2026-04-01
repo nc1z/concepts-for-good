@@ -1,0 +1,345 @@
+.page {
+  --ink: #141312;
+  --paper: #f4eddf;
+  --paper-2: #efe3cb;
+  --accent: #ca4f2d;
+  --accent-deep: #8f341b;
+  --olive: #5d6a46;
+  --teal: #2c675f;
+  --muted: #635f57;
+
+  min-height: 100vh;
+  color: var(--ink);
+  font-family: var(--font-public-sans), sans-serif;
+  background:
+    radial-gradient(circle at 8% 6%, rgba(255, 255, 255, 0.4), transparent 28%),
+    radial-gradient(circle at 84% 14%, rgba(202, 79, 45, 0.16), transparent 30%),
+    linear-gradient(180deg, #d6b992 0%, #c7a67f 100%);
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  padding: 22px 26px 0;
+}
+
+.backLink {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.74rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #2f2a24;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(47, 42, 36, 0.5);
+}
+
+.sessionLabel {
+  margin: 0;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(20, 19, 18, 0.75);
+}
+
+.firstScreen {
+  padding: 22px 26px 12px;
+  max-width: 940px;
+}
+
+.eyebrow {
+  margin: 0;
+  color: var(--accent-deep);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.firstScreen h1 {
+  margin: 12px 0 12px;
+  max-width: 16ch;
+  font-family: var(--font-fraunces), serif;
+  font-size: clamp(2.3rem, 6vw, 4.5rem);
+  font-weight: 600;
+  line-height: 0.96;
+}
+
+.lede {
+  margin: 0;
+  max-width: 62ch;
+  font-size: 1.02rem;
+  color: rgba(20, 19, 18, 0.84);
+}
+
+.visitTypeSection {
+  padding: 10px 26px 20px;
+}
+
+.visitTypeGroup {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.visitTypeOption {
+  display: block;
+  padding: 14px 12px;
+  border-top: 3px solid transparent;
+  background: rgba(244, 237, 223, 0.92);
+  cursor: pointer;
+  transition:
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+
+.visitTypeOption strong {
+  display: block;
+  font-size: 0.96rem;
+  line-height: 1.2;
+}
+
+.visitTypeOption p {
+  margin: 6px 0 0;
+  font-size: 0.86rem;
+  color: rgba(20, 19, 18, 0.74);
+}
+
+.visitTypeOption[data-selected] {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.board {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 330px;
+  gap: 22px;
+  align-items: start;
+  padding: 8px 26px 48px;
+}
+
+.gridBreakNote {
+  position: absolute;
+  right: 330px;
+  top: -6px;
+  margin: 0;
+  padding: 8px 12px;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: #fff8ef;
+  background: var(--teal);
+  transform: rotate(-7deg);
+}
+
+.trayArea {
+  min-height: 440px;
+  padding-top: 12px;
+}
+
+.trayGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.itemCard {
+  display: grid;
+  gap: 9px;
+  min-height: 142px;
+  padding: 14px 14px 12px;
+  background: linear-gradient(180deg, var(--paper) 0%, var(--paper-2) 100%);
+  box-shadow: 0 12px 26px rgba(20, 19, 18, 0.17);
+  cursor: grab;
+}
+
+.itemCard h3 {
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.2;
+}
+
+.itemCard p {
+  margin: 0;
+  color: rgba(20, 19, 18, 0.74);
+  font-size: 0.88rem;
+}
+
+.itemCardPacked {
+  opacity: 0.5;
+}
+
+.itemDragging {
+  z-index: 4;
+  cursor: grabbing;
+}
+
+.secondaryAction {
+  justify-self: start;
+  border: 1px dashed rgba(20, 19, 18, 0.42);
+  background: transparent;
+  color: var(--ink);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  padding: 6px 8px;
+  cursor: pointer;
+}
+
+.secondaryAction:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.bagRail {
+  padding: 18px 16px 16px;
+  background: #fbf6eb;
+  border-left: 8px solid var(--olive);
+  transition:
+    border-color 160ms ease,
+    transform 160ms ease;
+}
+
+.bagRailActive {
+  border-left-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.bagLabel {
+  margin: 0;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(20, 19, 18, 0.75);
+}
+
+.progressText {
+  margin: 10px 0 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.progressTrack {
+  height: 6px;
+  background: rgba(20, 19, 18, 0.14);
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--teal), var(--accent));
+}
+
+.packedList {
+  list-style: none;
+  margin: 14px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+}
+
+.packedRow,
+.unpackedRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(20, 19, 18, 0.12);
+  font-size: 0.9rem;
+}
+
+.packedRow {
+  color: rgba(20, 19, 18, 0.66);
+}
+
+.inlineAction {
+  border: 0;
+  background: transparent;
+  color: var(--accent-deep);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.leaveStrip {
+  padding: 14px;
+  background: linear-gradient(92deg, #ffedd0 0%, #fdd8b6 45%, #fcc6a8 100%);
+  border-left: 8px solid var(--accent);
+}
+
+.leaveLabel {
+  margin: 0;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #632715;
+}
+
+.leaveDetails {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.leaveDetails div {
+  display: grid;
+  gap: 5px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(99, 39, 21, 0.26);
+}
+
+.leaveDetails span {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.66rem;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: rgba(20, 19, 18, 0.68);
+}
+
+.leaveDetails strong {
+  font-size: 0.85rem;
+  line-height: 1.35;
+}
+
+@media (max-width: 980px) {
+  .visitTypeGroup {
+    grid-template-columns: 1fr;
+  }
+
+  .board {
+    grid-template-columns: 1fr;
+  }
+
+  .gridBreakNote {
+    right: 16px;
+  }
+
+  .leaveDetails {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 680px) {
+  .topbar,
+  .firstScreen,
+  .visitTypeSection,
+  .board {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .trayGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
