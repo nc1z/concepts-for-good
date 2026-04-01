@@ -12,6 +12,19 @@ export type PocCard = {
 
 export const pocCards: PocCard[] = [
   {
+    slug: "what-to-bring-to-the-clinic-sg",
+    title: "What to Bring to the Clinic",
+    category: "Health systems",
+    createdAt: "2026-04-01T15:14:04+08:00",
+    summary:
+      "Pick your clinic visit type and pack every required document, payment item, and medicine note before leaving home.",
+    impact:
+      "A countertop prep board that turns clinic preparation into a quick drag-to-bag flow for caregivers and seniors.",
+    theme: "civic",
+    tags: ["Health", "Caregiving", "Seniors", "Clinic prep", "Singapore"],
+    model: "openai/gpt-5.4",
+  },
+  {
     slug: "homework-quiet-timer-sg",
     title: "Quiet Study Timer",
     category: "Education equity",
