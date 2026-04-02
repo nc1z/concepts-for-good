@@ -82,9 +82,9 @@ export default function HelpANeighbourPage() {
     <main className={styles.page}>
       <section className={styles.hero}>
         <p className={styles.eyebrow}>Neighbour support board</p>
-        <h1 className={styles.title}>Ask for small help near you.</h1>
+        <h1 className={styles.title}>Ask neighbours nearby for help.</h1>
         <p className={styles.lede}>
-          Post what you need and neighbours can step in with one tap.
+          Share what you need and a neighbour can step in.
         </p>
         <button
           type="button"
