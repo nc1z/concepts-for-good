@@ -1435,7 +1435,7 @@
     },
     {
       "id": "GOOD_SG-133",
-      "title": "Elder Social Outing",
+      "title": "Outing with Seniors",
       "platform": "website",
       "folder": "web",
       "build_stack": "Next.js website",
@@ -1505,7 +1505,8 @@
         "experience_goal": "social plans feel possible for seniors with varying energy and mobility"
       },
       "implementation_tags": [],
-      "implemented": false
+      "implemented": false,
+      "built": true
     },
     {
       "id": "GOOD_SG-090",

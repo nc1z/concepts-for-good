@@ -75,8 +75,31 @@
   box-shadow: 0 24px 54px rgba(24, 34, 45, 0.08);
 }
 
-.graphStage canvas {
+.graphSvg {
   display: block;
+  width: 100%;
+  height: auto;
+}
+
+.graphNode {
+  cursor: pointer;
+}
+
+.skillLabel,
+.personLabel {
+  font-family: var(--font-manrope), sans-serif;
+  fill: #23384f;
+  user-select: none;
+}
+
+.skillLabel {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.personLabel {
+  font-size: 11px;
+  fill: #4c5f73;
 }
 
 .graphFrame {

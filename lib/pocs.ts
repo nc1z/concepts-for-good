@@ -12,6 +12,19 @@ export type PocCard = {
 
 export const pocCards: PocCard[] = [
   {
+    slug: "elder-social-outing-sg",
+    title: "Outing with Seniors",
+    category: "Social connection",
+    createdAt: "2026-04-02T19:19:52+08:00",
+    summary:
+      "Set comfort dials for energy, heat, and walking to get outing plans that feel manageable today.",
+    impact:
+      "A conversation-style outing planner that adjusts each suggestion to feel calmer or busier based on comfort needs.",
+    theme: "civic",
+    tags: ["Seniors", "Caregiving", "Outings", "Social connection", "Singapore"],
+    model: "openai/gpt-5.4",
+  },
+  {
     slug: "what-to-bring-to-the-clinic-sg",
     title: "What to Bring to the Clinic",
     category: "Health systems",
