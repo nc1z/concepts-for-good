@@ -1362,7 +1362,8 @@
         "avoid": "generic form; list without the board aesthetic; anything that exposes personal information",
         "experience_goal": "resident feels the warmth of a community where neighbours help each other"
       },
-      "implemented": false
+      "implemented": false,
+      "built": true
     },
     {
       "id": "GOOD_SG-091",
