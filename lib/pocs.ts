@@ -12,6 +12,19 @@ export type PocCard = {
 
 export const pocCards: PocCard[] = [
   {
+    slug: "donate-or-swap-clothes-sg",
+    title: "Donate or Swap Clothes",
+    category: "Sustainability",
+    createdAt: "2026-04-03T05:19:38+08:00",
+    summary:
+      "Browse nearby clothing posts by size and condition, then message a neighbour to donate or swap items.",
+    impact:
+      "A neighbourhood feed with wear sketches that makes hand-me-downs and swaps easier to trust before meeting.",
+    theme: "editorial",
+    tags: ["Sustainability", "Neighbourhood", "Clothes", "Reuse", "Singapore"],
+    model: "openai/gpt-5.4",
+  },
+  {
     slug: "what-to-bring-to-the-clinic-sg",
     title: "What to Bring to the Clinic",
     category: "Health systems",

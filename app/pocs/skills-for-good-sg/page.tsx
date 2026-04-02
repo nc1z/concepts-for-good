@@ -1,14 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import dynamic from "next/dynamic";
 import { Fraunces, Manrope } from "next/font/google";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
+import { motion } from "framer-motion";
 
 import { people } from "./data";
 import styles from "./page.module.css";
-
-const ForceGraph2D = dynamic(() => import("react-force-graph-2d"), { ssr: false });
 
 const fraunces = Fraunces({
   subsets: ["latin"],
@@ -28,7 +26,9 @@ type GraphNode = {
   label: string;
   detail?: string;
   color: string;
-  val: number;
+  radius: number;
+  x: number;
+  y: number;
   personName?: string;
 };
 
@@ -45,24 +45,35 @@ function buildGraph() {
     });
   });
 
-  const skillNodes: GraphNode[] = [...skillMap.entries()].map(([skill, count]) => ({
-    id: `skill-${skill}`,
-    group: "skill",
-    label: skill,
-    color: "#224c8f",
-    val: 5 + count * 1.4,
-    detail: `${count} people can help here`,
-  }));
+  const skillEntries = [...skillMap.entries()];
+  const skillNodes: GraphNode[] = skillEntries.map(([skill, count], index) => {
+    const theta = (Math.PI * 2 * index) / Math.max(skillEntries.length, 1);
+    return {
+      id: `skill-${skill}`,
+      group: "skill",
+      label: skill,
+      color: "#224c8f",
+      radius: 11 + count * 1.7,
+      detail: `${count} people can help here`,
+      x: 360 + Math.cos(theta) * 195,
+      y: 250 + Math.sin(theta) * 145,
+    };
+  });
 
-  const personNodes: GraphNode[] = people.map((person) => ({
-    id: `person-${person.name}`,
-    group: "person",
-    label: person.name,
-    personName: person.name,
-    color: person.accent,
-    val: 4 + person.level,
-    detail: `${person.role} · ${person.org}`,
-  }));
+  const personNodes: GraphNode[] = people.map((person, index) => {
+    const theta = (Math.PI * 2 * index) / Math.max(people.length, 1);
+    return {
+      id: `person-${person.name}`,
+      group: "person",
+      label: person.name,
+      personName: person.name,
+      color: person.accent,
+      radius: 8 + person.level * 1.8,
+      detail: `${person.role} · ${person.org}`,
+      x: 360 + Math.cos(theta) * 290,
+      y: 250 + Math.sin(theta) * 220,
+    };
+  });
 
   const links: GraphLink[] = people.flatMap((person) =>
     person.skills.map((skill) => ({
@@ -76,20 +87,6 @@ function buildGraph() {
 
 export default function SkillsForGoodPage() {
   const [selectedId, setSelectedId] = useState<string | null>(null);
-  const [size, setSize] = useState({ width: 1200, height: 720 });
-
-  useEffect(() => {
-    const syncSize = () => {
-      setSize({
-        width: Math.max(320, Math.min(window.innerWidth - 32, 1240)),
-        height: Math.max(520, Math.min(window.innerHeight - 220, 760)),
-      });
-    };
-
-    syncSize();
-    window.addEventListener("resize", syncSize);
-    return () => window.removeEventListener("resize", syncSize);
-  }, []);
 
   const graph = useMemo(() => buildGraph(), []);
   const selected = graph.nodes.find((node) => node.id === selectedId) ?? null;
@@ -118,35 +115,48 @@ export default function SkillsForGoodPage() {
         </section>
 
         <section className={styles.graphStage}>
-          <ForceGraph2D
-            width={size.width}
-            height={size.height}
-            graphData={graph}
-            nodeLabel={(node) => `${node.label}`}
-            backgroundColor="transparent"
-            cooldownTicks={90}
-            linkColor={() => "rgba(84, 108, 136, 0.22)"}
-            linkWidth={(link) =>
-              selectedId &&
-              ((typeof link.source === "object" && "id" in link.source && link.source.id === selectedId) ||
-                (typeof link.target === "object" && "id" in link.target && link.target.id === selectedId))
-                ? 2.2
-                : 1
-            }
-            nodeCanvasObject={(node, ctx, globalScale) => {
-              const label = node.label as string;
-              const fontSize = (node.group === "skill" ? 16 : 12) / globalScale;
-              ctx.beginPath();
-              ctx.fillStyle = node.color as string;
-              ctx.arc(node.x ?? 0, node.y ?? 0, (node.val as number) * 1.8, 0, 2 * Math.PI, false);
-              ctx.fill();
-              ctx.font = `${fontSize}px Inter, sans-serif`;
-              ctx.fillStyle = node.group === "skill" ? "#16304d" : "#45596e";
-              ctx.fillText(label, (node.x ?? 0) + (node.val as number) * 2.4, (node.y ?? 0) + 4);
-            }}
-            onNodeClick={(node) => setSelectedId(node.id as string)}
-          />
+          <svg viewBox="0 0 720 500" className={styles.graphSvg} role="img" aria-label="Skills network graph">
+            {graph.links.map((link) => {
+              const source = graph.nodes.find((node) => node.id === link.source);
+              const target = graph.nodes.find((node) => node.id === link.target);
+              if (!source || !target) {
+                return null;
+              }
 
+              const highlighted = selectedId && (source.id === selectedId || target.id === selectedId);
+              return (
+                <line
+                  key={`${link.source}-${link.target}`}
+                  x1={source.x}
+                  y1={source.y}
+                  x2={target.x}
+                  y2={target.y}
+                  className={highlighted ? styles.linkActive : styles.link}
+                />
+              );
+            })}
+
+            {graph.nodes.map((node) => (
+              <g key={node.id} transform={`translate(${node.x}, ${node.y})`}>
+                <motion.circle
+                  r={node.radius}
+                  className={node.group === "skill" ? styles.skillNode : styles.personNode}
+                  style={{ color: node.color }}
+                  initial={{ scale: 0.9, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ duration: 0.22 }}
+                  onClick={() => setSelectedId(node.id)}
+                />
+                <text
+                  x={node.radius + 6}
+                  y={4}
+                  className={node.group === "skill" ? styles.skillLabel : styles.personLabel}
+                >
+                  {node.label}
+                </text>
+              </g>
+            ))}
+          </svg>
           <div className={styles.graphFrame} aria-hidden="true" />
         </section>
 
