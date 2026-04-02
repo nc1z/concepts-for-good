@@ -1505,7 +1505,8 @@
         "experience_goal": "social plans feel possible for seniors with varying energy and mobility"
       },
       "implementation_tags": [],
-      "implemented": false
+      "implemented": false,
+      "built": true
     },
     {
       "id": "GOOD_SG-090",
