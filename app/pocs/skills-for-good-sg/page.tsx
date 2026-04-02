@@ -1,14 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import dynamic from "next/dynamic";
 import { Fraunces, Manrope } from "next/font/google";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 
 import { people } from "./data";
 import styles from "./page.module.css";
-
-const ForceGraph2D = dynamic(() => import("react-force-graph-2d"), { ssr: false });
 
 const fraunces = Fraunces({
   subsets: ["latin"],
@@ -28,7 +25,6 @@ type GraphNode = {
   label: string;
   detail?: string;
   color: string;
-  val: number;
   personName?: string;
 };
 
@@ -50,7 +46,6 @@ function buildGraph() {
     group: "skill",
     label: skill,
     color: "#224c8f",
-    val: 5 + count * 1.4,
     detail: `${count} people can help here`,
   }));
 
@@ -60,7 +55,6 @@ function buildGraph() {
     label: person.name,
     personName: person.name,
     color: person.accent,
-    val: 4 + person.level,
     detail: `${person.role} · ${person.org}`,
   }));
 
@@ -71,27 +65,33 @@ function buildGraph() {
     })),
   );
 
-  return { nodes: [...skillNodes, ...personNodes], links };
+  const nodes = [...skillNodes, ...personNodes];
+  const positions = new Map<string, { x: number; y: number }>();
+  const center = { x: 430, y: 320 };
+
+  skillNodes.forEach((node, index) => {
+    const angle = (index / skillNodes.length) * Math.PI * 2 - Math.PI / 2;
+    positions.set(node.id, {
+      x: center.x + Math.cos(angle) * 170,
+      y: center.y + Math.sin(angle) * 170,
+    });
+  });
+
+  personNodes.forEach((node, index) => {
+    const angle = (index / personNodes.length) * Math.PI * 2 - Math.PI / 2;
+    positions.set(node.id, {
+      x: center.x + Math.cos(angle) * 290,
+      y: center.y + Math.sin(angle) * 290,
+    });
+  });
+
+  return { nodes, links, positions };
 }
 
 export default function SkillsForGoodPage() {
   const [selectedId, setSelectedId] = useState<string | null>(null);
-  const [size, setSize] = useState({ width: 1200, height: 720 });
-
-  useEffect(() => {
-    const syncSize = () => {
-      setSize({
-        width: Math.max(320, Math.min(window.innerWidth - 32, 1240)),
-        height: Math.max(520, Math.min(window.innerHeight - 220, 760)),
-      });
-    };
-
-    syncSize();
-    window.addEventListener("resize", syncSize);
-    return () => window.removeEventListener("resize", syncSize);
-  }, []);
-
   const graph = useMemo(() => buildGraph(), []);
+
   const selected = graph.nodes.find((node) => node.id === selectedId) ?? null;
 
   const selectedPerson =
@@ -118,34 +118,52 @@ export default function SkillsForGoodPage() {
         </section>
 
         <section className={styles.graphStage}>
-          <ForceGraph2D
-            width={size.width}
-            height={size.height}
-            graphData={graph}
-            nodeLabel={(node) => `${node.label}`}
-            backgroundColor="transparent"
-            cooldownTicks={90}
-            linkColor={() => "rgba(84, 108, 136, 0.22)"}
-            linkWidth={(link) =>
-              selectedId &&
-              ((typeof link.source === "object" && "id" in link.source && link.source.id === selectedId) ||
-                (typeof link.target === "object" && "id" in link.target && link.target.id === selectedId))
-                ? 2.2
-                : 1
-            }
-            nodeCanvasObject={(node, ctx, globalScale) => {
-              const label = node.label as string;
-              const fontSize = (node.group === "skill" ? 16 : 12) / globalScale;
-              ctx.beginPath();
-              ctx.fillStyle = node.color as string;
-              ctx.arc(node.x ?? 0, node.y ?? 0, (node.val as number) * 1.8, 0, 2 * Math.PI, false);
-              ctx.fill();
-              ctx.font = `${fontSize}px Inter, sans-serif`;
-              ctx.fillStyle = node.group === "skill" ? "#16304d" : "#45596e";
-              ctx.fillText(label, (node.x ?? 0) + (node.val as number) * 2.4, (node.y ?? 0) + 4);
-            }}
-            onNodeClick={(node) => setSelectedId(node.id as string)}
-          />
+          <svg viewBox="0 0 860 640" className={styles.graphSvg} role="img" aria-label="Skills network graph">
+            {graph.links.map((link) => {
+              const source = graph.positions.get(link.source);
+              const target = graph.positions.get(link.target);
+              if (!source || !target) return null;
+
+              const highlighted = selectedId && (selectedId === link.source || selectedId === link.target);
+              return (
+                <line
+                  key={`${link.source}-${link.target}`}
+                  x1={source.x}
+                  y1={source.y}
+                  x2={target.x}
+                  y2={target.y}
+                  stroke={highlighted ? "rgba(33, 74, 128, 0.65)" : "rgba(84, 108, 136, 0.22)"}
+                  strokeWidth={highlighted ? 2.2 : 1}
+                />
+              );
+            })}
+
+            {graph.nodes.map((node) => {
+              const point = graph.positions.get(node.id);
+              if (!point) return null;
+              const selectedNode = selectedId === node.id;
+              const radius = node.group === "skill" ? 17 : 12;
+
+              return (
+                <g
+                  key={node.id}
+                  transform={`translate(${point.x}, ${point.y})`}
+                  className={styles.graphNode}
+                  onClick={() => setSelectedId(node.id)}
+                >
+                  <circle
+                    r={selectedNode ? radius + 3 : radius}
+                    fill={node.color}
+                    stroke={selectedNode ? "#10263f" : "transparent"}
+                    strokeWidth={selectedNode ? 2 : 0}
+                  />
+                  <text x={radius + 7} y={4} className={node.group === "skill" ? styles.skillLabel : styles.personLabel}>
+                    {node.label}
+                  </text>
+                </g>
+              );
+            })}
+          </svg>
 
           <div className={styles.graphFrame} aria-hidden="true" />
         </section>
@@ -179,3 +197,4 @@ export default function SkillsForGoodPage() {
     </main>
   );
 }
+
