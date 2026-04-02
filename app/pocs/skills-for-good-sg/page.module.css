@@ -75,8 +75,52 @@
   box-shadow: 0 24px 54px rgba(24, 34, 45, 0.08);
 }
 
-.graphStage canvas {
+.graphSvg {
   display: block;
+  width: 100%;
+  height: auto;
+  max-height: 760px;
+}
+
+.link {
+  stroke: rgba(84, 108, 136, 0.22);
+  stroke-width: 1.1;
+}
+
+.linkActive {
+  stroke: rgba(34, 76, 143, 0.72);
+  stroke-width: 2;
+}
+
+.skillNode,
+.personNode {
+  cursor: pointer;
+  stroke: rgba(20, 34, 53, 0.2);
+  stroke-width: 1;
+}
+
+.skillNode {
+  fill: color-mix(in srgb, currentColor 88%, white 12%);
+}
+
+.personNode {
+  fill: color-mix(in srgb, currentColor 70%, white 30%);
+}
+
+.skillLabel,
+.personLabel {
+  fill: #16304d;
+  pointer-events: none;
+}
+
+.skillLabel {
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.personLabel {
+  font-size: 9px;
+  fill: #45596e;
 }
 
 .graphFrame {
