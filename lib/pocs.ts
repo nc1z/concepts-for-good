@@ -12,6 +12,19 @@ export type PocCard = {
 
 export const pocCards: PocCard[] = [
   {
+    slug: "train-your-eye-sg",
+    title: "Train Your Eye",
+    category: "Digital confidence",
+    createdAt: "2026-04-03T12:00:00+08:00",
+    summary:
+      "Ten pieces of AI-written Singapore content, each one failing for a reason. Find it, name it, fix it.",
+    impact:
+      "A dark split-screen critique trainer that builds your rejection vocabulary one challenge at a time.",
+    theme: "editorial",
+    tags: ["Creative skills", "Writing", "AI literacy", "Content"],
+    model: "anthropic/claude-sonnet-4-6",
+  },
+  {
     slug: "what-to-bring-to-the-clinic-sg",
     title: "What to Bring to the Clinic",
     category: "Health systems",

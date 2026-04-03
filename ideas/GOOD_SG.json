@@ -2,7 +2,7 @@
   "dataset": "GOOD_SG",
   "region": "singapore",
   "lens": "public good and social impact in Singapore",
-  "idea_count": 80,
+  "idea_count": 81,
   "design_contract": {
     "mandate": "Every idea must be built with a deliberately chosen visual direction and interaction model, and copy written for the target user — not for developers. Reading the ui field and rules/CONTENT_RULES.md is mandatory before writing a single line of code.",
     "design_diversity_mandate": {
@@ -166,6 +166,83 @@
     ]
   },
   "ideas": [
+    {
+      "id": "GOOD_SG-081",
+      "title": "Train Your Eye",
+      "platform": "website",
+      "folder": "web",
+      "build_stack": "Next.js website",
+      "category": "digital confidence",
+      "tags": [
+        "Creative skills",
+        "Writing",
+        "AI literacy",
+        "Content"
+      ],
+      "summary": "A critique trainer for community creators who want to write better than the AI-generated default.",
+      "target_user": "community organisers, copywriters, and student content creators in Singapore",
+      "why_fast": "The interesting challenge is the amber highlight animation that reveals weak phrases in the AI specimen the moment the user submits their critique.",
+      "stage": "poc",
+      "poc": [
+        "10 seeded AI-written specimens",
+        "critique textarea with expert feedback",
+        "constrained rewrite",
+        "localStorage-persisted vocabulary"
+      ],
+      "prototype_goal": "Let a person practice articulating what is wrong with AI-generated content and rewrite it under one constraint, building a personal rejection vocabulary.",
+      "auth_strategy": "No authentication. App opens directly to challenge 1.",
+      "storage_strategy": {
+        "primary": "localStorage",
+        "secondary": "IndexedDB only if the POC needs larger offline caches, many records, or image/file blobs",
+        "server_database": "not allowed for the initial POC"
+      },
+      "simulation_mode": "Use seeded AI-written specimens with pre-written expert critiques and rewrite constraints.",
+      "personas": [
+        "community_organiser",
+        "copywriter",
+        "student"
+      ],
+      "core_entities": [
+        "challenges",
+        "critiques",
+        "rewrites"
+      ],
+      "primary_user_flow": [
+        "read_specimen",
+        "submit_critique",
+        "read_expert_critique",
+        "rewrite_with_constraint",
+        "next_challenge"
+      ],
+      "demo_seed_data": [
+        "10 AI-written Singapore community content specimens",
+        "expert critique for each",
+        "rewrite constraint for each"
+      ],
+      "success_signal": "A user completes all 10 challenges and sees their personal rejection vocabulary on the final screen.",
+      "non_goals": [
+        "AI API integration",
+        "real-time AI generation",
+        "sharing or social features"
+      ],
+      "build_notes": [
+        "The app itself must demonstrate taste — no purple gradients, no generic layouts.",
+        "Dark background only.",
+        "Splitscreen comparison is the core layout."
+      ],
+      "ui": {
+        "direction": "editorial brutalist",
+        "interaction_model": "splitscreen-compare — left panel shows AI-generated specimen; right panel is the critique workspace; panels react to each other as the user progresses through two steps: naming the failure, then rewriting under a constraint",
+        "suggested_libraries": [
+          "framer-motion"
+        ],
+        "distinctive_feature": "When the user submits their critique, weak phrases in the AI specimen animate to amber underlines — revealing exactly what statistical taste looks like",
+        "avoid": "cards, gradients, light background, rounded corners, any layout that looks like a standard web app",
+        "experience_goal": "the user feels the gap between what AI produces and what they actually want — and starts to name it precisely"
+      },
+      "implemented": true,
+      "built": true
+    },
     {
       "id": "GOOD_SG-004",
       "title": "Food Donation Route",
