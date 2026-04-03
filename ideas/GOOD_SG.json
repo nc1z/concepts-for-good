@@ -2,7 +2,7 @@
   "dataset": "GOOD_SG",
   "region": "singapore",
   "lens": "public good and social impact in Singapore",
-  "idea_count": 81,
+  "idea_count": 78,
   "design_contract": {
     "mandate": "Every idea must be built with a deliberately chosen visual direction and interaction model, and copy written for the target user — not for developers. Reading the ui field and rules/CONTENT_RULES.md is mandatory before writing a single line of code.",
     "design_diversity_mandate": {
@@ -1063,8 +1063,7 @@
         "experience_goal": "domestic helper plans her rest day with activities she actually wants to do"
       },
       "built": true,
-      "implemented": false,
-      "built": true
+      "implemented": false
     },
     {
       "id": "GOOD_SG-116",
@@ -1512,80 +1511,6 @@
       "implemented": false
     },
     {
-      "id": "GOOD_SG-133",
-      "title": "Elder Social Outing",
-      "platform": "website",
-      "folder": "web",
-      "build_stack": "Next.js website",
-      "category": "social connection",
-      "tags": [
-        "Seniors",
-        "Social",
-        "Community"
-      ],
-      "summary": "Plan light social outings for seniors around energy level, weather, and rest needs.",
-      "target_user": "seniors, befrienders, and caregivers",
-      "why_fast": "The interesting challenge is expressing outing suitability through comfort cues rather than just place names.",
-      "stage": "poc",
-      "poc": [
-        "outing ideas",
-        "comfort filters",
-        "group plan"
-      ],
-      "prototype_goal": "Simulate the core value of Elder Social Outing in-browser with believable local data and zero backend dependencies.",
-      "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
-      "storage_strategy": {
-        "primary": "localStorage",
-        "secondary": "IndexedDB only if the POC needs larger offline caches, many records, or image/file blobs",
-        "server_database": "not allowed for the initial POC"
-      },
-      "simulation_mode": "Use seeded demo records, optimistic UI updates, and fake notifications or status changes so the end-to-end workflow is testable by one person.",
-      "personas": [
-        "senior",
-        "caregiver",
-        "volunteer"
-      ],
-      "core_entities": [
-        "outings",
-        "comfort_cues",
-        "plans"
-      ],
-      "primary_user_flow": [
-        "energy_pick",
-        "outing_compare",
-        "comfort_check",
-        "invite_save"
-      ],
-      "demo_seed_data": [
-        "3 to 8 sample outings records tailored to Singapore context",
-        "2 to 3 personas with prefilled preferences, saved items, or history",
-        "at least 1 edge case record to demonstrate empty states, stale data, or exceptions"
-      ],
-      "success_signal": "A new user can switch into a persona, complete the main workflow in under 2 minutes, and understand the concept without any manual setup.",
-      "non_goals": [
-        "real identity verification or account systems",
-        "production-grade multi-user synchronization",
-        "complex backend integrations before concept validation"
-      ],
-      "build_notes": [
-        "Prefer deterministic mock data over external APIs.",
-        "Keep state resettable so demos can be rerun quickly.",
-        "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ],
-      "ui": {
-        "direction": "gentle leisure guide",
-        "interaction_model": "comfort dial planner — outing cards expand or soften as the user changes energy, heat, and walking tolerance dials",
-        "suggested_libraries": [
-          "framer-motion"
-        ],
-        "distinctive_feature": "comfort dials change not only what appears but how calm or busy each outing card feels visually",
-        "avoid": "tourism app look; cluttered map pins; youth-oriented social feed",
-        "experience_goal": "social plans feel possible for seniors with varying energy and mobility"
-      },
-      "implementation_tags": [],
-      "implemented": false
-    },
-    {
       "id": "GOOD_SG-090",
       "title": "Donate or Swap Clothes",
       "platform": "website",
@@ -1784,73 +1709,6 @@
         "distinctive_feature": "multi-axis ring chart that fills as each question is answered; axes animate independently",
         "avoid": "plain questionnaire with score at end; no visual during the check-in; generic tip list",
         "experience_goal": "user gains insight into which dimensions of their stress need attention today"
-      },
-      "implemented": false
-    },
-    {
-      "id": "GOOD_SG-096",
-      "title": "Dementia Walk Companion",
-      "platform": "website",
-      "folder": "web",
-      "build_stack": "Next.js website",
-      "category": "caregiving",
-      "summary": "Plan a short familiar walk with rest points and an easy return route.",
-      "target_user": "family caregivers and seniors with memory decline",
-      "why_fast": "The interesting challenge is a calm loop-route planner that makes the return path and resting spots as visible as the outward walk.",
-      "stage": "poc",
-      "poc": [
-        "walk loop view",
-        "rest point markers",
-        "return cue"
-      ],
-      "prototype_goal": "Simulate the core value of Dementia Walk Companion in-browser with believable local data and zero backend dependencies.",
-      "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
-      "storage_strategy": {
-        "primary": "localStorage",
-        "secondary": "IndexedDB only if the POC needs larger offline caches, many records, or image/file blobs",
-        "server_database": "not allowed for the initial POC"
-      },
-      "simulation_mode": "Use seeded demo records, optimistic UI updates, and fake notifications or status changes so the end-to-end workflow is testable by one person.",
-      "personas": [
-        "caregiver",
-        "senior"
-      ],
-      "core_entities": [
-        "places",
-        "plans",
-        "history"
-      ],
-      "primary_user_flow": [
-        "loop_route_view",
-        "rest_point_pick",
-        "return_highlight",
-        "save_walk"
-      ],
-      "demo_seed_data": [
-        "3 to 8 sample places records tailored to Singapore context",
-        "2 to 3 personas with prefilled preferences, saved items, or history",
-        "at least 1 edge case record to demonstrate empty states, stale data, or exceptions"
-      ],
-      "success_signal": "A new user can switch into a persona, complete the main workflow in under 2 minutes, and understand the concept without any manual setup.",
-      "non_goals": [
-        "real identity verification or account systems",
-        "production-grade multi-user synchronization",
-        "complex backend integrations before concept validation"
-      ],
-      "build_notes": [
-        "Prefer deterministic mock data over external APIs.",
-        "Keep state resettable so demos can be rerun quickly.",
-        "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ],
-      "ui": {
-        "direction": "minimalist",
-        "interaction_model": "calm loop-route diagram — a simple route loop showing start point, rest stop, toilet, and return cue with minimal visual noise",
-        "suggested_libraries": [
-          "framer-motion"
-        ],
-        "distinctive_feature": "the return path brightens after the outward leg completes, making the way back feel always present",
-        "avoid": "busy city map; sports tracking dashboard; list of route steps with no visual loop",
-        "experience_goal": "caregiver feels reassured by the visible return path and predictable stopping points"
       },
       "implemented": false
     },
@@ -2273,79 +2131,6 @@
         "avoid": "generic form without timeline; list without health trends visualisation",
         "experience_goal": "caregiver sees the care recipient's recent history at a glance and notices patterns over time"
       },
-      "implemented": false
-    },
-    {
-      "id": "GOOD_SG-151",
-      "title": "Share Elder Care with Siblings",
-      "platform": "website",
-      "folder": "web",
-      "build_stack": "Next.js website",
-      "category": "family life",
-      "tags": [
-        "Family",
-        "Caregiving",
-        "Coordination"
-      ],
-      "summary": "Divide caregiving duties more fairly across brothers and sisters.",
-      "target_user": "adult siblings and family caregivers",
-      "why_fast": "The interesting challenge is making invisible family labour visible through a simple rotation and load view.",
-      "stage": "poc",
-      "poc": [
-        "rotation plan",
-        "care load view",
-        "handoff notes"
-      ],
-      "prototype_goal": "Simulate the core value of Share Elder Care with Siblings in-browser with believable local data and zero backend dependencies.",
-      "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
-      "storage_strategy": {
-        "primary": "localStorage",
-        "secondary": "IndexedDB only if the POC needs larger offline caches, many records, or image/file blobs",
-        "server_database": "not allowed for the initial POC"
-      },
-      "simulation_mode": "Use seeded demo records, optimistic UI updates, and fake notifications or status changes so the end-to-end workflow is testable by one person.",
-      "personas": [
-        "caregiver",
-        "resident"
-      ],
-      "core_entities": [
-        "siblings",
-        "duties",
-        "weeks"
-      ],
-      "primary_user_flow": [
-        "family_setup",
-        "rotation_view",
-        "load_check",
-        "handoff_note"
-      ],
-      "demo_seed_data": [
-        "3 to 8 sample siblings records tailored to Singapore context",
-        "2 to 3 personas with prefilled preferences, saved items, or history",
-        "at least 1 edge case record to demonstrate empty states, stale data, or exceptions"
-      ],
-      "success_signal": "A new user can switch into a persona, complete the main workflow in under 2 minutes, and understand the concept without any manual setup.",
-      "non_goals": [
-        "real identity verification or account systems",
-        "production-grade multi-user synchronization",
-        "complex backend integrations before concept validation"
-      ],
-      "build_notes": [
-        "Prefer deterministic mock data over external APIs.",
-        "Keep state resettable so demos can be rerun quickly.",
-        "Treat notifications, queues, and matching as simulations unless a real API is trivial."
-      ],
-      "ui": {
-        "direction": "family duty planner",
-        "interaction_model": "care rotation rings — each sibling’s duties appear in a weekly ring that shows who has carried more this month",
-        "suggested_libraries": [
-          "framer-motion"
-        ],
-        "distinctive_feature": "care rings fill unevenly over the month, surfacing hidden imbalances early",
-        "avoid": "shaming scorecards; corporate rota styling; dense spreadsheet table",
-        "experience_goal": "families can discuss care load using something concrete and visible"
-      },
-      "implementation_tags": [],
       "implemented": false
     },
     {
