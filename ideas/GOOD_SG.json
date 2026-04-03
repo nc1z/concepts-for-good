@@ -1509,7 +1509,8 @@
         "avoid": "small checkbox list; long clinic FAQ page; dense appointment admin dashboard; printable checklist as the main experience",
         "experience_goal": "user leaves with fewer forgotten papers, payment cards, or medicine details"
       },
-      "implemented": false
+      "implemented": true,
+      "built": true
     },
     {
       "id": "GOOD_SG-133",

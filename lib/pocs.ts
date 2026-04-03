@@ -28,7 +28,7 @@ export const pocCards: PocCard[] = [
     slug: "what-to-bring-to-the-clinic-sg",
     title: "What to Bring to the Clinic",
     category: "Health systems",
-    createdAt: "2026-04-02T09:18:09+08:00",
+    createdAt: "2026-04-03T15:19:43+08:00",
     summary:
       "Pick your clinic visit type and pack every required document, payment item, and medicine note before leaving home.",
     impact:
