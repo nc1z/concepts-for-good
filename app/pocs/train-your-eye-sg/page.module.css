@@ -1,0 +1,509 @@
+/* ── Shell + design tokens ─────────────────────────────────────────────────── */
+.shell {
+  --eye-bg: #0f0d0a;
+  --eye-surface: #1a1714;
+  --eye-surface-raised: #211e1a;
+  --eye-border: #2a2520;
+  --eye-border-subtle: #201d1a;
+  --eye-accent: #e8a020;
+  --eye-accent-dim: rgba(232, 160, 32, 0.15);
+  --eye-text: #f5f0e8;
+  --eye-text-muted: #7a7268;
+  --eye-text-faint: #3d3930;
+  --eye-specimen: #e8e3dc;
+  --eye-top-h: 52px;
+
+  min-height: 100vh;
+  background-color: var(--eye-bg);
+  color: var(--eye-text);
+  font-family: var(--font-jakarta), system-ui, sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Top bar ───────────────────────────────────────────────────────────────── */
+.topBar {
+  height: var(--eye-top-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px 0 16px;
+  border-bottom: 1px solid var(--eye-border);
+  background-color: var(--eye-bg);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  flex-shrink: 0;
+}
+
+.backLink {
+  font-family: var(--font-jakarta), sans-serif;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--eye-text-muted);
+  text-decoration: none;
+  letter-spacing: 0.01em;
+  transition: color 0.15s;
+  flex-shrink: 0;
+}
+.backLink:hover {
+  color: var(--eye-text);
+}
+
+.counter {
+  font-family: var(--font-space-mono), monospace;
+  font-size: 0.72rem;
+  color: var(--eye-text-muted);
+  letter-spacing: 0.08em;
+  display: flex;
+  align-items: baseline;
+  gap: 3px;
+}
+.counterNum {
+  color: var(--eye-accent);
+  font-weight: 700;
+}
+.counterSep {
+  color: var(--eye-text-faint);
+}
+.counterTotal {
+  color: var(--eye-text-muted);
+}
+.counterDone {
+  color: var(--eye-accent);
+  font-weight: 700;
+}
+
+.dots {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex-shrink: 0;
+}
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--eye-border);
+  flex-shrink: 0;
+}
+.dotFilled {
+  background-color: var(--eye-accent);
+}
+
+/* ── Splitscreen ───────────────────────────────────────────────────────────── */
+.splitscreen {
+  display: grid;
+  grid-template-columns: 58fr 42fr;
+  flex: 1;
+  min-height: calc(100vh - var(--eye-top-h));
+  overflow: hidden;
+}
+
+/* ── Specimen panel (left) ─────────────────────────────────────────────────── */
+.specimenPanel {
+  border-right: 1px solid var(--eye-border);
+  overflow-y: auto;
+  background-color: var(--eye-bg);
+}
+.specimenInner {
+  padding: clamp(32px, 5vw, 64px) clamp(28px, 4vw, 56px);
+  max-width: 560px;
+}
+
+.specimenLabel {
+  font-family: var(--font-space-mono), monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  color: var(--eye-text-faint);
+  margin: 0 0 16px;
+}
+
+.specimenContext {
+  font-family: var(--font-jakarta), sans-serif;
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--eye-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--eye-border-subtle);
+}
+
+.specimenText {
+  font-family: var(--font-playfair), Georgia, serif;
+  font-size: clamp(1.1rem, 1.6vw, 1.3rem);
+  line-height: 1.78;
+  color: var(--eye-specimen);
+  margin: 0;
+  font-weight: 400;
+}
+
+.weakPhrase {
+  background-color: rgba(232, 160, 32, 0.12);
+  border-bottom: 2px solid var(--eye-accent);
+  border-radius: 0;
+  color: inherit;
+  padding: 0;
+}
+
+.specimenHint {
+  font-family: var(--font-space-mono), monospace;
+  font-size: 0.65rem;
+  color: var(--eye-text-faint);
+  line-height: 1.6;
+  margin: 28px 0 0;
+  padding-top: 20px;
+  border-top: 1px solid var(--eye-border-subtle);
+}
+
+/* ── Critique panel (right) ────────────────────────────────────────────────── */
+.critiquePanel {
+  overflow-y: auto;
+  background-color: var(--eye-surface);
+}
+.critiqueInner {
+  padding: clamp(28px, 4vw, 56px) clamp(24px, 3.5vw, 48px);
+}
+
+.critiqueStep {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.critiquePrompt {
+  font-family: var(--font-space-mono), monospace;
+  font-size: 0.85rem;
+  color: var(--eye-text-muted);
+  margin: 0;
+  letter-spacing: 0.02em;
+}
+
+.critiqueInput {
+  font-family: var(--font-space-mono), monospace;
+  font-size: 0.8rem;
+  line-height: 1.65;
+  color: var(--eye-text);
+  background-color: var(--eye-surface-raised);
+  border: 1px solid var(--eye-border);
+  border-radius: 0;
+  padding: 14px 16px;
+  resize: vertical;
+  width: 100%;
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.15s;
+  caret-color: var(--eye-accent);
+}
+.critiqueInput:focus {
+  border-color: var(--eye-accent);
+}
+.critiqueInput::placeholder {
+  color: var(--eye-text-faint);
+}
+
+.critiqueActions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.critiqueHint {
+  font-family: var(--font-space-mono), monospace;
+  font-size: 0.62rem;
+  color: var(--eye-text-faint);
+  letter-spacing: 0.04em;
+}
+
+.submitBtn {
+  font-family: var(--font-jakarta), sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--eye-bg);
+  background-color: var(--eye-accent);
+  border: none;
+  padding: 9px 18px;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+  border-radius: 0;
+  transition: background-color 0.15s, opacity 0.15s;
+  white-space: nowrap;
+}
+.submitBtn:hover:not(:disabled) {
+  background-color: #f0b030;
+}
+.submitBtn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.streakNote {
+  font-family: var(--font-space-mono), monospace;
+  font-size: 0.62rem;
+  color: var(--eye-text-faint);
+  margin: 0;
+  letter-spacing: 0.04em;
+}
+
+/* ── Step 2: User critique display ────────────────────────────────────────── */
+.userCritiqueBox {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 14px 16px;
+  border: 1px solid var(--eye-accent);
+  background-color: var(--eye-accent-dim);
+}
+.userCritiqueLabel {
+  font-family: var(--font-space-mono), monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  color: var(--eye-accent);
+  text-transform: uppercase;
+}
+.userCritiqueText {
+  font-family: var(--font-space-mono), monospace;
+  font-size: 0.78rem;
+  line-height: 1.6;
+  color: var(--eye-text);
+  margin: 0;
+  font-style: italic;
+}
+
+/* ── Expert critique ───────────────────────────────────────────────────────── */
+.expertCritiqueBox {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.expertLabel {
+  font-family: var(--font-space-mono), monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  color: var(--eye-text-muted);
+  text-transform: uppercase;
+}
+.expertCritiqueText {
+  font-family: var(--font-playfair), Georgia, serif;
+  font-size: 0.9rem;
+  line-height: 1.72;
+  color: var(--eye-text-muted);
+  margin: 0;
+  font-style: italic;
+  border-left: 2px solid var(--eye-border);
+  padding-left: 14px;
+}
+
+/* ── Rewrite section ───────────────────────────────────────────────────────── */
+.rewriteSection {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 8px;
+  border-top: 1px solid var(--eye-border-subtle);
+}
+.constraintLabel {
+  font-family: var(--font-space-mono), monospace;
+  font-size: 0.72rem;
+  color: var(--eye-text-muted);
+  margin: 0;
+}
+.constraintText {
+  font-family: var(--font-playfair), Georgia, serif;
+  font-size: 0.88rem;
+  font-style: italic;
+  color: var(--eye-text);
+  margin: 0;
+  line-height: 1.55;
+}
+
+/* ── Vocabulary / final screen ─────────────────────────────────────────────── */
+.vocabScreen {
+  flex: 1;
+  overflow-y: auto;
+}
+.vocabInner {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: clamp(48px, 7vw, 96px) clamp(24px, 5vw, 48px);
+}
+
+.vocabEyebrow {
+  font-family: var(--font-space-mono), monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  color: var(--eye-accent);
+  margin: 0 0 20px;
+}
+
+.vocabHeading {
+  font-family: var(--font-playfair), Georgia, serif;
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  font-weight: 700;
+  line-height: 1.18;
+  color: var(--eye-text);
+  margin: 0 0 56px;
+}
+
+.vocabList {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.vocabItem {
+  display: grid;
+  grid-template-columns: 36px 1fr;
+  gap: 20px;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--eye-border-subtle);
+}
+.vocabItem:first-child {
+  border-top: 1px solid var(--eye-border-subtle);
+}
+
+.vocabNumber {
+  font-family: var(--font-space-mono), monospace;
+  font-size: 0.65rem;
+  color: var(--eye-text-faint);
+  letter-spacing: 0.06em;
+  padding-top: 3px;
+}
+
+.vocabContent {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.vocabContext {
+  font-family: var(--font-jakarta), sans-serif;
+  font-size: 0.68rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--eye-text-muted);
+  margin: 0;
+}
+.vocabCritique {
+  font-family: var(--font-playfair), Georgia, serif;
+  font-size: 0.96rem;
+  line-height: 1.65;
+  color: var(--eye-text);
+  margin: 0;
+  font-style: italic;
+}
+
+.vocabRewriteDetails {
+  margin-top: 4px;
+}
+.vocabRewriteSummary {
+  font-family: var(--font-space-mono), monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.06em;
+  color: var(--eye-text-faint);
+  cursor: pointer;
+  list-style: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.vocabRewriteSummary::-webkit-details-marker {
+  display: none;
+}
+.vocabRewriteSummary::before {
+  content: "+";
+  font-size: 0.7rem;
+}
+details[open] .vocabRewriteSummary::before {
+  content: "−";
+}
+.vocabRewrite {
+  font-family: var(--font-space-mono), monospace;
+  font-size: 0.78rem;
+  line-height: 1.7;
+  color: var(--eye-text-muted);
+  margin: 10px 0 0;
+  padding-left: 12px;
+  border-left: 2px solid var(--eye-border);
+}
+
+.vocabFooter {
+  margin-top: 64px;
+  padding-top: 32px;
+  border-top: 1px solid var(--eye-border-subtle);
+}
+.restartBtn {
+  font-family: var(--font-space-mono), monospace;
+  font-size: 0.72rem;
+  color: var(--eye-text-faint);
+  background: none;
+  border: 1px solid var(--eye-border);
+  padding: 10px 20px;
+  cursor: pointer;
+  letter-spacing: 0.06em;
+  transition: color 0.15s, border-color 0.15s;
+}
+.restartBtn:hover {
+  color: var(--eye-text-muted);
+  border-color: var(--eye-text-faint);
+}
+
+/* ── Mobile ────────────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .splitscreen {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    overflow: unset;
+    min-height: unset;
+  }
+
+  .specimenPanel {
+    border-right: none;
+    border-bottom: 1px solid var(--eye-border);
+    overflow-y: unset;
+  }
+  .specimenInner {
+    padding: 28px 20px;
+  }
+  .specimenText {
+    font-size: 1.05rem;
+  }
+
+  .critiquePanel {
+    overflow-y: unset;
+  }
+  .critiqueInner {
+    padding: 24px 20px;
+  }
+
+  .dots {
+    gap: 4px;
+  }
+  .dot {
+    width: 5px;
+    height: 5px;
+  }
+
+  .vocabInner {
+    padding: 40px 20px;
+  }
+  .vocabHeading {
+    font-size: 1.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .topBar {
+    padding: 0 12px;
+  }
+  .dots {
+    gap: 3px;
+  }
+  .dot {
+    width: 4px;
+    height: 4px;
+  }
+}
