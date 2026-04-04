@@ -2,7 +2,7 @@
   "dataset": "GOOD_SG",
   "region": "singapore",
   "lens": "public good and social impact in Singapore",
-  "idea_count": 78,
+  "idea_count": 81,
   "design_contract": {
     "mandate": "Every idea must be built with a deliberately chosen visual direction and interaction model, and copy written for the target user — not for developers. Reading the ui field and rules/CONTENT_RULES.md is mandatory before writing a single line of code.",
     "design_diversity_mandate": {
@@ -5113,6 +5113,240 @@
         "distinctive_feature": "the comfort ring physically pulls distant clusters closer or farther away so the page feels like tuning social intensity rather than filtering a directory",
         "avoid": "event marketplace grid; dating-app swipe pattern; giant community forum; generic map full of pins",
         "experience_goal": "meeting people feels gentler because the user starts from the social energy they can handle today"
+      },
+      "implementation_tags": [],
+      "implemented": false
+    },
+    {
+      "id": "GOOD_SG-170",
+      "title": "Check This Job Ad",
+      "platform": "website",
+      "folder": "mobile",
+      "build_stack": "Next.js website",
+      "category": "digital safety",
+      "tags": [
+        "Job scams",
+        "First jobs",
+        "Career switch",
+        "WhatsApp hiring"
+      ],
+      "summary": "Spot the warning signs in a job ad before you send your details or turn up for an interview.",
+      "target_user": "first-job seekers and career switchers in Singapore replying to online job ads",
+      "why_fast": "The interesting challenge is an ad-inspection surface where every suspicious claim can be torn off, pinned, and turned into a safer next step without feeling like a lecture.",
+      "stage": "poc",
+      "poc": [
+        "job ad picker",
+        "line-by-line warning tags",
+        "safe next-step panel"
+      ],
+      "prototype_goal": "Simulate the core value of Check This Job Ad in-browser with believable local data and zero backend dependencies.",
+      "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
+      "storage_strategy": {
+        "primary": "localStorage",
+        "secondary": "IndexedDB only if the POC needs larger offline caches, many records, or image/file blobs",
+        "server_database": "not allowed for the initial POC"
+      },
+      "simulation_mode": "Use seeded demo records, optimistic UI updates, and fake notifications or status changes so the end-to-end workflow is testable by one person.",
+      "personas": [
+        "student",
+        "resident",
+        "worker"
+      ],
+      "core_entities": [
+        "job_ads",
+        "warning_tags",
+        "employers",
+        "next_steps"
+      ],
+      "primary_user_flow": [
+        "ad_pick",
+        "claim_tap",
+        "warning_pin",
+        "safe_next_move"
+      ],
+      "demo_seed_data": [
+        "3 to 8 sample job_ads records tailored to Singapore context",
+        "2 to 3 personas with prefilled preferences, saved items, or history",
+        "at least 1 edge case record to demonstrate empty states, stale data, or exceptions"
+      ],
+      "success_signal": "A new user can switch into a persona, complete the main workflow in under 2 minutes, and understand the concept without any manual setup.",
+      "non_goals": [
+        "real identity verification or account systems",
+        "production-grade multi-user synchronization",
+        "complex backend integrations before concept validation"
+      ],
+      "build_notes": [
+        "Prefer deterministic mock data over external APIs.",
+        "Keep state resettable so demos can be rerun quickly.",
+        "Treat notifications, queues, and matching as simulations unless a real API is trivial."
+      ],
+      "ui": {
+        "direction": "noticeboard forensics",
+        "interaction_model": "tear-off ad inspection — the job ad appears like a phone screenshot pinned to a community noticeboard; tapping pay, contact, address, or timing claims tears a paper strip into the side rail where risk labels stack from unclear to dangerous, and the footer updates with the safest next move",
+        "suggested_libraries": [
+          "react-aria-components",
+          "rough-notation",
+          "framer-motion"
+        ],
+        "distinctive_feature": "every flagged line becomes a physical paper stub on the side rail, so the user can see whether the ad still makes sense once the risky claims have been stripped away",
+        "avoid": "chatbot scam judge; generic HR dashboard; long article with bullet points; plain checklist under a screenshot",
+        "experience_goal": "the user feels calm and skeptical enough to pause before sharing NRIC, bank, or passport details"
+      },
+      "implementation_tags": [],
+      "implemented": false
+    },
+    {
+      "id": "GOOD_SG-171",
+      "title": "How Much Will the Visit Cost",
+      "platform": "website",
+      "folder": "web",
+      "build_stack": "Next.js website",
+      "category": "health systems",
+      "tags": [
+        "Clinic costs",
+        "Medisave",
+        "CHAS",
+        "Caregiving"
+      ],
+      "summary": "See what a clinic or follow-up visit may cost before you leave home and what payment items to bring.",
+      "target_user": "caregivers and lower-income residents comparing GP, polyclinic, and hospital follow-up visits",
+      "why_fast": "The interesting challenge is a stacked receipt that peels away subsidy and payment layers one by one, so the user understands both the likely bill and the reason it changed.",
+      "stage": "poc",
+      "poc": [
+        "visit type picker",
+        "subsidy chip tray",
+        "payment receipt reveal"
+      ],
+      "prototype_goal": "Simulate the core value of How Much Will the Visit Cost in-browser with believable local data and zero backend dependencies.",
+      "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
+      "storage_strategy": {
+        "primary": "localStorage",
+        "secondary": "IndexedDB only if the POC needs larger offline caches, many records, or image/file blobs",
+        "server_database": "not allowed for the initial POC"
+      },
+      "simulation_mode": "Use seeded demo records, optimistic UI updates, and fake notifications or status changes so the end-to-end workflow is testable by one person.",
+      "personas": [
+        "caregiver",
+        "resident",
+        "senior"
+      ],
+      "core_entities": [
+        "visit_types",
+        "cost_layers",
+        "subsidies",
+        "payment_items"
+      ],
+      "primary_user_flow": [
+        "visit_pick",
+        "subsidy_apply",
+        "receipt_compare",
+        "bring_list_save"
+      ],
+      "demo_seed_data": [
+        "3 to 8 sample visit_types records tailored to Singapore context",
+        "2 to 3 personas with prefilled preferences, saved items, or history",
+        "at least 1 edge case record to demonstrate empty states, stale data, or exceptions"
+      ],
+      "success_signal": "A new user can switch into a persona, complete the main workflow in under 2 minutes, and understand the concept without any manual setup.",
+      "non_goals": [
+        "real identity verification or account systems",
+        "production-grade multi-user synchronization",
+        "complex backend integrations before concept validation"
+      ],
+      "build_notes": [
+        "Prefer deterministic mock data over external APIs.",
+        "Keep state resettable so demos can be rerun quickly.",
+        "Treat notifications, queues, and matching as simulations unless a real API is trivial."
+      ],
+      "ui": {
+        "direction": "receipt counter explainer",
+        "interaction_model": "receipt peel-down estimator — a visit card lands on a clinic counter and drops a tall printed receipt; tapping subsidy, test, and payment chips peels sections off the receipt in place, while a bring-this strip fills with Medisave card, referral note, and payment method items",
+        "suggested_libraries": [
+          "@dnd-kit/core",
+          "@react-spring/web",
+          "react-aria-components"
+        ],
+        "distinctive_feature": "the receipt folds down to the amount the household is most likely to pay, leaving the removed subsidy layers clipped above it so the number never feels mysterious",
+        "avoid": "insurance-comparison table; fintech budget dashboard; dense billing calculator form; wall of subsidy jargon",
+        "experience_goal": "the user leaves with a believable cost range and a clear sense of what to prepare at the counter"
+      },
+      "implementation_tags": [],
+      "implemented": false
+    },
+    {
+      "id": "GOOD_SG-172",
+      "title": "Walk Home Together",
+      "platform": "website",
+      "folder": "mobile",
+      "build_stack": "Next.js website",
+      "category": "safety",
+      "tags": [
+        "Late-night travel",
+        "Shift work",
+        "Students",
+        "Neighbourhood safety"
+      ],
+      "summary": "Set a simple home route and check-in plan before a late walk from the station, bus stop, or night class.",
+      "target_user": "students, women, and shift workers in Singapore heading home late at night",
+      "why_fast": "The interesting challenge is a route strip that feels safer than a live map by turning the last leg home into a short sequence of known waypoints and check-ins.",
+      "stage": "poc",
+      "poc": [
+        "home-leg route strip",
+        "waypoint check-ins",
+        "shareable safety card"
+      ],
+      "prototype_goal": "Simulate the core value of Walk Home Together in-browser with believable local data and zero backend dependencies.",
+      "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
+      "storage_strategy": {
+        "primary": "localStorage",
+        "secondary": "IndexedDB only if the POC needs larger offline caches, many records, or image/file blobs",
+        "server_database": "not allowed for the initial POC"
+      },
+      "simulation_mode": "Use seeded demo records, optimistic UI updates, and fake notifications or status changes so the end-to-end workflow is testable by one person.",
+      "personas": [
+        "resident",
+        "student",
+        "worker"
+      ],
+      "core_entities": [
+        "routes",
+        "waypoints",
+        "check_ins",
+        "trusted_contacts"
+      ],
+      "primary_user_flow": [
+        "route_pick",
+        "waypoint_adjust",
+        "check_in_assign",
+        "share_plan"
+      ],
+      "demo_seed_data": [
+        "3 to 8 sample routes records tailored to Singapore context",
+        "2 to 3 personas with prefilled preferences, saved items, or history",
+        "at least 1 edge case record to demonstrate empty states, stale data, or exceptions"
+      ],
+      "success_signal": "A new user can switch into a persona, complete the main workflow in under 2 minutes, and understand the concept without any manual setup.",
+      "non_goals": [
+        "real identity verification or account systems",
+        "production-grade multi-user synchronization",
+        "complex backend integrations before concept validation"
+      ],
+      "build_notes": [
+        "Prefer deterministic mock data over external APIs.",
+        "Keep state resettable so demos can be rerun quickly.",
+        "Treat notifications, queues, and matching as simulations unless a real API is trivial."
+      ],
+      "ui": {
+        "direction": "estate waypoint lanterns",
+        "interaction_model": "home-leg lantern strip — the route from station exit to block lobby becomes a vertical strip of lit waypoints such as pedestrian crossing, minimart, sheltered turn, and lift lobby; dragging a waypoint changes where the user plans to check in, pause, or call, and the strip compresses into a one-screen plan card for sharing",
+        "suggested_libraries": [
+          "visx",
+          "@use-gesture/react",
+          "framer-motion"
+        ],
+        "distinctive_feature": "each confirmed waypoint glows like a corridor lantern, so the last stretch home reads as a short chain of known safe pauses instead of a vague dark route",
+        "avoid": "generic live-tracking map; SOS panic-button dashboard; ride-hailing shell; red-alert aesthetic with sirens and warnings everywhere",
+        "experience_goal": "the user feels steadier because getting home is reduced to a few recognisable checkpoints they can share quickly"
       },
       "implementation_tags": [],
       "implemented": false
