@@ -12,6 +12,19 @@ export type PocCard = {
 
 export const pocCards: PocCard[] = [
   {
+    slug: "comcare-renewal-calendar-sg",
+    title: "ComCare Renewal Calendar",
+    category: "Support",
+    createdAt: "2026-04-04T13:44:40+08:00",
+    summary:
+      "See every ComCare renewal date in order, along with what to prepare before each step.",
+    impact:
+      "A living deadline track that pulls urgent dates closer so residents can act before papers are late.",
+    theme: "civic",
+    tags: ["Support", "ComCare", "Renewal", "Documents", "Singapore"],
+    model: "openai/gpt-5.4",
+  },
+  {
     slug: "train-your-eye-sg",
     title: "Train Your Eye",
     category: "Digital confidence",
