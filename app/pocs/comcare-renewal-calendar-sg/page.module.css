@@ -1,0 +1,194 @@
+.page {
+  min-height: 100vh;
+  padding: clamp(1rem, 3vw, 2rem);
+  background:
+    radial-gradient(circle at 85% 18%, rgba(255, 150, 72, 0.22), transparent 30%),
+    radial-gradient(circle at 18% 78%, rgba(72, 117, 255, 0.24), transparent 34%),
+    #0f1320;
+  color: #f7f2e8;
+  font-family: var(--font-comcare-display), "Segoe UI", sans-serif;
+}
+
+.topbar {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.backLink {
+  color: #d9d1c2;
+  font-size: 0.86rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.firstScreen {
+  margin-top: clamp(1.4rem, 3vw, 2.3rem);
+  max-width: 60rem;
+}
+
+.firstScreen h1 {
+  margin: 0;
+  line-height: 1.08;
+  font-size: clamp(1.95rem, 6.3vw, 4.5rem);
+  font-weight: 700;
+  text-wrap: balance;
+}
+
+.primaryAction {
+  margin-top: 1.25rem;
+  border: 0;
+  background: #ffd270;
+  color: #181819;
+  font-weight: 700;
+  font-size: 0.96rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.8rem 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+.shell {
+  margin-top: 2.2rem;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 1.6rem;
+  background: linear-gradient(130deg, rgba(14, 20, 32, 0.88), rgba(24, 23, 36, 0.72));
+  box-shadow: 0 24px 80px rgba(5, 5, 7, 0.5);
+  padding: clamp(1rem, 2.6vw, 1.8rem);
+}
+
+.ruler {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.76rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #baa89a;
+}
+
+.todayFlag,
+.deadlineFlag {
+  font-family: var(--font-comcare-mono), "Courier New", monospace;
+}
+
+.timelineSurface {
+  margin-top: 0.95rem;
+  position: relative;
+  min-height: 15.5rem;
+}
+
+.trackLine {
+  position: absolute;
+  top: 7.2rem;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background:
+    linear-gradient(90deg, #ffd270 0 20%, rgba(255, 210, 112, 0.4) 35%, rgba(181, 193, 255, 0.32) 100%);
+}
+
+.deadlineNode {
+  position: absolute;
+  width: min(15.8rem, 33vw);
+  transform: translateX(-50%);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0.85rem;
+  background: rgba(12, 16, 25, 0.87);
+  color: #fff;
+  padding: 0.55rem 0.7rem 0.68rem;
+  text-align: left;
+  display: grid;
+  gap: 0.2rem;
+  cursor: pointer;
+}
+
+.deadlineNode strong {
+  font-size: 0.88rem;
+  line-height: 1.2;
+}
+
+.deadlineNode em {
+  color: #dbc8b5;
+  font-style: normal;
+  font-size: 0.75rem;
+}
+
+.deadlineDay {
+  font-size: 0.7rem;
+  font-family: var(--font-comcare-mono), "Courier New", monospace;
+  color: #ffe4a3;
+}
+
+.deadlineNodeActive {
+  border-color: rgba(255, 210, 112, 0.86);
+  background: linear-gradient(160deg, rgba(31, 30, 44, 0.95), rgba(22, 25, 42, 0.92));
+}
+
+.detailPanel {
+  margin-top: -0.9rem;
+  margin-left: clamp(0.35rem, 3.2vw, 2.5rem);
+  max-width: min(39rem, 100%);
+  padding: 1rem 1.05rem 1.15rem;
+  background: linear-gradient(115deg, #f3ece2 0%, #ffefcc 100%);
+  color: #1c1c24;
+  border-left: 8px solid #191c31;
+}
+
+.detailMeta {
+  margin: 0;
+  font-family: var(--font-comcare-mono), "Courier New", monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #37384a;
+}
+
+.detailPanel h2 {
+  margin: 0.35rem 0 0;
+  font-size: clamp(1.25rem, 3vw, 2rem);
+  line-height: 1.08;
+}
+
+.detailAction {
+  margin: 0.52rem 0 0;
+  font-size: 1rem;
+  max-width: 34rem;
+}
+
+.documentList {
+  margin: 0.9rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.4rem;
+}
+
+.documentList li {
+  border-bottom: 1px dashed rgba(43, 43, 57, 0.35);
+  padding-bottom: 0.33rem;
+  font-size: 0.95rem;
+}
+
+.detailNote {
+  margin: 0.85rem 0 0;
+  font-size: 0.9rem;
+  color: #37384a;
+}
+
+@media (max-width: 900px) {
+  .timelineSurface {
+    min-height: 18rem;
+  }
+
+  .deadlineNode {
+    width: 11.5rem;
+  }
+
+  .detailPanel {
+    margin-left: 0;
+    margin-top: 0.1rem;
+  }
+}
+

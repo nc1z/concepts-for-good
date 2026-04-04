@@ -695,7 +695,7 @@
       "implementation_tags": [
         "drag-reorder"
       ],
-      "implemented": false,
+      "implemented": true,
       "built": true
     },
     {
