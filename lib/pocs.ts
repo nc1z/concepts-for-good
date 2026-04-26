@@ -12,6 +12,19 @@ export type PocCard = {
 
 export const pocCards: PocCard[] = [
   {
+    slug: "lower-your-grocery-bill-sg",
+    title: "Lower Your Grocery Bill",
+    category: "Cost of living",
+    createdAt: "2026-04-26T23:37:59+08:00",
+    summary:
+      "Swap a brand or two in your weekly basket and watch the total drop in real time.",
+    impact:
+      "A ledger-and-receipt interface where each swap physically updates the running total below.",
+    theme: "civic",
+    tags: ["Groceries", "Budgeting", "Cost of living", "Families", "Singapore"],
+    model: "claude-sonnet-4-6",
+  },
+  {
     slug: "check-my-stress-sg",
     title: "Check My Stress",
     category: "Mental health",
