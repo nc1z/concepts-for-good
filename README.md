@@ -10,7 +10,7 @@ Each concept is independently scoped, visually distinct, and demoable without a 
 
 ## What's inside
 
-17 live concepts across six themes:
+19 live concepts across eight themes:
 
 | Theme | Examples |
 |---|---|
@@ -18,8 +18,10 @@ Each concept is independently scoped, visually distinct, and demoable without a 
 | Accessibility | MRT Lift Note, Accessible Mall Route, Quiet Places |
 | Community care | Senior Check-In, Elder Visit Planner |
 | Health & ageing | Medication Reminder |
+| Mental health | Check My Stress |
 | Civic life | Volunteer Match, Skills for Good, Volunteer Hours |
 | Cost of living | Rent Split Planner |
+| Social connection | Try a Hobby Nearby, Community Cooking Circle, Block Potluck |
 
 All POCs use seeded local data, `localStorage`, and persona-switch buttons — no auth, no server database.
 

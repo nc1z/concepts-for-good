@@ -5044,7 +5044,7 @@
     },
     {
       "id": "GOOD_SG-169",
-      "title": "Hobby First Step",
+      "title": "Try a Hobby Nearby",
       "platform": "website",
       "folder": "web",
       "build_stack": "Next.js website",
@@ -5055,7 +5055,7 @@
         "Hobbies",
         "Social anxiety"
       ],
-      "summary": "Find a low-pressure first meetup idea near home when you want company but do not want a big club commitment.",
+      "summary": "Find a gentle first hobby meetup near home when you want company but do not want a big club commitment.",
       "target_user": "adults in Singapore who want to meet people through hobbies but feel rusty or socially anxious",
       "why_fast": "The interesting challenge is a comfort-radius explorer where tiny, low-stakes meetup formats appear first and larger group options only surface when the user is ready.",
       "stage": "poc",
@@ -5064,7 +5064,7 @@
         "meetup constellation",
         "first-step card"
       ],
-      "prototype_goal": "Simulate the core value of Hobby First Step in-browser with believable local data and zero backend dependencies.",
+      "prototype_goal": "Simulate the core value of Try a Hobby Nearby in-browser with believable local data and zero backend dependencies.",
       "auth_strategy": "No authentication. Use one-click persona buttons such as login as resident, customer, volunteer, caregiver, or store owner depending on the flow.",
       "storage_strategy": {
         "primary": "localStorage",
@@ -5115,8 +5115,12 @@
         "avoid": "event marketplace grid; dating-app swipe pattern; giant community forum; generic map full of pins",
         "experience_goal": "meeting people feels gentler because the user starts from the social energy they can handle today"
       },
-      "implementation_tags": [],
-      "implemented": false
+      "implementation_tags": [
+        "radial-explorer",
+        "comfort-ring"
+      ],
+      "implemented": true,
+      "built": true
     },
     {
       "id": "GOOD_SG-011",
