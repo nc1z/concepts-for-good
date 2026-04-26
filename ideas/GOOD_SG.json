@@ -1715,7 +1715,7 @@
     },
     {
       "id": "GOOD_SG-109",
-      "title": "Grocery Budget Basket",
+      "title": "Lower Your Grocery Bill",
       "platform": "website",
       "folder": "web",
       "build_stack": "Next.js website",
@@ -1785,7 +1785,8 @@
         "experience_goal": "user feels in control of weekly groceries without doing manual math"
       },
       "implementation_tags": [],
-      "implemented": false
+      "implemented": false,
+      "built": true
     },
     {
       "id": "GOOD_SG-037",
