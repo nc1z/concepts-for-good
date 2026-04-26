@@ -25,6 +25,19 @@ export const pocCards: PocCard[] = [
     model: "openai/gpt-5",
   },
   {
+    slug: "try-a-hobby-nearby-sg",
+    title: "Try a Hobby Nearby",
+    category: "Social connection",
+    createdAt: "2026-04-26T10:00:00+08:00",
+    summary:
+      "Find a gentle first hobby meetup near home that matches the social energy you have today.",
+    impact:
+      "A comfort-ring constellation for adults who want company without jumping into a big club.",
+    theme: "editorial",
+    tags: ["Hobbies", "Belonging", "Meetups", "Social anxiety", "Singapore"],
+    model: "openai/gpt-5.5",
+  },
+  {
     slug: "train-your-eye-sg",
     title: "Train Your Eye",
     category: "Digital confidence",
