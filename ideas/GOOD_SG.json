@@ -1644,7 +1644,7 @@
     },
     {
       "id": "GOOD_SG-071",
-      "title": "Stress Check Card",
+      "title": "Check My Stress",
       "platform": "website",
       "folder": "mobile",
       "build_stack": "Next.js website",
@@ -1710,7 +1710,8 @@
         "avoid": "plain questionnaire with score at end; no visual during the check-in; generic tip list",
         "experience_goal": "user gains insight into which dimensions of their stress need attention today"
       },
-      "implemented": false
+      "implemented": false,
+      "built": true
     },
     {
       "id": "GOOD_SG-109",
