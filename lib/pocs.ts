@@ -12,6 +12,19 @@ export type PocCard = {
 
 export const pocCards: PocCard[] = [
   {
+    slug: "check-my-stress-sg",
+    title: "Check My Stress",
+    category: "Mental health",
+    createdAt: "2026-04-26T22:58:01+08:00",
+    summary:
+      "Answer five quick questions and see which part of today needs the most care.",
+    impact:
+      "A breathing stress ring that turns a short daily check into one clear next step.",
+    theme: "editorial",
+    tags: ["Mental health", "Stress", "Daily routine", "Singapore"],
+    model: "openai/gpt-5",
+  },
+  {
     slug: "train-your-eye-sg",
     title: "Train Your Eye",
     category: "Digital confidence",
